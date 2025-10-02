@@ -1,4 +1,6 @@
 HELP.md
+# Mapper 폴더는 Git에 포함
+!src/main/resources/mapper/
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
