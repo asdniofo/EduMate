@@ -1,4 +1,4 @@
-package com.edumate.boot.domain.teacher.model.vo;
+package com.edumate.boot.domain.teacher.model.mapper.vo;
 
 import lombok.Getter;
 import lombok.Setter;
