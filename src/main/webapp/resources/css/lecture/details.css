@@ -199,10 +199,19 @@ body {
 .star {
     font-size: 16px;
     color: #f39c12;
+    position: relative;
+    display: inline-block;
 }
 
 .star.empty {
     color: #ddd;
+}
+
+.star.partial {
+    background: linear-gradient(90deg, #f39c12 50%, #ddd 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .course-students {
@@ -406,10 +415,19 @@ body {
 .reviews-rating .star {
     font-size: 40px;
     color: #f39c12;
+    position: relative;
+    display: inline-block;
 }
 
 .reviews-rating .star.empty {
     color: #ddd;
+}
+
+.reviews-rating .star.partial {
+    background: linear-gradient(90deg, #f39c12 50%, #ddd 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .reviews-count {
@@ -521,6 +539,10 @@ body {
     padding: 24px;
 }
 
+.review-item.hidden {
+    display: none;
+}
+
 .review-header {
     display: flex;
     justify-content: space-between;
@@ -562,10 +584,19 @@ body {
 .review-rating .star {
     font-size: 18px;
     color: #f39c12;
+    position: relative;
+    display: inline-block;
 }
 
 .review-rating .star.empty {
     color: #ddd;
+}
+
+.review-rating .star.partial {
+    background: linear-gradient(90deg, #f39c12 50%, #ddd 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .review-content {

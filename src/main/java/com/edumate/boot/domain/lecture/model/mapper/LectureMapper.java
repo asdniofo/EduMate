@@ -1,6 +1,7 @@
 package com.edumate.boot.domain.lecture.model.mapper;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
+import com.edumate.boot.app.lecture.dto.ReviewListRequest;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -18,4 +19,6 @@ public interface LectureMapper {
     int categoryCount(String category);
 
     List<LectureListRequest> selectOneById(int lectureNo);
+
+    List<ReviewListRequest> selectReviewById(int lectureNo);
 }

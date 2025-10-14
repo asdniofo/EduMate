@@ -170,70 +170,35 @@
                                     <span class="sort-selected">최신순</span>
                                     <div class="sort-arrow"></div>
                                     <div class="sort-options">
-                                        <div class="sort-option selected" onclick="selectSortOption(this, '최신순')">최신순
-                                        </div>
-                                        <div class="sort-option" onclick="selectSortOption(this, '인기순')">인기순</div>
+                                        <div class="sort-option <c:if test='${sort eq "최신순"}'>selected</c:if>" onclick="selectSortOption(this, '최신순')">최신순</div>
+                                        <div class="sort-option <c:if test='${sort eq "별점높은순"}'>selected</c:if>" onclick="selectSortOption(this, '별점높은순')">별점높은순</div>
+                                        <div class="sort-option <c:if test='${sort eq "별점낮은순"}'>selected</c:if>" onclick="selectSortOption(this, '별점낮은순')">별점낮은순</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="reviews-list">
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="review-user">
-                                <div class="review-username">olauser1</div>
-                                <div class="review-date">2025.10.22</div>
+                <div class="reviews-list" id="reviews-list">
+                    <c:forEach var="review" items="${rList}" varStatus="status">
+                        <div class="review-item" data-index="${status.index}" data-rating="${review.reviewRating}" data-date="${review.reviewDate}">
+                            <div class="review-header">
+                                <div class="review-user">
+                                    <div class="review-username">${review.memberName}</div>
+                                    <div class="review-date">
+                                        <fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd"/>
+                                    </div>
+                                </div>
+                                <div class="review-rating">
+                                    <span class="rating-stars review-stars-${status.index + 1}"></span>
+                                    <span>${review.reviewRating}</span>
+                                </div>
                             </div>
-                            <div class="review-rating">
-                                <span class="rating-stars review-stars-1"></span>
-                                <span>5</span>
-                            </div>
+                            <div class="review-content">${review.reviewContent}</div>
                         </div>
-                        <div class="review-content">강의가 이해하기 쉽고 도움이 많이됩니다.</div>
-                    </div>
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="review-user">
-                                <div class="review-username">olauser1</div>
-                                <div class="review-date">2025.10.22</div>
-                            </div>
-                            <div class="review-rating">
-                                <span class="rating-stars review-stars-2"></span>
-                                <span>5</span>
-                            </div>
-                        </div>
-                        <div class="review-content">강의가 이해하기 쉽고 도움이 많이됩니다.</div>
-                    </div>
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="review-user">
-                                <div class="review-username">olauser1</div>
-                                <div class="review-date">2025.10.22</div>
-                            </div>
-                            <div class="review-rating">
-                                <span class="rating-stars review-stars-3"></span>
-                                <span>5</span>
-                            </div>
-                        </div>
-                        <div class="review-content">강의가 이해하기 쉽고 도움이 많이됩니다.</div>
-                    </div>
-                    <div class="review-item">
-                        <div class="review-header">
-                            <div class="review-user">
-                                <div class="review-username">olauser1</div>
-                                <div class="review-date">2025.10.22</div>
-                            </div>
-                            <div class="review-rating">
-                                <span class="rating-stars review-stars-4"></span>
-                                <span>5</span>
-                            </div>
-                        </div>
-                        <div class="review-content">강의가 이해하기 쉽고 도움이 많이됩니다.</div>
-                    </div>
+                    </c:forEach>
                 </div>
-                <button class="show-more-button">
+                <button class="show-more-button" id="show-more-button" onclick="showMoreReviews()">
                     더보기
                     <div class="show-more-arrow"></div>
                 </button>
@@ -287,8 +252,8 @@
                 // 드롭다운 닫기
                 document.querySelector(".sort-dropdown").classList.remove("open");
 
-                // 여기서 실제 정렬 로직을 구현할 수 있습니다
-                console.log("선택된 정렬:", value);
+                // 리뷰 정렬 실행
+                sortReviews(value);
             }
 
             // 외부 클릭 시 드롭다운 닫기
@@ -331,7 +296,8 @@
 
                 // 부분적인 별 (소수 부분이 있을 때)
                 if (partialStar > 0 && fullStars < totalStars) {
-                    starsHTML += `<span class="star" style="opacity: ${partialStar}">★</span>`;
+                    const percentage = Math.round(partialStar * 100);
+                    starsHTML += `<span class="star partial" style="background: linear-gradient(90deg, #f39c12 ${percentage}%, #ddd ${percentage}%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">★</span>`;
                 }
 
                 // 빈 별들 (나머지)
@@ -360,7 +326,8 @@
 
                 // 부분적인 별 (소수 부분이 있을 때)
                 if (partialStar > 0 && fullStars < totalStars) {
-                    starsHTML += `<span class="star" style="opacity: ${partialStar}">★</span>`;
+                    const percentage = Math.round(partialStar * 100);
+                    starsHTML += `<span class="star partial" style="background: linear-gradient(90deg, #f39c12 ${percentage}%, #ddd ${percentage}%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">★</span>`;
                 }
 
                 // 빈 별들 (나머지)
@@ -372,18 +339,122 @@
                 starsContainer.innerHTML = starsHTML;
             }
 
-            // 페이지 로드 시 별점 생성
+            // 리뷰 페이지네이션 관련 변수
+            let currentVisibleReviews = 4;
+            const reviewsPerPage = 4;
+            let totalReviews = 0;
+            let reviewsData = [];
+            let currentSortType = '최신순';
+
+            function showMoreReviews() {
+                const reviewItems = document.querySelectorAll('.review-item');
+                const showMoreButton = document.getElementById('show-more-button');
+                
+                // 현재 보이는 리뷰 수를 4개씩 증가
+                currentVisibleReviews += reviewsPerPage;
+                
+                // 리뷰 아이템들을 순차적으로 표시
+                reviewItems.forEach((item, index) => {
+                    if (index < currentVisibleReviews) {
+                        item.classList.remove('hidden');
+                    }
+                });
+                
+                // 모든 리뷰가 표시되면 더보기 버튼 숨기기
+                if (currentVisibleReviews >= totalReviews) {
+                    showMoreButton.style.display = 'none';
+                }
+            }
+
+            function sortReviews(sortType) {
+                currentSortType = sortType;
+                const reviewsList = document.getElementById('reviews-list');
+                const reviewItems = Array.from(reviewsList.querySelectorAll('.review-item'));
+                
+                reviewItems.sort((a, b) => {
+                    switch(sortType) {
+                        case '최신순':
+                            const dateA = new Date(a.getAttribute('data-date'));
+                            const dateB = new Date(b.getAttribute('data-date'));
+                            return dateB - dateA;
+                        case '별점높은순':
+                            const ratingA = parseFloat(a.getAttribute('data-rating'));
+                            const ratingB = parseFloat(b.getAttribute('data-rating'));
+                            return ratingB - ratingA;
+                        case '별점낮은순':
+                            const ratingA2 = parseFloat(a.getAttribute('data-rating'));
+                            const ratingB2 = parseFloat(b.getAttribute('data-rating'));
+                            return ratingA2 - ratingB2;
+                        default:
+                            return 0;
+                    }
+                });
+                
+                // 정렬된 순서로 다시 배치
+                reviewItems.forEach((item, index) => {
+                    item.setAttribute('data-index', index);
+                    reviewsList.appendChild(item);
+                });
+                
+                resetPagination();
+            }
+
+            function resetPagination() {
+                currentVisibleReviews = 4;
+                const reviewItems = document.querySelectorAll('.review-item');
+                totalReviews = reviewItems.length;
+                
+                reviewItems.forEach((item, index) => {
+                    if (index >= 4) {
+                        item.classList.add('hidden');
+                    } else {
+                        item.classList.remove('hidden');
+                    }
+                });
+                
+                // 더보기 버튼 표시/숨김
+                const showMoreButton = document.getElementById('show-more-button');
+                if (totalReviews <= 4) {
+                    showMoreButton.style.display = 'none';
+                } else {
+                    showMoreButton.style.display = 'flex';
+                }
+            }
+
+            function initializeReviews() {
+                const reviewItems = document.querySelectorAll('.review-item');
+                totalReviews = reviewItems.length;
+                
+                // 처음에는 4개만 보이고 나머지는 숨기기
+                reviewItems.forEach((item, index) => {
+                    if (index >= 4) {
+                        item.classList.add('hidden');
+                    }
+                });
+                
+                // 리뷰가 4개 이하이면 더보기 버튼 숨기기
+                const showMoreButton = document.getElementById('show-more-button');
+                if (totalReviews <= 4) {
+                    showMoreButton.style.display = 'none';
+                } else {
+                    showMoreButton.style.display = 'flex';
+                }
+            }
+
+            // 페이지 로드 시 별점 생성 및 리뷰 초기화
             document.addEventListener("DOMContentLoaded", function () {
                 generateStars(${lList[0].lectureRating}); // 메인 별점 생성
 
-                // 수강평 별점들 생성 (모두 5점으로 설정)
-                generateReviewStars(5.0, ".review-stars-1");
-                generateReviewStars(5.0, ".review-stars-2");
-                generateReviewStars(5.0, ".review-stars-3");
-                generateReviewStars(5.0, ".review-stars-4");
+                // 수강평 별점들 동적 생성
+                <c:forEach var="review" items="${rList}" varStatus="status">
+                    generateReviewStars(${review.reviewRating}, ".review-stars-${status.index + 1}");
+                </c:forEach>
 
                 // 수강평 헤더 별점 생성
                 generateStars(${lList[0].lectureRating}, "#reviews-rating-stars");
+                
+                // 리뷰 페이지네이션 초기화
+                initializeReviews();
             });
         </script>
     </body>

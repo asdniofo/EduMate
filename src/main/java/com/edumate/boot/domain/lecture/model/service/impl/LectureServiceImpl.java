@@ -1,6 +1,7 @@
 package com.edumate.boot.domain.lecture.model.service.impl;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
+import com.edumate.boot.app.lecture.dto.ReviewListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.lecture.model.mapper.LectureMapper;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
@@ -56,6 +57,12 @@ public class LectureServiceImpl implements LectureService {
     public List<LectureListRequest> selectOneById(int lectureNo) {
         List<LectureListRequest> lList = lMapper.selectOneById(lectureNo);
         return lList;
+    }
+
+    @Override
+    public List<ReviewListRequest> selectReviewById(int lectureNo) {
+        List<ReviewListRequest> rList = lMapper.selectReviewById(lectureNo);
+        return rList;
     }
 
 
