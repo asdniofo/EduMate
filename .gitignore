@@ -34,4 +34,5 @@ build/
 ### VS Code ###
 .vscode/
 
-
+# DB정보 제외
+/src/main/resources/application.properties
