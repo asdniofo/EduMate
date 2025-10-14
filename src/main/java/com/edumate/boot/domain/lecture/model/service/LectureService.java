@@ -1,6 +1,7 @@
 package com.edumate.boot.domain.lecture.model.service;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
+import com.edumate.boot.app.lecture.dto.ReviewListRequest;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface LectureService {
     int getCategoryCount(String category);
 
     List<LectureListRequest> selectOneById(int lectureNo);
+
+    List<ReviewListRequest> selectReviewById(int lectureNo);
 }

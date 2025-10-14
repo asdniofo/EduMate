@@ -22,6 +22,7 @@ public class LectureListRequest {
     private String lectureCategory;
     private String lecturePath;
     private String lectureContent;
+    private String lectureYn;
     private Timestamp lectureCreatedDate;
 }
 

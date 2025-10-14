@@ -1,6 +1,7 @@
 package com.edumate.boot.app.lecture.controller;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
+import com.edumate.boot.app.lecture.dto.ReviewListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -68,10 +69,13 @@ public class LectureController {
 
     @GetMapping("/details")
     public String showDetails(@ModelAttribute LectureListRequest lecture
+            ,@ModelAttribute ReviewListRequest review
             ,@RequestParam int lectureNo, Model model) {
         try {
             List<LectureListRequest> lList = lService.selectOneById(lectureNo);
+            List<ReviewListRequest> rList = lService.selectReviewById(lectureNo);
             model.addAttribute("lList", lList);
+            model.addAttribute("rList", rList);
             return "lecture/details";
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
