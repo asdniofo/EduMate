@@ -20,7 +20,7 @@
         <div class="content-top-area">
             <div class="main-search-bar">
                 <form action="/teacher/search" method="get" class="search-form">
-                    <input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요">
+                    <input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${searchKeyword }">
                     <button type="submit" class="search-btn"></button>
                 </form>
                 </div>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             
-            <a href="#" class="write-button">글쓰기</a>
+            <!-- <a href="#" class="write-button">글쓰기</a> -->
         </div>
     </main>
 	</body>

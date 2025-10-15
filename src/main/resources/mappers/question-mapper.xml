@@ -8,15 +8,16 @@
 	</select>
 	<select id="getSearchTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM QUESTION
-		WHERE QUESTION_TITLE LIKE '%'||#{searchKeyword}||'%'			
+		WHERE REPLACE(UPPER(QUESTION_TITLE), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+        OR UPPER(QUESTION_CONTENT) LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'		
 	</select>
 	<select id="selectQuestionList" resultType="Question">
 		SELECT * FROM QUESTION ORDER BY QUESTION_NO ASC
 	</select>
 	<select id="selectSearchList" resultType="Question">
 		SELECT * FROM QUESTION
-		WHERE UPPER(QUESTION_TITLE) LIKE '%'||#{searchKeyword}||'%'
-		OR UPPER(QUESTION_CONTENT) LIKE '%'||#{searchKeyword}||'%'
+		WHERE REPLACE(UPPER(QUESTION_TITLE), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+        OR UPPER(QUESTION_CONTENT) LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'	
 		ORDER BY QUESTION_NO ASC
 	</select>
 </mapper>
