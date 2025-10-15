@@ -56,9 +56,11 @@ body {
 
 /* Main Content Area */
 .content-area {
+    max-width: 1400px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
     display: flex;
     gap: 20px;
-    margin-bottom: 40px;
 }
 
 /* Video Player Section */
@@ -66,26 +68,34 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    min-height: 0;
 }
 
 .lesson-title {
-    color: black;
-    font-size: 50px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    color: white;
+    font-size: 40px;
     font-family: "Segoe UI", sans-serif;
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    transition: opacity 0.3s ease;
 }
 
 .video-player {
     width: 100%;
+    height: auto;
     aspect-ratio: 16/9;
     background: #d9d9d9;
     border: 1px black solid;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+    flex: none;
 }
 
 .video-element {
@@ -99,14 +109,24 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(26, 26, 26, 0.9);
+    background: transparent;
     padding: 15px 20px;
     display: flex;
     align-items: center;
     gap: 15px;
     color: white;
     border-radius: 0 0 8px 8px;
-    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease;
+}
+
+.video-player.hide-controls.playing .video-controls-custom {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-player.hide-controls.playing .lesson-title {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .control-btn {
@@ -125,13 +145,20 @@ body {
 }
 
 .control-btn.play {
-    background: #4f46e5;
-    padding: 8px 16px;
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .control-btn.play:hover {
-    background: #3730a3;
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .progress-area {
@@ -164,14 +191,56 @@ body {
     min-width: 80px;
 }
 
+.speed-control-container {
+    position: relative;
+}
+
 .speed-control {
-    background: #333;
+    background: rgba(0, 0, 0, 0.3);
     border: none;
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.speed-control:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.speed-options {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    padding: 5px 0;
+    display: none;
+    min-width: 60px;
+    margin-bottom: 5px;
+}
+
+.speed-control-container.open .speed-options {
+    display: block;
+}
+
+.speed-option {
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.speed-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.speed-option.selected {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Curriculum Styles for Player Page */
@@ -237,19 +306,21 @@ body {
 
 /* Chat Section */
 .chat-section {
-    width: 516px;
+    width: 400px;
+    height: 630px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0;
     flex-shrink: 0;
 }
 
 .ai-model-selector {
     width: 100%;
-    height: 91px;
+    height: 60px;
     background: white;
-    border-radius: 30px;
     border: 1px black solid;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -264,7 +335,7 @@ body {
 
 .ai-model-text {
     color: black;
-    font-size: 32px;
+    font-size: 24px;
     font-family: "Segoe UI", sans-serif;
     font-weight: 700;
     flex: 1;
@@ -296,7 +367,7 @@ body {
     z-index: 1000;
     overflow: hidden;
     display: none;
-    margin-top: 8px;
+    margin-top: 0;
 }
 
 .ai-model-selector.open .ai-model-options {
@@ -304,9 +375,9 @@ body {
 }
 
 .ai-model-option {
-    padding: 16px 20px;
+    padding: 12px 20px;
     color: black;
-    font-size: 24px;
+    font-size: 20px;
     font-family: "Segoe UI", sans-serif;
     font-weight: 600;
     cursor: pointer;
@@ -331,25 +402,26 @@ body {
 
 .chat-messages {
     width: 100%;
-    flex: 1;
+    height: 490px;
     background: white;
     border: 1px black solid;
-    border-radius: 8px;
-    padding: 20px;
+    border-top: 1px solid #ddd;
+    border-bottom: none;
+    border-radius: 0;
+    padding: 15px;
     overflow-y: auto;
-    min-height: 400px;
-    max-height: 600px;
 }
 
 .chat-input-section {
     width: 100%;
-    height: 91px;
+    height: 80px;
     background: white;
-    border-radius: 30px;
     border: 1px black solid;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 20px 0 0;
     gap: 12px;
 }
 
@@ -363,31 +435,67 @@ body {
 
 .chat-input {
     flex: 1;
-    background: transparent;
+    height: 78px;
+    background: #f9f9f9;
     border: none;
+    border-radius: 0 0 0 8px;
+    padding: 8px 12px;
+    margin: 0;
     outline: none;
     color: black;
     font-size: 18px;
     font-family: "Segoe UI", sans-serif;
     font-weight: 400;
+    resize: none;
+    line-height: 1.4;
+    box-sizing: border-box;
 }
 
 .send-button {
-    padding: 12px 24px;
+    width: 70px;
+    height: 60px;
     background: var(--background-positive-default);
-    border-radius: 8px;
-    border: 1px var(--border-brand-default) solid;
+    border-radius: 6px;
+    border: none;
     color: var(--text-brand-on-brand);
-    font-size: 24px;
+    font-size: 14px;
     font-family: Inter, sans-serif;
-    font-weight: 400;
+    font-weight: 600;
     cursor: pointer;
-    white-space: nowrap;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin: 10px -5px 10px 0;
 }
 
 .send-button:hover {
-    opacity: 0.9;
+    background: #0f8a47;
+    transform: translateY(-1px);
+}
+
+.detail-button-container {
+    width: 100%;
+    margin: 12px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.detail-button-chat {
+    width: 100%;
+    padding: 12px;
+    background: #f0f8ff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    color: #007bff;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.detail-button-chat:hover {
+    background: #007bff;
+    color: white;
 }
 
 /* Footer Styles */

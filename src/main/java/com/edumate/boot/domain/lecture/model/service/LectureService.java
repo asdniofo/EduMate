@@ -2,6 +2,7 @@ package com.edumate.boot.domain.lecture.model.service;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.ReviewListRequest;
+import com.edumate.boot.app.lecture.dto.VideoDetailRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 
@@ -26,4 +27,10 @@ public interface LectureService {
     int totalVideoById(int lectureNo);
 
     int totalTimeById(int lectureNo);
+
+    List<VideoListRequest> selectVideoById(int videoNo);
+
+    List<VideoListRequest> selectNextVideoById(int lectureNo, int nextVideoNo);
+
+    String selectNameById(int lectureNo);
 }
