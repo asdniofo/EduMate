@@ -2,6 +2,7 @@ package com.edumate.boot.app.lecture.controller;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.ReviewListRequest;
+import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -70,12 +71,30 @@ public class LectureController {
     @GetMapping("/details")
     public String showDetails(@ModelAttribute LectureListRequest lecture
             ,@ModelAttribute ReviewListRequest review
+            ,@ModelAttribute VideoListRequest video
             ,@RequestParam int lectureNo, Model model) {
         try {
             List<LectureListRequest> lList = lService.selectOneById(lectureNo);
             List<ReviewListRequest> rList = lService.selectReviewById(lectureNo);
+            int videoCount = lService.totalVideoById(lectureNo);
+            int totalTime = lService.totalTimeById(lectureNo);
+            List<VideoListRequest> vList = lService.selectVideoListById(lectureNo);
+
+            StringBuilder totalTimeFormatted = new StringBuilder();
+            int totalHour = totalTime / 3600;
+            int totalMinute = (totalTime % 3600) / 60;
+            int totalSecond = totalTime % 60;
+            if (totalHour > 0) totalTimeFormatted.append(totalHour).append("시간 ");
+            if (totalMinute > 0) totalTimeFormatted.append(totalMinute).append("분 ");
+            if (totalSecond > 0) totalTimeFormatted.append(totalSecond).append("초");
+            
             model.addAttribute("lList", lList);
             model.addAttribute("rList", rList);
+            model.addAttribute("vList", vList);
+            model.addAttribute("videoCount", videoCount);
+            model.addAttribute("totalTimeFormatted", totalTimeFormatted.toString().trim());
+            System.out.println(vList);
+
             return "lecture/details";
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
