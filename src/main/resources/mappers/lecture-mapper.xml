@@ -59,4 +59,18 @@
         WHERE R.LECTURE_NO = #{lectureNo} AND R.REVIEW_YN = 'Y'
         ORDER BY R.REVIEW_DATE DESC
     </select>
+    <select id="selectVideoListById" resultType="VideoListRequest">
+        SELECT * FROM LECTURE_VIDEO
+        WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
+        ORDER BY VIDEO_ORDER ASC
+    </select>
+    <select id="totalVideoById" resultType="_int">
+        SELECT COUNT(*) FROM LECTURE_VIDEO
+        WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
+    </select>
+    <select id="totalTimeById" resultType="_int">
+        SELECT SUM(VIDEO_TIME) FROM LECTURE_VIDEO
+        WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
+    </select>
+
 </mapper>

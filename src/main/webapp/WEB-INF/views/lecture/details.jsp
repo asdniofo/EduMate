@@ -57,100 +57,18 @@
             <div class="curriculum-section" id="curriculum-section">
                 <div class="curriculum-header">
                     <h2 class="curriculum-title">커리큘럼</h2>
-                    <div class="curriculum-summary">전체 13개 · (2시간 20분)</div>
+                    <div class="curriculum-summary">전체 ${videoCount}개 · (${totalTimeFormatted})</div>
                 </div>
                 <div class="curriculum-list">
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">1. [개념] 빠르게 이해하는 딥러닝 개요</div>
+                    <c:forEach var="video" items="${vList}">
+                        <div class="curriculum-item" onclick="location.href='/lecture/player?videoNo=${video.videoNo}'">
+                            <div class="curriculum-icon"></div>
+                            <div class="curriculum-content">
+                                <div class="curriculum-lesson">${video.videoOrder}. ${video.videoTitle}</div>
+                            </div>
+                            <div class="curriculum-duration">${video.time}</div>
                         </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">2. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">3. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">4. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">5. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">6. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">7. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">8. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">9. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">10. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">11. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">12. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
-                    <div class="curriculum-item">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">13. [개념] 빠르게 이해하는 딥러닝 개요</div>
-                        </div>
-                        <div class="curriculum-duration">15:35</div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
 
@@ -170,9 +88,15 @@
                                     <span class="sort-selected">최신순</span>
                                     <div class="sort-arrow"></div>
                                     <div class="sort-options">
-                                        <div class="sort-option <c:if test='${sort eq "최신순"}'>selected</c:if>" onclick="selectSortOption(this, '최신순')">최신순</div>
-                                        <div class="sort-option <c:if test='${sort eq "별점높은순"}'>selected</c:if>" onclick="selectSortOption(this, '별점높은순')">별점높은순</div>
-                                        <div class="sort-option <c:if test='${sort eq "별점낮은순"}'>selected</c:if>" onclick="selectSortOption(this, '별점낮은순')">별점낮은순</div>
+                                        <div class="sort-option <c:if test='${sort eq "최신순"}'>selected</c:if>"
+                                             onclick="selectSortOption(this, '최신순')">최신순
+                                        </div>
+                                        <div class="sort-option <c:if test='${sort eq "별점높은순"}'>selected</c:if>"
+                                             onclick="selectSortOption(this, '별점높은순')">별점높은순
+                                        </div>
+                                        <div class="sort-option <c:if test='${sort eq "별점낮은순"}'>selected</c:if>"
+                                             onclick="selectSortOption(this, '별점낮은순')">별점낮은순
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +105,8 @@
                 </div>
                 <div class="reviews-list" id="reviews-list">
                     <c:forEach var="review" items="${rList}" varStatus="status">
-                        <div class="review-item" data-index="${status.index}" data-rating="${review.reviewRating}" data-date="${review.reviewDate}">
+                        <div class="review-item" data-index="${status.index}" data-rating="${review.reviewRating}"
+                             data-date="${review.reviewDate}">
                             <div class="review-header">
                                 <div class="review-user">
                                     <div class="review-username">${review.memberName}</div>
@@ -349,17 +274,17 @@
             function showMoreReviews() {
                 const reviewItems = document.querySelectorAll('.review-item');
                 const showMoreButton = document.getElementById('show-more-button');
-                
+
                 // 현재 보이는 리뷰 수를 4개씩 증가
                 currentVisibleReviews += reviewsPerPage;
-                
+
                 // 리뷰 아이템들을 순차적으로 표시
                 reviewItems.forEach((item, index) => {
                     if (index < currentVisibleReviews) {
                         item.classList.remove('hidden');
                     }
                 });
-                
+
                 // 모든 리뷰가 표시되면 더보기 버튼 숨기기
                 if (currentVisibleReviews >= totalReviews) {
                     showMoreButton.style.display = 'none';
@@ -370,9 +295,9 @@
                 currentSortType = sortType;
                 const reviewsList = document.getElementById('reviews-list');
                 const reviewItems = Array.from(reviewsList.querySelectorAll('.review-item'));
-                
+
                 reviewItems.sort((a, b) => {
-                    switch(sortType) {
+                    switch (sortType) {
                         case '최신순':
                             const dateA = new Date(a.getAttribute('data-date'));
                             const dateB = new Date(b.getAttribute('data-date'));
@@ -389,13 +314,13 @@
                             return 0;
                     }
                 });
-                
+
                 // 정렬된 순서로 다시 배치
                 reviewItems.forEach((item, index) => {
                     item.setAttribute('data-index', index);
                     reviewsList.appendChild(item);
                 });
-                
+
                 resetPagination();
             }
 
@@ -403,7 +328,7 @@
                 currentVisibleReviews = 4;
                 const reviewItems = document.querySelectorAll('.review-item');
                 totalReviews = reviewItems.length;
-                
+
                 reviewItems.forEach((item, index) => {
                     if (index >= 4) {
                         item.classList.add('hidden');
@@ -411,7 +336,7 @@
                         item.classList.remove('hidden');
                     }
                 });
-                
+
                 // 더보기 버튼 표시/숨김
                 const showMoreButton = document.getElementById('show-more-button');
                 if (totalReviews <= 4) {
@@ -424,14 +349,14 @@
             function initializeReviews() {
                 const reviewItems = document.querySelectorAll('.review-item');
                 totalReviews = reviewItems.length;
-                
+
                 // 처음에는 4개만 보이고 나머지는 숨기기
                 reviewItems.forEach((item, index) => {
                     if (index >= 4) {
                         item.classList.add('hidden');
                     }
                 });
-                
+
                 // 리뷰가 4개 이하이면 더보기 버튼 숨기기
                 const showMoreButton = document.getElementById('show-more-button');
                 if (totalReviews <= 4) {
@@ -447,12 +372,12 @@
 
                 // 수강평 별점들 동적 생성
                 <c:forEach var="review" items="${rList}" varStatus="status">
-                    generateReviewStars(${review.reviewRating}, ".review-stars-${status.index + 1}");
+                generateReviewStars(${review.reviewRating}, ".review-stars-${status.index + 1}");
                 </c:forEach>
 
                 // 수강평 헤더 별점 생성
                 generateStars(${lList[0].lectureRating}, "#reviews-rating-stars");
-                
+
                 // 리뷰 페이지네이션 초기화
                 initializeReviews();
             });
