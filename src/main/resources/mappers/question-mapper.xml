@@ -6,7 +6,17 @@
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM QUESTION
 	</select>
+	<select id="getSearchTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM QUESTION
+		WHERE QUESTION_TITLE LIKE '%'||#{searchKeyword}||'%'			
+	</select>
 	<select id="selectQuestionList" resultType="Question">
-		SELECT * FROM QUESTION ORDER BY WRITE_DATE ASC
+		SELECT * FROM QUESTION ORDER BY QUESTION_NO ASC
+	</select>
+	<select id="selectSearchList" resultType="Question">
+		SELECT * FROM QUESTION
+		WHERE UPPER(QUESTION_TITLE) LIKE '%'||#{searchKeyword}||'%'
+		OR UPPER(QUESTION_CONTENT) LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY QUESTION_NO ASC
 	</select>
 </mapper>
