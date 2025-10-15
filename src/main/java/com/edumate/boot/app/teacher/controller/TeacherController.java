@@ -3,7 +3,9 @@ package com.edumate.boot.app.teacher.controller;
 import com.edumate.boot.domain.teacher.model.service.TeacherService;
 import com.edumate.boot.domain.teacher.model.vo.Question;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,5 +46,40 @@ public class TeacherController {
 			return "common/error";
 		}
     }
+    
+    @GetMapping("/search")
+	public String showNoticeSearchList(
+			@RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value = "page", defaultValue = "1") int currentPage
+			, Model model) {
+		try {
+			int boardLimit = 5;
+			String upperKeyword = searchKeyword.toUpperCase();
+			Map<String, Object> searchMap = new HashMap<String, Object>();
+			searchMap.put("searchKeyword", upperKeyword);
+			searchMap.put("currentPage", currentPage);
+			searchMap.put("boardLimit", boardLimit);
+			List<Question> searchList = tService.selectSearchList(searchMap);
+			if(searchList != null && !searchList.isEmpty()) {
+				// 페이징처리 코드 작성
+				int totalCount = tService.getTotalCount(searchMap);
+				int maxPage = (int)Math.ceil((double)totalCount/boardLimit);
+				int naviLimit = 5;
+				int startNavi = ((currentPage-1)/naviLimit)*naviLimit+1;
+				int endNavi = (startNavi-1)+naviLimit;
+				if(endNavi > maxPage) endNavi = maxPage;
+				model.addAttribute("maxPage", maxPage);
+				model.addAttribute("startNavi", startNavi);
+				model.addAttribute("endNavi", endNavi);
+				model.addAttribute("currentPage", currentPage);
+			}
+			model.addAttribute("searchList", searchList);
+			model.addAttribute("searchKeyword", searchKeyword);
+			return "teacher/search";
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+	}
 
 }

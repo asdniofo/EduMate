@@ -27,7 +27,7 @@
                 <input type="button" class="sort-by-text" value="등록순">
             </div>
         <section class="question-list">
-            <c:forEach items="${tList }" var="question" varStatus="i">
+            <c:forEach items="${searchList }" var="question" varStatus="i">
 	            <article class="question-item">
 	                <div class="question-status-and-title">
 	                	<c:if test="${question.questionStatus eq 'N' }">
@@ -55,13 +55,13 @@
             <div class="pagination-wrapper">
                 <div class="pagination">
                 	<c:if test="${startNavi ne 1 }">
-                		<a href="/teacher/list?page=${startNavi - 1 }" class="page-button">이전</a>
+                		<a href="/teacher/search?page=${startNavi - 1 }&searchKeyword=${searchKeyword }" class="page-button">이전</a>
                 	</c:if>
                 	<c:forEach begin="${startNavi }" end="${endNavi }" var="n">
-                    	<a href="/teacher/list?page=${n }" class='page-button <c:if test="${currentPage eq n }">page-current</c:if>'>${n }</a>
+                    	<a href="/teacher/search?page=${n }&searchKeyword=${searchKeyword }" class='page-button <c:if test="${currentPage eq n }">page-current</c:if>'>${n }</a>
                     </c:forEach>
                     <c:if test="${endNavi ne maxPage }">
-                    	<a href="/teacher/list?page=${endNavi + 1 }" class="page-button">다음</a>
+                    	<a href="/teacher/search?page=${endNavi + 1 }&searchKeyword=${searchKeyword }" class="page-button">다음</a>
                     </c:if>
                 </div>
             </div>
