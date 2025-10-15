@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+/* 푸터 바깥 흰색 */
+#footer {
+    width: 100%;
+    background-color: #fff; /* 좌우 흰색 */
+    padding: 20px 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* 푸터 전체 높이 */
+.footer-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.5;
+    height: 120px; /* 푸터 높이 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 전체 높이 기준 중앙 */
+}
+
+/* 상단 줄 */
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 상하 중앙 */
+}
+
+/* 좌측 그룹 */
+.footer-left {
+    display: flex;
+    gap: 10px;
+}
+
+/* 로고를 세로 중앙 */
+.footer-logo {
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center; /* 부모 높이 기준 중앙 */
+    margin-top: 15px;
+    margin-left: 30px;
+}
+
+/* 상단 줄 전체 */
+.footer-top {
+    display: flex;
+    justify-content: space-between; /* 좌우 그룹 배치 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-bottom: 10px;
+}
+
+/* 좌측 그룹: 로고 + 텍스트 */
+.footer-left {
+    display: flex;
+    gap: 10px;
+}
+
+/* 로고 */
+.footer-logo {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.footer-info {
+    margin-left: -150px;
+}
+
+/* 좌측 정보 텍스트 */
+.footer-info span {
+    margin-left: 10px;
+}
+
+/* 우측 그룹 */
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: right;
+}
+
+/* 하단 줄 전체 */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+}
+
+/* 중앙 저작권 */
+.footer-copy {
+    text-align: center;
+    flex: 0.85;
+}
+
+/* 오른쪽 연락처 */
+.footer-contact {
+    text-align: right;
+    display: flex;
+    gap: 10px;
+}
+
+.footer-right,
+.footer-contact {
+    margin-right: 100px;
+}
