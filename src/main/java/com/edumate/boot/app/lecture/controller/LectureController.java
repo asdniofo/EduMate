@@ -93,8 +93,6 @@ public class LectureController {
             model.addAttribute("vList", vList);
             model.addAttribute("videoCount", videoCount);
             model.addAttribute("totalTimeFormatted", totalTimeFormatted.toString().trim());
-            System.out.println(vList);
-
             return "lecture/details";
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
@@ -103,7 +101,7 @@ public class LectureController {
     }
 
     @GetMapping("/player")
-    public String showPlayer() {
+    public String showPlayer(@RequestParam int videoNo, Model model) {
         return "lecture/player";
     }
 
