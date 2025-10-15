@@ -7,6 +7,7 @@
             <div id="logo">
                 <h1>로고</h1>
                 <button class="categoryBtn">Ξ 카테고리</button>
+
             </div>
 
 
