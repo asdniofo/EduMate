@@ -1,0 +1,145 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(to right, #d6f0ff, #f1f9ff);
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 1000px;
+}
+
+.login-icon{
+    display: flex;
+    background-color: #fff;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0px 0px 4px #666;
+}
+
+.login-box {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 1500px;
+    height: 800px;
+    max-width: 95%;
+}
+
+.login-left {
+    background: linear-gradient(to bottom, #cfefff, #e8faff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+}
+
+.login-left .login-icon{
+    font-size: 80px;
+    margin-bottom: 10px;
+}
+
+.login-right {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-logo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.btn-login {
+    background: #216dff;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+    background: #0054f0;
+}
+
+.btn-join {
+    margin-top: 15px;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    padding: 12px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-join:hover {
+    background: #f6f6f6;
+}
+
+.find-info {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+.find-info a {
+    color: #666;
+    text-decoration: none;
+}
+
+.find-info a:hover {
+    text-decoration: underline;
+}
+
+.btn-login:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* 빨간 경고 border */
+.input-error {
+    border: 2px solid red;
+}
+
+/* 경고 메시지 스타일 */
+.error-message {
+    color: red;
+    font-size: 13px;
+    padding: 8px 12px;
+    border: 1px solid red;
+    border-radius: 6px;
+    background: #ffeaea;
+    display: none;
+    margin-bottom: 20px;
+}
