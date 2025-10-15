@@ -2,6 +2,22 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MemberMapper">
-    
+<mapper
+	namespace="com.edumate.boot.domain.member.model.mapper.MemberMapper">
+	<insert id="insertQuestion">
+		INSERT INTO QUESTION (
+		QUESTION_NO,
+		MEMBER_ID,
+		QUESTION_TITLE,
+		QUESTION_CONTENT,
+		WRITE_DATE
+		) VALUES (
+		SEQ_QUESTION_NO.NEXTVAL,
+		#{memberId, jdbcType=VARCHAR},
+		#{questionTitle, jdbcType=VARCHAR},
+		#{questionContent, jdbcType=VARCHAR},
+		DEFAULT
+		)
+	</insert>
+
 </mapper>

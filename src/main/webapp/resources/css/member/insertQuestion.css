@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+/* ====== 기본 설정 ====== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #000;
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+/* 메인 컨테이너 */
+.main-container {
+    width: 100%;
+    position: relative;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+/* ====== 상단 영역 ====== */
+.header-section {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    background: linear-gradient(150.71deg, #caedff, #e5fff4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.board-image {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15%;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    z-index: 5;
+}
+
+/* ====== 폼 전체 ====== */
+/* ====== form 태그 관련 ====== */
+form {
+    width: 100%;
+}
+
+/* 폼 컨테이너 */
+.form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 50px 0 100px 0;
+    background-color: #f9f9f9;
+    z-index: 20;
+    box-sizing: border-box; /* 추가 */
+}
+
+/* 폼 래퍼 */
+.form-wrapper {
+    width: 80%;
+    max-width: 1000px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 40px 60px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 입력 구역 */
+.input-section {
+    margin-bottom: 30px;
+}
+
+/* 라벨 */
+.input-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* 입력 필드 (텍스트/텍스트에어리어 공통) */
+.input-field {
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f3f3f3;
+    box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.1) inset;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+/* textarea 전용 스타일 */
+textarea.input-field {
+    min-height: 150px; /* 높이를 더 넉넉하게 */
+    resize: none; /* 크기 조절 불가능 */
+    line-height: 1.6;
+    padding: 15px 20px; /* 안쪽 여백 넉넉하게 */
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* ====== 등록 버튼 ====== */
+.submit-button {
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-left: auto;
+    transition: all 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #d1e5f0;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(1px);
+}
