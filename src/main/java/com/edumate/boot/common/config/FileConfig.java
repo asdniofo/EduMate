@@ -6,18 +6,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class FileConfig implements WebMvcConfigurer{
-	private final String BOARD_WEB_PATH = "/images/board/**";
-	private final String BOARD_REAL_PATH = "file:///C:/uploadImage/board/";
+
+	private final String LECTURE_IMAGE_WEB_PATH = "/images/lecture/**";
+	private final String LECTURE_IMAGE_REAL_PATH = "file:///" + System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
 	
-	private final String PHOTO_WEB_PATH = "/images/photo/**";
-	private final String PHOTO_REAL_PATH = "file:///C:/uploadImage/photo/";
+	private final String LECTURE_VIDEO_WEB_PATH = "/videos/lecture/**";
+	private final String LECTURE_VIDEO_REAL_PATH = "file:///" + System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/";
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler(BOARD_WEB_PATH)
-				.addResourceLocations(BOARD_REAL_PATH);
+
+		registry.addResourceHandler(LECTURE_IMAGE_WEB_PATH)
+				.addResourceLocations(LECTURE_IMAGE_REAL_PATH);
 		
-		registry.addResourceHandler(PHOTO_WEB_PATH)
-				.addResourceLocations(PHOTO_REAL_PATH);
+		registry.addResourceHandler(LECTURE_VIDEO_WEB_PATH)
+				.addResourceLocations(LECTURE_VIDEO_REAL_PATH);
 	}
 }

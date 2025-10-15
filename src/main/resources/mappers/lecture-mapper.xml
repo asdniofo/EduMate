@@ -9,23 +9,68 @@
     <select id="categoryCount" resultType="_int">
         SELECT COUNT(*) FROM LECTURE WHERE LECTURE_CATEGORY = #{lectureCategory}
     </select>
-    <select id="selectList" resultType="Lecture">
-        SELECT L.*, T.TEACHER_NAME 
-        FROM LECTURE L 
-        JOIN TEACHER T ON L.TEACHER_NO = T.TEACHER_NO
-        ORDER BY ${sortValue} DESC
-    </select>
-    <select id="selectCategoryList" resultType="Lecture">
-        SELECT L.*, T.TEACHER_NAME
+    <select id="selectList" resultType="LectureListRequest">
+        SELECT L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+               L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE,
+               M.MEMBER_NAME,
+               NVL(ROUND(AVG(R.REVIEW_RATING), 1), 0) AS LECTURE_RATING,
+               (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
+               (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT
         FROM LECTURE L
-        JOIN TEACHER T ON L.TEACHER_NO = T.TEACHER_NO
+        JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
+        GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+                 L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
+        ORDER BY ${sortValue}
+    </select>
+    <select id="selectCategoryList" resultType="LectureListRequest">
+        SELECT L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+               L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE,
+               M.MEMBER_NAME,
+               NVL(ROUND(AVG(R.REVIEW_RATING), 1), 0) AS LECTURE_RATING,
+               (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
+               (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT
+        FROM LECTURE L
+        JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
         WHERE L.LECTURE_CATEGORY = #{category}
-        ORDER BY ${sortValue} DESC
+        GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+                 L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
+        ORDER BY ${sortValue}
     </select>
-    <select id="selectOneById" resultType="Lecture">
-        SELECT L.*, T.TEACHER_NAME
+    <select id="selectOneById" resultType="LectureListRequest">
+        SELECT L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+               L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE,
+               M.MEMBER_NAME,
+               NVL(ROUND(AVG(R.REVIEW_RATING), 1), 0) AS LECTURE_RATING,
+               (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
+               (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT
         FROM LECTURE L
-        JOIN TEACHER T ON L.TEACHER_NO = T.TEACHER_NO
-        WHERE LECTURE_NO = #{lectureNo}
+        JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
+        WHERE L.LECTURE_NO = #{lectureNo}
+        GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+                 L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
     </select>
+    <select id="selectReviewById" resultType="ReviewListRequest">
+        SELECT R.*, M.MEMBER_NAME
+        FROM REVIEW R
+        JOIN MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
+        WHERE R.LECTURE_NO = #{lectureNo} AND R.REVIEW_YN = 'Y'
+        ORDER BY R.REVIEW_DATE DESC
+    </select>
+    <select id="selectVideoListById" resultType="VideoListRequest">
+        SELECT * FROM LECTURE_VIDEO
+        WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
+        ORDER BY VIDEO_ORDER ASC
+    </select>
+    <select id="totalVideoById" resultType="_int">
+        SELECT COUNT(*) FROM LECTURE_VIDEO
+        WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
+    </select>
+    <select id="totalTimeById" resultType="_int">
+        SELECT SUM(VIDEO_TIME) FROM LECTURE_VIDEO
+        WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
+    </select>
+
 </mapper>
