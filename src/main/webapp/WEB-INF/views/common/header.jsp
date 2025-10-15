@@ -18,22 +18,26 @@
                         <button class="categoryBtn">Ξ 카테고리</button>
                     </div>
 
+                    <div id="search-nav">
                     <input type="text" class="searchBox" placeholder="검색어를 입력해주세요" />
-                </div>
-
-                <!-- nav 메뉴 -->
-                <nav id="nav">
+                    <nav id="nav">
                     <ul class="topMenu">
                         <li><a href="#">강의/강좌</a></li>
                         <li><a href="#">내 강의실</a></li>
-                        <li><a href="#">자료실</a></li>
+                        <li><a href="/reference/list">자료실</a></li>
                         <li><a href="#">공지사항</a></li>
                         <li><a href="#">특가</a></li>
                     </ul>
+                    </nav>
+                    </div>
                     <div class="loginBox">
                         <button>로그인/회원가입</button>
                     </div>
-                </nav>
+                
+                </div>
+
+                <!-- nav 메뉴 -->
+                
             </div>
         </header>
     </body>

@@ -1,0 +1,311 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Inter, Segoe UI, sans-serif;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
+}
+
+.search-box {
+	width: 932px;
+	height: 34px;
+	background: #EEEEEE;
+	border-radius: 5px;
+	padding: 0 15px;
+	display: flex;
+	align-items: center;
+	margin: 50px auto 0;
+}
+
+.content {
+	flex: 1;
+	max-width: 100%;
+	padding: 60px 80px;
+	background: rgba(250, 250, 250, 0.95);
+}
+
+.title-section {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	margin-bottom: 40px;
+}
+
+.title {
+	font-size: 64px;
+	font-weight: 700;
+	color: #000000;
+	margin: 0;
+}
+
+.floppy-icon {
+	width: 120px;
+	height: 120px;
+}
+
+.category-filter {
+	display: flex;
+	gap: 15px;
+	margin-bottom: 40px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.category-btn {
+	padding: 12px 32px;
+	background: white;
+	border: none;
+	border-radius: 25px;
+	font-size: 20px;
+	font-weight: 500;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-btn.active {
+	background: #EBEBEB;
+	box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+	font-weight: 600;
+}
+.category-search-wrapper {
+	display: flex;
+	justify-content: space-between; /* 왼쪽: 검색창, 오른쪽: 카테고리 */
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 40px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.category-filter {
+	display: flex;
+	gap: 15px;
+	margin: 0;
+	padding: 0;
+}
+
+.search-form {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.search-input {
+	background-color: #EEEEEE;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 300px;
+    font-size: 14px;
+
+    /* 테두리 제거 */
+    border: none;
+
+    /* 클릭 시 테두리 생기지 않도록 */
+    outline: none;
+}
+
+
+.reference-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 50px;
+}
+
+.reference-item {
+	background: white;
+	border-radius: 20px;
+	padding: 24px 35px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.reference-item:hover {
+	background: #FAFAFA;
+	transform: translateX(5px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.reference-info {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.reference-category {
+	font-size: 18px;
+	font-weight: 600;
+	color: #666666;
+	min-width: 100px;
+}
+
+.reference-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #000000;
+}
+
+.reference-date {
+	font-size: 16px;
+	font-weight: 500;
+	color: #9C9C9C;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	margin-top: 40px;
+}
+
+.page-btn {
+	width: 45px;
+	height: 45px;
+	background: white;
+	border: 1px solid #E0E0E0;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.page-btn:hover:not(:disabled) {
+	background: #F5F5F5;
+	border-color: #CCCCCC;
+}
+
+.page-btn.active {
+	background: #4A90E2;
+	color: white;
+	border-color: #4A90E2;
+	font-weight: 600;
+}
+
+.page-btn:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+.page-btn.nav-btn {
+	font-size: 14px;
+	padding: 0 12px;
+	width: auto;
+}
+
+.write-btn {
+	position: absolute;
+	bottom: 40px;
+	right: 80px;
+	padding: 18px 40px;
+	background: #4A90E2;
+	color: white;
+	border: none;
+	border-radius: 25px;
+	font-size: 20px;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 4px 16px rgba(74, 144, 226, 0.4);
+	transition: all 0.3s ease;
+}
+
+.write-btn:hover {
+	background: #357ABD;
+	transform: translateY(-3px);
+	box-shadow: 0 6px 20px rgba(74, 144, 226, 0.5);
+}
+
+.write-btn:active {
+	transform: translateY(-1px);
+}
+
+.page-title {
+	font-size: 64px;
+	font-weight: 700;
+	color: #000000;
+	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 20px;
+}
+
+.page-title-section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between; /* 텍스트는 왼쪽, 이미지는 오른쪽 */
+	max-width: 1200px;
+	margin: 60px auto 20px auto; /* 가운데 정렬 */
+	padding: 0 40px;
+}
+
+.page-title-text {
+	font-size: 40px;
+    font-weight: 600;
+	color: #000000;
+}
+
+.page-title-image {
+	width: 100px; /* 원하는 크기로 조절 */
+	height: auto;
+}
+
+.pagination-wrapper {
+	position: relative;
+	display: flex;
+	justify-content: center; /* 가운데 정렬 */
+	align-items: center;
+	margin-top: 40px;
+	padding: 0 40px;
+}
+
+/* 페이지네이션은 가운데 */
+.pagination-center {
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 글쓰기 버튼은 오른쪽 고정 */
+.write-button {
+	position: absolute;
+	right: 0;
+	padding: 12px 25px;
+	background-color: white;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: none;
+	color: black;
+	z-index: 20;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.write-button:hover {
+	background-color: #f0f0f0;
+}
