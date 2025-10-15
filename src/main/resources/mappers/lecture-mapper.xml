@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edumate.boot.domain.lecture.model.mapper.LectureMapper">
-    <select id="totalCount" resultType="_int">
+    <select id="totalCount" resultType="int">
         SELECT COUNT(*) FROM LECTURE
     </select>
-    <select id="categoryCount" resultType="_int">
+    <select id="categoryCount" resultType="int">
         SELECT COUNT(*) FROM LECTURE WHERE LECTURE_CATEGORY = #{lectureCategory}
     </select>
     <select id="selectList" resultType="LectureListRequest">
@@ -64,11 +64,11 @@
         WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
         ORDER BY VIDEO_ORDER ASC
     </select>
-    <select id="totalVideoById" resultType="_int">
+    <select id="totalVideoById" resultType="int">
         SELECT COUNT(*) FROM LECTURE_VIDEO
         WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
     </select>
-    <select id="totalTimeById" resultType="_int">
+    <select id="totalTimeById" resultType="int">
         SELECT SUM(VIDEO_TIME) FROM LECTURE_VIDEO
         WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
     </select>
@@ -76,7 +76,9 @@
         SELECT * FROM LECTURE_VIDEO WHERE VIDEO_NO = #{videoNo} AND VIDEO_YN ='Y'
     </select>
     <select id="selectNextVideoById" resultType="VideoListRequest">
-        SELECT * FROM LECTURE_VIDEO WHERE LECTURE_NO = #{lectureNo} AND VIDEO_NO = #{nextVideoNo} AND VIDEO_YN ='Y'
+        SELECT * FROM LECTURE_VIDEO WHERE LECTURE_NO = #{lectureNo} AND VIDEO_ORDER = #{nextVideoNo} AND VIDEO_YN ='Y'
     </select>
-
+    <select id="selectNameById" resultType="string">
+        SELECT LECTURE_NAME FROM LECTURE WHERE LECTURE_NO = #{lectureNo}
+    </select>
 </mapper>

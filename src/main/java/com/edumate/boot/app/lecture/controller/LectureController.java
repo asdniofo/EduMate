@@ -109,8 +109,10 @@ public class LectureController {
             int lectureNo =  currentVideo.get(0).getLectureNo();
             int nextVideoNo = currentVideo.get(0).getVideoOrder()+1;
             List<VideoListRequest> nextVideo = lService.selectNextVideoById(lectureNo,nextVideoNo);
+            String lectureName = lService.selectNameById(lectureNo);
             model.addAttribute("currentVideo", currentVideo);
             model.addAttribute("nextVideo", nextVideo);
+            model.addAttribute("lectureName", lectureName);
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
             return "common/error";

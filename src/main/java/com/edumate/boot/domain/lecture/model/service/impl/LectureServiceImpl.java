@@ -98,5 +98,11 @@ public class LectureServiceImpl implements LectureService {
         return vList;
     }
 
+    @Override
+    public String selectNameById(int lectureNo) {
+        String result = lMapper.selectNameById(lectureNo);
+        return result;
+    }
+
 
 }
