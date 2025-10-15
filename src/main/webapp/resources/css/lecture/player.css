@@ -67,6 +67,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-height: 0;
 }
 
 .lesson-title {
@@ -80,12 +81,14 @@ body {
 
 .video-player {
     width: 100%;
+    height: auto;
     aspect-ratio: 16/9;
     background: #d9d9d9;
     border: 1px black solid;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+    flex: none;
 }
 
 .video-element {
@@ -99,14 +102,19 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(26, 26, 26, 0.9);
+    background: transparent;
     padding: 15px 20px;
     display: flex;
     align-items: center;
     gap: 15px;
     color: white;
     border-radius: 0 0 8px 8px;
-    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease;
+}
+
+.video-player.hide-controls.playing .video-controls-custom {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .control-btn {
@@ -125,13 +133,20 @@ body {
 }
 
 .control-btn.play {
-    background: #4f46e5;
-    padding: 8px 16px;
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .control-btn.play:hover {
-    background: #3730a3;
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .progress-area {
@@ -164,14 +179,56 @@ body {
     min-width: 80px;
 }
 
+.speed-control-container {
+    position: relative;
+}
+
 .speed-control {
-    background: #333;
+    background: rgba(0, 0, 0, 0.3);
     border: none;
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.speed-control:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.speed-options {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    padding: 5px 0;
+    display: none;
+    min-width: 60px;
+    margin-bottom: 5px;
+}
+
+.speed-control-container.open .speed-options {
+    display: block;
+}
+
+.speed-option {
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.speed-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.speed-option.selected {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Curriculum Styles for Player Page */

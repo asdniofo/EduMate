@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -17,15 +18,15 @@
             <div class="content-area">
                 <!-- Video Player Section -->
                 <div class="video-section">
-                    <h1 class="lesson-title">1. [개념] 빠르게 이해하는 딥러닝 개요</h1>
+                    <h1 class="lesson-title">${currentVideo[0].videoOrder}. ${currentVideo[0].videoTitle}</h1>
 
                     <div class="video-player">
-                        <video id="video-element" class="video-element" preload="metadata">
-                            <source src="/videos/lecture/123.mp4" type="video/mp4">
+                        <video id="video-element" class="video-element" preload="metadata" onclick="togglePlay()">
+                            <source src="/videos/lecture/${currentVideo[0].videoPath}" type="video/mp4">
                             브라우저가 비디오를 지원하지 않습니다.
                         </video>
                         <div class="video-controls-custom">
-                        <button class="control-btn play" id="play-btn" onclick="togglePlay()">▶️ 재생</button>
+                        <button class="control-btn play" id="play-btn" onclick="togglePlay()">▶</button>
                         <div class="progress-area">
                             <span class="time-display" id="current-time">00:00</span>
                             <div class="progress-bar" onclick="seekVideo(event)">
@@ -33,25 +34,32 @@
                             </div>
                             <span class="time-display" id="total-time">00:00</span>
                         </div>
-                        <select class="speed-control" onchange="changeSpeed(this.value)">
-                            <option value="0.5">0.5x</option>
-                            <option value="1" selected>1x</option>
-                            <option value="1.25">1.25x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2">2x</option>
-                        </select>
+                        <div class="speed-control-container">
+                            <div class="speed-control" onclick="toggleSpeedDropdown()">
+                                <span class="speed-text">1x</span>
+                            </div>
+                            <div class="speed-options">
+                                <div class="speed-option" onclick="selectSpeed(this, '0.5')">0.5x</div>
+                                <div class="speed-option selected" onclick="selectSpeed(this, '1')">1x</div>
+                                <div class="speed-option" onclick="selectSpeed(this, '1.25')">1.25x</div>
+                                <div class="speed-option" onclick="selectSpeed(this, '1.5')">1.5x</div>
+                                <div class="speed-option" onclick="selectSpeed(this, '2')">2x</div>
+                            </div>
+                        </div>
                         <button class="control-btn" onclick="toggleFullscreen()">⛶</button>
                         </div>
                     </div>
 
                     <!-- Next Lecture Section -->
-                    <div class="curriculum-item" onclick="goToNextLecture()">
-                        <div class="curriculum-icon"></div>
-                        <div class="curriculum-content">
-                            <div class="curriculum-lesson">2. [실습] 딥러닝 환경 설정하기</div>
+                    <c:if test="${not empty nextVideo}">
+                        <div class="curriculum-item" onclick="location.href='/lecture/player?videoNo=${nextVideo[0].videoNo}'">
+                            <div class="curriculum-icon"></div>
+                            <div class="curriculum-content">
+                                <div class="curriculum-lesson">${nextVideo[0].videoOrder}. ${nextVideo[0].videoTitle}</div>
+                            </div>
+                            <div class="curriculum-duration">${nextVideo[0].time}</div>
                         </div>
-                        <div class="curriculum-duration">15분</div>
-                    </div>
+                    </c:if>
                 </div>
 
                 <!-- Chat Section -->
@@ -97,20 +105,48 @@
         <script>
             let video = null;
             let isPlaying = false;
+            let controlsTimeout = null;
+            let videoPlayer = null;
 
             function togglePlay() {
                 const video = document.getElementById('video-element');
                 const playBtn = document.getElementById('play-btn');
+                const videoPlayer = document.querySelector('.video-player');
                 
                 if (video.paused) {
                     video.play();
-                    playBtn.textContent = '⏸️ 일시정지';
-                    playBtn.style.background = '#ef4444';
+                    playBtn.innerHTML = '||';
+                    videoPlayer.classList.add('playing');
+                    hideControlsAfterDelay();
                 } else {
                     video.pause();
-                    playBtn.textContent = '▶️ 재생';
-                    playBtn.style.background = '#4f46e5';
+                    playBtn.innerHTML = '▶';
+                    videoPlayer.classList.remove('playing');
+                    showControls();
                 }
+            }
+
+            function showControls() {
+                const videoPlayer = document.querySelector('.video-player');
+                videoPlayer.classList.remove('hide-controls');
+                clearTimeout(controlsTimeout);
+            }
+
+            function hideControlsAfterDelay() {
+                const video = document.getElementById('video-element');
+                const videoPlayer = document.querySelector('.video-player');
+                
+                clearTimeout(controlsTimeout);
+                if (!video.paused) {
+                    controlsTimeout = setTimeout(() => {
+                        videoPlayer.classList.add('hide-controls');
+                    }, 3000); // 3초 후 숨김
+                }
+            }
+
+            function handleMouseMove() {
+                showControls();
+                hideControlsAfterDelay();
             }
 
             function seekVideo(event) {
@@ -126,6 +162,30 @@
             function changeSpeed(speed) {
                 const video = document.getElementById('video-element');
                 video.playbackRate = parseFloat(speed);
+            }
+
+            function toggleSpeedDropdown() {
+                const container = document.querySelector('.speed-control-container');
+                container.classList.toggle('open');
+            }
+
+            function selectSpeed(element, speed) {
+                // 이전 선택 제거
+                document.querySelectorAll('.speed-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                // 새로운 선택 표시
+                element.classList.add('selected');
+                
+                // 속도 변경
+                changeSpeed(speed);
+                
+                // 표시 텍스트 업데이트
+                document.querySelector('.speed-text').textContent = speed + 'x';
+                
+                // 드롭다운 닫기
+                document.querySelector('.speed-control-container').classList.remove('open');
             }
 
             function toggleFullscreen() {
@@ -205,12 +265,6 @@
                 }
             }
 
-            function goToNextLecture() {
-                // 다음 강의로 이동하는 로직
-                alert('다음 강의로 이동합니다.');
-                // window.location.href = '/lecture/player?videoNo=3';
-            }
-
             function toggleAiDropdown() {
                 const dropdown = document.querySelector(".ai-model-selector");
                 dropdown.classList.toggle("open");
@@ -245,9 +299,14 @@
 
             // 외부 클릭 시 드롭다운 닫기
             document.addEventListener("click", function (event) {
-                const dropdown = document.querySelector(".ai-model-selector");
-                if (!dropdown.contains(event.target)) {
-                    dropdown.classList.remove("open");
+                const aiDropdown = document.querySelector(".ai-model-selector");
+                if (!aiDropdown.contains(event.target)) {
+                    aiDropdown.classList.remove("open");
+                }
+                
+                const speedDropdown = document.querySelector(".speed-control-container");
+                if (!speedDropdown.contains(event.target)) {
+                    speedDropdown.classList.remove("open");
                 }
             });
 
@@ -264,8 +323,20 @@
                 video.addEventListener('canplay', updateProgress);
                 video.addEventListener('ended', function() {
                     const playBtn = document.getElementById('play-btn');
-                    playBtn.textContent = '▶️ 재생';
-                    playBtn.style.background = '#4f46e5';
+                    const videoPlayer = document.querySelector('.video-player');
+                    playBtn.innerHTML = '▶';
+                    videoPlayer.classList.remove('playing');
+                    showControls();
+                });
+                
+                // 비디오 플레이어에 마우스 이벤트 리스너 추가
+                const videoPlayer = document.querySelector('.video-player');
+                videoPlayer.addEventListener('mousemove', handleMouseMove);
+                videoPlayer.addEventListener('mouseenter', showControls);
+                videoPlayer.addEventListener('mouseleave', () => {
+                    if (!video.paused) {
+                        hideControlsAfterDelay();
+                    }
                 });
                 
                 // 비디오 로드 시도
