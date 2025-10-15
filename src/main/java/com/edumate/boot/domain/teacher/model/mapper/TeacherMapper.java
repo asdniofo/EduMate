@@ -11,13 +11,11 @@ import com.edumate.boot.domain.teacher.model.vo.Question;
 @Mapper
 public interface TeacherMapper {
 
-	int getTotalCount();
+	int getTotalCount(Map<String, Object> params);
 
 	int getSearchTotalCount(Map<String, Object> searchMap);
 	
-	List<Question> selectQuestionList(RowBounds rowBounds);
+	List<Question> selectQuestionList(Map<String, Object> params, RowBounds rowBounds);
 
 	List<Question> selectSearchList(Map<String, Object> searchMap, RowBounds rowBounds);
-
-
 }

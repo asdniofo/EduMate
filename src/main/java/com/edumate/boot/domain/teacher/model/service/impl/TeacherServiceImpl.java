@@ -4,6 +4,7 @@ import com.edumate.boot.domain.teacher.model.service.TeacherService;
 import com.edumate.boot.domain.teacher.model.vo.Question;
 import com.edumate.boot.domain.teacher.model.mapper.TeacherMapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +19,11 @@ public class TeacherServiceImpl implements TeacherService {
     private final TeacherMapper tMapper;
 
 	@Override
-	public int getTotalCount() {
-		int totalCount = tMapper.getTotalCount();
-		return totalCount;
+	public int getTotalCount(String filter) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("filter", filter);
+	    int totalCount = tMapper.getTotalCount(params);
+	    return totalCount;
 	}
 	
 	@Override
@@ -30,10 +33,12 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Question> selectList(int currentPage, int boardCountPerPage) {
+	public List<Question> selectList(int currentPage, int boardCountPerPage, String filter) {
 		int offset = (currentPage-1)*boardCountPerPage;
 		RowBounds rowBounds = new RowBounds(offset, boardCountPerPage);
-		List<Question> tList = tMapper.selectQuestionList(rowBounds);
+		Map<String, Object> params = new HashMap<>();
+	    params.put("filter", filter);
+		List<Question> tList = tMapper.selectQuestionList(params, rowBounds);
 		return tList;
 	}
 
