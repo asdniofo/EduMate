@@ -4,9 +4,54 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edumate.boot.domain.teacher.model.mapper.TeacherMapper" >
 	<select id="getTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM QUESTION
+	    SELECT COUNT(*) FROM QUESTION
+	    <where>
+	        <if test="filter != null and filter != 'ALL'">
+	            AND QUESTION_STATUS = #{filter}
+	        </if>
+	    </where>
 	</select>
-	<select id="selectQuestionList" resultType="Question">
-		SELECT * FROM QUESTION ORDER BY WRITE_DATE ASC
+    
+	<select id="getSearchTotalCount" resultType="_int">
+	    SELECT COUNT(*) FROM QUESTION
+	    <where>
+	        <if test="filter != null and filter != 'ALL'">
+	            AND QUESTION_STATUS = #{filter}
+	        </if>
+	        
+	        <if test="searchKeyword != null and searchKeyword != ''">
+	            AND (
+	                REPLACE(UPPER(QUESTION_TITLE), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	                OR REPLACE(UPPER(QUESTION_CONTENT), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	            )
+	        </if>
+	    </where>
+	</select>
+    
+	 <select id="selectQuestionList" resultType="Question">
+	    SELECT * FROM QUESTION 
+	    <where>
+	        <if test="filter != null and filter != 'ALL'">
+	            AND QUESTION_STATUS = #{filter}
+	        </if>
+	    </where>
+	    ORDER BY QUESTION_NO ASC
+     </select>
+    
+	<select id="selectSearchList" resultType="Question">
+	    SELECT * FROM QUESTION
+	    <where>
+	        <if test="filter != null and filter != 'ALL'">
+	            AND QUESTION_STATUS = #{filter}
+	        </if>
+	        
+	        <if test="searchKeyword != null and searchKeyword != ''">
+	            AND (
+	                REPLACE(UPPER(QUESTION_TITLE), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	                OR REPLACE(UPPER(QUESTION_CONTENT), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	            )
+	        </if>
+	    </where>
+	    ORDER BY QUESTION_NO ASC
 	</select>
 </mapper>
