@@ -1,0 +1,327 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    /* **수정**: 고정 폭 제거, 유동적인 최대 폭 설정 */
+    max-width: 1920px;
+    margin: 0 auto;
+    background-color: #FAFAFA; 
+    min-height: 100vh;
+}
+
+/* --- 1. 상단 타이틀 섹션 (그라데이션 배경) --- */
+.hero-section-wrapper {
+    background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
+    padding-bottom: 80px; 
+}
+
+.hero-section {
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    /* **수정**: 중앙 정렬** */
+    justify-content: center; 
+    position: relative;
+    padding: 100px 20px 80px; 
+}
+
+.hero-title {
+    font-size: 40px;
+    font-weight: 600;
+    color: black;
+    /* 유동적 중앙 정렬을 위해 픽셀 마진 제거 */
+    margin-left: 0; 
+    margin-right: 30px; 
+}
+
+/* Question Mark Image Placeholder (3D 그래픽 시뮬레이션) */
+.hero-image {
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    /* **수정**: 절대 위치를 %로 조정하여 유동적인 위치를 확보 */
+    right: 25%; 
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.hero-image::before {
+    content: '?';
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    width: 90px;
+    height: 90px;
+    background: #FF6060;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: rotate(10deg);
+}
+.hero-image::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    right: 0px;
+    width: 140px;
+    height: 100px;
+    background: #FFE082; 
+    border-radius: 20px 20px 0 20px;
+    transform: rotate(-5deg);
+}
+
+/* --- 2. 메인 콘텐츠 영역 (흰색 질문 목록) --- */
+.main-content {
+    background-color: #FAFAFA; 
+    border-radius: 30px; 
+    box-shadow: none; 
+    
+    margin-top: 40px; 
+    margin-bottom: 60px;
+    
+    /* **수정**: 유동적인 중앙 정렬 및 최대 너비 */
+   max-width: 1400px; 
+   margin-left: auto;
+   margin-right: auto;
+   padding: 40px 30px; /* 내부 패딩을 조정하여 좌우 여백 확보 */
+}
+
+.content-top-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.main-search-bar {
+    background-color: #EEEEEE;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 300px;
+    font-size: 14px;
+}
+
+.main-search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    color: #777;
+}
+
+.sort-by-text {
+    font-size: 14px;
+    color: #777;
+    border: none;
+    background-color: #FAFAFA;
+    cursor: pointer;
+}
+
+.search-btn {
+    float: left;
+}
+/* --- 질문 목록 스타일 --- */
+.question-list {
+    display: grid;
+    gap: 20px; 
+    padding-bottom: 60px;
+}
+
+.question-item {
+    background-color: white; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+    padding: 25px 30px; 
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.question-status-and-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.status-tag {
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    min-width: 70px;
+    text-align: center;
+}
+
+.status-unresolved { background-color: #FF6060; } 
+.status-resolved { background-color: #32E462; } 
+
+.question-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: black;
+}
+
+.question-content {
+    font-size: 16px;
+    color: #333;
+    margin-left: 90px;
+    line-height: 1.5;
+}
+
+.question-meta {
+    display: flex;
+    font-size: 14px;
+    color: #777;
+    margin-left: 90px;
+    margin-top: 5px;
+    gap: 10px;
+}
+
+.question-meta span:not(:last-child)::after {
+    content: " ·";
+    margin-left: 5px;
+}
+
+/* --- 페이지네이션 및 글쓰기 버튼 --- */
+.bottom-actions {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 40px; 
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.pagination-wrapper {
+    /* 페이지네이션 중앙 고정을 위한 래퍼 */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.pagination {
+    display: flex;
+    gap: 10px; 
+}
+
+.page-button {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: none;
+    border-radius: 10px; 
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
+    transition: background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    text-decoration: none;
+}
+
+/* 일반 버튼 (선택되지 않은 버튼) Hover 스타일 */
+.page-button:not(.page-current):hover {
+    background-color: #F0F0F0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.page-button-text {
+    width: auto;
+    padding: 0 20px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
+}
+
+/* **선택된(현재) 버튼 스타일 (고정)** */
+.page-current {
+    background-color: #E0E0E0 !important; 
+    color: black;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); 
+    cursor: default;
+}
+
+/* 선택된 버튼에는 hover 효과를 제거합니다. */
+.page-current:hover {
+    background-color: #E0E0E0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.write-button {
+    padding: 12px 25px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+    z-index: 20;
+}
+
+/* 글쓰기 버튼을 오른쪽 끝으로 밀기 위한 빈 공간 */
+.pagination-placeholder {
+    width: 300px; 
+    visibility: hidden;
+}
+
+/* 모바일/태블릿 반응형 조정 */
+@media (max-width: 1400px) {
+    .main-content {
+        max-width: 95%;
+        padding: 40px 20px;
+    }
+    .pagination-placeholder {
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 10px;
+    }
+    .hero-title {
+        font-size: 30px;
+    }
+    .hero-image {
+        right: 5%;
+        width: 120px;
+        height: 120px;
+    }
+    .pagination-wrapper {
+        position: static;
+        transform: none;
+        width: 100%;
+    }
+    .bottom-actions {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .pagination-placeholder {
+        display: none;
+    }
+    .write-button {
+        width: 100%;
+        text-align: center;
+    }
+    .main-search-bar {
+        width: 100%;
+    }
+}
