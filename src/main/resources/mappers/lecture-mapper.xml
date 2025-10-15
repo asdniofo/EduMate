@@ -72,5 +72,11 @@
         SELECT SUM(VIDEO_TIME) FROM LECTURE_VIDEO
         WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN ='Y'
     </select>
+    <select id="selectVideoById" resultType="VideoListRequest">
+        SELECT * FROM LECTURE_VIDEO WHERE VIDEO_NO = #{videoNo} AND VIDEO_YN ='Y'
+    </select>
+    <select id="selectNextVideoById" resultType="VideoListRequest">
+        SELECT * FROM LECTURE_VIDEO WHERE LECTURE_NO = #{lectureNo} AND VIDEO_NO = #{nextVideoNo} AND VIDEO_YN ='Y'
+    </select>
 
 </mapper>
