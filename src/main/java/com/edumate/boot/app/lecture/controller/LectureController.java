@@ -2,6 +2,7 @@ package com.edumate.boot.app.lecture.controller;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.ReviewListRequest;
+import com.edumate.boot.app.lecture.dto.VideoDetailRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import jakarta.servlet.http.HttpSession;
@@ -101,7 +102,21 @@ public class LectureController {
     }
 
     @GetMapping("/player")
-    public String showPlayer(@RequestParam int videoNo, Model model) {
+    public String showPlayer(@ModelAttribute VideoListRequest video
+            ,@RequestParam int videoNo, Model model) {
+        try {
+            List<VideoListRequest> currentVideo = lService.selectVideoById(videoNo);
+            int lectureNo =  currentVideo.get(0).getLectureNo();
+            int nextVideoNo = currentVideo.get(0).getVideoOrder()+1;
+            List<VideoListRequest> nextVideo = lService.selectNextVideoById(lectureNo,nextVideoNo);
+            String lectureName = lService.selectNameById(lectureNo);
+            model.addAttribute("currentVideo", currentVideo);
+            model.addAttribute("nextVideo", nextVideo);
+            model.addAttribute("lectureName", lectureName);
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "common/error";
+        }
         return "lecture/player";
     }
 

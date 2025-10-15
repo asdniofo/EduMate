@@ -2,6 +2,7 @@ package com.edumate.boot.domain.lecture.model.service.impl;
 
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.ReviewListRequest;
+import com.edumate.boot.app.lecture.dto.VideoDetailRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.lecture.model.mapper.LectureMapper;
@@ -10,6 +11,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -81,6 +83,24 @@ public class LectureServiceImpl implements LectureService {
     @Override
     public int totalTimeById(int lectureNo) {
         int result = lMapper.totalTimeById(lectureNo);
+        return result;
+    }
+
+    @Override
+    public List<VideoListRequest> selectVideoById(int videoNo) {
+        List<VideoListRequest> vList = lMapper.selectVideoById(videoNo);
+        return vList;
+    }
+
+    @Override
+    public List<VideoListRequest> selectNextVideoById(int lectureNo, int nextVideoNo) {
+        List<VideoListRequest> vList = lMapper.selectNextVideoById(lectureNo, nextVideoNo);
+        return vList;
+    }
+
+    @Override
+    public String selectNameById(int lectureNo) {
+        String result = lMapper.selectNameById(lectureNo);
         return result;
     }
 
