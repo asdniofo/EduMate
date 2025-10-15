@@ -33,4 +33,6 @@ public interface LectureMapper {
     List<VideoListRequest> selectVideoById(int videoNo);
 
     List<VideoListRequest> selectNextVideoById(int lectureNo, int nextVideoNo);
+
+    String selectNameById(int lectureNo);
 }
