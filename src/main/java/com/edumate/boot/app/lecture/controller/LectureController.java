@@ -114,12 +114,15 @@ public class LectureController {
     public String showLectureList(@ModelAttribute LectureListRequest Lecture
             ,@RequestParam(value = "page", defaultValue = "1") int currentPage
             ,@RequestParam(value = "category", defaultValue = "전체") String category
-            ,@RequestParam(value = "sort", defaultValue = "인기순") String sort, Model model) {
+            ,@RequestParam(value = "sort", defaultValue = "인기순") String sort
+            ,@RequestParam(value = "search", defaultValue = "") String search, Model model) {
         try {
             List<LectureListRequest> lList = null;
             int totalCount = 0;
             int lectureCountPerPage = 9;
             String sortValue = null;
+            
+            // 정렬 조건 설정
             if (sort.equals("인기순")) {
                 sortValue = "COUNT_STUDENT DESC";
             } else if (sort.equals("최신순")){
@@ -131,12 +134,28 @@ public class LectureController {
             } else if (sort.equals("별점높은순")){
                 sortValue = "LECTURE_RATING DESC";
             }
-            if (category.equals("전체")){
-                totalCount = lService.getTotalCount();
-                lList = lService.selectList(currentPage, lectureCountPerPage, sortValue);
+            
+            // 검색어 처리
+            boolean hasSearch = search != null && !search.trim().isEmpty();
+            
+            if (hasSearch) {
+                // 검색 모드 (통합 검색)
+                if (category.equals("전체")) {
+                    totalCount = lService.getSearchCountAll(search);
+                    lList = lService.selectSearchAll(currentPage, lectureCountPerPage, search, sortValue);
+                } else {
+                    totalCount = lService.getSearchCategoryCount(search, category);
+                    lList = lService.selectSearchCategoryList(currentPage, lectureCountPerPage, search, category, sortValue);
+                }
             } else {
-                totalCount = lService.getCategoryCount(category);
-                lList = lService.selectCategoryList(currentPage, lectureCountPerPage, category, sortValue);
+                // 일반 모드
+                if (category.equals("전체")) {
+                    totalCount = lService.getTotalCount();
+                    lList = lService.selectList(currentPage, lectureCountPerPage, sortValue);
+                } else {
+                    totalCount = lService.getCategoryCount(category);
+                    lList = lService.selectCategoryList(currentPage, lectureCountPerPage, category, sortValue);
+                }
             }
             int maxPage = (int) Math.ceil((double) totalCount / lectureCountPerPage);
             int naviCountPerPage = 5;
@@ -152,6 +171,7 @@ public class LectureController {
             model.addAttribute("lList", lList);
             model.addAttribute("category", category);
             model.addAttribute("sort", sort);
+            model.addAttribute("search", search);
             return "lecture/list";
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());

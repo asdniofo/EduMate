@@ -12,10 +12,13 @@
 
 
             <div id="search-nav">
-            <input type="text" class="searchBox" placeholder="검색어를 입력해주세요" />
+            <form action="/lecture/list" method="get" style="display: inline;">
+                <input type="text" name="search" class="searchBox" placeholder="검색어를 입력해주세요" value="${param.search}" />
+                <button type="submit" style="display: none;"></button>
+            </form>
             <nav id="nav">
             <ul class="topMenu">
-                <li><a href="/lecture/list">강의/강좌</a></li>
+                <li><a href="/lecture/list">전체 강의</a></li>
                 <li><a href="#">내 강의실</a></li>
                 <li><a href="#">자료실</a></li>
                 <li><a href="#">공지사항</a></li>

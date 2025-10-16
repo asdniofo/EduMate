@@ -117,4 +117,51 @@ public class LectureServiceImpl implements LectureService {
         return result;
     }
 
+    @Override
+    public int getSearchCountAll(String search) {
+        int result = lMapper.getSearchCountAll(search);
+        return result;
+    }
+
+    @Override
+    public List<LectureListRequest> selectSearchAll(int currentPage, int lectureCountPerPage, String search, String sortValue) {
+        int startRow = (currentPage - 1) * lectureCountPerPage + 1;
+        int endRow = currentPage * lectureCountPerPage;
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("sortValue", sortValue);
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+        
+        List<LectureListRequest> lList = lMapper.selectSearchAll(params);
+        return lList;
+    }
+
+    @Override
+    public int getSearchCategoryCount(String search, String category) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("category", category);
+        
+        int result = lMapper.getSearchCategoryCount(params);
+        return result;
+    }
+
+    @Override
+    public List<LectureListRequest> selectSearchCategoryList(int currentPage, int lectureCountPerPage, String search, String category, String sortValue) {
+        int startRow = (currentPage - 1) * lectureCountPerPage + 1;
+        int endRow = currentPage * lectureCountPerPage;
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("category", category);
+        params.put("sortValue", sortValue);
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+        
+        List<LectureListRequest> lList = lMapper.selectSearchCategoryList(params);
+        return lList;
+    }
+
 }

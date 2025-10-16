@@ -40,4 +40,12 @@ public interface LectureMapper {
     int insertLecture(Lecture lecture);
 
     int insertVideo(LectureVideo video);
+
+    int getSearchCountAll(String search);
+
+    List<LectureListRequest> selectSearchAll(Map<String, Object> params);
+
+    int getSearchCategoryCount(Map<String, Object> params);
+
+    List<LectureListRequest> selectSearchCategoryList(Map<String, Object> params);
 }
