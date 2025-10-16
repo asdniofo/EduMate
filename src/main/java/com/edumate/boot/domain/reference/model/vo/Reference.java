@@ -14,6 +14,7 @@ public class Reference {
 	private String memberId;           // 작성자 ID
 	private String archiveTitle;       // 자료 제목
 	private String archiveContent;     // 자료 내용
+	private String archiveType;		   // 자료 카테고리
 	private Date writeDate;            // 작성일
 	private int viewCount;             // 조회수
 	private String attachmentName;     // 첨부파일명 (원본명)
