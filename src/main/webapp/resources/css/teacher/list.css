@@ -114,6 +114,7 @@ body {
     padding: 10px 15px;
     width: 300px;
     font-size: 14px;
+    margin-right: auto;
 }
 
 .main-search-bar input {
@@ -131,10 +132,13 @@ body {
     background-color: #FAFAFA;
     cursor: pointer;
     text-decoration:none;
+    margin-left: 20px;
 }
 
-.sort-by-text:first-child {
-    margin-left: 100px;
+.sort-current {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .search-btn {
