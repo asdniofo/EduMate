@@ -7,6 +7,7 @@ import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.lecture.model.mapper.LectureMapper;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
+import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -104,5 +105,16 @@ public class LectureServiceImpl implements LectureService {
         return result;
     }
 
+    @Override
+    public int insertLecture(Lecture lecture) {
+        int result = lMapper.insertLecture(lecture);
+        return result;
+    }
+
+    @Override
+    public int insertVideo(LectureVideo video) {
+        int result = lMapper.insertVideo(video);
+        return result;
+    }
 
 }

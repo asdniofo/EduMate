@@ -81,4 +81,20 @@
     <select id="selectNameById" resultType="string">
         SELECT LECTURE_NAME FROM LECTURE WHERE LECTURE_NO = #{lectureNo}
     </select>
+    <insert id="insertLecture">
+        <selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
+            SELECT SEQ_LECTURE_NO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO LECTURE
+        VALUES(#{lectureNo}, #{memberId}, #{lectureName}
+        , #{lectureContent} , #{lecturePrice}, #{lectureCategory}
+        , #{lecturePath}, #{lectureCreatedDate}, DEFAULT)
+    </insert>
+
+    <insert id="insertVideo">
+        INSERT INTO LECTURE_VIDEO
+        VALUES(SEQ_VIDEO_NO.NEXTVAL, #{lectureNo}, #{videoTitle}
+        , #{videoOrder} , #{videoTime} , #{videoPath}, DEFAULT)
+    </insert>
 </mapper>
+

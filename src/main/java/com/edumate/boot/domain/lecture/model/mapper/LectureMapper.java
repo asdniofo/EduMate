@@ -5,6 +5,7 @@ import com.edumate.boot.app.lecture.dto.ReviewListRequest;
 import com.edumate.boot.app.lecture.dto.VideoDetailRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
+import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
@@ -35,4 +36,8 @@ public interface LectureMapper {
     List<VideoListRequest> selectNextVideoById(int lectureNo, int nextVideoNo);
 
     String selectNameById(int lectureNo);
+
+    int insertLecture(Lecture lecture);
+
+    int insertVideo(LectureVideo video);
 }
