@@ -11,23 +11,24 @@
 
 	<!-- 자료 목록 조회 (페이징) -->
 	<select id="selectList" parameterType="map" resultType="com.edumate.boot.domain.reference.model.vo.Reference">
-		SELECT 
-			ARCHIVE_NO as archiveNo,
-			MEMBER_ID as memberId,
-			ARCHIVE_TITLE as archiveTitle,
-			ARCHIVE_CONTENT as archiveContent,
-			WRITE_DATE as writeDate,
-			VIEW_COUNT as viewCount,
-			ATTACHMENT_NAME as attachmentName,
-			ATTACHMENT_RENAME as attachmentRename,
-			ATTACHMENT_PATH as attachmentPath,
-			ATTACHMENT_DATE as attachmentDate,
-			BOARD_YN as boardYn
-		FROM ARCHIVE_BOARD
-		WHERE BOARD_YN = 'Y'
-		ORDER BY WRITE_DATE DESC
-		OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
-	</select>
+	SELECT 
+		ARCHIVE_NO as archiveNo,
+		MEMBER_ID as memberId,
+		ARCHIVE_TITLE as archiveTitle,
+		ARCHIVE_CONTENT as archiveContent,
+		WRITE_DATE as writeDate,
+		VIEW_COUNT as viewCount,
+		ATTACHMENT_NAME as attachmentName,
+		ATTACHMENT_RENAME as attachmentRename,
+		ATTACHMENT_PATH as attachmentPath,
+		ATTACHMENT_DATE as attachmentDate,
+		BOARD_YN as boardYn,
+		ARCHIVE_TYPE as archiveType
+	FROM ARCHIVE_BOARD
+	WHERE BOARD_YN = 'Y'
+	ORDER BY WRITE_DATE DESC
+	OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+</select>
 
 	<!-- 자료 상세 조회 -->
 	<select id="selectOneByNo" parameterType="int" resultType="com.edumate.boot.domain.reference.model.vo.Reference">
@@ -42,32 +43,37 @@
 			ATTACHMENT_RENAME as attachmentRename,
 			ATTACHMENT_PATH as attachmentPath,
 			ATTACHMENT_DATE as attachmentDate,
-			BOARD_YN as boardYn
+			BOARD_YN as boardYn,
+			ARCHIVE_TYPE as archiveType
 		FROM ARCHIVE_BOARD
 		WHERE ARCHIVE_NO = #{archiveNo} AND BOARD_YN = 'Y'
 	</select>
 
 	<!-- 자료 등록 -->
 	<insert id="insertReference" parameterType="com.edumate.boot.domain.reference.model.vo.Reference">
-		INSERT INTO ARCHIVE_BOARD (
-			MEMBER_ID,
-			ARCHIVE_TITLE,
-			ARCHIVE_CONTENT,
-			VIEW_COUNT,
-			ATTACHMENT_NAME,
-			ATTACHMENT_RENAME,
-			ATTACHMENT_PATH,
-			BOARD_YN
-		) VALUES (
-			#{memberId},
-			#{archiveTitle},
-			#{archiveContent},
-			0,
-			#{attachmentName},
-			#{attachmentRename},
-			#{attachmentPath},
-			'Y'
-		)
+	    INSERT INTO ARCHIVE_BOARD (
+	        ARCHIVE_NO,
+	        MEMBER_ID,
+	        ARCHIVE_TITLE,
+	        ARCHIVE_CONTENT,
+	        VIEW_COUNT,
+	        ATTACHMENT_NAME,
+	        ATTACHMENT_RENAME,
+	        ATTACHMENT_PATH,
+	        ARCHIVE_TYPE,
+	        BOARD_YN
+	    ) VALUES (
+	        SEQ_ARCHIVE_NO.NEXTVAL,
+	        #{memberId},
+	        #{archiveTitle},
+	        #{archiveContent},
+	        0,
+	        #{attachmentName},
+	        #{attachmentRename},
+	        #{attachmentPath},
+	        #{archiveType},
+	        'Y'
+	    )
 	</insert>
 
 	<!-- 자료 수정 -->
