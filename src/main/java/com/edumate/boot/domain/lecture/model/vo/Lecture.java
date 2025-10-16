@@ -13,10 +13,12 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Lecture {
     private int lectureNo;
-    private int teacherNo;
-    private String teacherName;
+    private String memberId;
     private String lectureName;
+    private String lectureContent;
     private int lecturePrice;
     private String lectureCategory;
     private String lecturePath;
+    private Timestamp lectureCreatedDate;
+    private String lectureYn;
 }

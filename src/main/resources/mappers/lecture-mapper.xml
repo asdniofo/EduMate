@@ -81,4 +81,92 @@
     <select id="selectNameById" resultType="string">
         SELECT LECTURE_NAME FROM LECTURE WHERE LECTURE_NO = #{lectureNo}
     </select>
+    <insert id="insertLecture">
+        <selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
+            SELECT SEQ_LECTURE_NO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO LECTURE
+        VALUES(#{lectureNo}, #{memberId}, #{lectureName}
+        , #{lectureContent} , #{lecturePrice}, #{lectureCategory}
+        , #{lecturePath}, #{lectureCreatedDate}, DEFAULT)
+    </insert>
+
+    <insert id="insertVideo">
+        INSERT INTO LECTURE_VIDEO
+        VALUES(SEQ_VIDEO_NO.NEXTVAL, #{lectureNo}, #{videoTitle}
+        , #{videoOrder} , #{videoTime} , #{videoPath}, DEFAULT)
+    </insert>
+    
+    <!-- 통합 검색 -->
+    <select id="getSearchCountAll" resultType="int">
+        SELECT COUNT(DISTINCT L.LECTURE_NO) 
+        FROM LECTURE L
+        JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+        WHERE UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+           OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+           OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%'
+    </select>
+    
+    <select id="selectSearchAll" resultType="LectureListRequest">
+        SELECT * FROM (
+            SELECT ROWNUM AS rnum, sub.* FROM (
+                SELECT DISTINCT L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+                       L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE,
+                       M.MEMBER_NAME,
+                       NVL(ROUND(AVG(R.REVIEW_RATING), 1), 0) AS LECTURE_RATING,
+                       (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
+                       (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT,
+                       (CASE WHEN UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 100 ELSE 0 END +
+                        CASE WHEN UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%' THEN 50 ELSE 0 END +
+                        CASE WHEN UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 30 ELSE 0 END) as search_score
+                FROM LECTURE L
+                JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+                LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
+                WHERE UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                   OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+                   OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+                         L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
+                ORDER BY search_score DESC, ${sortValue}
+            ) sub
+        ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    </select>
+    
+    <!-- 검색 + 카테고리 -->
+    <select id="getSearchCategoryCount" resultType="int">
+        SELECT COUNT(DISTINCT L.LECTURE_NO) 
+        FROM LECTURE L
+        JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+        WHERE L.LECTURE_CATEGORY = #{category}
+          AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+           OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+           OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
+    </select>
+    
+    <select id="selectSearchCategoryList" resultType="LectureListRequest">
+        SELECT * FROM (
+            SELECT ROWNUM AS rnum, sub.* FROM (
+                SELECT DISTINCT L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+                       L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE,
+                       M.MEMBER_NAME,
+                       NVL(ROUND(AVG(R.REVIEW_RATING), 1), 0) AS LECTURE_RATING,
+                       (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
+                       (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT,
+                       (CASE WHEN UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 100 ELSE 0 END +
+                        CASE WHEN UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%' THEN 50 ELSE 0 END +
+                        CASE WHEN UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 30 ELSE 0 END) as search_score
+                FROM LECTURE L
+                JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
+                LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
+                WHERE L.LECTURE_CATEGORY = #{category}
+                  AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                   OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+                   OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
+                GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
+                         L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
+                ORDER BY search_score DESC, ${sortValue}
+            ) sub
+        ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    </select>
 </mapper>
+
