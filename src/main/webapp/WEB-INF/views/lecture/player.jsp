@@ -4,15 +4,16 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
-        <title>player</title>
-        <link rel="stylesheet" href="../resources/css/lecture/player.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>강의 재생 - EduMate</title>
+        <link rel="stylesheet" href="/resources/css/common/header.css">
+        <link rel="stylesheet" href="/resources/css/common/footer.css">
+        <link rel="stylesheet" href="/resources/css/lecture/player.css">
     </head>
     <body>
         <div class="main-container">
-            <!-- Header -->
-            <div class="header-bar">
-                <div class="header-text">헤더</div>
-            </div>
+            <!-- Header Include -->
+            <jsp:include page="../common/header.jsp" />
 
             <!-- Main Content Area -->
             <div class="content-area">
@@ -95,11 +96,10 @@
                 </div>
             </div>
 
-            <!-- Footer -->
-            <div class="footer-bar">
-                <div class="footer-text">푸터</div>
-            </div>
         </div>
+        
+        <!-- Footer Include -->
+        <jsp:include page="../common/footer.jsp" />
 
         <script>
             let video = null;

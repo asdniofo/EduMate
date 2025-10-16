@@ -15,7 +15,7 @@
             <input type="text" class="searchBox" placeholder="검색어를 입력해주세요" />
             <nav id="nav">
             <ul class="topMenu">
-                <li><a href="#">강의/강좌</a></li>
+                <li><a href="/lecture/list">강의/강좌</a></li>
                 <li><a href="#">내 강의실</a></li>
                 <li><a href="#">자료실</a></li>
                 <li><a href="#">공지사항</a></li>
