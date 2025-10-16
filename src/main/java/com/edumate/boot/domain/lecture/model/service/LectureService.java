@@ -38,4 +38,12 @@ public interface LectureService {
     int insertLecture(Lecture lecture);
 
     int insertVideo(LectureVideo video);
+
+    int getSearchCountAll(String search);
+
+    List<LectureListRequest> selectSearchAll(int currentPage, int lectureCountPerPage, String search, String sortValue);
+
+    int getSearchCategoryCount(String search, String category);
+
+    List<LectureListRequest> selectSearchCategoryList(int currentPage, int lectureCountPerPage, String search, String category, String sortValue);
 }

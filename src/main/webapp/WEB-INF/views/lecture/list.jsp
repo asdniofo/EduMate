@@ -101,7 +101,7 @@
             <!-- Pagination -->
             <div class="pagination-container">
                 <c:if test="${startNavi ne 1 }">
-                    <a href="/lecture/list?category=${category }&sort=${sort}&page=${startNavi - 1 }" class="pagination-next-btn">
+                    <a href="/lecture/list?category=${category }&sort=${sort}&page=${startNavi - 1 }<c:if test='${not empty search}'>&search=${search}</c:if>" class="pagination-next-btn">
                         <div class="pagination-next">&laquo; 이전</div>
                     </a>
                 </c:if>
@@ -113,14 +113,14 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <a href="/lecture/list?category=${category }&sort=${sort}&page=${n }" class="pagination-number-btn">
+                            <a href="/lecture/list?category=${category }&sort=${sort}&page=${n }<c:if test='${not empty search}'>&search=${search}</c:if>" class="pagination-number-btn">
                                 <div class="pagination-number">${n }</div>
                             </a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <c:if test="${endNavi ne maxPage }">
-                    <a href="/lecture/list?category=${category }&sort=${sort}&page=${endNavi + 1 }" class="pagination-next-btn">
+                    <a href="/lecture/list?category=${category }&sort=${sort}&page=${endNavi + 1 }<c:if test='${not empty search}'>&search=${search}</c:if>" class="pagination-next-btn">
                         <div class="pagination-next">다음 &raquo;</div>
                     </a>
                 </c:if>
@@ -158,7 +158,12 @@
 
                 // 선택된 카테고리 로그
                 const currentSort = "${sort}"
-                window.location.href = "/lecture/list?category=" + category +"&sort=" + currentSort;
+                const currentSearch = "${search}"
+                let url = "/lecture/list?category=" + category + "&sort=" + currentSort;
+                if (currentSearch) {
+                    url += "&search=" + encodeURIComponent(currentSearch);
+                }
+                window.location.href = url;
             }
 
             function selectSortOption(element, value) {
@@ -180,7 +185,12 @@
                 console.log("선택된 정렬:", value);
                 // 선택된 카테고리 로그
                 const currentCategory = "${category}"
-                window.location.href = "/lecture/list?category=" + currentCategory +"&sort="+value;
+                const currentSearch = "${search}"
+                let url = "/lecture/list?category=" + currentCategory + "&sort=" + value;
+                if (currentSearch) {
+                    url += "&search=" + encodeURIComponent(currentSearch);
+                }
+                window.location.href = url;
             }
 
             // 외부 클릭 시 드롭다운 닫기
