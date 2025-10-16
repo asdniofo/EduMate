@@ -12,4 +12,18 @@ public class NoticeController {
 
     private final NoticeService noticeService;
 
+    @GetMapping("/list")
+    public String showNoticeList() {
+    	return "notice/list";
+    }
+    
+    @GetMapping("/detail")
+    public String showNoticeDetail() {
+    	return "notice/detail";
+    }
+    
+    @GetMapping("/insert")
+    public String showNoticeInsert() {
+    	return "notice/insert";
+    }
 }
