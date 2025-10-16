@@ -1,0 +1,170 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+/* ===== 헤더 ===== */
+#header {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.search-box input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.auth a {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+}
+
+/* ===== 배너 ===== */
+.notice-banner {
+    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 50px 100px 50px 200px;
+}
+
+.notice-banner h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.notice-banner img {
+    width: 200px;
+}/* ===== 배너 ===== */
+.notice-banner {
+    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 50px 100px 50px 200px;
+}
+
+.notice-banner h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.notice-banner img {
+    width: 200px;
+}
+
+/* ===== 공지 상세 ===== */
+.notice-detail {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 40px 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.notice-content {
+    line-height: 1.8;
+    color: #333;
+}
+
+.notice-file {
+    margin-top: 20px;
+}
+
+.notice-file a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.notice-file a:hover {
+    text-decoration: underline;
+}
+
+/* ===== 버튼 ===== */
+.notice-buttons {
+    display: flex;
+    justify-content: space-between; /* 왼쪽/오른쪽 분리 */
+    margin-top: 30px;
+}
+
+.notice-buttons-left {
+    display: flex;
+    gap: 20px;
+}
+
+.notice-buttons-right {
+    display: flex;
+    gap: 20px;
+}
+
+/* Hover 시 무채색 적용 */
+.notice-buttons button:hover {
+    background-color: #ddd; /* 연한 회색 */
+    color: #000; /* 글자 색 검정으로 대비 */
+}
+
+/* 기존 버튼 스타일 그대로 사용 */
+.notice-buttons button {
+    border: none;
+    background: #fff;
+    box-shadow: 0 0 6px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
