@@ -1,6 +1,7 @@
 package com.edumate.boot.domain.member.model.service.impl;
 
 import com.edumate.boot.domain.member.model.service.MemberService;
+import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.mapper.MemberMapper;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,15 @@ public class MemberServiceImpl implements MemberService {
     	int result = memberMapper.insertQuestion(question); 
 		return result;
     }
+
+	@Override
+	public int signup(Member member) {
+		return memberMapper.insertMember(member);
+	}
+
+	@Override
+	public Member findByMemberId(String memberId) {
+		return memberMapper.selectByMemberId(memberId);
+	}
 
 }
