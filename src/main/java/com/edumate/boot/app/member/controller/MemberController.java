@@ -201,15 +201,20 @@ public class MemberController {
     @PostMapping("/insertQuestion")
     public String insertQuestion(
     		@ModelAttribute InsertQuestionRequest question
-    		, Model model) {
-    	try {			
-    		question.setMemberId("user01"); // 하드코딩이므로 변환필요
+    		, Model model, HttpSession session) {
+    	try {
+    		String loginId = (String) session.getAttribute("loginId");
+            
+            if (loginId == null) {
+                return "redirect:/member/login"; 
+            }
+    		question.setMemberId(loginId);
     		int result = memberService.insertQuestion(question);
     		return "redirect:/member/question/list";
-		} catch (Exception e) {
-			model.addAttribute("errorMsg", e.getMessage());
-			return "common/error";
-		}
+    	} catch (Exception e) {
+    		model.addAttribute("errorMsg", e.getMessage());
+    		return "common/error";
+    	}
     }
 
 }

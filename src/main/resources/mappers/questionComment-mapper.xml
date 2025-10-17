@@ -7,10 +7,14 @@
 		SELECT * FROM QUESTION_COMMENT WHERE QUESTION_NO = #{questionNo} AND QUESTION_COMMENT_YN = 'Y' ORDER BY QUESTION_COMMENT_NO DESC
 	</select>
 	<insert id="insertQuestionCommnet">
-		INSERT INTO QUESTION_COMMENT
-		VALUES(#{questionNo}, #{memberId}, #{questionCommentContent}, DEFAULT, DEFAULT, SEQ_QUESTION_COMMENT_NO)
+		INSERT INTO QUESTION_COMMENT (
+			QUESTION_COMMENT_NO, QUESTION_NO, MEMBER_ID, QUESTION_COMMENT_CONTENT)
+		VALUES (
+			SEQ_QUESTION_COMMENT_NO.NEXTVAL, #{questionNo},
+			#{memberId},
+			#{questionCommentContent, jdbcType=VARCHAR} )
 	</insert>
-	<update id="delectQuestionComment">
+	<update id="deleteComment">
 		UPDATE QUESTION_COMMENT SET QUESTION_COMMENT_YN = 'N' QUESTION_COMMENT_NO = #{questionCommentNo}
 	</update>
 </mapper>

@@ -14,4 +14,6 @@ public interface QuestionCommentMapper {
 
 	int insertQuestionCommnet(QuestionCommentAddRequest questionComment);
 
+	int deleteComment(int questionCommentNo);
+
 }

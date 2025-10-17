@@ -11,4 +11,6 @@ public interface QuestionCommentService {
 
 	int insertQuestionCommnet(QuestionCommentAddRequest questionComment);
 
+	int deleteComment(int questionCommentNo);
+
 }

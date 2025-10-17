@@ -28,5 +28,11 @@ public class QuestionCommentServiceImpl implements QuestionCommentService {
 		int result = qcMapper.insertQuestionCommnet(questionComment);
 		return result;
 	}
+
+	@Override
+	public int deleteComment(int questionCommentNo) {
+		int result = qcMapper.deleteComment(questionCommentNo);
+		return result;
+	}
 	
 }
