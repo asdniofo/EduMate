@@ -10,10 +10,17 @@
 			WHERE MEMBER_ID = #{memberId}
 	</select>
 	
+	<!-- Login -->
+	<select id="loginMember">
+		SELECT	*	FROM MEMBER
+			WHERE 	MEMBER_ID = #{memberId}
+			AND		MEMBER_PW = #{memberPw}
+	</select>
+	
 	<!-- Signup -->
 	<insert id="insertMember">
-		INSERT INTO MEMBER 		(	MEMBER_ID,		MEMBER_PW,		MEMBER_EMAIL,	MEMBER_BIRTH,	LECTURE_YN,		ADMIN_YN,	MEMBER_MONEY	)
-					VALUES		(	#{memberId},	#{memberPw},	#{memberEmail},	#{memberBirth},	DEFAULT,		DEFAULT,	DEFAULT	)
+		INSERT INTO MEMBER 		(	MEMBER_ID,		MEMBER_PW,		MEMBER_EMAIL,	MEMBER_NAME,	MEMBER_BIRTH,	LECTURE_YN,		ADMIN_YN,	MEMBER_MONEY	)
+					VALUES		(	#{memberId},	#{memberPw},	#{memberEmail},	#{memberName},	#{memberBirth},	DEFAULT,		DEFAULT,	DEFAULT	)
 	</insert>
 	
 	
