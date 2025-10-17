@@ -41,7 +41,7 @@
 
             <button type="button" class="btn-join" onclick="location.href='signup/terms'">회원가입</button>
             <p class="find-info">
-                <a href="findInfo.jsp">아이디 / 비밀번호를 잊어버렸습니다.</a>
+                <a href="/member/find">아이디 / 비밀번호를 잊어버렸습니다.</a>
             </p>
         </div>
     </div>

@@ -41,5 +41,19 @@ public class MemberServiceImpl implements MemberService {
     	int result = memberMapper.insertQuestion(question); 
 		return result;
     }
+	public String findMemberId(Member member) {
+		return memberMapper.findMemberId(member);
+	}
+
+	@Override
+	public boolean checkMemberForPwReset(Member member) {
+		int count = memberMapper.checkMemberForPwReset(member);
+        return count > 0;
+	}
+
+	@Override
+	public int updateMemberPw(Member member) {
+		return memberMapper.updateMemberPw(member);
+	}
 
 }

@@ -13,5 +13,9 @@ public interface MemberService {
     Member login(String memberId, String memberPw);
     
 	int insertQuestion(InsertQuestionRequest question);
+    // 아이디 / 비밀번호 찾기
+	String findMemberId(Member member);
+	boolean checkMemberForPwReset(Member member);
+	int updateMemberPw(Member member);
 
 }

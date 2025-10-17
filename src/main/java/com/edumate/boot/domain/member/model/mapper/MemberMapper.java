@@ -19,6 +19,12 @@ public interface MemberMapper {
 	Member loginMember(Map<String, Object> map);
 
 	int insertQuestion(InsertQuestionRequest question);
+	
+	String findMemberId(Member member);
+
+	int checkMemberForPwReset(Member member);
+
+	int updateMemberPw(Member member);
 
 
 
