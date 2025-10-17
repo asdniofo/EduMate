@@ -1,10 +1,11 @@
 package com.edumate.boot.app.member.controller;
 
-import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpSession;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -32,6 +33,29 @@ public class MemberController {
 		  return "member/login";
     }
 
+    @PostMapping("/login")
+    public String login(
+            @RequestParam("memberId") String memberId,
+            @RequestParam("memberPw") String memberPw,
+            HttpSession session) {
+
+        Member loginUser = memberService.login(memberId, memberPw);
+
+        if (loginUser != null) {
+            session.setAttribute("loginUser", loginUser);
+            return "redirect:/"; // 로그인 성공 → 메인 페이지로 이동
+        } else {
+            return "redirect:/member/login?error=1"; // 로그인 실패 시 다시 로그인 페이지
+        }
+    }
+
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
     @GetMapping("/signup/terms")
     public String showTerms() {
       return "member/signup_terms";
@@ -46,6 +70,7 @@ public class MemberController {
     public String submitSignupInfo(
     		 	@RequestParam 	String memberId,
     	        @RequestParam 	String memberPw,
+    	        @RequestParam	String memberName,
     	        @RequestParam 	String memberEmail,
     	        @RequestParam 	String memberBirth,
     	        @RequestParam	("g-recaptcha-response") String recaptchaResponse,
@@ -63,6 +88,7 @@ public class MemberController {
     Member member = new Member();
     member.setMemberId(memberId);
     member.setMemberPw(memberPw);
+    member.setMemberName(memberName);
     member.setMemberEmail(memberEmail);
     member.setMemberBirth(memberBirth);
     member.setMemberMoney(0);
@@ -121,20 +147,5 @@ public class MemberController {
     public String showInsertQuestion() {
 		return "member/insertQuestion";
     }
-    
-    // 등록하기
-    @PostMapping("/insertQuestion")
-    public String insertQuestion(
-    		@ModelAttribute InsertQuestionRequest question
-    		, Model model) {
-    	try {			
-    		question.setMemberId("user01"); // 하드코딩이므로 변환필요
-    		int result = memberService.insertQuestion(question);
-    		return "redirect:/member/question/list";
-		} catch (Exception e) {
-			model.addAttribute("errorMsg", e.getMessage());
-			return "common/error";
-		}
-    }
-    
+
 }

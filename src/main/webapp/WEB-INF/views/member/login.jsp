@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,9 +28,13 @@
 
             <div class="error-message" id="error-message"></div>
 
-            <form id="login-form" action="login.do" method="post">
-                <input type="text" name="userId" placeholder="아이디">
-                <input type="password" name="userPwd" placeholder="비밀번호">
+            <form id="login-form" action="/member/login" method="post">
+                <input type="text" name="memberId" placeholder="아이디">
+                <input type="password" name="memberPw" placeholder="비밀번호">
+                
+                <c:if test="${param.error == 1}">
+        			<p style="color:red;">아이디 또는 비밀번호가 잘못되었습니다.</p>
+    			</c:if>
 
                 <button type="submit" class="btn-login">로그인</button>
             </form>
