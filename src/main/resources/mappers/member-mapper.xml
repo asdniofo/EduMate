@@ -22,7 +22,27 @@
 		INSERT INTO MEMBER 		(	MEMBER_ID,		MEMBER_PW,		MEMBER_EMAIL,	MEMBER_NAME,	MEMBER_BIRTH,	TEACHER_YN,		ADMIN_YN,	MEMBER_MONEY	)
 					VALUES		(	#{memberId},	#{memberPw},	#{memberEmail},	#{memberName},	#{memberBirth},	DEFAULT,		DEFAULT,	DEFAULT	)
 	</insert>
-
+	
+	<select id="findMemberId">
+        SELECT MEMBER_ID
+        FROM MEMBER
+        WHERE MEMBER_NAME = #{memberName}
+        AND MEMBER_BIRTH = #{memberBirth}
+        AND MEMBER_EMAIL = #{memberEmail}
+    </select>
+    
+    <select id="checkMemberForPwReset">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE MEMBER_ID = #{memberId}
+        AND MEMBER_EMAIL = #{memberEmail}
+    </select>
+    
+    <update id="updateMemberPw">
+    UPDATE MEMBER
+    SET MEMBER_PW = #{memberPw}
+    WHERE MEMBER_ID = #{memberId}
+	</update>
 
 
 	<insert id="insertQuestion">

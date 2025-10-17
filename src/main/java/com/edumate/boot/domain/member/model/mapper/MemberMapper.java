@@ -17,6 +17,12 @@ public interface MemberMapper {
 	// 로그인
 	Member loginMember(Map<String, Object> map);
 
+	String findMemberId(Member member);
+
+	int checkMemberForPwReset(Member member);
+
+	int updateMemberPw(Member member);
+
 
 
 }

@@ -40,9 +40,11 @@ public class MemberController {
             HttpSession session) {
 
         Member loginUser = memberService.login(memberId, memberPw);
+        
+        String loginId = loginUser.getMemberId();
 
         if (loginUser != null) {
-            session.setAttribute("loginUser", loginUser);
+            session.setAttribute("loginId", loginId);
             return "redirect:/"; // 로그인 성공 → 메인 페이지로 이동
         } else {
             return "redirect:/member/login?error=1"; // 로그인 실패 시 다시 로그인 페이지
@@ -140,6 +142,52 @@ public class MemberController {
     @GetMapping("/signup/complete")
     public String showComplete() {
       return "member/signup_done";
+    }
+    
+    @GetMapping("/find")
+    public String showFind() {
+    	return "member/find_info";
+    }
+    
+    @PostMapping("/findId")
+    public String findId(Member member, Model model) {
+        String foundId = memberService.findMemberId(member);
+
+        if (foundId != null) {
+            model.addAttribute("foundId", foundId);
+            return "member/find_id"; // 아이디 결과 페이지
+        } else {
+            model.addAttribute("msg", "일치하는 회원 정보가 없습니다.");
+            return "member/find_info";
+        }
+    }
+    
+    @PostMapping("/findPw")
+    public String findPw(Member member, Model model) {
+        boolean exists = memberService.checkMemberForPwReset(member);
+
+        if (exists) {
+            model.addAttribute("memberId", member.getMemberId());
+            return "member/find_pw"; // 비밀번호 재설정 페이지
+        } else {
+            model.addAttribute("msg", "입력하신 정보와 일치하는 회원이 없습니다.");
+            return "member/find_info";
+        }
+    }
+    
+    @PostMapping("/updatePw")
+    public String updatePw(Member member, Model model) {
+        int result = memberService.updateMemberPw(member);
+
+        if (result > 0) {
+            model.addAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
+            model.addAttribute("url", "/member/login");
+            return "common/success"; // 메시지 후 이동 (혹은 redirect)
+        } else {
+            model.addAttribute("msg", "비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
+            model.addAttribute("url", "/member/find_pw");
+            return "common/fail"; // 실패 페이지 (선택)
+        }
     }
 
     // 보여지는 화면
