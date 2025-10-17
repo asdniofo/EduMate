@@ -32,13 +32,13 @@ public class LectureController {
         String lowerFileName = fileName.toLowerCase();
         String[] imageType = {".jpg", ".jpeg", ".png", ".gif", ".bmp"};
         String[] videoType = {".mp4", ".avi", ".mov", ".wmv", ".flv", ".mkv"};
-
+        
         for (String ext : imageType) {
             if (lowerFileName.endsWith(ext)) {
                 return "image";
             }
         }
-
+        
         for (String ext : videoType) {
             if (lowerFileName.endsWith(ext)) {
                 return "video";
@@ -51,10 +51,10 @@ public class LectureController {
         try {
             // FFprobe 명령어로 영상 길이 추출
             ProcessBuilder pb = new ProcessBuilder(
-                "ffprobe",
-                "-v", "quiet",
-                "-show_entries", "format=duration",
-                "-of", "csv=p=0",
+                "ffprobe", 
+                "-v", "quiet", 
+                "-show_entries", "format=duration", 
+                "-of", "csv=p=0", 
                 filePath
             );
             Process process = pb.start();
@@ -94,7 +94,7 @@ public class LectureController {
         String originalFileName = file.getOriginalFilename();
         String fileType = getFileType(originalFileName);
         String uploadPath;
-
+        
         // 확장자에 따라 저장 경로 결정
         if ("image".equals(fileType)) {
             uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
@@ -106,7 +106,7 @@ public class LectureController {
         String newFileName = generateSequentialFileName(originalFileName, uploadPath);
         File saveFile = new File(uploadPath + newFileName);
         file.transferTo(saveFile);
-
+        
         return newFileName;
     }
 
@@ -121,7 +121,7 @@ public class LectureController {
             int totalCount = 0;
             int lectureCountPerPage = 9;
             String sortValue = null;
-
+            
             // 정렬 조건 설정
             if (sort.equals("인기순")) {
                 sortValue = "COUNT_STUDENT DESC";
@@ -134,10 +134,10 @@ public class LectureController {
             } else if (sort.equals("별점높은순")){
                 sortValue = "LECTURE_RATING DESC";
             }
-
+            
             // 검색어 처리
             boolean hasSearch = search != null && !search.trim().isEmpty();
-
+            
             if (hasSearch) {
                 // 검색 모드 (통합 검색)
                 if (category.equals("전체")) {
@@ -234,7 +234,7 @@ public class LectureController {
     public String showLectureAdd(Model model) {
         return "lecture/add";
     }
-
+    
     @PostMapping("/add")
     public String addLecture(@RequestParam("lectureName") String lectureName,
                            @RequestParam("lectureCategory") String lectureCategory,
@@ -268,14 +268,14 @@ public class LectureController {
                 if (!lectureVideos[i].isEmpty()) {
                     // 영상 파일 저장
                     String videoFileName = saveFile(lectureVideos[i]);
-
+                    
                     // 저장된 영상 파일의 실제 시간 추출
-                    String uploadPath = "video".equals(getFileType(lectureVideos[i].getOriginalFilename()))
-                        ? System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/"
+                    String uploadPath = "video".equals(getFileType(lectureVideos[i].getOriginalFilename())) 
+                        ? System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/" 
                         : System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
                     String fullFilePath = uploadPath + videoFileName;
                     int videoDuration = getVideoDuration(fullFilePath);
-
+                    
                     LectureVideo video = new LectureVideo();
                     video.setLectureNo(lectureNo);
                     video.setVideoTitle(videoTitles[i]);
