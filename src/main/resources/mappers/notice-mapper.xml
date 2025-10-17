@@ -5,20 +5,16 @@
 <mapper namespace="com.edumate.boot.domain.notice.model.mapper.NoticeMapper">
 	
 	<select id="getTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM NOTICE_BOARD
+		SELECT COUNT(*) FROM NOTICE_BOARD WHERE BOARD_YN = 'Y'
+	</select>
+	
+	<select id="getSearchTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_BOARD WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' AND BOARD_YN = 'Y'
 	</select>
 	<select id="selectNoticeList" resultType="Notice">
-		SELECT * FROM NOTICE_BOARD ORDER BY NOTICE_ID DESC
+		SELECT * FROM NOTICE_BOARD WHERE BOARD_YN = 'Y' ORDER BY NOTICE_ID DESC
 	</select>
 	<select id="selectSearchList" resultType="Notice">
-		SELECT * FROM NOTICE_BOARD 
-			<where>
-				<if test="searchcondition == 'title'">
-					NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%'
-				</if>
-				<if test="searchcondition == 'content'">
-					NOTICE_CONTENT LIKE '%'||#{searchKeyword}||'%'
-				</if>
-			</where>
+		SELECT * FROM NOTICE_BOARD WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' AND BOARD_YN = 'Y'
 	</select>
 </mapper>

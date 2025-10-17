@@ -28,8 +28,8 @@
 
 	<!-- 메인 콘텐츠 -->
 	<main class="main-content">
-		<form action="/notice/search" method="get">
 			<div class="search-bar">
+		<form action="/notice/search" method="get">
 				<input type="text" placeholder="검색어를 입력하세요" 
 				name="searchKeyword" value="${searchKeyword }"/>
 				<button>🔍</button>

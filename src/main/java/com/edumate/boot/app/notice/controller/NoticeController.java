@@ -49,14 +49,12 @@ public class NoticeController {
     
     @GetMapping("/search")
     public String showNoticeSearchList(
-    		@RequestParam("searchCondition") String searchCondition,
     		@RequestParam("searchKeyword") String searchKeyword,
     		@RequestParam(value = "page", defaultValue = "1") int currentPage,
     		Model model	) {
     	try {
 			int boardLimit = 5;
 			Map<String, Object> searchMap = new HashMap<String, Object>();
-			searchMap.put("searchCondition", searchCondition);
 			searchMap.put("searchKeyword", searchKeyword);
 			searchMap.put("currentPage", currentPage);
 			searchMap.put("boardLimit", boardLimit);
@@ -74,7 +72,6 @@ public class NoticeController {
 				model.addAttribute("currentPage", currentPage);
 			}
 			model.addAttribute("searchList", searchList);
-			model.addAttribute("searchCondition", searchCondition);
 			model.addAttribute("searchKeyword", searchKeyword);
 			return "notice/search";
 		} catch (Exception e) {
