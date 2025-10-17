@@ -34,7 +34,7 @@
 			  </div>
 			
 			</div>
-			<!-- 검색창 -->
+			
 
 			<!-- Reference List -->
 			<c:choose>
@@ -46,13 +46,13 @@
 				<c:otherwise>
 					<div class="reference-list">
 						<c:forEach var="ref" items="${rList}">
-							<div class="reference-item" onclick="location.href='/reference/detail?referenceNo=${ref.referenceNo}'">
+							<div class="reference-item" onclick="location.href='/reference/detail?archiveNo=${ref.archiveNo}'">
 								<div class="reference-info">
-									<div class="reference-category">${ref.referenceCategory}</div>
-									<div class="reference-title">${ref.referenceTitle}</div>
+									<div class="reference-category">${ref.archiveType}</div>
+									<div class="reference-title">${ref.archiveTitle}</div>
 								</div>
 								<div class="reference-date">
-									<fmt:formatDate value="${ref.referenceDate}" pattern="yyyy.MM.dd"/>
+									<fmt:formatDate value="${ref.writeDate}" pattern="yyyy.MM.dd"/>
 								</div>
 							</div>
 						</c:forEach>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
@@ -89,11 +89,11 @@
 					</c:if>
 				</div>
 
-				<!-- 글쓰기 버튼 (이제 pagination 옆으로 배치) -->
-				<a href="#" class="write-button">글쓰기</a>
+				<!-- 글쓰기 버튼 -->
+				<a href="/reference/insert" class="write-button">글쓰기</a>
 			</div>
 
-			<!-- Write Button -->
+			
 		
 		</div>
 

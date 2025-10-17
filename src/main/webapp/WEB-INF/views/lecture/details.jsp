@@ -5,15 +5,16 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8">
-        <title>details</title>
-        <link rel="stylesheet" href="../resources/css/lecture/details.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>강의 상세 - EduMate</title>
+        <link rel="stylesheet" href="/resources/css/common/header.css">
+        <link rel="stylesheet" href="/resources/css/common/footer.css">
+        <link rel="stylesheet" href="/resources/css/lecture/details.css">
     </head>
     <body>
         <div class="main-container">
-            <!-- Header -->
-            <div class="header-bar">
-                <div class="header-text">헤더</div>
-            </div>
+            <!-- Header Include -->
+            <jsp:include page="../common/header.jsp" />
 
             <!-- Course Hero Section -->
             <div class="course-hero">
@@ -129,11 +130,10 @@
                 </button>
             </div>
 
-            <!-- Footer -->
-            <div class="footer-bar">
-                <div class="footer-text">푸터</div>
-            </div>
         </div>
+        
+        <!-- Footer Include -->
+        <jsp:include page="../common/footer.jsp" />
 
         <script>
             function switchTab(element, section) {
