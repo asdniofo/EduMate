@@ -52,5 +52,11 @@ public class TeacherServiceImpl implements TeacherService {
 		return searchList;
 	}
 
+	@Override
+	public Question selectOneByNo(int questionNo) {
+		Question question = tMapper.selectOneByNo(questionNo);
+		return question;
+	}
+
 
 }

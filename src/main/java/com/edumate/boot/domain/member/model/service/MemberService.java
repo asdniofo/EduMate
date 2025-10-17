@@ -1,5 +1,6 @@
 package com.edumate.boot.domain.member.model.service;
 
+import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
 
 public interface MemberService {
@@ -10,5 +11,7 @@ public interface MemberService {
 
     // 로그인
     Member login(String memberId, String memberPw);
+    
+	int insertQuestion(InsertQuestionRequest question);
 
 }

@@ -18,4 +18,6 @@ public interface TeacherMapper {
 	List<Question> selectQuestionList(Map<String, Object> params, RowBounds rowBounds);
 
 	List<Question> selectSearchList(Map<String, Object> searchMap, RowBounds rowBounds);
+
+	Question selectOneByNo(int questionNo);
 }

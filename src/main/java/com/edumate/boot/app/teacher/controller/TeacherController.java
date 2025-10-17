@@ -86,5 +86,16 @@ public class TeacherController {
 			return "common/error";
 		}
 	}
+    
+    @GetMapping("/question/detail")
+    public String showDetailView(int questionNo, Model model) {
+    	try {
+			Question question = tService.selectOneByNo(questionNo);
+			model.addAttribute("question", question);
+			return "teacher/detail";
+		} catch (Exception e) {
+			return "common/error";
+		}
+    }
 
 }

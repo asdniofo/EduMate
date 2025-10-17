@@ -54,4 +54,8 @@
 	    </where>
 	    ORDER BY QUESTION_NO ASC
 	</select>
+	
+	<select id="selectOneByNo" resultType="Question">
+		SELECT * FROM QUESTION WHERE QUESTION_NO = #{questionNo}
+	</select>
 </mapper>

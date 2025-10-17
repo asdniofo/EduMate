@@ -2,6 +2,7 @@ package com.edumate.boot.domain.member.model.service.impl;
 
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.mapper.MemberMapper;
 
 import java.util.HashMap;
@@ -33,6 +34,12 @@ public class MemberServiceImpl implements MemberService {
         map.put("memberPw", memberPw);
 
         return memberMapper.loginMember(map);
+    }
+
+	@Override
+	public int insertQuestion(InsertQuestionRequest question) {
+    	int result = memberMapper.insertQuestion(question); 
+		return result;
     }
 
 }
