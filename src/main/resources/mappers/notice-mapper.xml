@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edumate.boot.domain.notice.model.mapper.NoticeMapper">
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_BOARD
+	</select>
+	<select id="selectNoticeList" resultType="Notice">
+		SELECT * FROM NOTICE_BOARD ORDER BY NOTICE_ID DESC
+	</select>
+	<select id="selectSearchList" resultType="Notice">
+		SELECT * FROM NOTICE_BOARD 
+			<where>
+				<if test="searchcondition == 'title'">
+					NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%'
+				</if>
+				<if test="searchcondition == 'content'">
+					NOTICE_CONTENT LIKE '%'||#{searchKeyword}||'%'
+				</if>
+			</where>
+	</select>
+</mapper>

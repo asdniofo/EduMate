@@ -88,30 +88,35 @@ body {
     border-color: #ff4040;
 }
 
-/* 검색창 */
+/* 검색창 + 버튼 전체 */
 .search-bar {
-    position: relative;
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    align-items: center;
+    gap: 8px; /* 검색창과 버튼 사이 간격 */
+    margin-bottom: 25px; /* 필요 시 여백 유지 */
 }
 
+/* 검색창 */
 .search-bar input {
-    width: 240px;
-    padding: 8px 36px 8px 12px;
+    width: 240px; /* 기존 폭 유지 */
+    padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 14px;
 }
 
+/* 버튼 */
 .search-bar button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #eee;
     cursor: pointer;
-    font-size: 16px;
-    color: #666;
 }
+
+
+
 
 /* =========================
    🔹 공지사항 리스트
@@ -181,6 +186,7 @@ body {
     flex-shrink: 0;
     margin-left: 30px;
 }
+
 
 
 /* 제목 */

@@ -1,7 +1,14 @@
 package com.edumate.boot.domain.notice.model.service.impl;
 
 import com.edumate.boot.domain.notice.model.service.NoticeService;
+import com.edumate.boot.domain.notice.model.vo.Notice;
+import com.edumate.boot.app.teacher.controller.TeacherController;
 import com.edumate.boot.domain.notice.model.mapper.NoticeMapper;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -9,6 +16,38 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService {
 
+    private final TeacherController teacherController;
+
     private final NoticeMapper noticeMapper;
+
+	@Override
+	public int getTotalCount() {
+		 int totalCount = noticeMapper.getTotalCount();
+		return totalCount;
+	}
+
+	@Override
+	public List<Notice> selectNoticeList(int currentPage, int boardCountPerPage) {
+		int offset = (currentPage-1)*boardCountPerPage;
+		RowBounds rowBounds = new RowBounds(offset, boardCountPerPage);
+		List<Notice> nList = noticeMapper.selectNoticeList(rowBounds);
+		return nList;
+	}
+
+	@Override
+	public List<Notice> selectSearchList(Map<String, Object> searchMap) {
+		int currentPage = (int)searchMap.get("currentPage");
+		int boardLimit = (int)searchMap.get("boardLimit");
+		int offset = (currentPage-1)*boardLimit;
+		RowBounds rowBounds = new RowBounds(offset, boardLimit);
+		List<Notice> searchList = noticeMapper.selectSearchList(searchMap, rowBounds);
+		return searchList;
+	}
+
+	@Override
+	public int getTotalCount(Map<String, Object> searchMap) {
+		int totalCount = noticeMapper.getSearchTotalCount(searchMap);
+		return totalCount;
+	}
 
 }

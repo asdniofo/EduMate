@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,7 +16,7 @@
 <link rel="stylesheet" href="/resources/css/notice/list.css" />
 </head>
 <body>
-    <jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/header.jsp" />
 	<!-- 히어로 섹션 -->
 	<section class="hero-section-wrapper">
 		<div class="hero-section">
@@ -26,53 +28,50 @@
 
 	<!-- 메인 콘텐츠 -->
 	<main class="main-content">
-		<!-- 검색창 + 필터 바 (위치 바뀜: 필터 왼쪽, 검색창 오른쪽) -->
-		<div class="filter-bar">
-			<div class="filter-buttons">
-				<button class="filter-btn active">전체</button>
-				<button class="filter-btn">공지사항</button>
-				<button class="filter-btn urgent">긴급</button>
-			</div>
 			<div class="search-bar">
 				<input type="text" placeholder="검색어를 입력하세요" />
 				<button>🔍</button>
 			</div>
-		</div>
 
 		<section class="question-list">
-			<article class="question-item">
-				<a href="/notice/detail/1" class="question-link">
-					<div class="question-left">
-						<span class="status-tag">공지사항</span>
-						<h2 class="question-title">사이트 개설 안내</h2>
-					</div> <span class="write-date">2025.10.02</span>
+			<c:forEach items="${nList }" var="notice" varStatus="i">
+				<a href="/notice/detail?noticeId=${notice.noticeId }"
+					class="question-link">
+					<article class="question-item">
+						<div class="question-left">
+							<span class="status-tag">공지사항</span>
+							<h2 class="question-title">${notice.noticeTitle }</h2>
+						</div>
+					</article> <span class="write-date"><fmt:formatDate
+							value="${notice.writeDate}" pattern="yyyy-MM-dd" /></span>
 				</a>
-			</article>
-
-			<article class="question-item">
-				<a href="/notice/detail/2" class="question-link">
-					<div class="question-left">
-						<span class="status-tag urgent">긴급</span>
-						<h2 class="question-title">오늘만 가면 10일 쉼</h2>
-					</div> <span class="write-date">2025.10.02</span>
-				</a>
-			</article>
+			</c:forEach>
 		</section>
 
 		<!-- 하단 페이지네이션 + 글쓰기 버튼 -->
 		<div class="bottom-actions">
 			<div class="pagination">
-				<button class="page-btn">이전</button>
-				<button class="page-btn active">1</button>
-				<button class="page-btn">2</button>
-				<button class="page-btn">3</button>
-				<button class="page-btn">4</button>
-				<button class="page-btn">5</button>
-				<button class="page-btn">다음</button>
+				<c:if test="${startNavi ne 1 }">
+						<a href="/notice/list?page=${startNavi-1 }">
+							<button class="page-btn">이전</button>
+						</a>
+				</c:if>
+				<c:forEach begin="${startNavi }" end="${endNavi }" var="n">
+					<a href="/notice/list?page=${n }"> 
+					<button class="page-btn <c:if test="${currentPage eq n }">active</c:if>">
+						${n }
+					</button>
+					</a>
+				</c:forEach>
+				<c:if test="${endNavi ne maxPage }">
+					<a href="/notice/list?page=${endNavi + 1 }">
+						<button class="page-btn">다음</button>
+					</a>
+				</c:if>
 			</div>
 			<a href="#" class="write-button">글쓰기</a>
 		</div>
 	</main>
-    <jsp:include page="../common/footer.jsp" />
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
