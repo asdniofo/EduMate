@@ -9,6 +9,7 @@
 	        <if test="filter != null and filter != 'ALL'">
 	            AND QUESTION_STATUS = #{filter}
 	        </if>
+	        AND QUESTION_YN = 'Y'
 	    </where>
 	</select>
     
@@ -25,6 +26,7 @@
 	                OR REPLACE(UPPER(QUESTION_CONTENT), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
 	            )
 	        </if>
+	        AND QUESTION_YN = 'Y'
 	    </where>
 	</select>
     
@@ -34,6 +36,7 @@
 	        <if test="filter != null and filter != 'ALL'">
 	            AND QUESTION_STATUS = #{filter}
 	        </if>
+	        AND QUESTION_YN = 'Y'
 	    </where>
 	    ORDER BY QUESTION_NO ASC
      </select>
@@ -51,7 +54,12 @@
 	                OR REPLACE(UPPER(QUESTION_CONTENT), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
 	            )
 	        </if>
+	        AND QUESTION_YN = 'Y'
 	    </where>
 	    ORDER BY QUESTION_NO ASC
+	</select>
+	
+	<select id="selectOneByNo" resultType="Question">
+		SELECT * FROM QUESTION WHERE QUESTION_NO = #{questionNo}
 	</select>
 </mapper>

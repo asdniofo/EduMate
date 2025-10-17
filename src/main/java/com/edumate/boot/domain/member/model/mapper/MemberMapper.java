@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
 
 @Mapper
@@ -16,6 +17,8 @@ public interface MemberMapper {
 
 	// 로그인
 	Member loginMember(Map<String, Object> map);
+
+	int insertQuestion(InsertQuestionRequest question);
 
 
 

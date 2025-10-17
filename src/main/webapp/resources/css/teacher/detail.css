@@ -1,0 +1,321 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+    /* **수정**: 고정 폭 제거, 유동적인 최대 폭 설정 */
+    max-width: 1920px; 
+    margin: 0 auto;
+    background-color: #FAFAFA;
+    min-height: 100vh;
+}
+
+/* --- 1. 상단 타이틀 섹션 (그라데이션 배경) --- */
+.hero-section-wrapper {
+    background: linear-gradient(150.71deg, #CAEDFF 0%, #E5FFF4 100%);
+    padding-bottom: 80px; 
+}
+
+.hero-section {
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    /* **수정**: 중앙 정렬** */
+    justify-content: center; 
+    position: relative;
+    padding: 120px 0; 
+}
+
+.hero-title-group {
+    display: flex;
+    align-items: center;
+    /* **수정**: 유동적인 중앙 정렬을 위해 transform 제거 */
+    transform: translateX(0); 
+    /* 내부 콘텐츠의 좌우 패딩을 조정하여 텍스트가 너무 가장자리에 붙지 않도록 함 */
+    padding: 0 20px; 
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: black;
+    margin-right: 30px; 
+}
+
+/* Question Mark Image Placeholder (아이콘) */
+.hero-image {
+    width: 150px; 
+    height: 150px;
+    position: relative; 
+    z-index: 1;
+}
+
+.hero-image::before {
+    content: '?';
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    font-size: 45px;
+    background: #FF6060;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: rotate(10deg);
+}
+.hero-image::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    width: 120px;
+    height: 80px;
+    background: #FFE082; 
+    border-radius: 20px 20px 0 20px;
+    transform: rotate(-5deg);
+}
+
+/* --- 2. 메인 콘텐츠 영역 (상세 정보 카드) --- */
+.main-content {
+    background-color: #FAFAFA; 
+    margin-top: 40px; 
+    margin-bottom: 60px;
+    
+    /* **수정**: 유동적인 중앙 정렬을 위한 설정 */
+    max-width: 1400px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    
+    padding: 0 20px; /* 유동적 여백 추가 */
+}
+
+.content-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 40px 60px;
+}
+
+/* --- A. 질문 헤더/본문 영역 --- */
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #b2b2b2;
+    margin-bottom: 20px;
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; 
+}
+
+.status-tag-unresolved {
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #FF6060; 
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.status-tag-resolved {
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #32E462; 
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.question-title {
+    font-size: 18px; 
+    font-weight: 700;
+    color: black;
+}
+
+.question-meta {
+    font-size: 12px; 
+    color: #9c9c9c;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.question-body {
+    font-size: 16px; 
+    color: #333;
+    padding: 0 0 40px 0;
+    line-height: 1.6;
+    text-align: left;
+    word-break: break-word;
+}
+
+/* --- B. 답변 입력 영역 --- */
+.answer-input-section {
+    padding: 40px 0;
+    text-align: left;
+    border-top: 1px solid #EAEAEA;
+}
+
+.answer-input-section h2 {
+    font-size: 18px; 
+    font-weight: 400; 
+    color: black;
+    margin-bottom: 10px;
+}
+
+.input-area-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.answer-textarea {
+    width: 100%;
+    min-height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 14px; 
+    resize: none; 
+    box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.05) inset;
+}
+
+.answer-submit-button {
+    padding: 15px 30px;
+    background-color: #333; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    height: 55px; 
+    min-width: 100px;
+    transition: background-color 0.1s;
+}
+
+.answer-submit-button:hover {
+    background-color: #111;
+}
+
+/* --- C. 답변 표시 영역 --- */
+.answer-display-section {
+    padding: 40px 0 0 0;
+    text-align: left;
+}
+
+.answer-item {
+    border-radius: 10px;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.1) inset;
+}
+
+.answer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #000;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.answer-author {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.answer-date {
+    font-size: 12px; 
+    color: #808887;
+    white-space: nowrap;
+}
+
+.answer-content {
+    font-size: 14px; 
+    color: black;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+/* --- D. 하단 액션 버튼 --- */
+.bottom-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.left-actions, .right-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.action-button {
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    font-size: 14px; 
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.1s, box-shadow 0.1s;
+}
+
+.action-button:hover {
+    background-color: #F0F0F0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 유동적인 중앙 정렬을 위한 미디어 쿼리 (768px 이하) */
+@media (max-width: 1400px) {
+    .main-content {
+        max-width: 90%;
+        margin: 40px auto 60px auto;
+        padding: 40px 5%; /* 내부 여백 비율 유지 */
+    }
+    .hero-section {
+        padding: 100px 20px;
+    }
+}
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 36px;
+    }
+    .hero-image {
+        right: 10%;
+        width: 120px;
+        height: 120px;
+    }
+    .hero-image::before {
+        width: 60px; height: 60px; font-size: 30px;
+    }
+    .hero-image::after {
+        width: 90px; height: 60px;
+    }
+    .content-card {
+        padding: 30px 20px;
+    }
+    .question-title {
+        font-size: 16px;
+    }
+}

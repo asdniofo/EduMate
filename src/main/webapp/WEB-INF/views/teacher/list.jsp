@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -61,7 +62,7 @@
 		                <p class="question-content">${question.questionContent }</p>
 		                <div class="question-meta">
 		                    <span>${question.memberId }</span>
-		                    <span>${question.writeDate }</span>
+		                    <span><fmt:formatDate value="${question.writeDate}" pattern="yyyy-MM-dd HH:mm" /></span>
 		                    <!-- <span>자바 프로그래밍</span> -->
 		                </div>
 		            </article>

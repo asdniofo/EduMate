@@ -14,4 +14,6 @@ public interface TeacherService {
 	List<Question> selectList(int currentPage, int boardCountPerPage, String filter);
 
 	List<Question> selectSearchList(Map<String, Object> searchMap);
+
+	Question selectOneByNo(int questionNo);
 }
