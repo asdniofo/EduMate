@@ -49,5 +49,6 @@ public interface ReferenceMapper {
 	 * 검색 결과 전체 개수 조회
 	 */
 	int getTotalCountBySearch(Map<String, Object> searchMap);
-
+	
+	
 }

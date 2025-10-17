@@ -1,164 +1,299 @@
 @charset "UTF-8";
-/* 자료실 작성 페이지 스타일 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f5f5f5;
+}
 
+.page-title-section {
+  width: 100%;
+  background-color: #DBF8F8;
+  text-align: center;
+  padding: 60px 0 50px;
+}
+
+.page-title-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px; /* 텍스트와 이미지 간격 */
+}
+
+/* 타이틀 텍스트 */
+.page-title-text {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* 오른쪽 아이콘 */
+.page-title-image {
+  width: 65px;
+  height: 65px;
+  opacity: 0.9;
+}
+
+/* -------------------------- */
+/* 콘텐츠 영역 */
+/* -------------------------- */
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+/* 폼 전체 컨테이너 */
 .reference-write-container {
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 40px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
+  width: 85%;
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 60px 50px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.page-title {
-    font-size: 32px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 40px;
-    text-align: left;
-}
 
+
+/* -------------------------- */
+/* 폼 구성요소 */
+/* -------------------------- */
 .form-group {
-    margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .form-label {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
 }
 
-.form-input {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-    background-color: white;
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: all 0.3s;
 }
 
-.form-input:focus {
-    outline: none;
-    border-color: #4a90e2;
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #4A90E2;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.1);
 }
 
 .form-textarea {
-    width: 100%;
-    padding: 15px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-    resize: vertical;
-    min-height: 300px;
-    background-color: white;
-    font-family: inherit;
+  resize: vertical;
+  min-height: 250px;
+  line-height: 1.6;
 }
 
-.form-textarea:focus {
-    outline: none;
-    border-color: #4a90e2;
-}
-
+/* -------------------------- */
+/* 유형 선택 */
+/* -------------------------- */
 .tag-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .tag-radio {
-    display: none;
+  display: none;
 }
 
 .tag-label {
-    padding: 8px 20px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    background-color: white;
-    transition: all 0.3s;
+  padding: 10px 24px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #fff;
+  color: #666;
+  transition: all 0.3s;
 }
 
 .tag-radio:checked + .tag-label {
-    background-color: #4a90e2;
-    color: white;
-    border-color: #4a90e2;
+  background-color: #4A90E2;
+  color: #fff;
+  border-color: #4A90E2;
 }
 
+/* -------------------------- */
+/* 파일 업로드 */
+/* -------------------------- */
 .file-upload-section {
-    margin-bottom: 30px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 25px;
 }
 
 .file-upload-label {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  display: block;
 }
 
 .file-upload-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .file-input {
-    display: none;
+  display: none;
 }
 
 .file-upload-btn {
-    padding: 10px 20px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s;
+  padding: 11px 24px;
+  border: 2px solid #4A90E2;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4A90E2;
+  transition: all 0.3s;
 }
 
 .file-upload-btn:hover {
-    background-color: #f8f9fa;
+  background-color: #4A90E2;
+  color: #fff;
 }
 
 .file-name-display {
-    font-size: 14px;
-    color: #666;
+  font-size: 14px;
+  color: #666;
+  flex: 1;
 }
 
+/* -------------------------- */
+/* 버튼 그룹 */
+/* -------------------------- */
 .button-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #e0e0e0;
 }
 
 .btn {
-    padding: 12px 30px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+/* hover 효과 */
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 클릭(active) 시 */
+.btn:active {
+  background: #EBEBEB;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+
+/* 별도의 색상 구분 없이 동일한 톤 유지 */
+.btn-cancel {
+  background: #fff;
 }
 
 .btn-submit {
-    background-color: #4a90e2;
-    color: white;
+  background: #fff;
 }
 
 .btn-submit:hover {
-    background-color: #357abd;
+  background-color: #357ABD;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74,144,226,0.4);
 }
 
-.btn-cancel {
-    background-color: #6c757d;
-    color: white;
+/* ✅ 자료유형(강의자료 / 기타자료) 버튼 그룹 */
+.tag-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
 }
 
-.btn-cancel:hover {
-    background-color: #5a6268;
+/* 실제 라디오 버튼은 숨김 */
+.tag-radio {
+  display: none;
+}
+
+/* ✅ 기본 버튼 스타일 — list.jsp의 .category-btn과 동일한 톤 */
+.tag-label {
+  padding: 12px 32px;
+  background: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  color: #000;
+  display: inline-block;
+  user-select: none;
+}
+
+.tag-label:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ 선택된 버튼(active) */
+.tag-radio:checked + .tag-label {
+  background: #EBEBEB; /* 선택 시 회색 배경 유지 (카테고리 버튼 톤과 맞춤) */
+  color: #000;         /* ✅ 텍스트는 항상 검정색으로 */
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+
+/* -------------------------- */
+/* 반응형 */
+/* -------------------------- */
+@media (max-width: 768px) {
+  .reference-write-container {
+    width: 95%;
+    padding: 30px 20px;
+  }
+
+  .page-title-text {
+    font-size: 28px;
+  }
+
+  .page-title-image {
+    width: 55px;
+    height: 55px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }
