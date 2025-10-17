@@ -6,13 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>EduMate - 자료실</title>
-<link rel="stylesheet" href="../../../resources/css/reference/list.css">
+<link rel="stylesheet" href="../resources/css/reference/list.css">
+<link rel="stylesheet" href="/resources/css/common/header.css">
+<link rel="stylesheet" href="/resources/css/common/footer.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
 		<!-- Header -->
-		<jsp:include page="/WEB-INF/views/common/header.jsp" />
+        <jsp:include page="../common/header.jsp" />
 
 			
 		<div class="page-title-section">
@@ -98,6 +100,6 @@
 		</div>
 
 	</div>
-		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>EduMate - 자료 상세조회</title>
-<link rel="stylesheet" href="../resources/css/notice/detail.css">
+<link rel="stylesheet" href="../resources/css/reference/detail.css">
+<link rel="stylesheet" href="/resources/css/common/header.css" />
+<link rel="stylesheet" href="/resources/css/common/footer.css" />
 </head>
 <body>
+    <jsp:include page="../common/header.jsp" />
 	<div class="container">
 		<c:choose>
 			<c:when test="${empty reference}">
@@ -65,5 +68,6 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

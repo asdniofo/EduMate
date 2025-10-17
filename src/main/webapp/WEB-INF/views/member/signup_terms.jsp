@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <title>약관 동의</title>
     <link rel="stylesheet" href="/resources/css/member/signup_terms.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css" />
-    <link rel="stylesheet" href="/resources/css/common/footer.css" />
+    <link rel="stylesheet" href="/resources/css/common/header.css">
+    <link rel="stylesheet" href="/resources/css/common/footer.css">
 </head>
 <!-- JavaScript -->
 <script src="/resources/js/member/signup_terms.js"></script>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
 
 <section class="login-container">
     <div class="login-box">
@@ -92,5 +92,5 @@
     </div>
 </div>
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 </body>

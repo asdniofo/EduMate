@@ -92,7 +92,7 @@ public class MemberController {
     member.setMemberEmail(memberEmail);
     member.setMemberBirth(memberBirth);
     member.setMemberMoney(0);
-    member.setLectureYN("N");
+    member.setTeacherYN("N");
     member.setAdminYN("N");
 
     memberService.signup(member);

@@ -16,7 +16,7 @@ public class Member {
     private String 	memberName;
     private String 	memberBirth;
     private int 	memberMoney;
-    private String 	lectureYN;
+    private String 	teacherYN;
     private String 	adminYN;
 
 }

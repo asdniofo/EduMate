@@ -7,8 +7,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/resources/css/member/signup_info.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css" />
-    <link rel="stylesheet" href="/resources/css/common/footer.css" />
+    <link rel="stylesheet" href="/resources/css/common/header.css">
+    <link rel="stylesheet" href="/resources/css/common/footer.css">
 
     <!-- JavaScript -->
     <script src="/resources/js/member/signup_info.js"></script>
@@ -17,7 +17,7 @@
 <body>
 
 <!-- Header -->
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
 
 <!-- 회원가입 폼 -->
 <section class="login-container">
@@ -71,7 +71,7 @@
 </section>
 
 <!-- Footer -->
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 
 </body>
 </html>

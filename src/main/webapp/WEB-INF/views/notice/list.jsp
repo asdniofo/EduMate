@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/resources/css/notice/list.css" />
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
 	<!-- 히어로 섹션 -->
 	<section class="hero-section-wrapper">
 		<div class="hero-section">
@@ -73,6 +73,6 @@
 			<a href="#" class="write-button">글쓰기</a>
 		</div>
 	</main>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

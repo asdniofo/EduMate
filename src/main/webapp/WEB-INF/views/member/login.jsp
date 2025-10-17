@@ -7,14 +7,14 @@
     <title>로그인 | EduMate</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/resources/css/member/login.css">
-    <link rel="stylesheet" href="/resources/css/common/header.css" />
-    <link rel="stylesheet" href="/resources/css/common/footer.css" />
+    <link rel="stylesheet" href="/resources/css/common/header.css">
+    <link rel="stylesheet" href="/resources/css/common/footer.css">
 </head>
 <!-- JavaScript -->
 <script src="/resources/js/member/login.js"></script>
 <body>
 <!-- Header -->
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
 <!-- Login -->
 <section class="login-container">
     <div class="login-box">
@@ -47,6 +47,6 @@
     </div>
 </section>
 <!-- Footer -->
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

@@ -7,8 +7,11 @@
 		<meta charset="UTF-8">
 		<title>질문 게시판</title>
 		<link rel="stylesheet" href="/resources/css/teacher/list.css">
+        <link rel="stylesheet" href="/resources/css/common/header.css" />
+        <link rel="stylesheet" href="/resources/css/common/footer.css" />
 	</head>
 	<body>
+        <jsp:include page="../common/header.jsp" />
 		<div class="hero-section-wrapper">
         <div class="hero-section">
             <h1 class="hero-title">질문과 답변</h1>
@@ -88,5 +91,6 @@
             <a href="#" class="write-button">글쓰기</a>
         </div>
     </main>
+        <jsp:include page="../common/footer.jsp" />
 	</body>
 </html>

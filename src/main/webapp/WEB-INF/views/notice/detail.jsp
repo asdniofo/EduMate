@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/resources/css/common/footer.css" />
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
 	<!-- ===== 메인 ===== -->
 	<main>
 		<section class="notice-banner">
@@ -53,6 +53,6 @@
 			</div>
 		</section>
 	</main>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

@@ -5,10 +5,12 @@ pageEncoding="UTF-8"%>
 <head>
 <meta charset="UTF-8">
 <title>EduMate - 자료실 작성</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reference/insert.css">
+    <link rel="stylesheet" href="../resources/css/reference/insert.css">
+    <link rel="stylesheet" href="/resources/css/common/header.css" />
+<link rel="stylesheet" href="/resources/css/common/footer.css" />
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
     <div class="reference-write-container">
         <h1 class="page-title">자료실 작성</h1>
         
@@ -86,6 +88,7 @@ pageEncoding="UTF-8"%>
             </div>
         </form>
     </div>
+    <jsp:include page="../common/footer.jsp" />
 
     <script>
         // 파일명 표시 함수
@@ -120,6 +123,6 @@ pageEncoding="UTF-8"%>
             return true;
         }
     </script>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
 </body>
 </html>

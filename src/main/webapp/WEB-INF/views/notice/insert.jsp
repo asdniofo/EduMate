@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/resources/css/common/footer.css" />
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
 	<main>
 		<section class="notice-banner">
 			<h1>공지사항</h1>
@@ -52,6 +52,6 @@
 			</form>
 		</section>
 	</main>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
     </head>
     <body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+        <jsp:include page="../common/header.jsp" />
         <div class="main-container">
             <!-- 상단 영역 -->
             <div class="header-section">
@@ -50,6 +50,6 @@
                 </div>
             </form>
         </div>
-        <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+        <jsp:include page="../common/footer.jsp" />
     </body>
 </html>

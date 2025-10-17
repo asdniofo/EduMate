@@ -9,6 +9,7 @@
     </head>
     <link rel="stylesheet" href="/resources/css/main/index.css">
     <link rel="stylesheet" href="/resources/css/common/header.css" />
+    <link rel="stylesheet" href="/resources/css/common/footer.css" />
   	<script src="/resources/js/main/index.js"></script>
     <body>
         <jsp:include page="common/header.jsp" />
@@ -144,5 +145,6 @@
                 </ul>
             </div>
         </section>
+        <jsp:include page="common/footer.jsp" />
     </body>
 </html>

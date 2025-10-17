@@ -19,7 +19,7 @@
 
 	<!-- Signup -->
 	<insert id="insertMember">
-		INSERT INTO MEMBER 		(	MEMBER_ID,		MEMBER_PW,		MEMBER_EMAIL,	MEMBER_NAME,	MEMBER_BIRTH,	LECTURE_YN,		ADMIN_YN,	MEMBER_MONEY	)
+		INSERT INTO MEMBER 		(	MEMBER_ID,		MEMBER_PW,		MEMBER_EMAIL,	MEMBER_NAME,	MEMBER_BIRTH,	TEACHER_YN,		ADMIN_YN,	MEMBER_MONEY	)
 					VALUES		(	#{memberId},	#{memberPw},	#{memberEmail},	#{memberName},	#{memberBirth},	DEFAULT,		DEFAULT,	DEFAULT	)
 	</insert>
 
