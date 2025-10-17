@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edumate.boot.domain.teacher.model.mapper.QuestionCommentMapper" >
+	<select id="selectQcList" resultType="QuestionComment">
+		SELECT * FROM QUESTION_COMMENT WHERE QUESTION_NO = #{questionNo} AND QUESTION_COMMENT_YN = 'Y' ORDER BY QUESTION_COMMENT_NO DESC
+	</select>
+	<insert id="insertQuestionCommnet">
+		INSERT INTO QUESTION_COMMENT
+		VALUES(#{questionNo}, #{memberId}, #{questionCommentContent}, DEFAULT, DEFAULT, SEQ_QUESTION_COMMENT_NO)
+	</insert>
+	<update id="delectQuestionComment">
+		UPDATE QUESTION_COMMENT SET QUESTION_COMMENT_YN = 'N' QUESTION_COMMENT_NO = #{questionCommentNo}
+	</update>
+</mapper>
