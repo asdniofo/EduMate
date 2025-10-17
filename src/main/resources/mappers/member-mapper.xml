@@ -2,6 +2,36 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MemberMapper">
-    
+<mapper
+	namespace="com.edumate.boot.domain.member.model.mapper.MemberMapper">
+	<!-- Find -->
+	<select id="selectByMemberId">
+		SELECT * FROM MEMBER
+			WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- Signup -->
+	<insert id="insertMember">
+		INSERT INTO MEMBER 		(	MEMBER_ID,		MEMBER_PW,		MEMBER_EMAIL,	MEMBER_BIRTH,	LECTURE_YN,		ADMIN_YN,	MEMBER_MONEY	)
+					VALUES		(	#{memberId},	#{memberPw},	#{memberEmail},	#{memberBirth},	DEFAULT,		DEFAULT,	DEFAULT	)
+	</insert>
+	
+	
+	
+	<insert id="insertQuestion">
+		INSERT INTO QUESTION (
+		QUESTION_NO,
+		MEMBER_ID,
+		QUESTION_TITLE,
+		QUESTION_CONTENT,
+		WRITE_DATE
+		) VALUES (
+		SEQ_QUESTION_NO.NEXTVAL,
+		#{memberId, jdbcType=VARCHAR},
+		#{questionTitle, jdbcType=VARCHAR},
+		#{questionContent, jdbcType=VARCHAR},
+		DEFAULT
+		)
+	</insert>
+
 </mapper>

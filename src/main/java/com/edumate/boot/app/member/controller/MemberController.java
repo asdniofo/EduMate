@@ -1,6 +1,8 @@
 package com.edumate.boot.app.member.controller;
 
+import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.service.MemberService;
+import com.edumate.boot.domain.member.model.vo.Member;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -8,9 +10,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
+import java.sql.Date;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +44,12 @@ public class MemberController {
 
     @PostMapping("/signup/info")
     public String submitSignupInfo(
-        @RequestParam String userId,
-        @RequestParam String userPwd,
-        @RequestParam String userName,
-        @RequestParam String birth,
-        @RequestParam("g-recaptcha-response") String recaptchaResponse,
-        Model model) {
+    		 	@RequestParam 	String memberId,
+    	        @RequestParam 	String memberPw,
+    	        @RequestParam 	String memberEmail,
+    	        @RequestParam 	String memberBirth,
+    	        @RequestParam	("g-recaptcha-response") String recaptchaResponse,
+    	        Model model) {
 
     // 1️⃣ 캡챠 검증
     boolean captchaValid = verifyRecaptcha(recaptchaResponse);
@@ -54,8 +58,18 @@ public class MemberController {
         return "error"; // 다시 회원가입 페이지로
     }
 
-    // 2️⃣ 회원가입 로직 처리 (DB 저장 등)
-    // memberService.signup(userId, userPwd, userName, birth);
+    // 2️⃣ DB 저장
+    java.sql.Date birthDate = java.sql.Date.valueOf(memberBirth);
+    Member member = new Member();
+    member.setMemberId(memberId);
+    member.setMemberPw(memberPw);
+    member.setMemberEmail(memberEmail);
+    member.setMemberBirth(memberBirth);
+    member.setMemberMoney(0);
+    member.setLectureYN("N");
+    member.setAdminYN("N");
+
+    memberService.signup(member);
 
     // 3️⃣ 완료 후 페이지
     return "redirect:/member/signup/complete";
@@ -101,4 +115,26 @@ public class MemberController {
     public String showComplete() {
       return "member/signup_done";
     }
+
+    // 보여지는 화면
+    @GetMapping("/insertQuestion")
+    public String showInsertQuestion() {
+		return "member/insertQuestion";
+    }
+    
+    // 등록하기
+    @PostMapping("/insertQuestion")
+    public String insertQuestion(
+    		@ModelAttribute InsertQuestionRequest question
+    		, Model model) {
+    	try {			
+    		question.setMemberId("user01"); // 하드코딩이므로 변환필요
+    		int result = memberService.insertQuestion(question);
+    		return "redirect:/member/question/list";
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+    }
+    
 }
