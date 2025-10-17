@@ -22,32 +22,38 @@ public class ReferenceController {
 
 	@GetMapping("/list")
 	public String showReferenceList(
-			@RequestParam(value = "page", defaultValue = "1") int currentPage,
-			Model model) {
-		try {
-			int totalCount = referenceService.getTotalCount();
-			int boardCountPerPage = 5;
-			int maxPage = (int) Math.ceil((double) totalCount / boardCountPerPage);
-			
-			List<Reference> rList = referenceService.selectList(currentPage, boardCountPerPage);
-			
-			int naviCountPerPage = 5;
-			int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
-			int endNavi = (startNavi - 1) + naviCountPerPage;
-			
-			if (endNavi > maxPage) endNavi = maxPage;
-			
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("maxPage", maxPage);
-			model.addAttribute("startNavi", startNavi);
-			model.addAttribute("endNavi", endNavi);
-			model.addAttribute("rList", rList);
-			
-			return "reference/list";
-		} catch (Exception e) {
-			model.addAttribute("errorMsg", e.getMessage());
-			return "common/error";
-		}
+	        @RequestParam(value = "page", defaultValue = "1") int currentPage,
+	        Model model) {
+	    try {
+	        int totalCount = referenceService.getTotalCount();
+	        int boardCountPerPage = 5;
+	        int maxPage = (int) Math.ceil((double) totalCount / boardCountPerPage);
+	        
+	        // Map으로 파라미터 전달
+	        int offset = (currentPage - 1) * boardCountPerPage;
+	        java.util.Map<String, Object> paramMap = new java.util.HashMap<>();
+	        paramMap.put("offset", offset);
+	        paramMap.put("limit", boardCountPerPage);
+	        
+	        List<Reference> rList = referenceService.selectList(paramMap);
+	        
+	        int naviCountPerPage = 5;
+	        int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+	        int endNavi = (startNavi - 1) + naviCountPerPage;
+	        
+	        if (endNavi > maxPage) endNavi = maxPage;
+	        
+	        model.addAttribute("currentPage", currentPage);
+	        model.addAttribute("maxPage", maxPage);
+	        model.addAttribute("startNavi", startNavi);
+	        model.addAttribute("endNavi", endNavi);
+	        model.addAttribute("rList", rList);
+	        
+	        return "reference/list";
+	    } catch (Exception e) {
+	        model.addAttribute("errorMsg", e.getMessage());
+	        return "common/error";
+	    }
 	}
 
 	@GetMapping("/detail")
@@ -155,44 +161,55 @@ public class ReferenceController {
 
 	@GetMapping("/search")
 	public String showSearchList(
-			@RequestParam("searchCondition") String searchCondition,
-			@RequestParam("searchKeyword") String searchKeyword,
-			@RequestParam(value = "page", defaultValue = "1") int currentPage,
-			Model model) {
-		try {
-			int boardLimit = 5;
-			java.util.Map<String, Object> searchMap = new java.util.HashMap<>();
-			searchMap.put("searchCondition", searchCondition);
-			searchMap.put("searchKeyword", searchKeyword);
-			searchMap.put("currentPage", currentPage);
-			searchMap.put("boardLimit", boardLimit);
-			
-			List<Reference> searchList = referenceService.selectSearchList(searchMap);
-			
-			if (searchList != null && !searchList.isEmpty()) {
-				int totalCount = referenceService.getTotalCount(searchMap);
-				int maxPage = (int) Math.ceil((double) totalCount / boardLimit);
-				int naviLimit = 5;
-				int startNavi = ((currentPage - 1) / naviLimit) * naviLimit + 1;
-				int endNavi = (startNavi - 1) + naviLimit;
-				
-				if (endNavi > maxPage) endNavi = maxPage;
-				
-				model.addAttribute("maxPage", maxPage);
-				model.addAttribute("startNavi", startNavi);
-				model.addAttribute("endNavi", endNavi);
-				model.addAttribute("currentPage", currentPage);
-			}
-			
-			model.addAttribute("searchCondition", searchCondition);
-			model.addAttribute("searchKeyword", searchKeyword);
-			model.addAttribute("searchList", searchList);
-			
-			return "reference/search";
-		} catch (Exception e) {
-			model.addAttribute("errorMsg", e.getMessage());
-			return "common/error";
-		}
+	        @RequestParam(value = "searchCondition", defaultValue = "all") String searchCondition,
+	        @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+	        @RequestParam(value = "page", defaultValue = "1") int currentPage,
+	        Model model) {
+	    try {
+	        if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
+	            return "redirect:/reference/list";
+	        }
+	        
+	        int boardLimit = 5;
+	        int offset = (currentPage - 1) * boardLimit;
+	        
+	        java.util.Map<String, Object> searchMap = new java.util.HashMap<>();
+	        searchMap.put("searchCondition", searchCondition);
+	        searchMap.put("searchKeyword", searchKeyword.trim());
+	        searchMap.put("offset", offset);
+	        searchMap.put("limit", boardLimit);
+	        
+	        List<Reference> searchList = referenceService.selectSearchList(searchMap);
+	        int totalCount = referenceService.getTotalCountBySearch(searchMap);
+	        
+	        if (totalCount > 0) {
+	            int maxPage = (int) Math.ceil((double) totalCount / boardLimit);
+	            int naviLimit = 5;
+	            int startNavi = ((currentPage - 1) / naviLimit) * naviLimit + 1;
+	            int endNavi = (startNavi - 1) + naviLimit;
+	            
+	            if (endNavi > maxPage) endNavi = maxPage;
+	            
+	            model.addAttribute("maxPage", maxPage);
+	            model.addAttribute("startNavi", startNavi);
+	            model.addAttribute("endNavi", endNavi);
+	        } else {
+	            model.addAttribute("maxPage", 1);
+	            model.addAttribute("startNavi", 1);
+	            model.addAttribute("endNavi", 1);
+	        }
+	        
+	        model.addAttribute("currentPage", currentPage);
+	        model.addAttribute("searchCondition", searchCondition);
+	        model.addAttribute("searchKeyword", searchKeyword);
+	        model.addAttribute("searchList", searchList);
+	        
+	        // list.jsp로 반환 (같은 페이지 사용)
+	        return "reference/list";
+	    } catch (Exception e) {
+	        model.addAttribute("errorMsg", e.getMessage());
+	        return "common/error";
+	    }
 	}
 
 }

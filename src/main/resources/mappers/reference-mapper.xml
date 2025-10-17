@@ -11,24 +11,24 @@
 
 	<!-- 자료 목록 조회 (페이징) -->
 	<select id="selectList" parameterType="map" resultType="com.edumate.boot.domain.reference.model.vo.Reference">
-	SELECT 
-		ARCHIVE_NO as archiveNo,
-		MEMBER_ID as memberId,
-		ARCHIVE_TITLE as archiveTitle,
-		ARCHIVE_CONTENT as archiveContent,
-		WRITE_DATE as writeDate,
-		VIEW_COUNT as viewCount,
-		ATTACHMENT_NAME as attachmentName,
-		ATTACHMENT_RENAME as attachmentRename,
-		ATTACHMENT_PATH as attachmentPath,
-		ATTACHMENT_DATE as attachmentDate,
-		BOARD_YN as boardYn,
-		ARCHIVE_TYPE as archiveType
-	FROM ARCHIVE_BOARD
-	WHERE BOARD_YN = 'Y'
-	ORDER BY WRITE_DATE DESC
-	OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
-</select>
+		SELECT 
+			ARCHIVE_NO as archiveNo,
+			MEMBER_ID as memberId,
+			ARCHIVE_TITLE as archiveTitle,
+			ARCHIVE_CONTENT as archiveContent,
+			WRITE_DATE as writeDate,
+			VIEW_COUNT as viewCount,
+			ATTACHMENT_NAME as attachmentName,
+			ATTACHMENT_RENAME as attachmentRename,
+			ATTACHMENT_PATH as attachmentPath,
+			ATTACHMENT_DATE as attachmentDate,
+			BOARD_YN as boardYn,
+			ARCHIVE_TYPE as archiveType
+		FROM ARCHIVE_BOARD
+		WHERE BOARD_YN = 'Y'
+		ORDER BY WRITE_DATE DESC
+		OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+	</select>
 
 	<!-- 자료 상세 조회 -->
 	<select id="selectOneByNo" parameterType="int" resultType="com.edumate.boot.domain.reference.model.vo.Reference">
@@ -51,34 +51,34 @@
 
 	<!-- 자료 등록 -->
 	<insert id="insertReference" parameterType="com.edumate.boot.domain.reference.model.vo.Reference">
-	    INSERT INTO ARCHIVE_BOARD (
-	        ARCHIVE_NO,
-	        MEMBER_ID,
-	        ARCHIVE_TITLE,
-	        ARCHIVE_CONTENT,
-	        VIEW_COUNT,
-	        ATTACHMENT_NAME,
-	        ATTACHMENT_RENAME,
-	        ATTACHMENT_PATH,
-	        ARCHIVE_TYPE,
-	        BOARD_YN
-	    ) VALUES (
-	        SEQ_ARCHIVE_NO.NEXTVAL,
-	        #{memberId},
-	        #{archiveTitle},
-	        #{archiveContent},
-	        0,
-	        #{attachmentName},
-	        #{attachmentRename},
-	        #{attachmentPath},
-	        #{archiveType},
-	        'Y'
-	    )
+		INSERT INTO ARCHIVE_BOARD (
+			ARCHIVE_NO,
+			MEMBER_ID,
+			ARCHIVE_TITLE,
+			ARCHIVE_CONTENT,
+			VIEW_COUNT,
+			ATTACHMENT_NAME,
+			ATTACHMENT_RENAME,
+			ATTACHMENT_PATH,
+			ARCHIVE_TYPE,
+			BOARD_YN
+		) VALUES (
+			SEQ_ARCHIVE_NO.NEXTVAL,
+			#{memberId},
+			#{archiveTitle},
+			#{archiveContent},
+			0,
+			#{attachmentName},
+			#{attachmentRename},
+			#{attachmentPath},
+			#{archiveType},
+			'Y'
+		)
 	</insert>
 
 	<!-- 자료 수정 -->
 	<update id="updateReference" parameterType="com.edumate.boot.domain.reference.model.vo.Reference">
-		UPDATE ARCHIVE
+		UPDATE ARCHIVE_BOARD
 		SET 
 			ARCHIVE_TITLE = #{archiveTitle},
 			ARCHIVE_CONTENT = #{archiveContent},
@@ -94,7 +94,7 @@
 
 	<!-- 자료 삭제 (논리적 삭제) -->
 	<update id="deleteReference" parameterType="int">
-		UPDATE ARCHIVE
+		UPDATE ARCHIVE_BOARD
 		SET BOARD_YN = 'N'
 		WHERE ARCHIVE_NO = #{archiveNo}
 	</update>
@@ -112,21 +112,24 @@
 			ATTACHMENT_RENAME as attachmentRename,
 			ATTACHMENT_PATH as attachmentPath,
 			ATTACHMENT_DATE as attachmentDate,
-			BOARD_YN as boardYn
-		FROM ARCHIVE
+			BOARD_YN as boardYn,
+			ARCHIVE_TYPE as archiveType
+		FROM ARCHIVE_BOARD
 		WHERE BOARD_YN = 'Y'
-		<choose>
-			<when test="searchCondition == 'title'">
-				AND ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>
-			<when test="searchCondition == 'writer'">
-				AND MEMBER_ID LIKE '%' || #{searchKeyword} || '%'
-			</when>
-			<otherwise>
-				AND (ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
-				OR ARCHIVE_CONTENT LIKE '%' || #{searchKeyword} || '%')
-			</otherwise>
-		</choose>
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<when test="searchCondition == 'title'">
+					AND ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
+				</when>
+				<when test="searchCondition == 'writer'">
+					AND MEMBER_ID LIKE '%' || #{searchKeyword} || '%'
+				</when>
+				<otherwise>
+					AND (ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
+					OR ARCHIVE_CONTENT LIKE '%' || #{searchKeyword} || '%')
+				</otherwise>
+			</choose>
+		</if>
 		ORDER BY WRITE_DATE DESC
 		OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
 	</select>
@@ -134,20 +137,22 @@
 	<!-- 검색 결과 전체 개수 조회 -->
 	<select id="getTotalCountBySearch" parameterType="map" resultType="int">
 		SELECT COUNT(*) 
-		FROM ARCHIVE
+		FROM ARCHIVE_BOARD
 		WHERE BOARD_YN = 'Y'
-		<choose>
-			<when test="searchCondition == 'title'">
-				AND ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>
-			<when test="searchCondition == 'writer'">
-				AND MEMBER_ID LIKE '%' || #{searchKeyword} || '%'
-			</when>
-			<otherwise>
-				AND (ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
-				OR ARCHIVE_CONTENT LIKE '%' || #{searchKeyword} || '%')
-			</otherwise>
-		</choose>
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<when test="searchCondition == 'title'">
+					AND ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
+				</when>
+				<when test="searchCondition == 'writer'">
+					AND MEMBER_ID LIKE '%' || #{searchKeyword} || '%'
+				</when>
+				<otherwise>
+					AND (ARCHIVE_TITLE LIKE '%' || #{searchKeyword} || '%'
+					OR ARCHIVE_CONTENT LIKE '%' || #{searchKeyword} || '%')
+				</otherwise>
+			</choose>
+		</if>
 	</select>
 
 </mapper>
