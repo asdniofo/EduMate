@@ -16,4 +16,8 @@ public interface TeacherService {
 	List<Question> selectSearchList(Map<String, Object> searchMap);
 
 	Question selectOneByNo(int questionNo);
+
+	Integer selectPrevQuestionNo(int currentQuestionNo);
+
+	Integer selectNextQuestionNo(int currentQuestionNo);
 }

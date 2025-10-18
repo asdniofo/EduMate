@@ -20,4 +20,8 @@ public interface TeacherMapper {
 	List<Question> selectSearchList(Map<String, Object> searchMap, RowBounds rowBounds);
 
 	Question selectOneByNo(int questionNo);
+
+	Integer selectPrevQuestionNo(int currentQuestionNo);
+
+	Integer selectNextQuestionNo(int currentQuestionNo);
 }

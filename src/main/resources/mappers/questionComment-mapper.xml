@@ -15,6 +15,10 @@
 			#{questionCommentContent, jdbcType=VARCHAR} )
 	</insert>
 	<update id="deleteComment">
-		UPDATE QUESTION_COMMENT SET QUESTION_COMMENT_YN = 'N' QUESTION_COMMENT_NO = #{questionCommentNo}
+		UPDATE QUESTION_COMMENT 
+		SET 
+		    QUESTION_COMMENT_YN = 'N' 
+		WHERE 
+		    QUESTION_COMMENT_NO = #{questionCommentNo}
 	</update>
 </mapper>

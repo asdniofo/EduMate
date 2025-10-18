@@ -62,4 +62,16 @@
 	<select id="selectOneByNo" resultType="Question">
 		SELECT * FROM QUESTION WHERE QUESTION_NO = #{questionNo}
 	</select>
+	
+	<select id="selectPrevQuestionNo" parameterType="_int" resultType="_int">
+	    SELECT MAX(QUESTION_NO) 
+	    FROM QUESTION
+	    WHERE QUESTION_NO <![CDATA[<]]> #{currentQuestionNo}
+	</select>
+	
+	<select id="selectNextQuestionNo" parameterType="_int" resultType="_int">
+	    SELECT MIN(QUESTION_NO) 
+	    FROM QUESTION
+	    WHERE QUESTION_NO <![CDATA[>]]> #{currentQuestionNo}
+	</select>
 </mapper>

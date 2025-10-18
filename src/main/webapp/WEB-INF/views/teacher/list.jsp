@@ -90,8 +90,9 @@
 					</c:if>
                 </div>
             </div>
-            
-            <a href="#" class="write-button">글쓰기</a>
+            <c:if test="${not empty sessionScope.loginId}">
+            <a href="/member/insertQuestion" class="write-button">글쓰기</a>
+            </c:if>
         </div>
     </main>
         <jsp:include page="../common/footer.jsp" />

@@ -42,10 +42,11 @@ public class MemberController {
 
         Member loginUser = memberService.login(memberId, memberPw);
         
-        String loginId = loginUser.getMemberId();
+        //String loginId = loginUser.getMemberId();
 
         if (loginUser != null) {
-            session.setAttribute("loginId", loginId);
+        	session.setAttribute("loginMember", loginUser);
+            session.setAttribute("loginId", loginUser.getMemberId());
             return "redirect:/"; // 로그인 성공 → 메인 페이지로 이동
         } else {
             return "redirect:/member/login?error=1"; // 로그인 실패 시 다시 로그인 페이지
@@ -210,7 +211,7 @@ public class MemberController {
             }
     		question.setMemberId(loginId);
     		int result = memberService.insertQuestion(question);
-    		return "redirect:/member/question/list";
+    		return "redirect:/teacher/question/list";
     	} catch (Exception e) {
     		model.addAttribute("errorMsg", e.getMessage());
     		return "common/error";

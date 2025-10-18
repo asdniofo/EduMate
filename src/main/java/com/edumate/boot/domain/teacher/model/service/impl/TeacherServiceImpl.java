@@ -58,5 +58,15 @@ public class TeacherServiceImpl implements TeacherService {
 		return question;
 	}
 
+	@Override
+	public Integer selectPrevQuestionNo(int currentQuestionNo) {
+		return tMapper.selectPrevQuestionNo(currentQuestionNo);
+	}
+
+	@Override
+	public Integer selectNextQuestionNo(int currentQuestionNo) {
+		return tMapper.selectNextQuestionNo(currentQuestionNo);
+	}
+
 
 }

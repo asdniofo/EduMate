@@ -91,7 +91,11 @@ public class TeacherController {
     public String showDetailView(int questionNo, Model model) {
     	try {
 			Question question = tService.selectOneByNo(questionNo);
+			Integer prevQuestionNo = tService.selectPrevQuestionNo(questionNo);
+		    Integer nextQuestionNo = tService.selectNextQuestionNo(questionNo);
 			model.addAttribute("question", question);
+			model.addAttribute("prevQuestionNo", prevQuestionNo);
+		    model.addAttribute("nextQuestionNo", nextQuestionNo);
 			return "teacher/detail";
 		} catch (Exception e) {
 			return "common/error";
