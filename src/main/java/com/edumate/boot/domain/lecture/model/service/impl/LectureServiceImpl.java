@@ -8,6 +8,7 @@ import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.lecture.model.mapper.LectureMapper;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
+import com.edumate.boot.domain.member.model.vo.Member;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -173,6 +174,24 @@ public class LectureServiceImpl implements LectureService {
     @Override
     public int checkPurchase(String memberId, int lectureNo) {
         int result = lMapper.checkPurchase(memberId, lectureNo);
+        return result;
+    }
+
+    @Override
+    public Member selectMember(String memberId) {
+        Member member = lMapper.selectMember(memberId);
+        return member;
+    }
+
+    @Override
+    public Lecture selectLecture(int lectureNo) {
+        Lecture lecture = lMapper.selectLecture(lectureNo);
+        return lecture;
+    }
+
+    @Override
+    public int checkLogin(String memberId) {
+        int result = lMapper.checkLogin(memberId);
         return result;
     }
 

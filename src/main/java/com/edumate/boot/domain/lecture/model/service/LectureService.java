@@ -6,6 +6,7 @@ import com.edumate.boot.app.lecture.dto.VideoDetailRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
+import com.edumate.boot.domain.member.model.vo.Member;
 
 import java.util.List;
 
@@ -50,4 +51,10 @@ public interface LectureService {
     int checkTeacher(String loginId);
 
     int checkPurchase(String memberId, int lectureNo);
+
+    Member selectMember(String memberId);
+
+    Lecture selectLecture(int lectureNo);
+
+    int checkLogin(String memberId);
 }
