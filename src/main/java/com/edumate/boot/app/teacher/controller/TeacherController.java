@@ -101,5 +101,18 @@ public class TeacherController {
 			return "common/error";
 		}
     }
+    
+    @GetMapping("/question/delete")
+    @ResponseBody
+    public int deleteQuestionList(@RequestParam int questionNo) {
+    	try {			
+    		int result = tService.deleteQuestion(questionNo);
+    		return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+	        // 실패 시 -1 반환
+	        return -1;
+		}
+    }
 
 }

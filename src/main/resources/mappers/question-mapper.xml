@@ -74,4 +74,7 @@
 	    FROM QUESTION
 	    WHERE QUESTION_NO <![CDATA[>]]> #{currentQuestionNo}
 	</select>
+	<update id="deleteQuestion">
+		UPDATE QUESTION SET QUESTION_YN = 'N' WHERE QUESTION_NO = #{questionNo}
+	</update>
 </mapper>

@@ -68,5 +68,11 @@ public class TeacherServiceImpl implements TeacherService {
 		return tMapper.selectNextQuestionNo(currentQuestionNo);
 	}
 
+	@Override
+	public int deleteQuestion(int questionNo) {
+		int result = tMapper.deleteQuestion(questionNo);
+		return result;
+	}
+
 
 }

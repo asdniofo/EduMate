@@ -24,4 +24,6 @@ public interface TeacherMapper {
 	Integer selectPrevQuestionNo(int currentQuestionNo);
 
 	Integer selectNextQuestionNo(int currentQuestionNo);
+
+	int deleteQuestion(int questionNo);
 }

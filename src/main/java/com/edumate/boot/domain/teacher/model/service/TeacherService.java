@@ -20,4 +20,6 @@ public interface TeacherService {
 	Integer selectPrevQuestionNo(int currentQuestionNo);
 
 	Integer selectNextQuestionNo(int currentQuestionNo);
+
+	int deleteQuestion(int questionNo);
 }
