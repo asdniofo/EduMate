@@ -26,7 +26,6 @@
                     <input type="hidden" name="questionNo" value="${question.questionNo}"/>
                         <!-- 질문 제목 -->
                         <div class="input-section">
-                        <div style="color:red;">디버깅: 질문 번호 = ${question.questionNo}</div>
                             <label for="question-title" class="input-label">질문 제목</label>
                             <input
                                 type="text"
