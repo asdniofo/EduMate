@@ -1,0 +1,249 @@
+/* 전체 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #e9ebef;
+    margin: 0;
+}
+
+.admin-wrapper {
+    display: flex;
+    min-height: 80vh;
+}
+
+/* --- 사이드바 --- */
+.sidebar {
+    width: 220px;
+    background: #2d2f39;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.sidebar .logo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 25px;
+    margin-bottom: 30px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    cursor: pointer;
+    border-bottom: 1px solid #40424f;
+}
+
+.sidebar-menu li.active, .sidebar-menu li:hover {
+    background: #1f212b;
+}
+
+.sidebar-menu a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* --- 메인 --- */
+.main-content {
+    flex: 1;
+    background: #fff;
+    padding: 40px;
+}
+
+/* --- 기본환경설정 --- */
+.basic-setting {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.basic-setting h2 {
+    text-align: left;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.notice-box {
+    border: 2px dashed #ccc;
+    background: #fafafa;
+    padding: 60px;
+}
+
+.admin-text strong {
+    color: red;
+    font-size: 20px;
+}
+
+.warning {
+    color: red;
+    font-weight: bold;
+}
+
+/* --- 회원관리 --- */
+.member-manage h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.summary {
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.search-box button {
+    padding: 10px 18px;
+    background: #2d2f39;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.sort-section {
+    margin-bottom: 10px;
+}
+
+.member-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.member-table th, .member-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.member-table th {
+    background: #f5f5f5;
+}
+
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    margin: 0 3px;
+}
+
+.btn.delete {
+    background: #e74c3c;
+}
+
+.btn.block {
+    background: #7f8c8d;
+}
+
+.btn.edit {
+    background: #2980b9;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pagination button {
+    margin: 0 4px;
+    background: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background: #2d2f39;
+    color: white;
+}
+.edit-row td {
+    background: #eaeaea;
+    padding: 20px;
+}
+
+.edit-box {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) auto;
+    align-items: center;
+    gap: 15px;
+}
+
+.edit-box label {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-box input, .edit-box select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    width: 160px;
+}
+
+.btn.show {
+    background: #777;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn.show:hover {
+    background: #555;
+}
+
+.btn.save {
+    background: #444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn.save:hover {
+    background: #222;
+}
+.member-table td {
+    vertical-align: middle;
+}
+
+.btn.show {
+    background: #777;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+.btn.show:hover {
+    background: #555;
+}
