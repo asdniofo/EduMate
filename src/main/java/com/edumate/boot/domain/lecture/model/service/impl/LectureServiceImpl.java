@@ -164,4 +164,16 @@ public class LectureServiceImpl implements LectureService {
         return lList;
     }
 
+    @Override
+    public int checkTeacher(String loginId) {
+        int result = lMapper.checkTeacher(loginId);
+        return result;
+    }
+
+    @Override
+    public int checkPurchase(String memberId, int lectureNo) {
+        int result = lMapper.checkPurchase(memberId, lectureNo);
+        return result;
+    }
+
 }

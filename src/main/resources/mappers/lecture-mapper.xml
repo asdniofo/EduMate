@@ -168,5 +168,15 @@
             ) sub
         ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
     </select>
+
+    <select id="checkTeacher" resultType="int">
+        SELECT COUNT(*) FROM MEMBER WHERE
+        MEMBER_ID = #{loginId } AND TEACHER_YN = 'Y'
+    </select>
+
+    <select id="checkPurchase" resultType="int">
+        SELECT COUNT(*) FROM PURCHASE WHERE
+        MEMBER_ID = #{memberId } AND LECTURE_NO = #{lectureNo }
+    </select>
 </mapper>
 

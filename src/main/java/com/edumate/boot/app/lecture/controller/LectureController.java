@@ -6,6 +6,7 @@ import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -213,26 +215,41 @@ public class LectureController {
 
     @GetMapping("/player")
     public String showLecturePlayer(@ModelAttribute VideoListRequest video
-            ,@RequestParam int videoNo, Model model) {
+            ,@RequestParam int videoNo, Model model, HttpSession session) {
         try {
+            String memberId = (String) session.getAttribute("loginId");
             List<VideoListRequest> currentVideo = lService.selectVideoById(videoNo);
             int lectureNo =  currentVideo.get(0).getLectureNo();
             int nextVideoNo = currentVideo.get(0).getVideoOrder()+1;
-            List<VideoListRequest> nextVideo = lService.selectNextVideoById(lectureNo,nextVideoNo);
-            String lectureName = lService.selectNameById(lectureNo);
-            model.addAttribute("currentVideo", currentVideo);
-            model.addAttribute("nextVideo", nextVideo);
-            model.addAttribute("lectureName", lectureName);
+            int result = lService.checkPurchase(memberId, lectureNo);
+            if (result >0) {
+                List<VideoListRequest> nextVideo = lService.selectNextVideoById(lectureNo,nextVideoNo);
+                String lectureName = lService.selectNameById(lectureNo);
+                model.addAttribute("currentVideo", currentVideo);
+                model.addAttribute("nextVideo", nextVideo);
+                model.addAttribute("lectureName", lectureName);
+                return "lecture/player";
+            } else {
+                model.addAttribute("errorMsg", "구매하지 않은 강의입니다.");
+                return "common/error";
+            }
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
             return "common/error";
         }
-        return "lecture/player";
+
     }
 
     @GetMapping("/add")
-    public String showLectureAdd(Model model) {
-        return "lecture/add";
+    public String showLectureAdd(HttpSession session, Model model) {
+        String loginId = (String) session.getAttribute("loginId");
+        int result = lService.checkTeacher(loginId);
+        if (result > 0) {
+            return "lecture/add";
+        } else  {
+            model.addAttribute("errorMsg", "선생님만 추가 가능합니다.");
+            return "common/error";
+        }
     }
     
     @PostMapping("/add")
@@ -243,7 +260,7 @@ public class LectureController {
                            @RequestParam("thumbnailImage") MultipartFile thumbnailImage,
                            @RequestParam("lectureVideos[]") MultipartFile[] lectureVideos,
                            @RequestParam("videoTitles[]") String[] videoTitles,
-                           Model model) {
+                           HttpSession session, Model model) {
         try {
             Lecture lecture = new Lecture();
             String thumbnailFileName = null;
@@ -251,8 +268,7 @@ public class LectureController {
             if (!thumbnailImage.isEmpty()) {
                 thumbnailFileName = saveFile(thumbnailImage);
             }
-            String memberId = "teacher02"; // 세션처리 해야함
-
+            String memberId = (String) session.getAttribute("loginId");
             lecture.setMemberId(memberId);
             lecture.setLectureName(lectureName);
             lecture.setLectureContent(lectureDescription);

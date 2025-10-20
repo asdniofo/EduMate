@@ -48,4 +48,8 @@ public interface LectureMapper {
     int getSearchCategoryCount(Map<String, Object> params);
 
     List<LectureListRequest> selectSearchCategoryList(Map<String, Object> params);
+
+    int checkTeacher(String loginId);
+
+    int checkPurchase(String memberId, int lectureNo);
 }

@@ -46,4 +46,8 @@ public interface LectureService {
     int getSearchCategoryCount(String search, String category);
 
     List<LectureListRequest> selectSearchCategoryList(int currentPage, int lectureCountPerPage, String search, String category, String sortValue);
+
+    int checkTeacher(String loginId);
+
+    int checkPurchase(String memberId, int lectureNo);
 }
