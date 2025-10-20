@@ -15,7 +15,7 @@ public class Notice {
 	private int noticeId;
 	private String memberId;
 	private String noticeTitle;
-	private String noticeCotent;
+	private String noticeContent;
 	private Timestamp writeDate;
 	private int viewCount;
 	private String boardYn;

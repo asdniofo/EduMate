@@ -50,4 +50,20 @@ public class NoticeServiceImpl implements NoticeService {
 		return totalCount;
 	}
 
+	@Override
+	public Notice selectByOneNo(int noticeId) {
+		Notice notice = noticeMapper.selectByOneNo(noticeId);
+		return notice;
+	}
+
+	@Override
+	public Integer selectPrevNotice(int currentNoticeId) {
+		return noticeMapper.selectPrevNotice(currentNoticeId);
+	}
+
+	@Override
+	public Integer selectNextNotice(int currentNoticeId) {
+		return noticeMapper.selectNextNotice(currentNoticeId);
+	}
+
 }

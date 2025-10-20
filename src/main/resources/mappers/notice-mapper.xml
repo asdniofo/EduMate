@@ -17,4 +17,13 @@
 	<select id="selectSearchList" resultType="Notice">
 		SELECT * FROM NOTICE_BOARD WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' AND BOARD_YN = 'Y'
 	</select>
+	<select id="selectByOneNo" resultType="Notice">
+			SELECT * FROM NOTICE_BOARD WHERE NOTICE_ID = #{noticeId}
+	</select>
+	<select id="selectPrevNotice" resultType="_int">
+		SELECT MAX(NOTICE_ID) FROM NOTICE_BOARD WHERE NOTICE_ID <![CDATA[<]]> #{currentNoticeNo}
+	</select>
+		<select id="selectNextNotice" resultType="_int">
+		SELECT MIN(NOTICE_ID) FROM NOTICE_BOARD WHERE NOTICE_ID <![CDATA[>]]> #{currentNoticeNo}
+	</select>
 </mapper>
