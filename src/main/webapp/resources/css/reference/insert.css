@@ -220,6 +220,12 @@ body {
   background: #fff;
 }
 
+.btn-cancel:hover {
+  background-color: #357ABD;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74,144,226,0.4);
+}
+
 .btn-submit {
   background: #fff;
 }
