@@ -168,5 +168,25 @@
             ) sub
         ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
     </select>
+
+    <select id="checkTeacher" resultType="int">
+        SELECT COUNT(*) FROM MEMBER WHERE
+        MEMBER_ID = #{loginId } AND TEACHER_YN = 'Y'
+    </select>
+
+    <select id="checkPurchase" resultType="int">
+        SELECT COUNT(*) FROM PURCHASE WHERE
+        MEMBER_ID = #{memberId, jdbcType=VARCHAR} AND LECTURE_NO = #{lectureNo, jdbcType=NUMERIC}
+    </select>
+
+    <select id="selectMember" resultType="Member">
+        SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
+    </select>
+    <select id="selectLecture" resultType="Lecture">
+        SELECT * FROM LECTURE WHERE LECTURE_NO = #{lectureNo}
+    </select>
+    <select id="checkLogin" resultType="int">
+        SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{memberId}
+    </select>
 </mapper>
 

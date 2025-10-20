@@ -6,6 +6,8 @@ import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
+import com.edumate.boot.domain.member.model.vo.Member;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +18,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/lecture")
@@ -32,13 +37,13 @@ public class LectureController {
         String lowerFileName = fileName.toLowerCase();
         String[] imageType = {".jpg", ".jpeg", ".png", ".gif", ".bmp"};
         String[] videoType = {".mp4", ".avi", ".mov", ".wmv", ".flv", ".mkv"};
-        
+
         for (String ext : imageType) {
             if (lowerFileName.endsWith(ext)) {
                 return "image";
             }
         }
-        
+
         for (String ext : videoType) {
             if (lowerFileName.endsWith(ext)) {
                 return "video";
@@ -50,13 +55,7 @@ public class LectureController {
     private int getVideoDuration(String filePath) {
         try {
             // FFprobe 명령어로 영상 길이 추출
-            ProcessBuilder pb = new ProcessBuilder(
-                "ffprobe", 
-                "-v", "quiet", 
-                "-show_entries", "format=duration", 
-                "-of", "csv=p=0", 
-                filePath
-            );
+            ProcessBuilder pb = new ProcessBuilder("ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", filePath);
             Process process = pb.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String duration = reader.readLine();
@@ -94,7 +93,7 @@ public class LectureController {
         String originalFileName = file.getOriginalFilename();
         String fileType = getFileType(originalFileName);
         String uploadPath;
-        
+
         // 확장자에 따라 저장 경로 결정
         if ("image".equals(fileType)) {
             uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
@@ -106,38 +105,34 @@ public class LectureController {
         String newFileName = generateSequentialFileName(originalFileName, uploadPath);
         File saveFile = new File(uploadPath + newFileName);
         file.transferTo(saveFile);
-        
+
         return newFileName;
     }
 
     @GetMapping("/list")
-    public String showLectureList(@ModelAttribute LectureListRequest Lecture
-            ,@RequestParam(value = "page", defaultValue = "1") int currentPage
-            ,@RequestParam(value = "category", defaultValue = "전체") String category
-            ,@RequestParam(value = "sort", defaultValue = "인기순") String sort
-            ,@RequestParam(value = "search", defaultValue = "") String search, Model model) {
+    public String showLectureList(@ModelAttribute LectureListRequest Lecture, @RequestParam(value = "page", defaultValue = "1") int currentPage, @RequestParam(value = "category", defaultValue = "전체") String category, @RequestParam(value = "sort", defaultValue = "인기순") String sort, @RequestParam(value = "search", defaultValue = "") String search, Model model) {
         try {
             List<LectureListRequest> lList = null;
             int totalCount = 0;
             int lectureCountPerPage = 9;
             String sortValue = null;
-            
+
             // 정렬 조건 설정
             if (sort.equals("인기순")) {
                 sortValue = "COUNT_STUDENT DESC";
-            } else if (sort.equals("최신순")){
+            } else if (sort.equals("최신순")) {
                 sortValue = "LECTURE_CREATED_DATE DESC";
-            } else if (sort.equals("낮은가격순")){
+            } else if (sort.equals("낮은가격순")) {
                 sortValue = "LECTURE_PRICE ASC";
-            } else if (sort.equals("높은가격순")){
+            } else if (sort.equals("높은가격순")) {
                 sortValue = "LECTURE_PRICE DESC";
-            } else if (sort.equals("별점높은순")){
+            } else if (sort.equals("별점높은순")) {
                 sortValue = "LECTURE_RATING DESC";
             }
-            
+
             // 검색어 처리
             boolean hasSearch = search != null && !search.trim().isEmpty();
-            
+
             if (hasSearch) {
                 // 검색 모드 (통합 검색)
                 if (category.equals("전체")) {
@@ -180,10 +175,7 @@ public class LectureController {
     }
 
     @GetMapping("/details")
-    public String showLectureDetails(@ModelAttribute LectureListRequest lecture
-            ,@ModelAttribute ReviewListRequest review
-            ,@ModelAttribute VideoListRequest video
-            ,@RequestParam int lectureNo, Model model) {
+    public String showLectureDetails(@ModelAttribute LectureListRequest lecture, @ModelAttribute ReviewListRequest review, @ModelAttribute VideoListRequest video, @RequestParam int lectureNo, Model model) {
         try {
             List<LectureListRequest> lList = lService.selectOneById(lectureNo);
             List<ReviewListRequest> rList = lService.selectReviewById(lectureNo);
@@ -198,7 +190,7 @@ public class LectureController {
             if (totalHour > 0) totalTimeFormatted.append(totalHour).append("시간 ");
             if (totalMinute > 0) totalTimeFormatted.append(totalMinute).append("분 ");
             if (totalSecond > 0) totalTimeFormatted.append(totalSecond).append("초");
-            
+
             model.addAttribute("lList", lList);
             model.addAttribute("rList", rList);
             model.addAttribute("vList", vList);
@@ -212,38 +204,49 @@ public class LectureController {
     }
 
     @GetMapping("/player")
-    public String showLecturePlayer(@ModelAttribute VideoListRequest video
-            ,@RequestParam int videoNo, Model model) {
+    public String showLecturePlayer(@ModelAttribute VideoListRequest video, @RequestParam int videoNo, Model model, HttpSession session) {
         try {
+            String memberId = (String) session.getAttribute("loginId");
+
+            if (memberId == null) {
+                return "member/login";
+            }
+
             List<VideoListRequest> currentVideo = lService.selectVideoById(videoNo);
-            int lectureNo =  currentVideo.get(0).getLectureNo();
-            int nextVideoNo = currentVideo.get(0).getVideoOrder()+1;
-            List<VideoListRequest> nextVideo = lService.selectNextVideoById(lectureNo,nextVideoNo);
-            String lectureName = lService.selectNameById(lectureNo);
-            model.addAttribute("currentVideo", currentVideo);
-            model.addAttribute("nextVideo", nextVideo);
-            model.addAttribute("lectureName", lectureName);
+            int lectureNo = currentVideo.get(0).getLectureNo();
+            int nextVideoNo = currentVideo.get(0).getVideoOrder() + 1;
+
+            int result = lService.checkPurchase(memberId, lectureNo);
+            if (result > 0) {
+                List<VideoListRequest> nextVideo = lService.selectNextVideoById(lectureNo, nextVideoNo);
+                String lectureName = lService.selectNameById(lectureNo);
+                model.addAttribute("currentVideo", currentVideo);
+                model.addAttribute("nextVideo", nextVideo);
+                model.addAttribute("lectureName", lectureName);
+                return "lecture/player";
+            } else {
+                return "redirect:/lecture/payment?lectureNo=" + lectureNo;
+            }
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
             return "common/error";
         }
-        return "lecture/player";
     }
 
     @GetMapping("/add")
-    public String showLectureAdd(Model model) {
-        return "lecture/add";
+    public String showLectureAdd(HttpSession session, Model model) {
+        String loginId = (String) session.getAttribute("loginId");
+        int result = lService.checkTeacher(loginId);
+        if (result > 0) {
+            return "lecture/add";
+        } else {
+            model.addAttribute("errorMsg", "선생님만 추가 가능합니다.");
+            return "common/error";
+        }
     }
-    
+
     @PostMapping("/add")
-    public String addLecture(@RequestParam("lectureName") String lectureName,
-                           @RequestParam("lectureCategory") String lectureCategory,
-                           @RequestParam("lectureDescription") String lectureDescription,
-                           @RequestParam("lecturePrice") int lecturePrice,
-                           @RequestParam("thumbnailImage") MultipartFile thumbnailImage,
-                           @RequestParam("lectureVideos[]") MultipartFile[] lectureVideos,
-                           @RequestParam("videoTitles[]") String[] videoTitles,
-                           Model model) {
+    public String addLecture(@RequestParam("lectureName") String lectureName, @RequestParam("lectureCategory") String lectureCategory, @RequestParam("lectureDescription") String lectureDescription, @RequestParam("lecturePrice") int lecturePrice, @RequestParam("thumbnailImage") MultipartFile thumbnailImage, @RequestParam("lectureVideos[]") MultipartFile[] lectureVideos, @RequestParam("videoTitles[]") String[] videoTitles, HttpSession session, Model model) {
         try {
             Lecture lecture = new Lecture();
             String thumbnailFileName = null;
@@ -251,8 +254,8 @@ public class LectureController {
             if (!thumbnailImage.isEmpty()) {
                 thumbnailFileName = saveFile(thumbnailImage);
             }
-            String memberId = "teacher02"; // 세션처리 해야함
 
+            String memberId = (String) session.getAttribute("loginId");
             lecture.setMemberId(memberId);
             lecture.setLectureName(lectureName);
             lecture.setLectureContent(lectureDescription);
@@ -268,14 +271,12 @@ public class LectureController {
                 if (!lectureVideos[i].isEmpty()) {
                     // 영상 파일 저장
                     String videoFileName = saveFile(lectureVideos[i]);
-                    
+
                     // 저장된 영상 파일의 실제 시간 추출
-                    String uploadPath = "video".equals(getFileType(lectureVideos[i].getOriginalFilename())) 
-                        ? System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/" 
-                        : System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
+                    String uploadPath = "video".equals(getFileType(lectureVideos[i].getOriginalFilename())) ? System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/" : System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
                     String fullFilePath = uploadPath + videoFileName;
                     int videoDuration = getVideoDuration(fullFilePath);
-                    
+
                     LectureVideo video = new LectureVideo();
                     video.setLectureNo(lectureNo);
                     video.setVideoTitle(videoTitles[i]);
@@ -286,8 +287,32 @@ public class LectureController {
                     int result2 = lService.insertVideo(video);
                 }
             }
-
             return "redirect:/lecture/list";
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "common/error";
+        }
+    }
+
+    @GetMapping("/payment")
+    public String showPayment(HttpSession session, @RequestParam("lectureNo") int lectureNo, Model model) {
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                return "member/login";
+            }
+
+            int result = lService.checkPurchase(memberId, lectureNo);
+            if (result > 0) {
+                return "member/mypage";
+            } else {
+                session.setAttribute("currentLectureNo", lectureNo);
+                Member member = lService.selectMember(memberId);
+                List<LectureListRequest> lList = lService.selectOneById(lectureNo);
+                model.addAttribute("member", member);
+                model.addAttribute("lList", lList);
+                return "lecture/payment";
+            }
         } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
             return "common/error";

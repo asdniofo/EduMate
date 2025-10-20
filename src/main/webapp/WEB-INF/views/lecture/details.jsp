@@ -42,7 +42,7 @@
                         <div class="course-purchase">
                             <div class="course-price">₩ <fmt:formatNumber value="${lList[0].lecturePrice}"
                                                                           pattern="#,###"/></div>
-                            <button class="purchase-button">수강 신청</button>
+                            <button class="purchase-button" onclick="location.href='/lecture/payment?lectureNo=${lList[0].lectureNo}'">수강 신청</button>
                         </div>
                     </div>
                 </div>

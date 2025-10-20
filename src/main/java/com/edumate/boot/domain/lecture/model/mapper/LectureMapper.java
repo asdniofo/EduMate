@@ -6,6 +6,7 @@ import com.edumate.boot.app.lecture.dto.VideoDetailRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
+import com.edumate.boot.domain.member.model.vo.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
@@ -48,4 +49,14 @@ public interface LectureMapper {
     int getSearchCategoryCount(Map<String, Object> params);
 
     List<LectureListRequest> selectSearchCategoryList(Map<String, Object> params);
+
+    int checkTeacher(String loginId);
+
+    int checkPurchase(String memberId, int lectureNo);
+
+    Member selectMember(String memberId);
+
+    Lecture selectLecture(int lectureNo);
+
+    int checkLogin(String memberId);
 }
