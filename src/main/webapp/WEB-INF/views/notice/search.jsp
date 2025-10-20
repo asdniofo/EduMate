@@ -37,7 +37,7 @@
 		</form>
 
 		<section class="question-list">
-			<c:forEach items="${nList }" var="notice" varStatus="i">
+			<c:forEach items="${searchList }" var="notice" varStatus="i">
 				<a href="/notice/detail?noticeId=${notice.noticeId }"
 					class="question-link">
 					<article class="question-item">
@@ -55,19 +55,19 @@
 		<div class="bottom-actions">
 			<div class="pagination">
 				<c:if test="${startNavi ne 1 }">
-						<a href="/notice/list?page=${startNavi-1 }">
+						<a href="/notice/search?page=${startNavi-1 }&searchKeyword=${searchKeyword}">
 							<button class="page-btn">이전</button>
 						</a>
 				</c:if>
 				<c:forEach begin="${startNavi }" end="${endNavi }" var="n">
-					<a href="/notice/list?page=${n }"> 
+					<a href="/notice/search?page=${n }&searchKeyword=${searchKeyword}"> 
 					<button class="page-btn <c:if test="${currentPage eq n }">active</c:if>">
 						${n }
 					</button>
 					</a>
 				</c:forEach>
 				<c:if test="${endNavi ne maxPage }">
-					<a href="/notice/list?page=${endNavi + 1 }">
+					<a href="/notice/search?page=${endNavi + 1 }&searchKeyword=${searchKeyword}">
 						<button class="page-btn">다음</button>
 					</a>
 				</c:if>

@@ -81,7 +81,20 @@ public class NoticeController {
     }
     
     @GetMapping("/detail")
-    public String showNoticeDetail() {
+    public String showNoticeDetail(
+    		@RequestParam("noticeId") int noticeId
+    		, Model model) {
+    	try {
+			Notice notice = noticeService.selectByOneNo(noticeId);
+			Integer prevNoticeNo = noticeService.selectPrevNotice(noticeId);
+			Integer nextNoticeNo = noticeService.selectNextNotice(noticeId);
+			model.addAttribute("notice", notice);
+			model.addAttribute("prevNoticeNo", prevNoticeNo);
+			model.addAttribute("nextNoticeNo", nextNoticeNo);
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
     	return "notice/detail";
     }
     

@@ -16,4 +16,10 @@ public interface NoticeService {
 
 	int getTotalCount(Map<String, Object> searchMap);
 
+	Notice selectByOneNo(int noticeId);
+
+	Integer selectPrevNotice(int noticeId);
+
+	Integer selectNextNotice(int noticeId);
+
 }

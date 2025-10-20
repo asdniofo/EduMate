@@ -19,4 +19,10 @@ public interface NoticeMapper {
 
 	List<Notice> selectSearchList(Map<String, Object> searchMap, RowBounds rowBounds);
 
+	Notice selectByOneNo(int noticeId);
+
+	Integer selectPrevNotice(int currentNoticeId);
+
+	Integer selectNextNotice(int currentNoticeId);
+
 }
