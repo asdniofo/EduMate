@@ -11,5 +11,19 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 
     private final AdminService adminService;
-
+    
+    @GetMapping("/main")
+    public String showAdmin() {
+    	return "admin/admin_main";
+    }
+    
+    @GetMapping("/user")
+    public String showUser() {
+    	return "admin/admin_user";
+    }
+    
+    @GetMapping("/setting")
+    public String showSetting() {
+    	return "admin/basicSetting";
+    }
 }
