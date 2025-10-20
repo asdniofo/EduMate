@@ -74,5 +74,10 @@ public class TeacherServiceImpl implements TeacherService {
 		return result;
 	}
 
+	@Override
+	public int changeQuestionStatus(int questionNo) {
+	    return tMapper.changeQuestionStatus(questionNo);
+	}
+
 
 }

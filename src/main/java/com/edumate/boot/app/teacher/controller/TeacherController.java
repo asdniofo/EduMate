@@ -115,4 +115,16 @@ public class TeacherController {
 		}
     }
 
+    @GetMapping("/question/change/status")
+    @ResponseBody
+    public int changeQuestionStatus(@RequestParam int questionNo) {
+        try {
+            int result = tService.changeQuestionStatus(questionNo);
+            return result; // 1 또는 0 반환
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // 오류 발생 시 0 반환
+        }
+    }
+    
 }

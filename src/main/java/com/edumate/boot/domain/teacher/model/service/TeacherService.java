@@ -22,4 +22,6 @@ public interface TeacherService {
 	Integer selectNextQuestionNo(int currentQuestionNo);
 
 	int deleteQuestion(int questionNo);
+
+	int changeQuestionStatus(int questionNo);
 }

@@ -69,9 +69,8 @@
 	                            <button class="action-button">수정</button>
 	                            <button class="action-button" id="delete-list-btn">삭제</button>
                             </c:if>
-                            <c:if test="${sessionScope.loginMember.memberId eq question.memberId 
-                    			or sessionScope.loginMember.adminYN eq 'Y' or sessionScope.loginMember.teacherYN eq 'Y'}">
-                            	<button class="action-button">상태변경</button>
+                            <c:if test="${sessionScope.loginMember.memberId eq question.memberId }">
+                            	<button class="action-button" id="change-status-btn">상태변경</button>
                             </c:if>
                         </div>
                         <div class="right-actions">
@@ -255,6 +254,38 @@
 	        .catch(error => {
 	            alert("질문 삭제 처리 중 오류가 발생했습니다. (네트워크/파싱 오류)");
 	            console.error("삭제 오류:", error);
+	        });
+	    }
+	});
+	
+	document.querySelector("#change-status-btn").addEventListener("click", function() {
+	    
+	    // 1. 확인 메시지를 일반적인 상태 변경 메시지로 변경
+	    if (confirm("질문 상태를 변경하시겠습니까?")) {
+	        
+	        // 2. fetch 요청 (경로에 '/teacher' 포함)
+	        fetch(`/teacher/question/change/status?questionNo=${question.questionNo}`)
+	        
+	        // 3. 서버 응답 처리
+	        .then(response => response.text()) 
+	        .then(text => {
+	            const result = parseInt(text.trim());
+	            
+	            if (result > 0) {
+	                // 💡 메시지 수정: 토글되었음을 알림
+	                alert("질문 상태가 성공적으로 변경되었습니다."); 
+	                
+	                // 변경 후 상세 페이지를 새로고침하여 바뀐 상태를 즉시 반영
+	                window.location.reload(); 
+	            } else {
+	                alert("상태 변경에 실패했습니다. (DB 오류)");
+	            }
+	        })
+	        
+	        // 4. 오류 처리
+	        .catch(error => {
+	            alert("상태 변경 요청 중 오류가 발생했습니다. (네트워크/파싱 오류)");
+	            console.error("상태 변경 오류:", error);
 	        });
 	    }
 	});
