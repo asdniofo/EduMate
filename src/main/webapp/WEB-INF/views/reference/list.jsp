@@ -11,13 +11,14 @@
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/common/footer.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
 	<div class="container">
 		<!-- Header -->
         <jsp:include page="../common/header.jsp" />
 
-			
 		<div class="page-title-section">
 		  <div class="page-title-text">자료실</div>
 		  <img class="page-title-image" src="/resources/img/reference-icon.png" alt="이미지" />
@@ -32,10 +33,12 @@
 			    <input type="text" name="searchKeyword" class="search-input" 
 			           placeholder="검색어를 입력해주세요" value="${searchKeyword}" />
 			  </form>
+
+			  <!-- ✅ 버튼 → 텍스트 링크형 카테고리 -->
 			  <div class="category-filter">
-			    <button class="category-btn active">전체</button>
-			    <button class="category-btn">강의자료</button>
-			    <button class="category-btn">기타 자료</button>
+			    <a href="#" class="category-link active" data-category="all">전체</a>
+			    <a href="#" class="category-link" data-category="강의 자료">강의 자료</a>
+			    <a href="#" class="category-link" data-category="기타 자료">기타 자료</a>
 			  </div>
 			</div>
 			
@@ -65,10 +68,9 @@
 				</c:when>
 				<c:otherwise>
 					<div class="reference-list">
-						<!-- 검색 결과가 있으면 searchList 출력, 없으면 rList 출력 -->
 						<c:set var="displayList" value="${not empty searchList ? searchList : rList}" />
 						<c:forEach var="ref" items="${displayList}">
-							<div class="reference-item" onclick="location.href='/reference/detail?archiveNo=${ref.archiveNo}'">
+							<div class="reference-item" data-category="${ref.archiveType}" onclick="location.href='/reference/detail?archiveNo=${ref.archiveNo}'">
 								<div class="reference-info">
 									<div class="reference-category">${ref.archiveType}</div>
 									<div class="reference-title">${ref.archiveTitle}</div>
@@ -85,7 +87,9 @@
 			<!-- Pagination + Write Button Wrapper -->
 			<div class="pagination-wrapper">
 				<div class="pagination">
-					<c:if test="${currentPage > 1}">
+					
+					<!-- ✅ 1~5페이지에서는 이전 버튼 숨김 -->
+					<c:if test="${currentPage > 5}">
 						<c:choose>
 							<c:when test="${not empty searchKeyword}">
 								<button class="page-btn" onclick="location.href='/reference/search?searchCondition=${searchCondition}&searchKeyword=${searchKeyword}&page=${currentPage-1}'">이전</button>
@@ -95,10 +99,8 @@
 							</c:otherwise>
 						</c:choose>
 					</c:if>
-					<c:if test="${currentPage == 1}">
-						<button class="page-btn" disabled>이전</button>
-					</c:if>
-			
+
+					<!-- 페이지 번호 -->
 					<c:forEach var="page" begin="${startNavi}" end="${endNavi}">
 						<c:choose>
 							<c:when test="${page == currentPage}">
@@ -116,8 +118,9 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-			
-					<c:if test="${currentPage < maxPage}">
+
+					<!-- ✅ 마지막 5페이지 구간에서는 다음 버튼 숨김 -->
+					<c:if test="${currentPage < maxPage - 4}">
 						<c:choose>
 							<c:when test="${not empty searchKeyword}">
 								<button class="page-btn" onclick="location.href='/reference/search?searchCondition=${searchCondition}&searchKeyword=${searchKeyword}&page=${currentPage+1}'">다음</button>
@@ -127,9 +130,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:if>
-					<c:if test="${currentPage == maxPage}">
-						<button class="page-btn" disabled>다음</button>
-					</c:if>
+
 				</div>
 
 				<!-- 글쓰기 버튼 -->
@@ -140,5 +141,36 @@
 
 	</div>
     <jsp:include page="../common/footer.jsp" />
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryLinks = document.querySelectorAll('.category-link');
+        const referenceItems = document.querySelectorAll('.reference-item');
+        
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // 모든 링크의 active 클래스 제거
+                categoryLinks.forEach(l => l.classList.remove('active'));
+                
+                // 클릭한 링크에 active 추가
+                this.classList.add('active');
+                
+                const selectedCategory = this.getAttribute('data-category');
+                
+                // 항목 필터링
+                referenceItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (selectedCategory === 'all' || selectedCategory === itemCategory) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    });
+    </script>
 </body>
 </html>

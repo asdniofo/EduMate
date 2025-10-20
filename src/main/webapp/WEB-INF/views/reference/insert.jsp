@@ -42,8 +42,8 @@
           <div class="form-group">
             <label class="form-label">자료 유형</label>
             <div class="tag-group">
-              <input type="radio" id="type1" name="archiveType" value="강의자료" class="tag-radio" checked />
-              <label for="type1" class="tag-label">강의자료</label>
+              <input type="radio" id="type1" name="archiveType" value="강의 자료" class="tag-radio" checked />
+              <label for="type1" class="tag-label">강의 자료</label>
 
               <input type="radio" id="type2" name="archiveType" value="기타 자료" class="tag-radio" />
               <label for="type2" class="tag-label">기타 자료</label>

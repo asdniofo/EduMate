@@ -89,12 +89,12 @@ public class ReferenceController {
 				String originalName = uploadFile.getOriginalFilename();
 				String renamedName = UUID.randomUUID().toString() + "_" + originalName;
 				
-				String folderPath = session.getServletContext().getRealPath("/resources/archiveFiles");
+				String folderPath = session.getServletContext().getRealPath("/resources/references");
 				uploadFile.transferTo(new File(folderPath + File.separator + renamedName));
 				
 				reference.setAttachmentName(originalName);
 				reference.setAttachmentRename(renamedName);
-				reference.setAttachmentPath("/resources/archiveFiles/" + renamedName);
+				reference.setAttachmentPath("/resources/references/" + renamedName);
 			}
 			
 			referenceService.insertReference(reference);
