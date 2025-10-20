@@ -24,4 +24,6 @@ public interface TeacherService {
 	int deleteQuestion(int questionNo);
 
 	int changeQuestionStatus(int questionNo);
+
+	int updateQuestion(Question question);
 }

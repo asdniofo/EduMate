@@ -84,4 +84,11 @@
 	            WHEN QUESTION_STATUS = 'Y' THEN 'N'  WHEN QUESTION_STATUS = 'N' THEN 'Y'  ELSE QUESTION_STATUS                END
 	    WHERE QUESTION_NO = #{questionNo}
 	</update>
+	<update id="updateQuestion" parameterType="Question">
+	    UPDATE QUESTION 
+	    SET 
+	        QUESTION_TITLE = #{questionTitle, jdbcType=VARCHAR},  QUESTION_CONTENT = #{questionContent, jdbcType=VARCHAR} 
+	    WHERE 
+	        QUESTION_NO = #{questionNo}
+	</update>
 </mapper>

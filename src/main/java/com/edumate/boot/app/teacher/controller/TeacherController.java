@@ -127,4 +127,41 @@ public class TeacherController {
         }
     }
     
+    @GetMapping("/question/modify")
+    public String showQuestionModify(@RequestParam int questionNo, Model model) {
+        Question question = tService.selectOneByNo(questionNo); 
+        
+        model.addAttribute("question", question);
+        
+        return "teacher/modify"; // 수정 페이지 JSP 경로
+    }
+    
+    @PostMapping("/question/modify")
+    public String modifyQuestion(
+    		@RequestParam("questionNo") int questionNo, 
+            @RequestParam("questionTitle") String questionTitle,
+            @RequestParam("questionContent") String questionContent,
+            Model model) {
+        try {
+        	Question question = new Question(); // Question VO/DTO를 가정
+            question.setQuestionNo(questionNo);
+            question.setQuestionTitle(questionTitle);
+            question.setQuestionContent(questionContent);
+        	
+            int result = tService.updateQuestion(question);
+            
+            if (result > 0) {
+                // 2. 성공 시 상세 페이지로 리다이렉트
+            	return "redirect:/teacher/question/detail?questionNo=" + questionNo; 
+            } else {
+                // 실패 처리
+                model.addAttribute("errorMsg", "질문 수정에 실패했습니다.");
+                return "common/error";
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", "수정 중 오류 발생: " + e.getMessage());
+            return "common/error";
+        }
+    }
+    
 }

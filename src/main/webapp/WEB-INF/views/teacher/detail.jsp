@@ -66,7 +66,7 @@
                         	<a href="/teacher/question/list"><button class="action-button">목록</button></a>
                         	<c:if test="${sessionScope.loginMember.memberId eq question.memberId 
                     			or sessionScope.loginMember.adminYN eq 'Y'}">
-	                            <button class="action-button">수정</button>
+	                            <a href="/teacher/question/modify?questionNo=${question.questionNo }"><button class="action-button">수정</button></a>
 	                            <button class="action-button" id="delete-list-btn">삭제</button>
                             </c:if>
                             <c:if test="${sessionScope.loginMember.memberId eq question.memberId }">
