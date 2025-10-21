@@ -71,11 +71,11 @@
 	        </if>
 	        
 	        <if test="searchKeyword != null and searchKeyword != ''">
-	            AND (
-	                REPLACE(UPPER(REQUEST_TITLE), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
-	                OR REPLACE(UPPER(REQUEST_CONTENT), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
-	            )
-	        </if>
+			    AND (
+			        UPPER(REQUEST_TITLE) LIKE '%' || #{searchKeyword} || '%'
+			        OR UPPER(REQUEST_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+			    )
+			</if>
 	        
 	        <if test='adminYN != null and adminYN == "N"'> 
 	            AND MEMBER_ID = #{memberId, jdbcType=VARCHAR} 
@@ -105,4 +105,19 @@
 	        </if>
 	    </where>
 	</select>
+	<insert id="insertRequest">
+		INSERT INTO REQUEST (
+		REQUEST_NO,
+		MEMBER_ID,
+		REQUEST_TITLE,
+		REQUEST_CONTENT,
+		WRITE_DATE
+		) VALUES (
+		SEQ_REQUEST_NO.NEXTVAL,
+		#{memberId, jdbcType=VARCHAR},
+		#{requestTitle, jdbcType=VARCHAR},
+		#{requestContent, jdbcType=VARCHAR},
+		DEFAULT
+		)
+	</insert>
 </mapper>

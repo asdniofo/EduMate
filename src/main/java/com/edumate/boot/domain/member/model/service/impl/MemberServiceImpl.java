@@ -4,6 +4,7 @@ import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.teacher.model.vo.Question;
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
+import com.edumate.boot.app.member.dto.InsertRequestRequest;
 import com.edumate.boot.domain.member.model.mapper.MemberMapper;
 
 import java.util.HashMap;
@@ -73,6 +74,12 @@ public class MemberServiceImpl implements MemberService {
 	public int getTotalCount(Map<String, Object> searchMap) {
 		int totalCount = memberMapper.getRequestTotalCount(searchMap);
 		return totalCount;
+	}
+
+	@Override
+	public int insertRequest(InsertRequestRequest request) {
+		int result = memberMapper.insertRequest(request); 
+		return result;
 	}
 
 }

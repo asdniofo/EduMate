@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
+import com.edumate.boot.app.member.dto.InsertRequestRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.teacher.model.vo.Question;
 
@@ -24,5 +25,6 @@ public interface MemberService {
 	
 	List<Question> selectRequestList(Map<String, Object> searchMap);
 	int getTotalCount(Map<String, Object> searchMap);
+	int insertRequest(InsertRequestRequest request);
 
 }

@@ -23,7 +23,7 @@
     <main class="main-content">
         <div class="content-top-area">
             <div class="main-search-bar">
-                <form action="/teacher/question/search" method="get" class="search-form">
+                <form action="/member/request" method="get" class="search-form">
                     <input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요" value="${searchKeyword }">
                     <input type="hidden" name="filter" value="${filter}"> 
                     <button type="submit" class="search-btn"></button>
@@ -84,7 +84,7 @@
             </div>
             
             <c:if test="${not empty sessionScope.loginId}">
-            <a href="/#" class="write-button">글쓰기</a>
+            <a href="/member/request/insert" class="write-button">글쓰기</a>
             </c:if>
         </div>
     </main>

@@ -162,6 +162,12 @@ body {
     gap: 10px;
 }
 
+.question-item:hover {
+	background-color: #f0f8ff; /* 연한 블루 배경 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px); /* 살짝 떠오르는 느낌 */
+}
+
 .question-status-and-title {
     display: flex;
     align-items: center;
@@ -288,6 +294,11 @@ body {
     text-decoration: none;
     color: black;
     z-index: 20;
+}
+
+.write-button:hover {
+	background-color: #F0F0F0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* 글쓰기 버튼을 오른쪽 끝으로 밀기 위한 빈 공간 */

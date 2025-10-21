@@ -1,6 +1,7 @@
 package com.edumate.boot.app.member.controller;
 
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
+import com.edumate.boot.app.member.dto.InsertRequestRequest;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.teacher.model.vo.Question;
@@ -271,6 +272,30 @@ public class MemberController {
 			model.addAttribute("errorMsg", e.getMessage());
 			return "common/error";
 		}
+    }
+    
+    @GetMapping("/request/insert")
+    public String showInsertRequest() {
+		return "member/insertRequest";
+    }
+    
+    @PostMapping("/request/insert")
+    public String insertRequest(
+    		@ModelAttribute InsertRequestRequest request
+    		, Model model, HttpSession session) {
+    	try {
+    		String loginId = (String) session.getAttribute("loginId");
+            
+            if (loginId == null) {
+                return "redirect:/member/login"; 
+            }
+            request.setMemberId(loginId);
+    		int result = memberService.insertRequest(request);
+    		return "redirect:/member/request";
+    	} catch (Exception e) {
+    		model.addAttribute("errorMsg", e.getMessage());
+    		return "common/error";
+    	}
     }
 
 }
