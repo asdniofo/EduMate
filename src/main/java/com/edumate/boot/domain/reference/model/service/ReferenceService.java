@@ -4,6 +4,12 @@ import java.util.Map;
 import com.edumate.boot.domain.reference.model.vo.Reference;
 
 public interface ReferenceService {
+	
+	List<Reference> selectListByCategory(Map<String, Object> paramMap);
+	
+	int getTotalCountByCategory(String category);
+	
+	int updateViewCount(int archiveNo);
 	/**
 	 * 전체 자료 개수 조회
 	 * @return 자료 총 개수

@@ -8,7 +8,29 @@
 		FROM ARCHIVE_BOARD
 		WHERE BOARD_YN = 'Y'
 	</select>
+	
+	<select id="selectListByCategory" parameterType="map" resultType="Reference">
+    SELECT *
+    FROM (
+        SELECT R.*, ROWNUM AS RN
+        FROM (
+            SELECT * 
+            FROM ARCHIVE_BOARD
+            WHERE ARCHIVE_TYPE = #{category}
+            ORDER BY ARCHIVE_NO DESC
+        ) R
+        WHERE ROWNUM &lt;= #{offset} + #{limit}
+    )
+    WHERE RN &gt; #{offset}
+	</select>
 
+	
+	<select id="getTotalCountByCategory" parameterType="string" resultType="int">
+	    SELECT COUNT(*)
+	    FROM ARCHIVE_BOARD
+	    WHERE ARCHIVE_TYPE = #{category}
+	</select>
+	
 	<!-- 자료 목록 조회 (페이징) -->
 	<select id="selectList" parameterType="map" resultType="com.edumate.boot.domain.reference.model.vo.Reference">
 		SELECT 
@@ -49,32 +71,40 @@
 		WHERE ARCHIVE_NO = #{archiveNo} AND BOARD_YN = 'Y'
 	</select>
 
+	<!-- 조회수 증가 -->
+	<update id="updateViewCount" parameterType="int">
+		UPDATE ARCHIVE_BOARD
+		SET VIEW_COUNT = VIEW_COUNT + 1
+		WHERE ARCHIVE_NO = #{archiveNo}
+	</update>
+
 	<!-- 자료 등록 -->
 	<insert id="insertReference" parameterType="com.edumate.boot.domain.reference.model.vo.Reference">
-		INSERT INTO ARCHIVE_BOARD (
-			ARCHIVE_NO,
-			MEMBER_ID,
-			ARCHIVE_TITLE,
-			ARCHIVE_CONTENT,
-			VIEW_COUNT,
-			ATTACHMENT_NAME,
-			ATTACHMENT_RENAME,
-			ATTACHMENT_PATH,
-			ARCHIVE_TYPE,
-			BOARD_YN
-		) VALUES (
-			SEQ_ARCHIVE_NO.NEXTVAL,
-			#{memberId},
-			#{archiveTitle},
-			#{archiveContent},
-			0,
-			#{attachmentName},
-			#{attachmentRename},
-			#{attachmentPath},
-			#{archiveType},
-			'Y'
-		)
-	</insert>
+    INSERT INTO ARCHIVE_BOARD (
+        ARCHIVE_NO,
+        MEMBER_ID,
+        ARCHIVE_TITLE,
+        ARCHIVE_CONTENT,
+        VIEW_COUNT,
+        ATTACHMENT_NAME,
+        ATTACHMENT_RENAME,
+        ATTACHMENT_PATH,
+        ARCHIVE_TYPE,
+        BOARD_YN
+    ) VALUES (
+        SEQ_ARCHIVE_NO.NEXTVAL,
+        #{memberId, jdbcType=VARCHAR},
+        #{archiveTitle, jdbcType=VARCHAR},
+        #{archiveContent, jdbcType=VARCHAR},
+        0,
+        #{attachmentName, jdbcType=VARCHAR},
+        #{attachmentRename, jdbcType=VARCHAR},
+        #{attachmentPath, jdbcType=VARCHAR},
+        #{archiveType, jdbcType=VARCHAR},
+        'Y'
+    )
+</insert>
+
 
 	<!-- 자료 수정 -->
 	<update id="updateReference" parameterType="com.edumate.boot.domain.reference.model.vo.Reference">
