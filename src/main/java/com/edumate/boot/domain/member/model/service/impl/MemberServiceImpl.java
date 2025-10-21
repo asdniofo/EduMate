@@ -90,13 +90,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Integer selectPrevRequestNo(int currentRequestNo) {
-		return memberMapper.selectPrevRequestNo(currentRequestNo);
+	public Integer selectPrevRequestNo(Map<String, Object> map) {
+		return memberMapper.selectPrevRequestNo(map);
 	}
 
 	@Override
-	public Integer selectNextRequestNo(int currentRequestNo) {
-		return memberMapper.selectNextRequestNo(currentRequestNo);
+	public Integer selectNextRequestNo(Map<String, Object> map) {
+		return memberMapper.selectNextRequestNo(map);
 	}
 
 }

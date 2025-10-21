@@ -64,12 +64,12 @@
                     <section class="bottom-actions">
                         <div class="left-actions">
                         	<a href="/member/request"><button class="action-button">목록</button></a>
-                        	<c:if test="${sessionScope.loginMember.memberId eq question.memberId 
+                        	<c:if test="${sessionScope.loginMember.memberId eq request.memberId 
                     			or sessionScope.loginMember.adminYN eq 'Y'}">
 	                            <a href="/member/request/modify?requestNo=${request.requestNo }"><button class="action-button">수정</button></a>
 	                            <button class="action-button" id="delete-list-btn">삭제</button>
                             </c:if>
-                            <c:if test="${sessionScope.loginMember.memberId eq question.memberId }">
+                            <c:if test="${sessionScope.loginMember.memberId eq request.memberId }">
                             	<button class="action-button" id="change-status-btn">상태변경</button>
                             </c:if>
                         </div>
@@ -102,9 +102,9 @@
 	<script>
 	const loginMemberId = "${sessionScope.loginId}"; // 이 값은 'aaaaaaa'입니다.
     
-    function deleteComment(questionCommentNo) {
+    function deleteComment(requestCommentNo) {
         // ... (deleteComment 함수 로직은 그대로 유지) ...
-        //console.log("전달된 댓글 번호:", questionCommentNo);
+        //console.log("전달된 댓글 번호:", requestCommentNo);
         
         if(confirm("정말로 삭제하시겠습니까?")){
             fetch("/question/comment/delete?questionCommentNo=" + questionCommentNo) 
@@ -123,7 +123,7 @@
     }
 
     function getCommentList() {
-        fetch("/question/comment/list?questionNo=${question.questionNo }")
+        fetch("/request/comment/list?requestNo=${request.requestNo }")
         .then(response => response.json())
         .then(cmList => {
             const cmListUl = document.querySelector("#answer-list");
@@ -198,15 +198,15 @@
 				return;
 			}
 			// 게시글 번호
-			const questionNo = ${question.questionNo };
-			const memberId = "${question.memberId }";
+			const questionNo = ${request.requestNo};
+			const memberId = "${request.memberId }";
 			const data = {
-			    "questionNo": questionNo, 
+			    "requestNo": requestNo, 
 			    "memberId": loginMemberId,
-			    "questionCommentContent": QuestionCommentContent
+			    "RequestCommentContent": RequestCommentContent
 			};
 			// 데이터 fetch API 이용하여 보내기
-			fetch("/question/comment/add", {
+			fetch("/request/comment/add", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -226,12 +226,12 @@
 			.catch(error => alert("댓글 등록 중 오류가 발생했습니다."));
 		})
 		
-	const currentQuestionNo = ${question.questionNo};
+	const currentQuestionNo = ${request.requestNo};
 
 	document.querySelector("#delete-list-btn").addEventListener("click", function() {
 	    if (confirm("정말 이 질문을 삭제하시겠습니까?")) {
 	        
-	    	fetch(`/teacher/question/delete?questionNo=${question.questionNo}`)
+	    	fetch(`/member/request/delete?requestNo=${currentRequestNo}`)
 	        
 	        // 💡 1. 응답을 텍스트로 받고 (Controller가 숫자만 반환)
 	        .then(response => response.text()) 
@@ -264,7 +264,7 @@
 	    if (confirm("질문 상태를 변경하시겠습니까?")) {
 	        
 	        // 2. fetch 요청 (경로에 '/teacher' 포함)
-	        fetch(`/teacher/question/change/status?questionNo=${question.questionNo}`)
+	        fetch(`/member/request/change/status?requestNo=${currentRequestNo}`)
 	        
 	        // 3. 서버 응답 처리
 	        .then(response => response.text()) 

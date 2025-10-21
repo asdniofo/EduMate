@@ -123,15 +123,21 @@
 	<select id="selectOneByNo" resultType="com.edumate.boot.domain.member.model.vo.Request">
 		SELECT * FROM REQUEST WHERE REQUEST_NO = #{requestNo}
 	</select>
-	<select id="selectPrevRequestNo" parameterType="_int" resultType="_int">
+	<select id="selectPrevRequestNo" resultType="_int">
 	    SELECT MAX(REQUEST_NO) 
 	    FROM REQUEST
 	    WHERE REQUEST_NO <![CDATA[<]]> #{currentRequestNo}
+	    AND REQUEST_YN = 'Y' <if test='adminYN != null and adminYN == "N"'> 
+	        AND MEMBER_ID = #{memberId, jdbcType=VARCHAR} 
+	    </if>
 	</select>
 	
-	<select id="selectNextRequestNo" parameterType="_int" resultType="_int">
+	<select id="selectNextRequestNo" resultType="_int">
 	    SELECT MIN(REQUEST_NO) 
 	    FROM REQUEST
 	    WHERE REQUEST_NO <![CDATA[>]]> #{currentRequestNo}
+	    AND REQUEST_YN = 'Y' <if test='adminYN != null and adminYN == "N"'> 
+	        AND MEMBER_ID = #{memberId, jdbcType=VARCHAR} 
+	    </if>
 	</select>
 </mapper>

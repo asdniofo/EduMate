@@ -305,18 +305,47 @@ public class MemberController {
     }
     
     @GetMapping("/request/detail")
-    public String showRequestDetailView(int requestNo, Model model) {
-    	try {
-			Request request = memberService.selectOneByNo(requestNo);
-			Integer prevRequestNo = memberService.selectPrevRequestNo(requestNo);
-		    Integer nextRequestNo = memberService.selectNextRequestNo(requestNo);
-			model.addAttribute("request", request);
-			model.addAttribute("prevRequestNo", prevRequestNo);
-		    model.addAttribute("nextRequestNo", nextRequestNo);
-			return "teacher/detail";
-		} catch (Exception e) {
-			return "common/error";
-		}
+    public String showRequestDetailView(@RequestParam("requestNo") int requestNo, 
+    		Model model, HttpSession session) {
+    	// 1. 로그인 정보 가져오기 및 체크
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/member/login";
+        }
+        
+        String loginMemberId = loginMember.getMemberId();
+        String adminYN = loginMember.getAdminYN();
+        
+        try {
+            Request request = memberService.selectOneByNo(requestNo);
+            
+            if (!"Y".equals(adminYN) && !loginMemberId.equals(request.getMemberId())) {
+                model.addAttribute("errorMsg", "해당 요청서에 접근할 권한이 없습니다.");
+                return "common/error";
+            }
+            
+            // 4. 이전/다음 요청 번호 조회를 위한 Map 준비 (사용자별 필터링을 위해)
+            Map<String, Object> naviMap = new HashMap<>();
+            naviMap.put("currentRequestNo", requestNo);
+            naviMap.put("adminYN", adminYN);
+            naviMap.put("memberId", loginMemberId); // 일반 사용자는 본인 글에서만 이전/다음이 작동하도록
+            
+            // 5. 수정된 Service 메소드 호출
+            Integer prevRequestNo = memberService.selectPrevRequestNo(naviMap);
+            Integer nextRequestNo = memberService.selectNextRequestNo(naviMap);
+            
+            // 6. Model에 담기
+            model.addAttribute("request", request);
+            model.addAttribute("prevRequestNo", prevRequestNo);
+            model.addAttribute("nextRequestNo", nextRequestNo);
+            
+            return "member/requestDetail"; 
+            
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            model.addAttribute("errorMsg", "요청 상세 정보 조회 중 오류가 발생했습니다.");
+            return "common/error";
+        }
     }
 
 }

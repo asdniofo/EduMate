@@ -39,9 +39,9 @@ public interface MemberMapper {
 
 	Request selectOneByNo(int requestNo);
 
-	Integer selectPrevRequestNo(int currentRequestNo);
-
-	Integer selectNextRequestNo(int currentRequestNo);
+	Integer selectPrevRequestNo(Map<String, Object> map);
+	
+	Integer selectNextRequestNo(Map<String, Object> map);
 
 
 
