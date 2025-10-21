@@ -41,13 +41,18 @@ public class MemberController {
             HttpSession session) {
 
         Member loginUser = memberService.login(memberId, memberPw);
-        
-        //String loginId = loginUser.getMemberId();
+        System.out.println();
 
         if (loginUser != null) {
         	session.setAttribute("loginMember", loginUser);
             session.setAttribute("loginId", loginUser.getMemberId());
-            return "redirect:/"; // 로그인 성공 → 메인 페이지로 이동
+            if (loginUser.getAdminYN().equals("Y")) {
+                return "redirect:/admin/main";
+            } else if (loginUser.getTeacherYN().equals("Y")){
+                return "redirect:/teacher/main";
+            } else {
+                return "redirect:/";
+            }
         } else {
             return "redirect:/member/login?error=1"; // 로그인 실패 시 다시 로그인 페이지
         }

@@ -32,7 +32,7 @@
                     <c:when test="${not empty sessionScope.loginId}">
                         <!-- 로그인된 상태 - 드롭다운 메뉴 -->
                         <div class="user-menu">
-                            <img src="/images/common/mypage2.png" alt="마이페이지" class="user-icon">
+                            <img src="${pageContext.request.contextPath}/resources/images/common/mypage2.png" alt="마이페이지" class="user-icon">
                             <div class="dropdown-menu">
                                 <a href="/member/mypage">마이페이지</a>
                                 <a href="/member/logout">로그아웃</a>
@@ -42,7 +42,7 @@
                     <c:otherwise>
                         <!-- 로그인되지 않은 상태 - 로그인 페이지로 이동 -->
                         <a href="/member/login">
-                            <img src="/images/common/mypage1.png" alt="로그인" class="user-icon">
+                            <img src="${pageContext.request.contextPath}/resources/images/common/mypage1.png" alt="로그인" class="user-icon">
                         </a>
                     </c:otherwise>
                 </c:choose>
