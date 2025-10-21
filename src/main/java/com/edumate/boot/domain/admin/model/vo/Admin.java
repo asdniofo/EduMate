@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 @ToString
 @NoArgsConstructor
 public class Admin {
-
 }
