@@ -1,7 +1,11 @@
 package com.edumate.boot.domain.member.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.domain.teacher.model.vo.Question;
 
 public interface MemberService {
 
@@ -17,5 +21,8 @@ public interface MemberService {
 	String findMemberId(Member member);
 	boolean checkMemberForPwReset(Member member);
 	int updateMemberPw(Member member);
+	
+	List<Question> selectRequestList(Map<String, Object> searchMap);
+	int getTotalCount(Map<String, Object> searchMap);
 
 }

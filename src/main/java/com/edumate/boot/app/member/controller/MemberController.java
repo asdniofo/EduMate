@@ -3,6 +3,7 @@ package com.edumate.boot.app.member.controller;
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.domain.teacher.model.vo.Question;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,6 +14,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -216,6 +220,57 @@ public class MemberController {
     		model.addAttribute("errorMsg", e.getMessage());
     		return "common/error";
     	}
+    }
+    
+    @GetMapping("/request")
+    public String showRequestList(
+    		@RequestParam(value = "searchKeyword", defaultValue = "") String searchKeyword
+			, @RequestParam(value = "page", defaultValue = "1") int currentPage
+			, @RequestParam(value = "filter", defaultValue = "ALL") String filter
+			, Model model, HttpSession session) {
+    	
+    	Member loginMember = (Member) session.getAttribute("loginMember");
+
+        String loginMemberId = null;
+        String adminYN = "N";
+        if (loginMember == null) {
+        	return "redirect:/member/login";
+        } else {
+            loginMemberId = loginMember.getMemberId();
+            adminYN = loginMember.getAdminYN();
+        }
+        try {
+        	int boardLimit = 5;
+			String upperKeyword = searchKeyword.toUpperCase();
+			Map<String, Object> searchMap = new HashMap<String, Object>();
+			searchMap.put("filter", filter);
+			searchMap.put("searchKeyword", upperKeyword);
+			searchMap.put("currentPage", currentPage);
+			searchMap.put("boardLimit", boardLimit);
+			searchMap.put("memberId", loginMemberId); 
+			searchMap.put("adminYN", adminYN);
+			List<Question> searchList = memberService.selectRequestList(searchMap);
+			if(searchList != null && !searchList.isEmpty()) {
+				// 페이징처리 코드 작성
+				int totalCount = memberService.getTotalCount(searchMap);
+				int maxPage = (int)Math.ceil((double)totalCount/boardLimit);
+				int naviLimit = 5;
+				int startNavi = ((currentPage-1)/naviLimit)*naviLimit+1;
+				int endNavi = (startNavi-1)+naviLimit;
+				if(endNavi > maxPage) endNavi = maxPage;
+				model.addAttribute("maxPage", maxPage);
+				model.addAttribute("startNavi", startNavi);
+				model.addAttribute("endNavi", endNavi);
+				model.addAttribute("currentPage", currentPage);
+			}
+			model.addAttribute("searchList", searchList);
+			model.addAttribute("searchKeyword", searchKeyword);
+			 model.addAttribute("filter", filter);
+        	return "member/requestList";
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
     }
 
 }

@@ -1,11 +1,14 @@
 package com.edumate.boot.domain.member.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.domain.teacher.model.vo.Question;
 
 @Mapper
 public interface MemberMapper {
@@ -25,6 +28,10 @@ public interface MemberMapper {
 	int checkMemberForPwReset(Member member);
 
 	int updateMemberPw(Member member);
+
+	List<Question> selectRequestList(Map<String, Object> searchMap, RowBounds rowBounds);
+
+	int getRequestTotalCount(Map<String, Object> searchMap);
 
 
 

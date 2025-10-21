@@ -61,4 +61,48 @@
 		)
 	</insert>
 
+	<select id="selectRequestList" resultType="Request">
+	    SELECT * FROM REQUEST 
+	    <where>
+	        AND REQUEST_YN = 'Y' 
+	        
+	        <if test="filter != null and filter != 'ALL'">
+	            AND REQUEST_STATUS = #{filter, jdbcType=VARCHAR}
+	        </if>
+	        
+	        <if test="searchKeyword != null and searchKeyword != ''">
+	            AND (
+	                REPLACE(UPPER(REQUEST_TITLE), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	                OR REPLACE(UPPER(REQUEST_CONTENT), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	            )
+	        </if>
+	        
+	        <if test='adminYN != null and adminYN == "N"'> 
+	            AND MEMBER_ID = #{memberId, jdbcType=VARCHAR} 
+	        </if>
+	    </where>
+	    ORDER BY REQUEST_NO DESC
+	</select>
+	
+	<select id="getRequestTotalCount" resultType="_int">
+	    SELECT COUNT(*) FROM REQUEST
+	    <where>
+	        <if test="filter != null and filter != 'ALL'">
+	            AND REQUEST_STATUS = #{filter, jdbcType=VARCHAR}
+	        </if>
+	        
+	        <if test="searchKeyword != null and searchKeyword != ''">
+	            AND (
+	                REPLACE(UPPER(REQUEST_TITLE), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	                OR REPLACE(UPPER(REQUEST_CONTENT), ' ', '') LIKE '%'||REPLACE(#{searchKeyword}, ' ', '')||'%'
+	            )
+	        </if>
+	        
+	        AND REQUEST_YN = 'Y'
+	        
+	        <if test='adminYN != null and adminYN == "N"'> 
+	            AND MEMBER_ID = #{memberId, jdbcType=VARCHAR} 
+	        </if>
+	    </where>
+	</select>
 </mapper>

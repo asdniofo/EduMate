@@ -2,12 +2,15 @@ package com.edumate.boot.domain.member.model.service.impl;
 
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.domain.teacher.model.vo.Question;
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.domain.member.model.mapper.MemberMapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -54,6 +57,22 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateMemberPw(Member member) {
 		return memberMapper.updateMemberPw(member);
+	}
+
+	@Override
+	public List<Question> selectRequestList(Map<String, Object> searchMap) {
+		int currentPage = (int)searchMap.get("currentPage");
+		int boardLimit = (int)searchMap.get("boardLimit");
+		int offset = (currentPage-1)*boardLimit;
+		RowBounds rowBounds = new RowBounds(offset, boardLimit);
+		List<Question> searchList = memberMapper.selectRequestList(searchMap, rowBounds);
+		return searchList;
+	}
+
+	@Override
+	public int getTotalCount(Map<String, Object> searchMap) {
+		int totalCount = memberMapper.getRequestTotalCount(searchMap);
+		return totalCount;
 	}
 
 }
