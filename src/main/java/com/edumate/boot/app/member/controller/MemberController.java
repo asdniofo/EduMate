@@ -46,10 +46,10 @@ public class MemberController {
         if (loginUser != null) {
         	session.setAttribute("loginMember", loginUser);
             session.setAttribute("loginId", loginUser.getMemberId());
+            session.setAttribute("adminYn", loginUser.getAdminYN());
+            session.setAttribute("teacherYn", loginUser.getTeacherYN());
             if (loginUser.getAdminYN().equals("Y")) {
                 return "redirect:/admin/main";
-            } else if (loginUser.getTeacherYN().equals("Y")){
-                return "redirect:/teacher/main";
             } else {
                 return "redirect:/";
             }

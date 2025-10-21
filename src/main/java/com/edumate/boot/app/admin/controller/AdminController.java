@@ -3,6 +3,7 @@ package com.edumate.boot.app.admin.controller;
 import com.edumate.boot.app.admin.dto.UserListRequest;
 import com.edumate.boot.app.admin.dto.UserStatusRequest;
 import com.edumate.boot.domain.admin.model.service.AdminService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,11 @@ public class AdminController {
     private final AdminService aService;
     
     @GetMapping("/main")
-    public String showAdmin() {
+    public String showAdmin(HttpSession session) {
+        String adminYn = (String) session.getAttribute("adminYn");
+        if (adminYn == null || !adminYn.equals("Y")) {
+            return "redirect:/";
+        }
     	return "admin/admin_main";
     }
     
@@ -26,7 +31,11 @@ public class AdminController {
     public String showUser(@RequestParam(value = "page", defaultValue = "1") int currentPage
             ,@RequestParam(value = "sort", defaultValue = "name") String sortType
             ,@RequestParam(value = "search", defaultValue = "") String searchKeyword
-            ,Model model) {
+            ,HttpSession session, Model model) {
+        String adminYn = (String) session.getAttribute("adminYn");
+        if (adminYn == null || !adminYn.equals("Y")) {
+            return "redirect:/";
+        }
         try {
             UserStatusRequest uStatus = aService.getUserStatus();
             int userCountPerPage = 10;
@@ -62,7 +71,11 @@ public class AdminController {
     }
     
     @GetMapping("/setting")
-    public String showSetting() {
+    public String showSetting(HttpSession session) {
+        String adminYn = (String) session.getAttribute("adminYn");
+        if (adminYn == null || !adminYn.equals("Y")) {
+            return "redirect:/";
+        }
     	return "admin/basicSetting";
     }
 }
