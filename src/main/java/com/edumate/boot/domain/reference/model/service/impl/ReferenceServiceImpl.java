@@ -14,6 +14,22 @@ public class ReferenceServiceImpl implements ReferenceService {
 	private final ReferenceMapper referenceMapper;
 	
 	@Override
+	public List<Reference> selectListByCategory(Map<String, Object> paramMap) {
+	    return referenceMapper.selectListByCategory(paramMap);
+	}
+
+	@Override
+	public int getTotalCountByCategory(String category) {
+	    return referenceMapper.getTotalCountByCategory(category);
+	}
+	
+	
+	@Override
+    public int updateViewCount(int archiveNo) {
+        return referenceMapper.updateViewCount(archiveNo);
+    }
+	
+	@Override
 	public int getTotalCount() {
 		return referenceMapper.getTotalCount();
 	}

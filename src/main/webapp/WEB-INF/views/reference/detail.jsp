@@ -58,8 +58,11 @@ ${reference.archiveContent}
 <!-- Action Buttons -->
 <div class="action-buttons">
 <a href="/reference/list" class="btn btn-secondary">목록</a>
+<!-- 수정/삭제 버튼: 작성자 본인 또는 관리자만 표시 -->
+<c:if test="${canModify}">
 <a href="/reference/modify?archiveNo=${reference.archiveNo}" class="btn btn-primary">수정</a>
 <a href="/reference/delete?archiveNo=${reference.archiveNo}" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+</c:if>
 </div>
 </div>
 </c:otherwise>

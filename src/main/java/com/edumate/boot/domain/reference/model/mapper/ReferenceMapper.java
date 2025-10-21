@@ -9,7 +9,9 @@ import com.edumate.boot.domain.reference.model.vo.Reference;
 
 @Mapper
 public interface ReferenceMapper {
-
+	
+	int updateViewCount(int archiveNo);
+	
 	/**
 	 * 전체 자료 개수 조회
 	 */
@@ -49,6 +51,10 @@ public interface ReferenceMapper {
 	 * 검색 결과 전체 개수 조회
 	 */
 	int getTotalCountBySearch(Map<String, Object> searchMap);
+
+	List<Reference> selectListByCategory(Map<String, Object> paramMap);
+
+	int getTotalCountByCategory(String category);
 	
 	
 }
