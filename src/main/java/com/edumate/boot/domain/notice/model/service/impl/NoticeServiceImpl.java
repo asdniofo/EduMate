@@ -66,4 +66,27 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeMapper.selectNextNotice(currentNoticeId);
 	}
 
+	@Override
+	public int updateNotice(Notice notice) {
+		int result = noticeMapper.updateNotice(notice);
+		return result;
+	}
+
+	@Override
+	public int deleteNotice(int noticeId) {
+		int result = noticeMapper.deleteNotice(noticeId);
+		return result;
+	}
+
+	@Override
+	public void increaseViewCount(int noticeId) {
+        noticeMapper.increaseViewCount(noticeId);
+	}
+
+	@Override
+	public int insertNotice(Notice notice) {
+		int result = noticeMapper.insertNotice(notice);
+		return result;
+	}
+
 }

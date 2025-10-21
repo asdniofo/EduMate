@@ -26,4 +26,28 @@
 		<select id="selectNextNotice" resultType="_int">
 		SELECT MIN(NOTICE_ID) FROM NOTICE_BOARD WHERE NOTICE_ID <![CDATA[>]]> #{currentNoticeNo}
 	</select>
+	<update id="updateNotice">
+		UPDATE NOTICE_BOARD SET 
+		NOTICE_TITLE=#{noticeTitle}
+		, NOTICE_CONTENT=#{noticeContent}
+		WHERE NOTICE_ID=#{noticeId}
+	</update>
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE_BOARD WHERE NOTICE_ID=#{noticeId}
+	</delete>
+	<update id="increaseViewCount">
+	    UPDATE NOTICE_BOARD
+	    SET VIEW_COUNT = VIEW_COUNT + 1
+	    WHERE NOTICE_ID = #{noticeId}
+	</update>
+	<insert id="insertNotice">
+		INSERT INTO NOTICE_BOARD VALUES(
+			SEQ_NOTICE_ID.NEXTVAL
+			, #{memberId}
+			, #{noticeTitle}
+			, #{noticeContent}
+			, DEFAULT
+			, DEFAULT
+			, DEFAULT)
+	</insert>
 </mapper>
