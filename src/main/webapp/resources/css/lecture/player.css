@@ -377,7 +377,7 @@ body {
 
 .ai-model-option.selected {
     background: #e3f2fd;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .chat-messages {
@@ -504,4 +504,149 @@ body {
     font-family: "Segoe UI", sans-serif;
     font-weight: 400;
     line-height: 1.4;
+}
+
+/* 강사님 질문 폼 전용 스타일 */
+.instructor-question-container {
+    width: 100%;
+    height: 570px;
+    display: flex;
+    flex-direction: column;
+}
+
+.instructor-form-wrapper {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border: 1px black solid;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.instructor-header {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.instructor-title {
+    color: black;
+    font-size: 24px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.instructor-subtitle {
+    color: #666;
+    font-size: 16px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 400;
+    margin: 0;
+}
+
+.instructor-question-form {
+    width: 100%;
+}
+
+.instructor-field-group {
+    margin-bottom: 20px;
+}
+
+.instructor-label {
+    display: block;
+    color: black;
+    font-size: 16px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.instructor-input {
+    width: 100%;
+    height: 45px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 12px;
+    color: black;
+    font-size: 16px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 400;
+    outline: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.instructor-input:focus {
+    border-color: #007bff;
+    background: white;
+}
+
+.instructor-textarea {
+    width: 100%;
+    height: 220px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+    color: black;
+    font-size: 16px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 400;
+    outline: none;
+    resize: none;
+    line-height: 1.4;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.instructor-textarea:focus {
+    border-color: #007bff;
+    background: white;
+}
+
+.instructor-button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.instructor-submit-button {
+    padding: 12px 24px;
+    background: var(--background-positive-default);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.instructor-submit-button:hover {
+    background: #0f8a47;
+    transform: translateY(-1px);
+}
+
+.instructor-cancel-button {
+    padding: 12px 24px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #666;
+    font-size: 16px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.instructor-cancel-button:hover {
+    background: #e0e0e0;
+    color: #333;
 }
