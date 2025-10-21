@@ -34,11 +34,6 @@ body {
 }
 
 .sidebar-menu li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 25px;
-    cursor: pointer;
     border-bottom: 1px solid #40424f;
 }
 
@@ -47,8 +42,13 @@ body {
 }
 
 .sidebar-menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 /* --- 메인 --- */

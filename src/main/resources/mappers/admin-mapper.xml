@@ -2,28 +2,73 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.edumate.boot.domain.admin.model.mapper.AdminMapper">
-
-    <!-- 회원 전체 조회 -->
-    <select id="selectAllUser" resultType="com.edumate.boot.app.admin.dto.UserListRequest">
+    
+    <select id="getUserStatus" resultType="UserStatusRequest">
         SELECT 
-            MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_NAME, MEMBER_BIRTH,
-            MEMBER_MONEY, TEACHER_YN, ADMIN_YN
+            SUM(CASE WHEN ADMIN_YN = 'Y' THEN 1 ELSE 0 END) AS adminCount,
+            SUM(CASE WHEN TEACHER_YN = 'Y' THEN 1 ELSE 0 END) AS teacherCount,
+            SUM(CASE WHEN ADMIN_YN = 'N' AND TEACHER_YN = 'N' THEN 1 ELSE 0 END) AS studentCount,
+            COUNT(*) AS totalCount
         FROM MEMBER
-        ORDER BY MEMBER_NAME ASC
+    </select>
+    
+    <select id="getUserListPaging" resultType="UserListRequest">
+        SELECT * FROM (
+            SELECT ROWNUM AS rnum, sub.* FROM (
+                SELECT 
+                    MEMBER_ID as memberId,
+                    MEMBER_PW as memberPw,
+                    MEMBER_NAME as memberName,
+                    TO_CHAR(MEMBER_BIRTH, 'YYYY-MM-DD') as memberBirth,
+                    TEACHER_YN as teacherYn,
+                    ADMIN_YN as adminYn,
+                    CASE 
+                        WHEN ADMIN_YN = 'Y' THEN '관리자'
+                        WHEN TEACHER_YN = 'Y' THEN '선생님'
+                        ELSE '일반회원'
+                    END as memberType
+                FROM MEMBER
+                <where>
+                    <if test="searchKeyword != null and searchKeyword != ''">
+                        MEMBER_NAME LIKE '%' || #{searchKeyword} || '%'
+                    </if>
+                </where>
+                <if test="sortType == 'type'">
+                    ORDER BY 
+                        CASE 
+                            WHEN ADMIN_YN = 'N' AND TEACHER_YN = 'N' THEN 1
+                            WHEN TEACHER_YN = 'Y' THEN 2
+                            WHEN ADMIN_YN = 'Y' THEN 3
+                        END, MEMBER_NAME
+                </if>
+                <if test="sortType != 'type'">
+                    ORDER BY MEMBER_NAME
+                </if>
+            ) sub
+        ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    </select>
+    
+    <select id="getUserSearchCount" resultType="int">
+        SELECT COUNT(*)
+        FROM MEMBER
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+                MEMBER_NAME LIKE '%' || #{searchKeyword} || '%'
+            </if>
+        </where>
     </select>
 
     <!-- 회원 수정 -->
     <update id="updateUser">
         UPDATE MEMBER
-        SET 
-            MEMBER_PW = #{memberPw},
-            MEMBER_NAME = #{memberName},
-            MEMBER_BIRTH = #{memberBirth},
-            MEMBER_MONEY = #{memberMoney},
-            TEACHER_YN = #{teacherYN},
-            ADMIN_YN = #{adminYN}
+        SET
+        MEMBER_PW = #{memberPw},
+        MEMBER_NAME = #{memberName},
+        MEMBER_BIRTH = #{memberBirth},
+        MEMBER_MONEY = #{memberMoney},
+        TEACHER_YN = #{teacherYN},
+        ADMIN_YN = #{adminYN}
         WHERE MEMBER_ID = #{memberId}
     </update>
 
@@ -31,5 +76,5 @@
     <delete id="deleteUser">
         DELETE FROM MEMBER WHERE MEMBER_ID = #{memberId}
     </delete>
-
+    
 </mapper>

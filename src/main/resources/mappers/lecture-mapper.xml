@@ -188,5 +188,9 @@
     <select id="checkLogin" resultType="int">
         SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{memberId}
     </select>
+    <insert id="insertQuestion">
+        INSERT INTO QUESTION VALUES(SEQ_QUESTION_NO.NEXTVAL, #{memberId}
+        ,#{questionTitle}, #{questionContent}, SYSTIMESTAMP, DEFAULT, DEFAULT)
+    </insert>
 </mapper>
 

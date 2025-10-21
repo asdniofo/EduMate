@@ -68,10 +68,10 @@
                         <div class="ai-model-text">AI에게 질문하기</div>
                         <div class="ai-dropdown-arrow"></div>
                         <div class="ai-model-options">
-                            <div class="ai-model-option selected" onclick="selectAiOption(this, 'AI에게 질문하기')">
+                            <div class="ai-model-option selected" onclick="selectAiOption(this, 'AI에게 질문하기', event)">
                                 AI에게 질문하기
                             </div>
-                            <div class="ai-model-option" onclick="selectAiOption(this, '강사님에게 질문하기')">
+                            <div class="ai-model-option" onclick="selectAiOption(this, '강사님에게 질문하기', event)">
                                 강사님에게 질문하기
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="chat-input-section">
+                    <div class="chat-input-section" id="ai-chat-input">
                         <textarea
                                 class="chat-input"
                                 placeholder="질문을 입력하세요..."
@@ -92,6 +92,32 @@
                                 rows="3"
                                 onkeypress="handleKeyPress(event)"></textarea>
                         <button class="send-button" onclick="sendMessage()">전송</button>
+                    </div>
+
+                    <!-- 강사님 질문 폼 영역 (숨김 상태) -->
+                    <div class="instructor-question-container" id="instructor-question-container" style="display: none;">
+                        <div class="instructor-form-wrapper">
+                            <div class="instructor-header">
+                                <h3 class="instructor-title">강사님에게 질문하기</h3>
+                                <p class="instructor-subtitle">질문 제목과 내용을 입력해주세요.</p>
+                            </div>
+                            <form class="instructor-question-form" id="instructor-question-form" onsubmit="submitInstructorQuestion(event)">
+                                <div class="instructor-field-group">
+                                    <label class="instructor-label" for="instructor-question-title">질문 제목</label>
+                                    <input class="instructor-input" type="text" id="instructor-question-title" name="title" placeholder="질문 제목을 입력하세요" required>
+                                </div>
+                                <div class="instructor-field-group">
+                                    <label class="instructor-label" for="instructor-question-content">질문 내용</label>
+                                    <textarea class="instructor-textarea" id="instructor-question-content" name="content" rows="6" placeholder="질문 내용을 자세히 입력하세요" required></textarea>
+                                </div>
+                                <input type="hidden" name="videoNo" value="${currentVideo[0].videoNo}">
+                                <input type="hidden" name="lectureNo" value="${currentVideo[0].lectureNo}">
+                                <div class="instructor-button-group">
+                                    <button type="submit" class="instructor-submit-button">질문 등록</button>
+                                    <button type="button" class="instructor-cancel-button" onclick="resetInstructorForm()">취소</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -420,7 +446,12 @@
                 dropdown.classList.toggle("open");
             }
 
-            function selectAiOption(element, value) {
+            function selectAiOption(element, value, event) {
+                // 이벤트 전파 방지
+                if (event) {
+                    event.stopPropagation();
+                }
+                
                 console.log("selectAiOption 호출됨:", value);
                 
                 // 이전 선택 제거
@@ -434,23 +465,82 @@
                 // 선택된 값 업데이트
                 document.querySelector(".ai-model-text").textContent = value;
 
-                // 드롭다운 닫기
+                // 드롭다운 닫기 (강제로 open 클래스 제거)
                 const dropdown = document.querySelector(".ai-model-selector");
-                console.log("드롭다운 요소:", dropdown);
-                console.log("드롭다운 닫기 전 클래스:", dropdown.className);
                 if (dropdown) {
                     dropdown.classList.remove("open");
-                    console.log("드롭다운 닫기 후 클래스:", dropdown.className);
+                    // 추가적으로 강제 닫기
+                    setTimeout(() => {
+                        dropdown.classList.remove("open");
+                    }, 10);
                 }
 
-                // 채팅 메시지 초기화
+                // 영역 전환
                 const chatMessages = document.getElementById("chat-messages");
+                const aiChatInput = document.getElementById("ai-chat-input");
+                const instructorContainer = document.getElementById("instructor-question-container");
+
                 if (value === "AI에게 질문하기") {
+                    // AI 채팅 영역 표시
+                    chatMessages.style.display = "block";
+                    aiChatInput.style.display = "flex";
+                    instructorContainer.style.display = "none";
+                    
+                    // AI 채팅 메시지 초기화
                     chatMessages.innerHTML = '<div class="message ai"><div class="message-text">안녕하세요! ${lectureName} 강의에 대해 궁금한 점이 있으시면 언제든 물어보세요</div></div>';
-                } else {
-                    chatMessages.innerHTML = '<div class="message ai"><div class="message-text">강사님에게 질문해보세요.</div></div>';
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                } else if (value === "강사님에게 질문하기") {
+                    // 강사님 질문 폼 표시
+                    chatMessages.style.display = "none";
+                    aiChatInput.style.display = "none";
+                    instructorContainer.style.display = "block";
+                    
+                    // 강사님 질문 폼 초기화
+                    resetInstructorForm();
                 }
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function submitInstructorQuestion(event) {
+                event.preventDefault();
+                
+                const form = event.target;
+                const formData = new FormData(form);
+                
+                const questionData = {
+                    title: formData.get('title'),
+                    content: formData.get('content'),
+                    videoNo: formData.get('videoNo'),
+                    lectureNo: formData.get('lectureNo')
+                };
+
+                // 질문 등록 API 호출
+                fetch('/api/chat/teacher', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(questionData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('질문이 성공적으로 등록되었습니다. 강사님이 답변해드릴 예정입니다.');
+                        resetInstructorForm();
+                    } else {
+                        alert('질문 등록에 실패했습니다. 다시 시도해주세요.');
+                    }
+                })
+                .catch(error => {
+                    console.error('질문 등록 오류:', error);
+                    alert('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                });
+            }
+
+            function resetInstructorForm() {
+                const form = document.getElementById('instructor-question-form');
+                if (form) {
+                    form.reset();
+                }
             }
 
             // 외부 클릭 시 드롭다운 닫기

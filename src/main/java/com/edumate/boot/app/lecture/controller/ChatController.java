@@ -1,5 +1,9 @@
 package com.edumate.boot.app.lecture.controller;
 
+import com.edumate.boot.app.lecture.dto.LectureQuestionRequest;
+import com.edumate.boot.domain.lecture.model.service.LectureService;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -14,11 +18,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/chat")
+@RequiredArgsConstructor
 public class ChatController {
-    
+
+    private final LectureService lService;
+
     @Value("${gemini.api.key}")
     private String geminiApiKey;
-    
+
     @Value("${gemini.api.url}")
     private String geminiApiUrl;
 
@@ -26,14 +33,14 @@ public class ChatController {
     public String ai(Model model) {
         return "chat";
     }
-    
+
     @PostMapping("/send")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> sendMessage(@RequestBody Map<String, String> request) {
         try {
             String userMessage = request.get("message");
             String isDetailed = request.get("detailed"); // "true"면 자세한 답변
-            
+
             String promptMessage;
             if ("true".equals(isDetailed)) {
                 // 자세한 답변 - 교육적 프롬프트 추가
@@ -82,4 +89,39 @@ public class ChatController {
             return ResponseEntity.ok(Map.of("success", false, "error", "오류: " + e.getMessage()));
         }
     }
+
+    @PostMapping("/teacher")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> submitTeacherQuestion(
+            @RequestBody Map<String, String> request
+            , HttpSession session) {
+        try {
+            LectureQuestionRequest qList = new LectureQuestionRequest();
+            String id = session.getAttribute("loginId").toString();
+            String title = request.get("title");
+            String content = request.get("content");
+
+            qList.setMemberId(id);
+            qList.setQuestionTitle(title);
+            qList.setQuestionContent(content);
+            int result = lService.insertQuestion(qList);
+            if (result > 0) {
+                return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "message", "질문이 성공적으로 등록되었습니다."
+                ));
+            } else {
+                return ResponseEntity.ok(Map.of(
+                    "success", false,
+                    "error", "질문 등록에 실패했습니다."
+                ));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.ok(Map.of(
+                "success", false,
+                "error", "질문 등록 중 오류가 발생했습니다: " + e.getMessage()
+            ));
+        }
+    }
+
 }

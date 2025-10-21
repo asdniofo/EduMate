@@ -110,7 +110,11 @@ public class LectureController {
     }
 
     @GetMapping("/list")
-    public String showLectureList(@ModelAttribute LectureListRequest Lecture, @RequestParam(value = "page", defaultValue = "1") int currentPage, @RequestParam(value = "category", defaultValue = "전체") String category, @RequestParam(value = "sort", defaultValue = "인기순") String sort, @RequestParam(value = "search", defaultValue = "") String search, Model model) {
+    public String showLectureList(@ModelAttribute LectureListRequest Lecture
+            , @RequestParam(value = "page", defaultValue = "1") int currentPage
+            , @RequestParam(value = "category", defaultValue = "전체") String category
+            , @RequestParam(value = "sort", defaultValue = "인기순") String sort
+            , @RequestParam(value = "search", defaultValue = "") String search, Model model) {
         try {
             List<LectureListRequest> lList = null;
             int totalCount = 0;

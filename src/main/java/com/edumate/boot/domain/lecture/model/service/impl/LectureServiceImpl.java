@@ -1,9 +1,6 @@
 package com.edumate.boot.domain.lecture.model.service.impl;
 
-import com.edumate.boot.app.lecture.dto.LectureListRequest;
-import com.edumate.boot.app.lecture.dto.ReviewListRequest;
-import com.edumate.boot.app.lecture.dto.VideoDetailRequest;
-import com.edumate.boot.app.lecture.dto.VideoListRequest;
+import com.edumate.boot.app.lecture.dto.*;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.lecture.model.mapper.LectureMapper;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
@@ -192,6 +189,12 @@ public class LectureServiceImpl implements LectureService {
     @Override
     public int checkLogin(String memberId) {
         int result = lMapper.checkLogin(memberId);
+        return result;
+    }
+
+    @Override
+    public int insertQuestion(LectureQuestionRequest qList) {
+        int result = lMapper.insertQuestion(qList);
         return result;
     }
 

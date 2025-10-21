@@ -1,11 +1,18 @@
 package com.edumate.boot.domain.admin.model.service;
 
+import com.edumate.boot.app.admin.dto.UserListRequest;
+import com.edumate.boot.app.admin.dto.UserStatusRequest;
+
 import java.util.List;
 
-import com.edumate.boot.app.admin.dto.UserListRequest;
-
 public interface AdminService {
-    List<UserListRequest> getUserList();
+
+    UserStatusRequest getUserStatus();
+    
+    List<UserListRequest> getUserListPaging(int currentPage, int userCountPerPage, String sortType, String searchKeyword);
+    
+    int getUserSearchCount(String searchKeyword);
     void updateUser(UserListRequest user);
+    
     void deleteUser(String memberId);
 }

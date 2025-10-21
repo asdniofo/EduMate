@@ -1,22 +1,18 @@
 package com.edumate.boot.app.admin.dto;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
 public class UserListRequest {
-    private String 	memberId;
-    private String 	memberPw;
-    private String 	memberEmail;
-    private String 	memberName;
-    private String 	memberBirth;
-    private int 	memberMoney;
-    private String 	teacherYN;
-    private String 	adminYN;
-    private String	type;
+    private String memberId;
+    private String memberPw;
+    private String memberName;
+    private String memberBirth;
+    private String memberType;
+    private String teacherYn;
+    private String adminYn;
 }
