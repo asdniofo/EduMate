@@ -30,7 +30,17 @@
                     <c:when test="${not empty sessionScope.loginId}">
                         <!-- 로그인된 상태 - 드롭다운 메뉴 -->
                         <div class="user-menu">
-                            <img src="${pageContext.request.contextPath}/resources/images/common/mypage2.png" alt="마이페이지" class="user-icon">
+                            <c:choose>
+                                <c:when test="${sessionScope.adminYn eq 'Y'}">
+                                    <img src="${pageContext.request.contextPath}/resources/images/common/mypage3.png" alt="관리자" class="user-icon">
+                                </c:when>
+                                <c:when test="${sessionScope.teacherYn eq 'Y'}">
+                                    <img src="${pageContext.request.contextPath}/resources/images/common/mypage2.png" alt="선생님" class="user-icon">
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${pageContext.request.contextPath}/resources/images/common/mypage4.png" alt="마이페이지" class="user-icon">
+                                </c:otherwise>
+                            </c:choose>
                             <div class="dropdown-menu">
                                 <c:choose>
                                     <c:when test="${sessionScope.adminYn eq 'Y'}">
