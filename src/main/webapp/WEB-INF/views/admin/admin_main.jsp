@@ -11,29 +11,29 @@
 </head>
     <script src="/resources/js/admin/admin.js"></script>
 <body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="../common/header.jsp" />
 
     <div class="admin-wrapper">
         <!-- 사이드바 -->
         <aside class="sidebar">
             <div class="logo">Edumate</div>
             <ul class="sidebar-menu">
-                <li class="active"><a href="/admin/setting">기본 환경설정</a><span>&gt;</span></li>
-                <li><a href="/admin/user">회원 관리</a><span>&gt;</span></li>
-                <li><a href="#">강의 관리</a><span>&gt;</span></li>
-                <li><a href="#">질문 관리</a><span>&gt;</span></li>
-                <li><a href="#">공지사항 관리</a><span>&gt;</span></li>
-                <li><a href="#">요청사항 관리</a><span>&gt;</span></li>
+                <li class="active"><a href="/admin/setting">기본 환경설정<span>&gt;</span></a></li>
+                <li><a href="/admin/user">회원 관리<span>&gt;</span></a></li>
+                <li><a href="#">강의 관리<span>&gt;</span></a></li>
+                <li><a href="#">질문 관리<span>&gt;</span></a></li>
+                <li><a href="#">공지사항 관리<span>&gt;</span></a></li>
+                <li><a href="#">요청사항 관리<span>&gt;</span></a></li>
             </ul>
         </aside>
 
         <!-- 메인 컨텐츠 -->
     <section class="main-content" id="mainContent">
         <%-- 기본 화면 (기본 설정) --%>
-        <jsp:include page="/WEB-INF/views/admin/basicSetting.jsp" />
+        <jsp:include page="../admin/basicSetting.jsp" />
     </section>
     </div>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <jsp:include page="../common/footer.jsp" />
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -49,7 +49,15 @@ $(function() {
         $(this).parent().addClass("active");
 
         // Ajax로 JSP 내용만 교체
-        $("#mainContent").load(url);
+        console.log("Loading URL:", url);
+        $("#mainContent").load(url, function(response, status, xhr) {
+            if (status == "error") {
+                console.log("Error loading page:", xhr.status, xhr.statusText);
+                $("#mainContent").html("<h2>페이지를 불러올 수 없습니다.</h2>");
+            } else {
+                console.log("Page loaded successfully");
+            }
+        });
     });
 });
 </script>

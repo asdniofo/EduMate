@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edumate.boot.domain.admin.model.mapper.AdminMapper">
+    
+    <select id="getUserStatus" resultType="UserStatusRequest">
+        SELECT 
+            SUM(CASE WHEN ADMIN_YN = 'Y' THEN 1 ELSE 0 END) AS adminCount,
+            SUM(CASE WHEN TEACHER_YN = 'Y' THEN 1 ELSE 0 END) AS teacherCount,
+            SUM(CASE WHEN ADMIN_YN = 'N' AND TEACHER_YN = 'N' THEN 1 ELSE 0 END) AS studentCount,
+            COUNT(*) AS totalCount
+        FROM MEMBER
+    </select>
+    
+    <select id="getUserListPaging" resultType="UserListRequest">
+        SELECT * FROM (
+            SELECT ROWNUM AS rnum, sub.* FROM (
+                SELECT 
+                    MEMBER_ID as memberId,
+                    MEMBER_PW as memberPw,
+                    MEMBER_NAME as memberName,
+                    TO_CHAR(MEMBER_BIRTH, 'YYYY-MM-DD') as memberBirth,
+                    TEACHER_YN as teacherYn,
+                    ADMIN_YN as adminYn,
+                    CASE 
+                        WHEN ADMIN_YN = 'Y' THEN '관리자'
+                        WHEN TEACHER_YN = 'Y' THEN '선생님'
+                        ELSE '일반회원'
+                    END as memberType
+                FROM MEMBER
+                <where>
+                    <if test="searchKeyword != null and searchKeyword != ''">
+                        MEMBER_NAME LIKE '%' || #{searchKeyword} || '%'
+                    </if>
+                </where>
+                <if test="sortType == 'type'">
+                    ORDER BY 
+                        CASE 
+                            WHEN ADMIN_YN = 'N' AND TEACHER_YN = 'N' THEN 1
+                            WHEN TEACHER_YN = 'Y' THEN 2
+                            WHEN ADMIN_YN = 'Y' THEN 3
+                        END, MEMBER_NAME
+                </if>
+                <if test="sortType != 'type'">
+                    ORDER BY MEMBER_NAME
+                </if>
+            ) sub
+        ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    </select>
+    
+    <select id="getUserSearchCount" resultType="int">
+        SELECT COUNT(*)
+        FROM MEMBER
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+                MEMBER_NAME LIKE '%' || #{searchKeyword} || '%'
+            </if>
+        </where>
+    </select>
+    
+</mapper>

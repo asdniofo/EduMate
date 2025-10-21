@@ -3,16 +3,16 @@
 
 <div class="member-manage">
     <h2>회원 관리</h2>
-    <p class="summary">총 0명의 회원이 있습니다. [ 회원 : 00명 | 선생님 : 00명 | 관리자 : 00명 ]</p>
+    <p class="summary">총 ${uStatus.totalCount}명의 회원이 있습니다. [ 학생 : ${uStatus.studentCount}명 | 선생님 : ${uStatus.teacherCount}명 | 관리자 : ${uStatus.adminCount}명 ]</p>
 
     <div class="search-box">
-        <input type="text" placeholder="이름을 입력하세요">
-        <button>검색</button>
+        <input type="text" id="searchInput" placeholder="이름을 입력하세요" value="${searchKeyword}" onkeypress="handleEnterKey(event)">
+        <button onclick="searchUsers()">검색</button>
     </div>
 
     <div class="sort-section">
-        <label><input type="radio" name="sort" checked> 이름순</label>
-        <label><input type="radio" name="sort"> 최신순</label>
+        <label><input type="radio" name="sort" value="name" onchange="sortUsers(this.value)" ${currentSort eq 'name' or empty currentSort ? 'checked' : ''}> 이름순</label>
+        <label><input type="radio" name="sort" value="type" onchange="sortUsers(this.value)" ${currentSort eq 'type' ? 'checked' : ''}> 권한별</label>
     </div>
 
     <table class="member-table" id="memberTable">
@@ -27,54 +27,83 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>일반회원</td>
-                <td>iwannagotohomerightnow</td>
-                <td>
-                    <span class="pw-mask">***************</span>
-                    <button class="btn show" onclick="togglePw(this, 'pw1')">보기</button>
-                    <span id="pw1" class="pw-real" style="display:none;">qwer1234!</span>
-                </td>
-                <td>남궁뚝딱</td>
-                <td>1999.09.06</td>
-                <td>
-                    <button class="btn delete">삭제</button>
-                    <button class="btn block">차단</button>
-                    <button class="btn edit" onclick="openEditRow(this)">수정</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>선생님</td>
-                <td>teach1234</td>
-                <td>
-                    <span class="pw-mask">***************</span>
-                    <button class="btn show" onclick="togglePw(this, 'pw2')">보기</button>
-                    <span id="pw2" class="pw-real" style="display:none;">teach4321!</span>
-                </td>
-                <td>홍길동</td>
-                <td>1988.05.21</td>
-                <td>
-                    <button class="btn delete">삭제</button>
-                    <button class="btn block">차단</button>
-                    <button class="btn edit" onclick="openEditRow(this)">수정</button>
-                </td>
-            </tr>
+            <c:forEach var="user" items="${uList}" varStatus="status">
+                <tr>
+                    <td>${user.memberType}</td>
+                    <td>${user.memberId}</td>
+                    <td>
+                        <span class="pw-mask">***************</span>
+                        <button class="btn show" onclick="togglePw(this, 'pw${status.index}')">보기</button>
+                        <span id="pw${status.index}" class="pw-real" style="display:none;">${user.memberPw}</span>
+                    </td>
+                    <td>${user.memberName}</td>
+                    <td>${user.memberBirth}</td>
+                    <td>
+                        <button class="btn delete">삭제</button>
+                        <button class="btn block">차단</button>
+                        <button class="btn edit" onclick="openEditRow(this)">수정</button>
+                    </td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
 
     <div class="pagination">
-        <button>이전</button>
-        <button class="active">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button>다음</button>
+        <c:if test="${startNavi ne 1}">
+            <button onclick="loadUserPage(${startNavi - 1}, '${currentSort}', '${searchKeyword}')">이전</button>
+        </c:if>
+        
+        <c:forEach begin="${startNavi}" end="${endNavi}" var="n">
+            <c:choose>
+                <c:when test="${currentPage eq n}">
+                    <button class="active">${n}</button>
+                </c:when>
+                <c:otherwise>
+                    <button onclick="loadUserPage(${n}, '${currentSort}', '${searchKeyword}')">${n}</button>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        
+        <c:if test="${endNavi ne maxPage}">
+            <button onclick="loadUserPage(${endNavi + 1}, '${currentSort}', '${searchKeyword}')">다음</button>다음</button>
+        </c:if>
     </div>
 </div>
 
 <script>
+function loadUserPage(pageNum, sortType, searchKeyword) {
+    var url = "/admin/user?page=" + pageNum;
+    if (sortType) {
+        url += "&sort=" + sortType;
+    }
+    if (searchKeyword) {
+        url += "&search=" + encodeURIComponent(searchKeyword);
+    }
+    $("#mainContent").load(url, function(response, status, xhr) {
+        if (status == "error") {
+            console.log("Error loading page:", xhr.status, xhr.statusText);
+            $("#mainContent").html("<h2>페이지를 불러올 수 없습니다.</h2>");
+        }
+    });
+}
+
+function sortUsers(sortType) {
+    var searchKeyword = document.getElementById('searchInput').value;
+    loadUserPage(1, sortType, searchKeyword);
+}
+
+function searchUsers() {
+    var searchKeyword = document.getElementById('searchInput').value;
+    var sortType = document.querySelector('input[name="sort"]:checked').value;
+    loadUserPage(1, sortType, searchKeyword);
+}
+
+function handleEnterKey(event) {
+    if (event.key === 'Enter') {
+        searchUsers();
+    }
+}
+
 function togglePw(btn, pwId) {
     const pwReal = document.getElementById(pwId);
     const pwMask = btn.previousElementSibling;
