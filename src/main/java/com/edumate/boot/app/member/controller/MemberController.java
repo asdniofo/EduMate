@@ -4,6 +4,7 @@ import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.app.member.dto.InsertRequestRequest;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.domain.member.model.vo.Request;
 import com.edumate.boot.domain.teacher.model.vo.Question;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -296,6 +297,21 @@ public class MemberController {
     		model.addAttribute("errorMsg", e.getMessage());
     		return "common/error";
     	}
+    }
+    
+    @GetMapping("/request/detail")
+    public String showRequestDetailView(int requestNo, Model model) {
+    	try {
+			Request request = memberService.selectOneByNo(requestNo);
+			Integer prevRequestNo = memberService.selectPrevRequestNo(requestNo);
+		    Integer nextRequestNo = memberService.selectNextRequestNo(requestNo);
+			model.addAttribute("request", request);
+			model.addAttribute("prevRequestNo", prevRequestNo);
+		    model.addAttribute("nextRequestNo", nextRequestNo);
+			return "teacher/detail";
+		} catch (Exception e) {
+			return "common/error";
+		}
     }
 
 }

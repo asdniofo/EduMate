@@ -2,6 +2,7 @@ package com.edumate.boot.domain.member.model.service.impl;
 
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.domain.member.model.vo.Request;
 import com.edumate.boot.domain.teacher.model.vo.Question;
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.app.member.dto.InsertRequestRequest;
@@ -80,6 +81,22 @@ public class MemberServiceImpl implements MemberService {
 	public int insertRequest(InsertRequestRequest request) {
 		int result = memberMapper.insertRequest(request); 
 		return result;
+	}
+
+	@Override
+	public Request selectOneByNo(int requestNo) {
+		Request request = memberMapper.selectOneByNo(requestNo);
+		return request;
+	}
+
+	@Override
+	public Integer selectPrevRequestNo(int currentRequestNo) {
+		return memberMapper.selectPrevRequestNo(currentRequestNo);
+	}
+
+	@Override
+	public Integer selectNextRequestNo(int currentRequestNo) {
+		return memberMapper.selectNextRequestNo(currentRequestNo);
 	}
 
 }

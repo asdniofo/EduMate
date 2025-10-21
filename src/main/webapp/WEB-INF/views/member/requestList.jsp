@@ -44,7 +44,7 @@
             </div>
         <section class="question-list">
             <c:forEach items="${searchList }" var="request" varStatus="i">
-	            <a href="/member/request?requestNo=${request.requestNo }" class = "atag">
+	            <a href="/member/request/detail?requestNo=${request.requestNo }" class = "atag">
 		            <article class="question-item">
 		                <div class="question-status-and-title">
 		                	<c:if test="${request.requestStatus eq 'N' }">

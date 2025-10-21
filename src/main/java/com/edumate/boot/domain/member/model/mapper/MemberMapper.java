@@ -9,6 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.app.member.dto.InsertRequestRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
+import com.edumate.boot.domain.member.model.vo.Request;
 import com.edumate.boot.domain.teacher.model.vo.Question;
 
 @Mapper
@@ -35,6 +36,12 @@ public interface MemberMapper {
 	int getRequestTotalCount(Map<String, Object> searchMap);
 
 	int insertRequest(InsertRequestRequest request);
+
+	Request selectOneByNo(int requestNo);
+
+	Integer selectPrevRequestNo(int currentRequestNo);
+
+	Integer selectNextRequestNo(int currentRequestNo);
 
 
 

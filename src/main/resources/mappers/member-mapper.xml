@@ -120,4 +120,18 @@
 		DEFAULT
 		)
 	</insert>
+	<select id="selectOneByNo" resultType="com.edumate.boot.domain.member.model.vo.Request">
+		SELECT * FROM REQUEST WHERE REQUEST_NO = #{requestNo}
+	</select>
+	<select id="selectPrevRequestNo" parameterType="_int" resultType="_int">
+	    SELECT MAX(REQUEST_NO) 
+	    FROM REQUEST
+	    WHERE REQUEST_NO <![CDATA[<]]> #{currentRequestNo}
+	</select>
+	
+	<select id="selectNextRequestNo" parameterType="_int" resultType="_int">
+	    SELECT MIN(REQUEST_NO) 
+	    FROM REQUEST
+	    WHERE REQUEST_NO <![CDATA[>]]> #{currentRequestNo}
+	</select>
 </mapper>
