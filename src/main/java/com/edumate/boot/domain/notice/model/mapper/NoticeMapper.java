@@ -25,4 +25,12 @@ public interface NoticeMapper {
 
 	Integer selectNextNotice(int currentNoticeId);
 
+	int updateNotice(Notice notice);
+
+	int deleteNotice(int noticeId);
+
+	void increaseViewCount(int noticeId);
+
+	int insertNotice(Notice notice);
+
 }

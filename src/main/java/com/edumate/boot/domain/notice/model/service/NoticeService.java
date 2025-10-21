@@ -22,4 +22,12 @@ public interface NoticeService {
 
 	Integer selectNextNotice(int noticeId);
 
+	int updateNotice(Notice notice);
+
+	int deleteNotice(int noticeId);
+	
+    void increaseViewCount(int noticeId);
+
+	int insertNotice(Notice notice);
+
 }

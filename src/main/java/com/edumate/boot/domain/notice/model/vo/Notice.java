@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @ToString
 @NoArgsConstructor
 public class Notice {
-	private int noticeId;
+	private Integer noticeId;
 	private String memberId;
 	private String noticeTitle;
 	private String noticeContent;

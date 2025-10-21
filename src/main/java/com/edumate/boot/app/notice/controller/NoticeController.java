@@ -1,8 +1,12 @@
 package com.edumate.boot.app.notice.controller;
 
+import com.edumate.boot.app.admin.controller.AdminController;
 import com.edumate.boot.domain.notice.model.service.NoticeService;
 import com.edumate.boot.domain.notice.model.vo.Notice;
 
+import jakarta.servlet.http.HttpSession;
+
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/notice")
 @RequiredArgsConstructor
 public class NoticeController {
+
+    private final AdminController adminController;
 
     private final NoticeService noticeService;
 
@@ -88,18 +94,88 @@ public class NoticeController {
 			Notice notice = noticeService.selectByOneNo(noticeId);
 			Integer prevNoticeNo = noticeService.selectPrevNotice(noticeId);
 			Integer nextNoticeNo = noticeService.selectNextNotice(noticeId);
+			noticeService.increaseViewCount(noticeId);
 			model.addAttribute("notice", notice);
 			model.addAttribute("prevNoticeNo", prevNoticeNo);
 			model.addAttribute("nextNoticeNo", nextNoticeNo);
+			return "notice/detail";
 		} catch (Exception e) {
 			model.addAttribute("errorMsg", e.getMessage());
 			return "common/error";
 		}
-    	return "notice/detail";
     }
     
     @GetMapping("/insert")
-    public String showNoticeInsert() {
-    	return "notice/insert";
+    public String showNoticeInsert(@ModelAttribute Notice notice
+    		, Model model) {
+    	try {
+    		return "notice/insert";
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+    }
+    
+    @PostMapping("/insert")
+    public String insertNotice(@ModelAttribute Notice notice
+    		, HttpSession session ,Model model) {
+    	try {
+    		String memberId = (String)session.getAttribute("loginId");
+    		System.out.println("memberId = " + memberId);
+    		notice.setMemberId(memberId);
+    		int result = noticeService.insertNotice(notice);
+    		if(result > 0) {
+			return "redirect:/notice/list";
+    		}
+    		else {
+    			model.addAttribute("errorMsg", "등록실패");
+    			return "common/error";
+    		}
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+    }
+    
+    @GetMapping("/update")
+    public String showNoitceUpdate(@RequestParam int noticeId, Model model) {
+    	try {
+			Notice notice = noticeService.selectByOneNo(noticeId);
+			model.addAttribute("notice", notice);
+    		return "notice/update";
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+    }
+    
+    @PostMapping("/update")
+    public String updateNotice(
+    		@ModelAttribute Notice notice
+    		, Model model) {
+    	try {
+			int result = noticeService.updateNotice(notice);
+			if(result > 0) {
+				return "redirect:/notice/detail?noticeId="+notice.getNoticeId();
+			}
+			else {
+				model.addAttribute("errorMsg", "데이터가 없습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
+    }
+    
+    @GetMapping("/delete")
+    public String deleteNotice(@RequestParam int noticeId, Model model) {
+    	try {
+    		int result = noticeService.deleteNotice(noticeId);
+			return "redirect:/notice/list";
+		} catch (Exception e) {
+			model.addAttribute("errorMsg", e.getMessage());
+			return "common/error";
+		}
     }
 }
