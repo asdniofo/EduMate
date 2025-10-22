@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -73,42 +74,16 @@
         <section class="lecture-section">
             <h2>인기 강의</h2>
             <div class="lecture-grid">
-                <div class="lecture-card" onclick="location.href='#'">
-                    <div class="lecture-img"></div>
+                <c:forEach items="${pList }" var="popular" varStatus="i">
+                <div class="lecture-card" onclick="location.href='/lecture/details?lectureNo=${popular.lectureNo}'">
+                    <img class="lecture-img" src="/images/lecture/${popular.lecturePath}"></img>
                     <div class="lecture-info">
-                        <p><b>강의 이름입니다.</b></p>
-                        <p>약 4시간</p>
-                        <p class="discount">30% 할인</p>
-                        <p>₩2,000,000</p>
+                        <p><b>${popular.lectureName }</b></p>
+                        <p>${popular.time}</p>
+                        <p>₩ <fmt:formatNumber value="${popular.lecturePrice}" pattern="#,###"/></p>
                     </div>
                 </div>
-                <div class="lecture-card" onclick="location.href='#'">
-                    <div class="lecture-img"></div>
-                    <div class="lecture-info">
-                        <p><b>강의 이름입니다.</b></p>
-                        <p>약 4시간</p>
-                        <p class="discount">30% 할인</p>
-                        <p>₩2,000,000</p>
-                    </div>
-                </div>
-                <div class="lecture-card" onclick="location.href='#'">
-                    <div class="lecture-img"></div>
-                    <div class="lecture-info">
-                        <p><b>강의 이름입니다.</b></p>
-                        <p>약 4시간</p>
-                        <p class="discount">30% 할인</p>
-                        <p>₩2,000,000</p>
-                    </div>
-                </div>
-                <div class="lecture-card" onclick="location.href='#'">
-                    <div class="lecture-img"></div>
-                    <div class="lecture-info">
-                        <p><b>강의 이름입니다.</b></p>
-                        <p>약 4시간</p>
-                        <p class="discount">30% 할인</p>
-                        <p>₩2,000,000</p>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </section>
 
@@ -116,32 +91,36 @@
         <section class="lecture-section">
             <h2>최근 올라온 강의</h2>
             <div class="lecture-grid">
-                <div class="lecture-card" onclick="location.href='#'"><div class="lecture-img"></div><div class="lecture-info"><p><b>강의 이름입니다.</b></p><p>약 4시간</p><p class="discount">30% 할인</p><p>₩2,000,000</p></div></div>
-                <div class="lecture-card" onclick="location.href='#'"><div class="lecture-img"></div><div class="lecture-info"><p><b>강의 이름입니다.</b></p><p>약 4시간</p><p class="discount">30% 할인</p><p>₩2,000,000</p></div></div>
-                <div class="lecture-card" onclick="location.href='#'"><div class="lecture-img"></div><div class="lecture-info"><p><b>강의 이름입니다.</b></p><p>약 4시간</p><p class="discount">30% 할인</p><p>₩2,000,000</p></div></div>
-                <div class="lecture-card" onclick="location.href='#'"><div class="lecture-img"></div><div class="lecture-info"><p><b>강의 이름입니다.</b></p><p>약 4시간</p><p class="discount">30% 할인</p><p>₩2,000,000</p></div></div>
+                <c:forEach items="${rList }" var="recent" varStatus="i">
+                    <div class="lecture-card" onclick="location.href='/lecture/details?lectureNo=${recent.lectureNo}'">
+                        <img class="lecture-img" src="/images/lecture/${recent.lecturePath}"></img>
+                        <div class="lecture-info">
+                            <p><b>${recent.lectureName }</b></p>
+                            <p>${recent.time}</p>
+                            <p>₩ <fmt:formatNumber value="${recent.lecturePrice}" pattern="#,###"/></p>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
         </section>
 
         <!-- 공지사항 / 자유게시판 -->
         <section class="board-section">
             <div class="board">
-                <h3>공지사항</h3>
+                <h3><a href="/notice/list">공지사항</a></h3>
                 <ul>
-                    <li><a href="#">사이트 개편 안내</a><span>2025.10.02</span></li>
-                    <li><a href="#">오늘만 가입 10일 혜택</a><span>2025.10.01</span></li>
-                    <li><a href="#">테스트</a><span>2025.10.01</span></li>
-                    <li><a href="#">테스트 두번째</a><span>2025.09.30</span></li>
+                    <c:forEach items="${nList }" var="notice" varStatus="i">
+                    <li><a href="/notice/detail?noticeId=${notice.noticeId }">${notice.noticeTitle}</a><span><fmt:formatDate value="${notice.writeDate}" pattern="yyyy.MM.dd"/></span></li>
+                    </c:forEach>
                 </ul>
             </div>
 
             <div class="board">
-                <h3>자유게시판</h3>
+                <h3><a href="/notice/list">질문게시판</a></h3>
                 <ul>
-                    <li><a href="#">테코파</a><span>2025.10.02</span></li>
-                    <li><a href="#">오늘만 가입 10일 혜택</a><span>2025.10.01</span></li>
-                    <li><a href="#">테스트</a><span>2025.10.01</span></li>
-                    <li><a href="#">테스트 두번째</a><span>2025.09.30</span></li>
+                    <c:forEach items="${tList }" var="teacher" varStatus="i">
+                        <li><a href="/teacher/question/detail?questionNo=${teacher.questionNo }">${teacher.questionTitle}</a><span><fmt:formatDate value="${teacher.writeDate}" pattern="yyyy.MM.dd"/></span></li>
+                    </c:forEach>
                 </ul>
             </div>
         </section>
