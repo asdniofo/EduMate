@@ -16,12 +16,13 @@
 <link rel="stylesheet" href="/resources/css/notice/list.css" />
 </head>
 <body>
+	 <div class="main-container">
 	<jsp:include page="../common/header.jsp" />
 	<!-- 히어로 섹션 -->
 	<section class="hero-section-wrapper">
 		<div class="hero-section">
 			<h1 class="hero-title">공지사항</h1>
-			<img src="/mnt/data/55c63bbe-ef1e-46ec-b81a-eaf12b7bcb6c.png"
+			<img src="/resources/images/notice/noticeIcon.png"
 				alt="공지 아이콘" class="hero-image" />
 		</div>
 	</section>
@@ -76,5 +77,6 @@
 		</div>
 	</main>
 	<jsp:include page="../common/footer.jsp" />
+	</div>
 </body>
 </html>

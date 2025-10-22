@@ -1,6 +1,6 @@
 package com.edumate.boot.domain.event.model.vo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +12,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Event {
-	private String 		eventId;
-	private String 		memberId;
-	private String 		eventTitle;
-	private String 		eventPath;
-	private Timestamp 	writeDate;
-	private int			viewCount;
-	private String		boardYn;
+    private int eventId;
+    private String eventTitle;
+    private String eventSubtitle;
+    private Date eventStart;
+    private Date eventEnd;
+    private String eventPath;
+    private String eventSubpath;
+    private String eventYn;
+    private String boardYn;
+    private Date regDate;
 }
