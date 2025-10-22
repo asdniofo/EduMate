@@ -2,6 +2,98 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.edumate.boot.domain.admin.model.mapper.EventMapper">
+<mapper namespace="com.edumate.boot.domain.event.model.mapper.EventMapper">
+	<!-- 전체 이벤트 목록 -->
+    <select id="selectAllEvents" resultType="com.edumate.boot.domain.event.model.vo.Event">
+        SELECT 
+            EVENT_ID AS eventId,
+            EVENT_TITLE AS eventTitle,
+            EVENT_SUBTITLE AS eventSubtitle,
+            EVENT_START AS eventStart,
+            EVENT_END AS eventEnd,
+            EVENT_PATH AS eventPath,
+            EVENT_SUBPATH AS eventSubpath,
+            EVENT_YN AS eventYn,
+            BOARD_YN AS boardYn,
+            REG_DATE AS regDate
+        FROM EVENT_BOARD
+        WHERE BOARD_YN = 'Y'
+        ORDER BY EVENT_ID DESC
+    </select>
 
+    <!-- 단일 이벤트 -->
+    <select id="selectEventById" resultType="com.edumate.boot.domain.event.model.vo.Event">
+        SELECT 
+            EVENT_ID AS eventId,
+            EVENT_TITLE AS eventTitle,
+            EVENT_SUBTITLE AS eventSubtitle,
+            EVENT_START AS eventStart,
+            EVENT_END AS eventEnd,
+            EVENT_PATH AS eventPath,
+            EVENT_SUBPATH AS eventSubpath,
+            EVENT_YN AS eventYn,
+            BOARD_YN AS boardYn,
+            REG_DATE AS regDate
+        FROM EVENT_BOARD
+        WHERE EVENT_ID = #{eventId}
+    </select>
+
+    <!-- 이전 이벤트 -->
+    <select id="selectPrevEventId" resultType="int">
+        SELECT MAX(EVENT_ID)
+        FROM EVENT_BOARD
+        WHERE EVENT_ID &lt; #{eventId}
+    </select>
+
+    <!-- 다음 이벤트 -->
+    <select id="selectNextEventId" resultType="int">
+        SELECT MIN(EVENT_ID)
+        FROM EVENT_BOARD
+        WHERE EVENT_ID &gt; #{eventId}
+    </select>
+
+    <!-- 등록 -->
+    <insert id="insertEvent" parameterType="com.edumate.boot.domain.event.model.vo.Event">
+        INSERT INTO EVENT_BOARD (
+            EVENT_ID,
+            EVENT_TITLE,
+            EVENT_SUBTITLE,
+            EVENT_START,
+            EVENT_END,
+            EVENT_PATH,
+            EVENT_SUBPATH,
+            EVENT_YN,
+            BOARD_YN
+        ) VALUES (
+            SEQ_EVENT_ID.NEXTVAL,
+            #{eventTitle},
+            #{eventSubtitle},
+            #{eventStart},
+            #{eventEnd},
+            #{eventPath},
+            #{eventSubpath},
+            NVL(#{eventYn}, 'Y'),
+            NVL(#{boardYn}, 'Y')
+        )
+    </insert>
+
+    <!-- 수정 -->
+    <update id="updateEvent" parameterType="com.edumate.boot.domain.event.model.vo.Event">
+        UPDATE EVENT_BOARD
+        SET
+            EVENT_TITLE = #{eventTitle},
+            EVENT_SUBTITLE = #{eventSubtitle},
+            EVENT_START = #{eventStart},
+            EVENT_END = #{eventEnd},
+            EVENT_PATH = #{eventPath},
+            EVENT_SUBPATH = #{eventSubpath},
+            EVENT_YN = #{eventYn}
+        WHERE EVENT_ID = #{eventId}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="deleteEvent">
+        DELETE FROM EVENT_BOARD
+        WHERE EVENT_ID = #{eventId}
+    </delete>
 </mapper>

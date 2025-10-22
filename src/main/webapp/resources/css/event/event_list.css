@@ -1,8 +1,4 @@
 @charset "UTF-8";
-
-/* =========================
-   🔹 기본 설정
-========================= */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,100 +9,38 @@
 body {
     background-color: #fafafa;
     color: #222;
-    line-height: 1.5;
-    min-height: 100vh;
 }
 
-/* =========================
-   🔹 히어로 섹션
-========================= */
+/* 히어로 섹션 */
 .hero-section-wrapper {
     background: linear-gradient(120deg, #bce0fd, #d8f0ff);
     padding: 80px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.hero-section {
     text-align: center;
+    position: relative;
 }
 
 .hero-title {
     font-size: 42px;
     font-weight: 700;
     color: #000;
-}
-
-.hero-image {
-    width: 180px;
-    position: absolute;
-    right: 15%;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* =========================
-   🔹 메인 콘텐츠
-========================= */
-.main-content {
-    max-width: 1200px;
-    margin: 40px auto 60px;
-    padding: 0 20px;
-}
-
-/* =========================
-   🔹 검색창 + 필터바
-========================= */
-.filter-bar {
-    display: flex;
-    justify-content: space-between; /* 왼쪽: 필터, 오른쪽: 검색창 */
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-/* 필터 버튼 그룹 */
-.filter-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.filter-btn {
-    padding: 8px 14px;
-    border-radius: 6px;
-    background: #f4f4f4;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 14px;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    color: #ff4040;
-    border-color: #ff4040;
-}
-
-/* 검색창 + 버튼 전체 */
-.search-bar {
-    display: flex;
-    justify-content: flex-end; /* 오른쪽 정렬 */
-    align-items: center;
-    gap: 8px; /* 검색창과 버튼 사이 간격 */
-    margin-bottom: 25px; /* 필요 시 여백 유지 */
+    margin-bottom: 15px;
 }
 
 /* 검색창 */
+.search-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
 .search-bar input {
-    width: 240px; /* 기존 폭 유지 */
+    width: 240px;
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
 }
 
-/* 버튼 */
 .search-bar button {
     padding: 8px 14px;
     border-radius: 6px;
@@ -115,101 +49,91 @@ body {
     cursor: pointer;
 }
 
-
-
-
-/* =========================
-   🔹 공지사항 리스트
-========================= */
-.question-list {
+/* 이벤트 리스트 */
+.event-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
-/* 공지사항 카드 링크 */
-.question-link {
+.event-card {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-decoration: none; /* 밑줄 제거 */
-    color: inherit;       /* 글자 색 유지 */
-    padding: 18px 25px;
-    border-radius: 10px;
+    flex-direction: column;
     background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: #000;
+    padding: 20px 25px;
     transition: all 0.2s;
 }
 
-/* hover 시 카드 강조 */
-.question-link:hover {
-    background-color: #f0f8ff; /* 연한 블루 배경 */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transform: translateY(-2px); /* 살짝 떠오르는 느낌 */
+.event-card:hover {
+    background: #f0f8ff;
+    transform: translateY(-2px);
 }
 
-/* 내부 구조는 기존 유지 */
-.question-left {
+/* 이벤트 이미지 */
+.event-banner {
     display: flex;
     align-items: center;
-    gap: 40px;
+    justify-content: center;
+    margin-bottom: 15px;
 }
 
-.status-tag {
-    display: inline-block;
-    width: 90px;
-    text-align: center;
-    padding: 6px 0;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 14px;
+.event-banner-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* 이벤트 텍스트 영역 */
+.event-info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.event-status {
+    font-weight: bold;
     color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.event-status.on {
     background-color: #32e462;
-    flex-shrink: 0;
 }
 
-.status-tag.urgent {
-    background-color: #ff6060;
+.event-status.end {
+    background-color: #ff4040;
 }
 
-.question-title {
-    font-size: 17px;
+.event-text {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.event-title {
+    font-size: 18px;
     font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin-bottom: 8px;
 }
 
-.write-date {
+.event-desc {
     font-size: 14px;
-    color: #777;
-    flex-shrink: 0;
-    margin-left: 30px;
+    color: #555;
+    margin-bottom: 10px;
 }
 
-
-
-/* 제목 */
-.question-title {
-    font-size: 17px;
-    font-weight: 600;
-    color: #222;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.event-date {
+    font-size: 13px;
+    color: #888;
 }
 
-/* 날짜 (오른쪽 끝) */
-.write-date {
-    font-size: 14px;
-    color: #777;
-    margin-left: 30px;
-    flex-shrink: 0;
-}
-
-/* =========================
-   🔹 페이지네이션 + 글쓰기 버튼
-========================= */
+/* 페이지네이션 + 글쓰기 */
 .bottom-actions {
     display: flex;
     justify-content: space-between;
@@ -232,85 +156,25 @@ body {
     background: #fff;
     cursor: pointer;
     transition: all 0.2s;
-    font-size: 14px;
-}
-
-.page-btn:hover {
-    background: #f3f3f3;
 }
 
 .page-btn.active {
     background: #ddd;
-    font-weight: 700;
+    font-weight: bold;
 }
 
+/* 글쓰기 버튼 */
 .write-button {
     padding: 10px 22px;
     border-radius: 8px;
     background: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     text-decoration: none;
     color: #000;
     font-weight: 500;
 }
+
 .write-button:hover {
-    background-color: #d1e5f0;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background: #d1e5f0;
     transform: translateY(-2px);
-}
-
-/* =========================
-   🔹 반응형
-========================= */
-@media (max-width: 768px) {
-    .hero-section-wrapper {
-        padding: 60px 10px;
-    }
-
-    .hero-title {
-        font-size: 30px;
-    }
-
-    .hero-image {
-        width: 120px;
-        right: 5%;
-    }
-
-    /* 필터 + 검색창 세로 정렬 */
-    .filter-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-
-    .search-bar input {
-        width: 100%;
-    }
-
-    /* 공지사항 리스트 모바일 */
-    .question-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .question-left {
-        width: 100%;
-        gap: 15px;
-    }
-
-    .status-tag {
-        width: auto;
-        padding: 5px 10px;
-    }
-
-    .write-date {
-        margin-left: 0;
-    }
-
-    /* 하단 버튼 모바일 */
-    .bottom-actions {
-        flex-direction: column;
-        align-items: center;
-    }
 }
