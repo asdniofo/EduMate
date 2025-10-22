@@ -2,7 +2,10 @@ package com.edumate.boot.app.admin.controller;
 
 import com.edumate.boot.app.admin.dto.UserListRequest;
 import com.edumate.boot.app.admin.dto.UserStatusRequest;
+import com.edumate.boot.app.lecture.dto.LectureListRequest;
+import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.admin.model.service.AdminService;
+import com.edumate.boot.domain.lecture.model.service.LectureService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService aService;
+    private final LectureService lService;
     
     @GetMapping("/main")
     public String showAdmin(HttpSession session) {
@@ -101,5 +105,79 @@ public class AdminController {
             return "redirect:/";
         }
        return "admin/basicSetting";
+    }
+    
+    @GetMapping("/lecture")
+    public String showLecture(@RequestParam(value = "page", defaultValue = "1") int currentPage
+            ,@RequestParam(value = "sort", defaultValue = "name") String sortType
+            ,@RequestParam(value = "search", defaultValue = "") String searchKeyword
+            ,HttpSession session, Model model) {
+        String adminYn = (String) session.getAttribute("adminYn");
+        if (adminYn == null || !adminYn.equals("Y")) {
+            return "redirect:/";
+        }
+        try {
+            int lectureCountPerPage = 5;
+            String sortValue = getSortValue(sortType);
+            
+            int totalCount = 0;
+            List<LectureListRequest> lectureList = null;
+            
+            if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+                totalCount = lService.getSearchCountAll(searchKeyword);
+                lectureList = lService.selectSearchAll(currentPage, lectureCountPerPage, searchKeyword, sortValue);
+            } else {
+                totalCount = lService.getTotalCount();
+                lectureList = lService.selectList(currentPage, lectureCountPerPage, sortValue);
+            }
+            
+            int maxPage = (int) Math.ceil((double) totalCount / lectureCountPerPage);
+            int naviCountPerPage = 5;
+            int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+            int endNavi = (startNavi - 1) + naviCountPerPage;
+            if (endNavi > maxPage) endNavi = maxPage;
+            
+            model.addAttribute("lectureList", lectureList);
+            model.addAttribute("totalCount", totalCount);
+            model.addAttribute("currentPage", currentPage);
+            model.addAttribute("lectureCountPerPage", lectureCountPerPage);
+            model.addAttribute("maxPage", maxPage);
+            model.addAttribute("startNavi", startNavi);
+            model.addAttribute("endNavi", endNavi);
+            model.addAttribute("currentSort", sortType);
+            model.addAttribute("searchKeyword", searchKeyword);
+            return "admin/admin_lecture";
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "common/error";
+        }
+    }
+    
+    @GetMapping("/lecture/videos")
+    @ResponseBody
+    public List<VideoListRequest> getLectureVideos(@RequestParam int lectureNo) {
+        return lService.selectVideoListById(lectureNo);
+    }
+    
+    @PostMapping("/lecture/deleteVideo")
+    @ResponseBody
+    public void deleteVideo(@RequestParam int videoNo, @RequestParam int lectureNo) {
+        lService.deleteVideoAndReorder(videoNo, lectureNo);
+    }
+    
+    @PostMapping("/lecture/delete")
+    @ResponseBody
+    public void deleteLecture(@RequestParam int lectureNo) {
+        lService.deleteLecture(lectureNo);
+    }
+    
+    private String getSortValue(String sortType) {
+        return switch (sortType) {
+            case "name" -> "L.LECTURE_NAME ASC";
+            case "date" -> "L.LECTURE_CREATED_DATE DESC";
+            case "category" -> "L.LECTURE_CATEGORY ASC";
+            case "instructor" -> "M.MEMBER_NAME ASC";
+            default -> "L.LECTURE_NAME ASC";
+        };
     }
 }

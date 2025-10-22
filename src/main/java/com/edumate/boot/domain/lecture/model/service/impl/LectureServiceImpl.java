@@ -8,6 +8,7 @@ import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
 import com.edumate.boot.domain.member.model.vo.Member;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -196,6 +197,29 @@ public class LectureServiceImpl implements LectureService {
     public int insertQuestion(LectureQuestionRequest qList) {
         int result = lMapper.insertQuestion(qList);
         return result;
+    }
+    
+    @Override
+    public void deleteVideo(int videoNo) {
+        lMapper.deleteVideo(videoNo);
+    }
+    
+    @Override
+    @Transactional
+    public void deleteVideoAndReorder(int videoNo, int lectureNo) {
+        // 1. 삭제할 비디오의 순서 조회
+        int deletedOrder = lMapper.getVideoOrder(videoNo);
+        
+        // 2. 비디오 삭제 (VIDEO_YN = 'N')
+        lMapper.deleteVideo(videoNo);
+        
+        // 3. 삭제된 순서보다 큰 순서들을 1씩 감소
+        lMapper.reorderVideosAfterDelete(lectureNo, deletedOrder);
+    }
+    
+    @Override
+    public void deleteLecture(int lectureNo) {
+        lMapper.deleteLecture(lectureNo);
     }
 
 }

@@ -58,4 +58,12 @@ public interface LectureMapper {
     int checkLogin(String memberId);
 
     int insertQuestion(LectureQuestionRequest qList);
+    
+    void deleteVideo(int videoNo);
+    
+    int getVideoOrder(int videoNo);
+    
+    void reorderVideosAfterDelete(int lectureNo, int deletedOrder);
+    
+    void deleteLecture(int lectureNo);
 }

@@ -56,4 +56,10 @@ public interface LectureService {
     int checkLogin(String memberId);
 
     int insertQuestion(LectureQuestionRequest qList);
+    
+    void deleteVideo(int videoNo);
+    
+    void deleteVideoAndReorder(int videoNo, int lectureNo);
+    
+    void deleteLecture(int lectureNo);
 }
