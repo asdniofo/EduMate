@@ -45,13 +45,14 @@
                         <p>${request.requestContent }</p>
                     </section>
 
-
+					<c:if test="${sessionScope.loginMember.adminYN eq 'Y' }">
                     <section class="answer-input-section">
                         <div class="input-area-wrapper">
                             <textarea class="answer-textarea" id="answer-area" placeholder="답변 내용을 입력하세요."></textarea>
                             <button class="answer-submit-button" id="submit-button">답변</button>
                         </div>
                     </section>
+                    </c:if>
                     
                     <section class="answer-display-section" id="answer-list">
                         
@@ -68,9 +69,9 @@
                     			or sessionScope.loginMember.adminYN eq 'Y'}">
 	                            <a href="/member/request/modify?requestNo=${request.requestNo }"><button class="action-button">수정</button></a>
 	                            <button class="action-button" id="delete-list-btn">삭제</button>
-                            </c:if>
-                            <c:if test="${sessionScope.loginMember.memberId eq request.memberId }">
                             	<button class="action-button" id="change-status-btn">상태변경</button>
+                            </c:if>
+                            <c:if test="${sessionScope.loginMember.adminYN eq 'Y' }">
                             </c:if>
                         </div>
                         <div class="right-actions">
@@ -107,7 +108,7 @@
         //console.log("전달된 댓글 번호:", requestCommentNo);
         
         if(confirm("정말로 삭제하시겠습니까?")){
-            fetch("/question/comment/delete?requestCommentNo=" + requestCommentNo) 
+            fetch("/request/comment/delete?requestCommentNo=" + requestCommentNo) 
             .then(response => response.text()) 
             .then(text => {
                 const result = parseInt(text.trim());
@@ -192,18 +193,18 @@
 			// 댓글 등록 버튼 클릭 시 실행되는 코드
 			// 입력된 값을 가져와서 서버로 전송하는 로직을 구현해야 합니다.
 			// Ajax를 사용하여 비동기적으로 댓글을 추가
-			const RequestCommentContent = document.querySelector("#answer-area").value;
-			if(RequestCommentContent.trim() === "") {
+			const requestCommentContent = document.querySelector("#answer-area").value;
+			if(requestCommentContent.trim() === "") {
 				alert("댓글 내용을 입력하세요.");
 				return;
 			}
 			// 게시글 번호
-			const questionNo = ${request.requestNo};
+			const requestNo = ${request.requestNo};
 			const memberId = "${request.memberId }";
 			const data = {
 			    "requestNo": requestNo, 
 			    "memberId": loginMemberId,
-			    "RequestCommentContent": RequestCommentContent
+			    "requestCommentContent": requestCommentContent
 			};
 			// 데이터 fetch API 이용하여 보내기
 			fetch("/request/comment/add", {

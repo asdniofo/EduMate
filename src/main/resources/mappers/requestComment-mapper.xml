@@ -3,7 +3,22 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edumate.boot.domain.member.model.mapper.RequestCommentMapper" >
-	<select id="selectQcList" resultType="QuestionComment">
+	<select id="selectRcList" resultType="RequestComment">
 		SELECT * FROM REQUEST_COMMENT WHERE REQUEST_NO = #{requestNo} AND REQUEST_COMMENT_YN = 'Y' ORDER BY REQUEST_COMMENT_NO DESC
 	</select>
+	<insert id="insertRequestComment">
+		INSERT INTO REQUEST_COMMENT (
+			REQUEST_COMMENT_NO, REQUEST_NO, MEMBER_ID, REQUEST_COMMENT_CONTENT)
+		VALUES (
+			SEQ_REQUEST_COMMENT_NO.NEXTVAL, #{requestNo},
+			#{memberId},
+			#{requestCommentContent, jdbcType=VARCHAR} )
+	</insert>
+	<update id="deleteComment">
+		UPDATE REQUEST_COMMENT 
+		SET 
+		    REQUEST_COMMENT_YN = 'N' 
+		WHERE 
+		    REQUEST_COMMENT_NO = #{requestCommentNo}
+	</update>
 </mapper>
