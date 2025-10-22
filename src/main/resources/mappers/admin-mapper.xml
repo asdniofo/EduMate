@@ -66,9 +66,8 @@
         MEMBER_PW = #{memberPw},
         MEMBER_NAME = #{memberName},
         MEMBER_BIRTH = #{memberBirth},
-        MEMBER_MONEY = #{memberMoney},
-        TEACHER_YN = #{teacherYN},
-        ADMIN_YN = #{adminYN}
+        TEACHER_YN = #{teacherYn},
+        ADMIN_YN = #{adminYn}
         WHERE MEMBER_ID = #{memberId}
     </update>
 

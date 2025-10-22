@@ -74,10 +74,16 @@ public class AdminController {
     @ResponseBody
     public void updateUser(@RequestBody UserListRequest user) {
         // 구분에 따라 teacherYN, adminYN 세팅
-        switch (user.getMemberType()) {
-            case "관리자" -> { user.setAdminYn("Y"); user.setTeacherYn("N"); }
-            case "선생님" -> { user.setAdminYn("N"); user.setTeacherYn("Y"); }
-            default -> { user.setAdminYn("N"); user.setTeacherYn("N"); }
+        String memberType = user.getMemberType();
+        if (memberType != null) {
+            switch (memberType) {
+                case "관리자" -> { user.setAdminYn("Y"); user.setTeacherYn("N"); }
+                case "선생님" -> { user.setAdminYn("N"); user.setTeacherYn("Y"); }
+                default -> { user.setAdminYn("N"); user.setTeacherYn("N"); }
+            }
+        } else {
+            user.setAdminYn("N"); 
+            user.setTeacherYn("N");
         }
         aService.updateUser(user);
     }

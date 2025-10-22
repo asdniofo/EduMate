@@ -178,30 +178,62 @@ body {
     background: #2d2f39;
     color: white;
 }
+/* 수정 중인 행 스타일 */
+.member-table tr.editing {
+    background-color: #f0f0f0;
+}
+
+.member-table tr.editing td {
+    background-color: #f0f0f0;
+}
+
 .edit-row td {
     background: #eaeaea;
-    padding: 20px;
+    padding: 12px;
 }
 
 .edit-box {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr) auto;
-    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
     gap: 15px;
+    align-items: center;
+    background: #eaeaea;
+    padding: 10px;
 }
 
 .edit-box label {
-    font-weight: 600;
+    font-weight: 500;
+    color: #495057;
     display: flex;
     align-items: center;
     gap: 8px;
+    min-width: auto;
+    white-space: nowrap;
+}
+
+.edit-box label span {
+    font-size: 13px;
+    color: #6c757d;
+    font-weight: 400;
 }
 
 .edit-box input, .edit-box select {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 1px solid #bbb;
-    width: 160px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    width: 130px;
+    font-size: 13px;
+    transition: border-color 0.2s;
+}
+
+.edit-box input:focus, .edit-box select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.edit-box input[readonly] {
+    background-color: #e9ecef;
+    color: #6c757d;
 }
 
 .btn.show {
@@ -218,17 +250,20 @@ body {
 }
 
 .btn.save {
-    background: #444;
+    background: #28a745;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 60px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    font-size: 13px;
 }
 
 .btn.save:hover {
-    background: #222;
+    background: #218838;
 }
 .member-table td {
     vertical-align: middle;
