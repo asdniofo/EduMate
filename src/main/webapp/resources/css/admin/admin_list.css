@@ -1,0 +1,71 @@
+/* 게시글관리 스타일 - admin_user.jsp와 동일한 패턴 */
+.board-manage h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.summary {
+    margin-bottom: 20px;
+}
+
+.board-table {
+    width: 1600px;
+    background-color: white;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.board-table thead {
+    background-color: #f1f2f6;
+}
+
+.board-table th {
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.board-table th:first-child {
+    width: 70%;
+}
+
+.board-table th:last-child {
+    width: 30%;
+    text-align: center;
+}
+
+.board-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e1e8ed;
+    vertical-align: middle;
+}
+
+.board-table td:last-child {
+    text-align: center;
+    font-weight: 600;
+    color: #2980b9;
+}
+
+.board-table tr:last-child td {
+    border-bottom: none;
+}
+
+.board-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.board-table a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.board-table a:hover {
+    color: #2980b9;
+}

@@ -49,6 +49,16 @@ a {
     transform: translateY(80px);
     animation: slideUp 1s ease forwards, floating 3s ease-in-out infinite;
     animation-delay: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.object img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 20px;
 }
 
 @keyframes slideUp {

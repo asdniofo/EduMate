@@ -115,4 +115,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.updateRequest(request);
 	}
 
+    @Override
+    public int getCount() {
+        int result = memberMapper.getCount();
+        return result;
+    }
+
 }

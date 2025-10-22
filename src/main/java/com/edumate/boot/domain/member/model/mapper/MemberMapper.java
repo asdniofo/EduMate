@@ -49,4 +49,5 @@ public interface MemberMapper {
 
 	int updateRequest(Request request);
 
+    int getCount();
 }

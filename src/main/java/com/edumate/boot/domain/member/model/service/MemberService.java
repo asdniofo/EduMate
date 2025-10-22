@@ -34,4 +34,5 @@ public interface MemberService {
 	int deleteRequest(int requestNo);
 	int updateQuestion(Request request);
 
+    int getCount();
 }

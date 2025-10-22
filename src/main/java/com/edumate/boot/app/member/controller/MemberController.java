@@ -235,16 +235,18 @@ public class MemberController {
 			, @RequestParam(value = "page", defaultValue = "1") int currentPage
 			, @RequestParam(value = "filter", defaultValue = "ALL") String filter
 			, Model model, HttpSession session) {
-    	
-    	Member loginMember = (Member) session.getAttribute("loginMember");
+
+        String memberId = session.getAttribute("loginId").toString();
+        String adminYn = (String) session.getAttribute("adminYn");
 
         String loginMemberId = null;
         String adminYN = "N";
-        if (loginMember == null) {
+
+        if (memberId == null) {
         	return "redirect:/member/login";
         } else {
-            loginMemberId = loginMember.getMemberId();
-            adminYN = loginMember.getAdminYN();
+            loginMemberId = memberId;
+            adminYN = adminYn;
         }
         try {
         	int boardLimit = 5;
@@ -308,13 +310,14 @@ public class MemberController {
     public String showRequestDetailView(@RequestParam("requestNo") int requestNo, 
     		Model model, HttpSession session) {
     	// 1. 로그인 정보 가져오기 및 체크
-        Member loginMember = (Member) session.getAttribute("loginMember");
-        if (loginMember == null) {
+        String memberId = session.getAttribute("loginId").toString();
+        String adminYn = (String) session.getAttribute("adminYn");
+        if (memberId == null) {
             return "redirect:/member/login";
         }
         
-        String loginMemberId = loginMember.getMemberId();
-        String adminYN = loginMember.getAdminYN();
+        String loginMemberId = memberId;
+        String adminYN = adminYn;
         
         try {
             Request request = memberService.selectOneByNo(requestNo);

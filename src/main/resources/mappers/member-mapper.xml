@@ -158,4 +158,8 @@
 	    WHERE 
 	        REQUEST_NO = #{requestNo}
 	</update>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM REQUEST
+    </select>
 </mapper>
