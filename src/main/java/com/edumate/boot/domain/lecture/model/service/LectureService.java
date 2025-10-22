@@ -44,6 +44,15 @@ public interface LectureService {
     int getSearchCategoryCount(String search, String category);
 
     List<LectureListRequest> selectSearchCategoryList(int currentPage, int lectureCountPerPage, String search, String category, String sortValue);
+    
+    // 관리자용 검색 메서드
+    int getSearchCountAllForAdmin(String search);
+
+    List<LectureListRequest> selectSearchAllForAdmin(int currentPage, int lectureCountPerPage, String search, String sortValue);
+
+    int getSearchCategoryCountForAdmin(String search, String category);
+
+    List<LectureListRequest> selectSearchCategoryListForAdmin(int currentPage, int lectureCountPerPage, String search, String category, String sortValue);
 
     int checkTeacher(String loginId);
 

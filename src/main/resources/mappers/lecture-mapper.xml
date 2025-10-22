@@ -106,7 +106,9 @@
         JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
         WHERE L.LECTURE_YN = 'Y'
           AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+          <if test="isAdmin == null or isAdmin == false">
            OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+          </if>
            OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
     </select>
     
@@ -120,14 +122,18 @@
                        (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
                        (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT,
                        (CASE WHEN UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 100 ELSE 0 END +
+                       <if test="isAdmin == null or isAdmin == false">
                         CASE WHEN UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%' THEN 50 ELSE 0 END +
+                       </if>
                         CASE WHEN UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 30 ELSE 0 END) as search_score
                 FROM LECTURE L
                 JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
                 LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
                 WHERE L.LECTURE_YN = 'Y'
                   AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                  <if test="isAdmin == null or isAdmin == false">
                    OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+                  </if>
                    OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
                 GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
                          L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
@@ -143,7 +149,9 @@
         JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
         WHERE L.LECTURE_CATEGORY = #{category} AND L.LECTURE_YN = 'Y'
           AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+          <if test="isAdmin == null or isAdmin == false">
            OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+          </if>
            OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
     </select>
     
@@ -157,14 +165,18 @@
                        (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
                        (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT,
                        (CASE WHEN UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 100 ELSE 0 END +
+                       <if test="isAdmin == null or isAdmin == false">
                         CASE WHEN UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%' THEN 50 ELSE 0 END +
+                       </if>
                         CASE WHEN UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 30 ELSE 0 END) as search_score
                 FROM LECTURE L
                 JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
                 LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
                 WHERE L.LECTURE_CATEGORY = #{category} AND L.LECTURE_YN = 'Y'
                   AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                  <if test="isAdmin == null or isAdmin == false">
                    OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+                  </if>
                    OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
                 GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
                          L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME

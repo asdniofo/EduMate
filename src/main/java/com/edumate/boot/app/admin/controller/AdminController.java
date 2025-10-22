@@ -124,8 +124,8 @@ public class AdminController {
             List<LectureListRequest> lectureList = null;
             
             if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-                totalCount = lService.getSearchCountAll(searchKeyword);
-                lectureList = lService.selectSearchAll(currentPage, lectureCountPerPage, searchKeyword, sortValue);
+                totalCount = lService.getSearchCountAllForAdmin(searchKeyword);
+                lectureList = lService.selectSearchAllForAdmin(currentPage, lectureCountPerPage, searchKeyword, sortValue);
             } else {
                 totalCount = lService.getTotalCount();
                 lectureList = lService.selectList(currentPage, lectureCountPerPage, sortValue);

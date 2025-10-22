@@ -38,7 +38,7 @@
 	        </if>
 	        AND QUESTION_YN = 'Y'
 	    </where>
-	    ORDER BY QUESTION_NO ASC
+	    ORDER BY WRITE_DATE ASC
      </select>
     
 	<select id="selectSearchList" resultType="Question">

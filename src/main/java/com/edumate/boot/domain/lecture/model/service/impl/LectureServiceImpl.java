@@ -118,7 +118,9 @@ public class LectureServiceImpl implements LectureService {
 
     @Override
     public int getSearchCountAll(String search) {
-        int result = lMapper.getSearchCountAll(search);
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        int result = lMapper.getSearchCountAll(params);
         return result;
     }
 
@@ -158,6 +160,59 @@ public class LectureServiceImpl implements LectureService {
         params.put("sortValue", sortValue);
         params.put("startRow", startRow);
         params.put("endRow", endRow);
+        
+        List<LectureListRequest> lList = lMapper.selectSearchCategoryList(params);
+        return lList;
+    }
+
+    @Override
+    public int getSearchCountAllForAdmin(String search) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("isAdmin", true);
+        int result = lMapper.getSearchCountAll(params);
+        return result;
+    }
+
+    @Override
+    public List<LectureListRequest> selectSearchAllForAdmin(int currentPage, int lectureCountPerPage, String search, String sortValue) {
+        int startRow = (currentPage - 1) * lectureCountPerPage + 1;
+        int endRow = currentPage * lectureCountPerPage;
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("sortValue", sortValue);
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+        params.put("isAdmin", true);
+        
+        List<LectureListRequest> lList = lMapper.selectSearchAll(params);
+        return lList;
+    }
+
+    @Override
+    public int getSearchCategoryCountForAdmin(String search, String category) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("category", category);
+        params.put("isAdmin", true);
+        
+        int result = lMapper.getSearchCategoryCount(params);
+        return result;
+    }
+
+    @Override
+    public List<LectureListRequest> selectSearchCategoryListForAdmin(int currentPage, int lectureCountPerPage, String search, String category, String sortValue) {
+        int startRow = (currentPage - 1) * lectureCountPerPage + 1;
+        int endRow = currentPage * lectureCountPerPage;
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("category", category);
+        params.put("sortValue", sortValue);
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+        params.put("isAdmin", true);
         
         List<LectureListRequest> lList = lMapper.selectSearchCategoryList(params);
         return lList;
