@@ -8,6 +8,7 @@ import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
 import com.edumate.boot.domain.member.model.vo.Member;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -117,7 +118,9 @@ public class LectureServiceImpl implements LectureService {
 
     @Override
     public int getSearchCountAll(String search) {
-        int result = lMapper.getSearchCountAll(search);
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        int result = lMapper.getSearchCountAll(params);
         return result;
     }
 
@@ -163,6 +166,59 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
+    public int getSearchCountAllForAdmin(String search) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("isAdmin", true);
+        int result = lMapper.getSearchCountAll(params);
+        return result;
+    }
+
+    @Override
+    public List<LectureListRequest> selectSearchAllForAdmin(int currentPage, int lectureCountPerPage, String search, String sortValue) {
+        int startRow = (currentPage - 1) * lectureCountPerPage + 1;
+        int endRow = currentPage * lectureCountPerPage;
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("sortValue", sortValue);
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+        params.put("isAdmin", true);
+        
+        List<LectureListRequest> lList = lMapper.selectSearchAll(params);
+        return lList;
+    }
+
+    @Override
+    public int getSearchCategoryCountForAdmin(String search, String category) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("category", category);
+        params.put("isAdmin", true);
+        
+        int result = lMapper.getSearchCategoryCount(params);
+        return result;
+    }
+
+    @Override
+    public List<LectureListRequest> selectSearchCategoryListForAdmin(int currentPage, int lectureCountPerPage, String search, String category, String sortValue) {
+        int startRow = (currentPage - 1) * lectureCountPerPage + 1;
+        int endRow = currentPage * lectureCountPerPage;
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("search", search);
+        params.put("category", category);
+        params.put("sortValue", sortValue);
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+        params.put("isAdmin", true);
+        
+        List<LectureListRequest> lList = lMapper.selectSearchCategoryList(params);
+        return lList;
+    }
+
+    @Override
     public int checkTeacher(String loginId) {
         int result = lMapper.checkTeacher(loginId);
         return result;
@@ -196,6 +252,29 @@ public class LectureServiceImpl implements LectureService {
     public int insertQuestion(LectureQuestionRequest qList) {
         int result = lMapper.insertQuestion(qList);
         return result;
+    }
+    
+    @Override
+    public void deleteVideo(int videoNo) {
+        lMapper.deleteVideo(videoNo);
+    }
+    
+    @Override
+    @Transactional
+    public void deleteVideoAndReorder(int videoNo, int lectureNo) {
+        // 1. 삭제할 비디오의 순서 조회
+        int deletedOrder = lMapper.getVideoOrder(videoNo);
+        
+        // 2. 비디오 삭제 (VIDEO_YN = 'N')
+        lMapper.deleteVideo(videoNo);
+        
+        // 3. 삭제된 순서보다 큰 순서들을 1씩 감소
+        lMapper.reorderVideosAfterDelete(lectureNo, deletedOrder);
+    }
+    
+    @Override
+    public void deleteLecture(int lectureNo) {
+        lMapper.deleteLecture(lectureNo);
     }
 
 }

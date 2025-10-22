@@ -4,10 +4,10 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edumate.boot.domain.lecture.model.mapper.LectureMapper">
     <select id="totalCount" resultType="int">
-        SELECT COUNT(*) FROM LECTURE
+        SELECT COUNT(*) FROM LECTURE WHERE LECTURE_YN = 'Y'
     </select>
     <select id="categoryCount" resultType="int">
-        SELECT COUNT(*) FROM LECTURE WHERE LECTURE_CATEGORY = #{lectureCategory}
+        SELECT COUNT(*) FROM LECTURE WHERE LECTURE_CATEGORY = #{lectureCategory} AND LECTURE_YN = 'Y'
     </select>
     <select id="selectList" resultType="LectureListRequest">
         SELECT L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
@@ -15,10 +15,12 @@
                M.MEMBER_NAME,
                NVL(ROUND(AVG(R.REVIEW_RATING), 1), 0) AS LECTURE_RATING,
                (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
-               (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT
+               (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT,
+               NVL((SELECT SUM(VIDEO_TIME) FROM LECTURE_VIDEO WHERE LECTURE_NO = L.LECTURE_NO AND VIDEO_YN = 'Y'), 0) AS TOTAL_VIDEO_TIME
         FROM LECTURE L
         JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
         LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
+        WHERE L.LECTURE_YN = 'Y'
         GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
                  L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
         ORDER BY ${sortValue}
@@ -33,7 +35,7 @@
         FROM LECTURE L
         JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
         LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
-        WHERE L.LECTURE_CATEGORY = #{category}
+        WHERE L.LECTURE_CATEGORY = #{category} AND L.LECTURE_YN = 'Y'
         GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
                  L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
         ORDER BY ${sortValue}
@@ -48,7 +50,7 @@
         FROM LECTURE L
         JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
         LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
-        WHERE L.LECTURE_NO = #{lectureNo}
+        WHERE L.LECTURE_NO = #{lectureNo} AND L.LECTURE_YN = 'Y'
         GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
                  L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
     </select>
@@ -79,7 +81,7 @@
         SELECT * FROM LECTURE_VIDEO WHERE LECTURE_NO = #{lectureNo} AND VIDEO_ORDER = #{nextVideoNo} AND VIDEO_YN ='Y'
     </select>
     <select id="selectNameById" resultType="string">
-        SELECT LECTURE_NAME FROM LECTURE WHERE LECTURE_NO = #{lectureNo}
+        SELECT LECTURE_NAME FROM LECTURE WHERE LECTURE_NO = #{lectureNo} AND LECTURE_YN = 'Y'
     </select>
     <insert id="insertLecture">
         <selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
@@ -102,9 +104,12 @@
         SELECT COUNT(DISTINCT L.LECTURE_NO) 
         FROM LECTURE L
         JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
-        WHERE UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+        WHERE L.LECTURE_YN = 'Y'
+          AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+          <if test="isAdmin == null or isAdmin == false">
            OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
-           OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%'
+          </if>
+           OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
     </select>
     
     <select id="selectSearchAll" resultType="LectureListRequest">
@@ -117,14 +122,19 @@
                        (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
                        (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT,
                        (CASE WHEN UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 100 ELSE 0 END +
+                       <if test="isAdmin == null or isAdmin == false">
                         CASE WHEN UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%' THEN 50 ELSE 0 END +
+                       </if>
                         CASE WHEN UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 30 ELSE 0 END) as search_score
                 FROM LECTURE L
                 JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
                 LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
-                WHERE UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                WHERE L.LECTURE_YN = 'Y'
+                  AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                  <if test="isAdmin == null or isAdmin == false">
                    OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
-                   OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                  </if>
+                   OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
                 GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
                          L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
                 ORDER BY search_score DESC, ${sortValue}
@@ -137,9 +147,11 @@
         SELECT COUNT(DISTINCT L.LECTURE_NO) 
         FROM LECTURE L
         JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
-        WHERE L.LECTURE_CATEGORY = #{category}
+        WHERE L.LECTURE_CATEGORY = #{category} AND L.LECTURE_YN = 'Y'
           AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+          <if test="isAdmin == null or isAdmin == false">
            OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+          </if>
            OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
     </select>
     
@@ -153,14 +165,18 @@
                        (SELECT COUNT(*) FROM REVIEW WHERE LECTURE_NO = L.LECTURE_NO AND REVIEW_YN = 'Y') AS COUNT_REVIEW,
                        (SELECT COUNT(*) FROM PURCHASE WHERE LECTURE_NO = L.LECTURE_NO) AS COUNT_STUDENT,
                        (CASE WHEN UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 100 ELSE 0 END +
+                       <if test="isAdmin == null or isAdmin == false">
                         CASE WHEN UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%' THEN 50 ELSE 0 END +
+                       </if>
                         CASE WHEN UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%' THEN 30 ELSE 0 END) as search_score
                 FROM LECTURE L
                 JOIN MEMBER M ON L.MEMBER_ID = M.MEMBER_ID
                 LEFT JOIN REVIEW R ON L.LECTURE_NO = R.LECTURE_NO AND R.REVIEW_YN = 'Y'
-                WHERE L.LECTURE_CATEGORY = #{category}
+                WHERE L.LECTURE_CATEGORY = #{category} AND L.LECTURE_YN = 'Y'
                   AND (UPPER(L.LECTURE_NAME) LIKE '%' || UPPER(#{search}) || '%'
+                  <if test="isAdmin == null or isAdmin == false">
                    OR UPPER(L.LECTURE_CONTENT) LIKE '%' || UPPER(#{search}) || '%'
+                  </if>
                    OR UPPER(M.MEMBER_NAME) LIKE '%' || UPPER(#{search}) || '%')
                 GROUP BY L.LECTURE_NO, L.MEMBER_ID, L.LECTURE_NAME, L.LECTURE_PRICE,
                          L.LECTURE_CATEGORY, L.LECTURE_PATH, L.LECTURE_CONTENT, L.LECTURE_CREATED_DATE, M.MEMBER_NAME
@@ -183,7 +199,7 @@
         SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
     </select>
     <select id="selectLecture" resultType="Lecture">
-        SELECT * FROM LECTURE WHERE LECTURE_NO = #{lectureNo}
+        SELECT * FROM LECTURE WHERE LECTURE_NO = #{lectureNo} AND LECTURE_YN = 'Y'
     </select>
     <select id="checkLogin" resultType="int">
         SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{memberId}
@@ -192,5 +208,25 @@
         INSERT INTO QUESTION VALUES(SEQ_QUESTION_NO.NEXTVAL, #{memberId}
         ,#{questionTitle}, #{questionContent}, SYSTIMESTAMP, DEFAULT, DEFAULT)
     </insert>
+    
+    <update id="deleteVideo">
+        UPDATE LECTURE_VIDEO SET VIDEO_YN = 'N' WHERE VIDEO_NO = #{videoNo}
+    </update>
+    
+    <select id="getVideoOrder" resultType="int">
+        SELECT VIDEO_ORDER FROM LECTURE_VIDEO WHERE VIDEO_NO = #{videoNo}
+    </select>
+    
+    <update id="reorderVideosAfterDelete">
+        UPDATE LECTURE_VIDEO 
+        SET VIDEO_ORDER = VIDEO_ORDER - 1 
+        WHERE LECTURE_NO = #{lectureNo} 
+          AND VIDEO_ORDER > #{deletedOrder} 
+          AND VIDEO_YN = 'Y'
+    </update>
+    
+    <update id="deleteLecture">
+        UPDATE LECTURE SET LECTURE_YN = 'N' WHERE LECTURE_NO = #{lectureNo}
+    </update>
 </mapper>
 

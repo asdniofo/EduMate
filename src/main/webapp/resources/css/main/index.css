@@ -40,242 +40,242 @@ a {
     animation: slideUp 1s ease forwards;
 }
 
-            .object {
-                width: 200px;
-                height: 200px;
-                background: #b0c4ff;
-                border-radius: 20px;
-                opacity: 0;
-                transform: translateY(80px);
-                animation: slideUp 1s ease forwards, floating 3s ease-in-out infinite;
-                animation-delay: 0.3s;
-            }
+.object {
+    width: 200px;
+    height: 200px;
+    background: #b0c4ff;
+    border-radius: 20px;
+    opacity: 0;
+    transform: translateY(80px);
+    animation: slideUp 1s ease forwards, floating 3s ease-in-out infinite;
+    animation-delay: 0.3s;
+}
 
-            @keyframes slideUp {
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-            @keyframes floating {
-                0%, 100% {
-                    transform: translateY(0);
-                }
-                50% {
-                    transform: translateY(-15px);
-                }
-            }
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
 
-            /* wrapper/viewport 정렬 */
-            .ads-section {
-                padding: 40px 0;
-                background: #fafafa;
-            }
-            .ads-wrapper {
-                position: relative;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                background: #fafafa;
-                
-            }
-            .ads-viewport {
-                display: flex;
-                overflow: hidden;
-                width: 100%; /* ✅ 전체 화면 기준 */
-                border-radius: 12px;
-                background: #fafafa;
-            }
+/* wrapper/viewport 정렬 */
+.ads-section {
+    padding: 40px 0;
+    background: #fafafa;
+}
+.ads-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #fafafa;
+    
+}
+.ads-viewport {
+    display: flex;
+    overflow: hidden;
+    width: 100%; /* ✅ 전체 화면 기준 */
+    border-radius: 12px;
+    background: #fafafa;
+}
 
-            /* 트랙(실제 슬라이드 그룹) */
-            .ads-track {
-                display: flex;
-                transition: transform 0.8s ease-in-out;
-                will-change: transform;
-                gap: 200px; /* 광고 사이 여백 */
-                
-            }
-            /* 개별 광고 박스 (item width 변수화하긴 JS에서) */
-            .ad-box {
-                flex: 0 0 60%; /* 👉 80%만 차지해서 양옆 보이게 함 */
-                height: 230px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 700;
-                font-size: 20px;
-                color: #222;
-                box-sizing: border-box;
-                transition: transform 0.4s ease, opacity 0.4s ease;
-                transform: translateX(100px);
-                cursor: pointer;
-                background-size : cover;
-                background-position : center;
-                background-repeat : no-repeat;
-            }
-            
-            #ad1 {
-                background: url("/resources/images/adv/ad1.png");
-            }
-            #ad2 {
-                background: url("/resources/images/adv/ad2.png");
-            }
-            #ad3 {
-                background: url("/resources/images/adv/ad3.png");
-            }
-            #ad4 {
-                background: url("/resources/images/adv/ad4.png");
-            }
+/* 트랙(실제 슬라이드 그룹) */
+.ads-track {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+    will-change: transform;
+    gap: 200px; /* 광고 사이 여백 */
+    
+}
+/* 개별 광고 박스 (item width 변수화하긴 JS에서) */
+.ad-box {
+    flex: 0 0 60%; /* 👉 80%만 차지해서 양옆 보이게 함 */
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    color: #222;
+    box-sizing: border-box;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    transform: translateX(100px);
+    cursor: pointer;
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+}
 
-            /* 컨트롤 버튼 스타일 (초기: 위치는 JS로 설정) */
+#ad1 {
+    background: url("/resources/images/adv/ad1.png");
+}
+#ad2 {
+    background: url("/resources/images/adv/ad2.png");
+}
+#ad3 {
+    background: url("/resources/images/adv/ad3.png");
+}
+#ad4 {
+    background: url("/resources/images/adv/ad4.png");
+}
 
-            .ads-controls {
-                position: absolute;
-                bottom: 12px;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                gap: 8px;
-                z-index: 30;
-            }
-            .ads-controls button {
-                background: rgba(255,255,255,0.9);
-                border: 1px solid rgba(0,0,0,0.08);
-                padding: 6px 10px;
-                border-radius: 6px;
-                cursor: pointer;
-                font-size: 16px;
-            }
-            .ads-controls button:hover {
-                transform: translateY(-2px);
-            }
+/* 컨트롤 버튼 스타일 (초기: 위치는 JS로 설정) */
+
+.ads-controls {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 30;
+}
+.ads-controls button {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.ads-controls button:hover {
+    transform: translateY(-2px);
+}
 
 
-            /* ===== 아이콘 네비게이션 ===== */
-            .icon-nav {
-                display: flex;
-                justify-content: center;
-                gap: 60px;
-                margin: 40px 0;
-            }
-            .icon-item {
-                text-align: center;
-            }
-            .icon {
-                width: 60px;
-                height: 60px;
-                background: #d8e4ff;
-                border-radius: 50%;
-                margin-bottom: 10px;
-                cursor: pointer;
-                border: none;
-            }
+/* ===== 아이콘 네비게이션 ===== */
+.icon-nav {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 40px 0;
+}
+.icon-item {
+    text-align: center;
+}
+.icon {
+    width: 60px;
+    height: 60px;
+    background: #d8e4ff;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+}
 
-            /* ===== 강의 섹션 ===== */
-            .lecture-section {
-                width: 90%;
-                max-width: 1200px;
-                margin: 0 auto 60px;
-            }
-            .lecture-section h2 {
-                font-size: 22px;
-                margin-bottom: 20px;
-            }
-            .lecture-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
-            }
-            .lecture-card {
-                border: 1px solid #ddd;
-                border-radius: 12px;
-                overflow: hidden;
-                text-align: center;
-                transition: transform 0.2s;
-                cursor: pointer;
-            }
-            .lecture-card:hover {
-                transform: translateY(-5px);
-            }
-            .lecture-img {
-                width: 100%;
-                height: 150px;
-                background: #bcd;
-            }
-            .lecture-info {
-                padding: 15px;
-            }
-            .lecture-info p {
-                margin: 5px 0;
-            }
-            .discount {
-                color: red;
-                font-weight: bold;
-            }
+/* ===== 강의 섹션 ===== */
+.lecture-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+}
+.lecture-section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.lecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.lecture-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+.lecture-card:hover {
+    transform: translateY(-5px);
+}
+.lecture-img {
+    width: 100%;
+    height: 150px;
+    background: #bcd;
+}
+.lecture-info {
+    padding: 15px;
+}
+.lecture-info p {
+    margin: 5px 0;
+}
+.discount {
+    color: red;
+    font-weight: bold;
+}
 
-            /* ===== 공지/자유게시판 ===== */
-            .board-section {
-                width: 90%;
-                max-width: 1200px;
-                margin: 0 auto 60px;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 40px;
-            }
+/* ===== 공지/자유게시판 ===== */
+.board-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
 
-            .board {
-                border: 1px solid #fafafa;
-                border-radius: 10px;
-                overflow: hidden;
-            }
+.board {
+    border: 1px solid #fafafa;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-            .board h3 {
-                background: #f2f2f2;
-                padding: 10px 15px;
-                font-size: 18px;
-                font-weight: 600;
-            }
+.board h3 {
+    background: #f2f2f2;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
 
-            .board ul {
-                list-style: none;
-            }
+.board ul {
+    list-style: none;
+}
 
-            .board li {
-                display: flex;
-                justify-content: space-between;
-                padding: 10px 15px;
-                border-top: 1px solid #eee;
-                font-size: 15px;
-            }
+.board li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-top: 1px solid #eee;
+    font-size: 15px;
+}
 
-            .board li span {
-                color: #666;
-            }
-            /* ===== 반응형 ===== */
-            @media (max-width: 768px) {
-                header {
-                    flex-direction: column;
-                    gap: 10px;
-                    padding: 10px;
-                }
-                .menu {
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    gap: 15px;
-                }
-                .main-banner {
-                    flex-direction: column;
-                    height: 300px;
-                }
-                .object {
-                    width: 120px;
-                    height: 120px;
-                }
-                .board-section {
-                    grid-template-columns: 1fr;
-                }
-                .icon-nav {
-                    gap: 20px;
-                }
-            }
+.board li span {
+    color: #666;
+}
+/* ===== 반응형 ===== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .main-banner {
+        flex-direction: column;
+        height: 300px;
+    }
+    .object {
+        width: 120px;
+        height: 120px;
+    }
+    .board-section {
+        grid-template-columns: 1fr;
+    }
+    .icon-nav {
+        gap: 20px;
+    }
+}

@@ -39,7 +39,7 @@ public interface LectureMapper {
 
     int insertVideo(LectureVideo video);
 
-    int getSearchCountAll(String search);
+    int getSearchCountAll(Map<String, Object> params);
 
     List<LectureListRequest> selectSearchAll(Map<String, Object> params);
 
@@ -58,4 +58,12 @@ public interface LectureMapper {
     int checkLogin(String memberId);
 
     int insertQuestion(LectureQuestionRequest qList);
+    
+    void deleteVideo(int videoNo);
+    
+    int getVideoOrder(int videoNo);
+    
+    void reorderVideosAfterDelete(int lectureNo, int deletedOrder);
+    
+    void deleteLecture(int lectureNo);
 }

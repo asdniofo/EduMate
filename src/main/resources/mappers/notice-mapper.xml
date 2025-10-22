@@ -12,7 +12,7 @@
 		SELECT COUNT(*) FROM NOTICE_BOARD WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' AND BOARD_YN = 'Y'
 	</select>
 	<select id="selectNoticeList" resultType="Notice">
-		SELECT * FROM NOTICE_BOARD WHERE BOARD_YN = 'Y' ORDER BY NOTICE_ID DESC
+		SELECT * FROM NOTICE_BOARD WHERE BOARD_YN = 'Y' ORDER BY WRITE_DATE DESC
 	</select>
 	<select id="selectSearchList" resultType="Notice">
 		SELECT * FROM NOTICE_BOARD WHERE NOTICE_TITLE LIKE '%'||#{searchKeyword}||'%' AND BOARD_YN = 'Y'
