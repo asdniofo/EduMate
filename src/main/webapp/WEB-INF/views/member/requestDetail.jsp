@@ -232,7 +232,7 @@
 	document.querySelector("#delete-list-btn").addEventListener("click", function() {
 	    if (confirm("정말 이 질문을 삭제하시겠습니까?")) {
 	        
-	    	fetch(`/member/request/delete?requestNo=${currentRequestNo}`)
+	    	fetch(`/member/request/delete?requestNo=${request.requestNo}`)
 	        
 	        // 💡 1. 응답을 텍스트로 받고 (Controller가 숫자만 반환)
 	        .then(response => response.text()) 
@@ -263,7 +263,7 @@
 	    
 	    if (confirm("질문 상태를 변경하시겠습니까?")) {
 	        
-	        fetch(`/member/request/change/status?requestNo=${currentRequestNo}`)
+	        fetch(`/member/request/change/status?requestNo=${request.requestNo}`)
 	        
 	        .then(response => response.text()) 
 	        .then(text => {

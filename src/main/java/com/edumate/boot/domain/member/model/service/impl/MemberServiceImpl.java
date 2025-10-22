@@ -99,4 +99,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.selectNextRequestNo(map);
 	}
 
+	@Override
+	public int changeRequestStatus(int requestNo) {
+		return memberMapper.changeRequestStatus(requestNo);
+	}
+
+	@Override
+	public int deleteRequest(int requestNo) {
+		int result = memberMapper.deleteRequest(requestNo);
+		return result;
+	}
+
 }

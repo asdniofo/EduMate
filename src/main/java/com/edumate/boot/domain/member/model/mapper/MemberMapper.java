@@ -43,6 +43,10 @@ public interface MemberMapper {
 	
 	Integer selectNextRequestNo(Map<String, Object> map);
 
+	int changeRequestStatus(int requestNo);
+
+	int deleteRequest(int requestNo);
+
 
 
 }

@@ -140,4 +140,15 @@
 	        AND MEMBER_ID = #{memberId, jdbcType=VARCHAR} 
 	    </if>
 	</select>
+	
+	<update id="changeRequestStatus">
+		UPDATE REQUEST 
+	    SET REQUEST_STATUS = 
+	        CASE 
+	            WHEN REQUEST_STATUS = 'Y' THEN 'N'  WHEN REQUEST_STATUS = 'N' THEN 'Y'  ELSE REQUEST_STATUS END
+	    WHERE REQUEST_NO = #{requestNo}
+	</update>
+	<update id="deleteRequest">
+		UPDATE REQUEST SET REQUEST_YN = 'N' WHERE REQUEST_NO = #{requestNo}
+	</update>
 </mapper>

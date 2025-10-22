@@ -347,5 +347,29 @@ public class MemberController {
             return "common/error";
         }
     }
+    
+    @GetMapping("/request/change/status")
+    @ResponseBody
+    public int changeRequestStatus(@RequestParam int requestNo) {
+    	try {
+			int result = memberService.changeRequestStatus(requestNo);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+            return 0;
+		}
+    }
+    
+    @GetMapping("/request/delete")
+    @ResponseBody
+    public int deleteRequestList(@RequestParam int requestNo) {
+    	try {
+    		int result = memberService.deleteRequest(requestNo);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+    }
 
 }

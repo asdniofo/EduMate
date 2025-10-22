@@ -30,5 +30,7 @@ public interface MemberService {
 	Request selectOneByNo(int requestNo);
 	Integer selectPrevRequestNo(Map<String, Object> map); 
 	Integer selectNextRequestNo(Map<String, Object> map);
+	int changeRequestStatus(int requestNo);
+	int deleteRequest(int requestNo);
 
 }
