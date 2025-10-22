@@ -71,22 +71,20 @@
 	                            <button class="action-button" id="delete-list-btn">삭제</button>
                             	<button class="action-button" id="change-status-btn">상태변경</button>
                             </c:if>
-                            <c:if test="${sessionScope.loginMember.adminYN eq 'Y' }">
-                            </c:if>
                         </div>
                         <div class="right-actions">
-                            <%-- 💡 이전 버튼: prevQuestionNo 변수에 값이 있을 때만 버튼 표시 --%>
-					        <c:if test="${not empty prevRequestNo}">
+                        	<%-- 💡 다음 버튼: nextQuestionNo 변수에 값이 있을 때만 버튼 표시 --%>
+					        <c:if test="${not empty nextRequestNo}">
 					            <button class="action-button" 
-					                    onclick="location.href='detail?requestNo=${prevRequestNo}';">
+					                    onclick="location.href='detail?requestNo=${nextRequestNo}';">
 					                이전
 					            </button>
 					        </c:if>
 					        
-					        <%-- 💡 다음 버튼: nextQuestionNo 변수에 값이 있을 때만 버튼 표시 --%>
-					        <c:if test="${not empty nextRequestNo}">
+                            <%-- 💡 이전 버튼: prevQuestionNo 변수에 값이 있을 때만 버튼 표시 --%>
+					        <c:if test="${not empty prevRequestNo}">
 					            <button class="action-button" 
-					                    onclick="location.href='detail?requestNo=${nextRequestNo}';">
+					                    onclick="location.href='detail?requestNo=${prevRequestNo}';">
 					                다음
 					            </button>
 					        </c:if>
@@ -189,43 +187,46 @@
     }
     getCommentList();
 		
-		document.querySelector("#submit-button").addEventListener("click", function(){
-			// 댓글 등록 버튼 클릭 시 실행되는 코드
-			// 입력된 값을 가져와서 서버로 전송하는 로직을 구현해야 합니다.
-			// Ajax를 사용하여 비동기적으로 댓글을 추가
-			const requestCommentContent = document.querySelector("#answer-area").value;
-			if(requestCommentContent.trim() === "") {
-				alert("댓글 내용을 입력하세요.");
-				return;
-			}
-			// 게시글 번호
-			const requestNo = ${request.requestNo};
-			const memberId = "${request.memberId }";
-			const data = {
-			    "requestNo": requestNo, 
-			    "memberId": loginMemberId,
-			    "requestCommentContent": requestCommentContent
-			};
-			// 데이터 fetch API 이용하여 보내기
-			fetch("/request/comment/add", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(data)
-			}).then(response => response.text())
-			.then(text => {
-				const result = parseInt(text.trim());
-				if(result > 0){
-					alert("댓글 등록이 완료되었습니다.");
-					getCommentList();
-				}else {
-					alert("댓글 등록이 완료되지 않았습니다.");
-				}
-				document.querySelector("#answer-area").value = "";
-			})
-			.catch(error => alert("댓글 등록 중 오류가 발생했습니다."));
-		})
+    const submitButton = document.querySelector("#submit-button");
+    if (submitButton){
+    	submitButton.addEventListener("click", function(){
+    		// 댓글 등록 버튼 클릭 시 실행되는 코드
+    		// 입력된 값을 가져와서 서버로 전송하는 로직을 구현해야 합니다.
+    		// Ajax를 사용하여 비동기적으로 댓글을 추가
+    		const requestCommentContent = document.querySelector("#answer-area").value;
+    		if(requestCommentContent.trim() === "") {
+    			alert("댓글 내용을 입력하세요.");
+    			return;
+    		}
+    		// 게시글 번호
+    		const requestNo = ${request.requestNo};
+    		const memberId = "${request.memberId }";
+    		const data = {
+    		    "requestNo": requestNo, 
+    		    "memberId": loginMemberId,
+    		    "requestCommentContent": requestCommentContent
+    		};
+    		// 데이터 fetch API 이용하여 보내기
+    		fetch("/request/comment/add", {
+    			method: "POST",
+    			headers: {
+    				"Content-Type": "application/json"
+    			},
+    			body: JSON.stringify(data)
+    		}).then(response => response.text())
+    		.then(text => {
+    			const result = parseInt(text.trim());
+    			if(result > 0){
+    				alert("댓글 등록이 완료되었습니다.");
+    				getCommentList();
+    			}else {
+    				alert("댓글 등록이 완료되지 않았습니다.");
+    			}
+    			document.querySelector("#answer-area").value = "";
+    		})
+    		.catch(error => alert("댓글 등록 중 오류가 발생했습니다."));
+    	})
+    }
 		
 	const currentRequestNo = ${request.requestNo};
 

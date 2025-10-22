@@ -47,6 +47,6 @@ public interface MemberMapper {
 
 	int deleteRequest(int requestNo);
 
-
+	int updateRequest(Request request);
 
 }

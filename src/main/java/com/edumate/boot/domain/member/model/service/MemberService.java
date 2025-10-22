@@ -32,5 +32,6 @@ public interface MemberService {
 	Integer selectNextRequestNo(Map<String, Object> map);
 	int changeRequestStatus(int requestNo);
 	int deleteRequest(int requestNo);
+	int updateQuestion(Request request);
 
 }

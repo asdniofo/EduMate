@@ -371,5 +371,39 @@ public class MemberController {
 			return -1;
 		}
     }
+    
+    @GetMapping("/request/modify")
+    public String showRequestModify(@RequestParam int requestNo, Model model) {
+    	Request request = memberService.selectOneByNo(requestNo);
+    	model.addAttribute("request", request);
+    	return "member/modifyRequest";
+    }
 
+    @PostMapping("/request/modify")
+    public String modifyQuestion(
+    		@RequestParam("requestNo") int requestNo, 
+            @RequestParam("requestTitle") String requestTitle,
+            @RequestParam("requestContent") String requestContent,
+            Model model) {
+        try {
+        	Request request = new Request(); // Question VO/DTO를 가정
+        	request.setRequestNo(requestNo);
+        	request.setRequestTitle(requestTitle);
+        	request.setRequestContent(requestContent);
+        	
+            int result = memberService.updateQuestion(request);
+            
+            if (result > 0) {
+                // 2. 성공 시 상세 페이지로 리다이렉트
+            	return "redirect:/member/request/detail?requestNo=" + requestNo; 
+            } else {
+                // 실패 처리
+                model.addAttribute("errorMsg", "건의사항 수정에 실패했습니다.");
+                return "common/error";
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", "수정 중 오류 발생: " + e.getMessage());
+            return "common/error";
+        }
+    }
 }
