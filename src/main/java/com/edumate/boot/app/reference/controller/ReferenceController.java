@@ -30,9 +30,9 @@ public class ReferenceController {
             HttpSession session,
             Model model) {
         try {
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
-            String teacherYn = session.getAttribute("teacherYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
+            String teacherYn = (String) session.getAttribute("teacherYn");
 
             boolean canWrite = false;
             if (memberId != null) {
@@ -88,8 +88,8 @@ public class ReferenceController {
             referenceService.updateViewCount(archiveNo);
             Reference reference = referenceService.selectOneByNo(archiveNo);
 
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
 
             boolean canModify = false;
             if (memberId != null) {
@@ -111,9 +111,9 @@ public class ReferenceController {
     // ==============================
     @GetMapping("/insert")
     public String showInsertView(HttpSession session, Model model) {
-        String memberId = session.getAttribute("loginId").toString();
-        String adminYn = session.getAttribute("adminYn").toString();
-        String teacherYn = session.getAttribute("teacherYn").toString();
+        String memberId = (String) session.getAttribute("loginId");
+        String adminYn = (String) session.getAttribute("adminYn");
+        String teacherYn = (String) session.getAttribute("teacherYn");
 
         if (memberId == null ||
             (!"Y".equals(adminYn) && !"Y".equals(teacherYn))) {
@@ -133,9 +133,9 @@ public class ReferenceController {
             HttpSession session,
             Model model) {
         try {
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
-            String teacherYn = session.getAttribute("teacherYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
+            String teacherYn = (String) session.getAttribute("teacherYn");
 
 
             if (memberId == null ||
@@ -174,8 +174,8 @@ public class ReferenceController {
             HttpSession session,
             Model model) {
         try {
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
             Reference reference = referenceService.selectOneByNo(archiveNo);
 
             if (memberId == null ||
@@ -202,8 +202,8 @@ public class ReferenceController {
             HttpSession session,
             Model model) {
         try {
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
 
             Reference originalRef = referenceService.selectOneByNo(reference.getArchiveNo());
 
@@ -242,8 +242,8 @@ public class ReferenceController {
             HttpSession session,
             Model model) {
         try {
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
 
             Reference reference = referenceService.selectOneByNo(archiveNo);
 
@@ -271,9 +271,9 @@ public class ReferenceController {
             HttpSession session,
             Model model) {
         try {
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
-            String teacherYn = session.getAttribute("teacherYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
+            String teacherYn = (String) session.getAttribute("teacherYn");
 
             boolean canWrite = false;
             if (memberId != null) {
@@ -329,9 +329,9 @@ public class ReferenceController {
             HttpSession session,
             Model model) {
         try {
-            String memberId = session.getAttribute("loginId").toString();
-            String adminYn = session.getAttribute("adminYn").toString();
-            String teacherYn = session.getAttribute("teacherYn").toString();
+            String memberId = (String) session.getAttribute("loginId");
+            String adminYn = (String) session.getAttribute("adminYn");
+            String teacherYn = (String) session.getAttribute("teacherYn");
 
             boolean canWrite = false;
             if (memberId != null) {

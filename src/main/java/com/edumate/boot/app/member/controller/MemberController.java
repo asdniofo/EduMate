@@ -34,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
     private final MemberService memberService;
-    
+
     @GetMapping("/login")
     public String showLogin() {
 		  return "member/login";
@@ -151,17 +151,17 @@ public class MemberController {
             return false;
         }
     }
-    
+
     @GetMapping("/signup/complete")
     public String showComplete() {
       return "member/signup_done";
     }
-    
+
     @GetMapping("/find")
     public String showFind() {
     	return "member/find_info";
     }
-    
+
     @PostMapping("/findId")
     public String findId(Member member, Model model) {
         String foundId = memberService.findMemberId(member);
@@ -174,7 +174,7 @@ public class MemberController {
             return "member/find_info";
         }
     }
-    
+
     @PostMapping("/findPw")
     public String findPw(Member member, Model model) {
         boolean exists = memberService.checkMemberForPwReset(member);
@@ -187,7 +187,7 @@ public class MemberController {
             return "member/find_info";
         }
     }
-    
+
     @PostMapping("/updatePw")
     public String updatePw(Member member, Model model) {
         int result = memberService.updateMemberPw(member);
@@ -208,7 +208,7 @@ public class MemberController {
     public String showInsertQuestion() {
 		return "member/insertQuestion";
     }
-    
+
  // 등록하기
     @PostMapping("/insertQuestion")
     public String insertQuestion(
@@ -216,9 +216,9 @@ public class MemberController {
     		, Model model, HttpSession session) {
     	try {
     		String loginId = (String) session.getAttribute("loginId");
-            
+
             if (loginId == null) {
-                return "redirect:/member/login"; 
+                return "redirect:/member/login";
             }
     		question.setMemberId(loginId);
     		int result = memberService.insertQuestion(question);
@@ -228,7 +228,7 @@ public class MemberController {
     		return "common/error";
     	}
     }
-    
+
     @GetMapping("/request")
     public String showRequestList(
     		@RequestParam(value = "searchKeyword", defaultValue = "") String searchKeyword
@@ -236,7 +236,7 @@ public class MemberController {
 			, @RequestParam(value = "filter", defaultValue = "ALL") String filter
 			, Model model, HttpSession session) {
 
-        String memberId = session.getAttribute("loginId").toString();
+        String memberId = (String) session.getAttribute("loginId");
         String adminYn = (String) session.getAttribute("adminYn");
 
         String loginMemberId = null;
@@ -256,7 +256,7 @@ public class MemberController {
 			searchMap.put("searchKeyword", upperKeyword);
 			searchMap.put("currentPage", currentPage);
 			searchMap.put("boardLimit", boardLimit);
-			searchMap.put("memberId", loginMemberId); 
+			searchMap.put("memberId", loginMemberId);
 			searchMap.put("adminYN", adminYN);
 			List<Question> searchList = memberService.selectRequestList(searchMap);
 			if(searchList != null && !searchList.isEmpty()) {
@@ -281,21 +281,21 @@ public class MemberController {
 			return "common/error";
 		}
     }
-    
+
     @GetMapping("/request/insert")
     public String showInsertRequest() {
 		return "member/insertRequest";
     }
-    
+
     @PostMapping("/request/insert")
     public String insertRequest(
     		@ModelAttribute InsertRequestRequest request
     		, Model model, HttpSession session) {
     	try {
     		String loginId = (String) session.getAttribute("loginId");
-            
+
             if (loginId == null) {
-                return "redirect:/member/login"; 
+                return "redirect:/member/login";
             }
             request.setMemberId(loginId);
     		int result = memberService.insertRequest(request);
@@ -305,52 +305,52 @@ public class MemberController {
     		return "common/error";
     	}
     }
-    
+
     @GetMapping("/request/detail")
-    public String showRequestDetailView(@RequestParam("requestNo") int requestNo, 
+    public String showRequestDetailView(@RequestParam("requestNo") int requestNo,
     		Model model, HttpSession session) {
     	// 1. 로그인 정보 가져오기 및 체크
-        String memberId = session.getAttribute("loginId").toString();
+        String memberId = (String) session.getAttribute("loginId");
         String adminYn = (String) session.getAttribute("adminYn");
         if (memberId == null) {
             return "redirect:/member/login";
         }
-        
+
         String loginMemberId = memberId;
         String adminYN = adminYn;
-        
+
         try {
             Request request = memberService.selectOneByNo(requestNo);
-            
+
             if (!"Y".equals(adminYN) && !loginMemberId.equals(request.getMemberId())) {
                 model.addAttribute("errorMsg", "해당 요청서에 접근할 권한이 없습니다.");
                 return "common/error";
             }
-            
+
             // 4. 이전/다음 요청 번호 조회를 위한 Map 준비 (사용자별 필터링을 위해)
             Map<String, Object> naviMap = new HashMap<>();
             naviMap.put("currentRequestNo", requestNo);
             naviMap.put("adminYN", adminYN);
             naviMap.put("memberId", loginMemberId); // 일반 사용자는 본인 글에서만 이전/다음이 작동하도록
-            
+
             // 5. 수정된 Service 메소드 호출
             Integer prevRequestNo = memberService.selectPrevRequestNo(naviMap);
             Integer nextRequestNo = memberService.selectNextRequestNo(naviMap);
-            
+
             // 6. Model에 담기
             model.addAttribute("request", request);
             model.addAttribute("prevRequestNo", prevRequestNo);
             model.addAttribute("nextRequestNo", nextRequestNo);
-            
-            return "member/requestDetail"; 
-            
+
+            return "member/requestDetail";
+
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
             model.addAttribute("errorMsg", "요청 상세 정보 조회 중 오류가 발생했습니다.");
             return "common/error";
         }
     }
-    
+
     @GetMapping("/request/change/status")
     @ResponseBody
     public int changeRequestStatus(@RequestParam int requestNo) {
@@ -362,7 +362,7 @@ public class MemberController {
             return 0;
 		}
     }
-    
+
     @GetMapping("/request/delete")
     @ResponseBody
     public int deleteRequestList(@RequestParam int requestNo) {
@@ -374,7 +374,7 @@ public class MemberController {
 			return -1;
 		}
     }
-    
+
     @GetMapping("/request/modify")
     public String showRequestModify(@RequestParam int requestNo, Model model) {
     	Request request = memberService.selectOneByNo(requestNo);
@@ -384,7 +384,7 @@ public class MemberController {
 
     @PostMapping("/request/modify")
     public String modifyQuestion(
-    		@RequestParam("requestNo") int requestNo, 
+    		@RequestParam("requestNo") int requestNo,
             @RequestParam("requestTitle") String requestTitle,
             @RequestParam("requestContent") String requestContent,
             Model model) {
@@ -393,12 +393,12 @@ public class MemberController {
         	request.setRequestNo(requestNo);
         	request.setRequestTitle(requestTitle);
         	request.setRequestContent(requestContent);
-        	
+
             int result = memberService.updateQuestion(request);
-            
+
             if (result > 0) {
                 // 2. 성공 시 상세 페이지로 리다이렉트
-            	return "redirect:/member/request/detail?requestNo=" + requestNo; 
+            	return "redirect:/member/request/detail?requestNo=" + requestNo;
             } else {
                 // 실패 처리
                 model.addAttribute("errorMsg", "건의사항 수정에 실패했습니다.");
