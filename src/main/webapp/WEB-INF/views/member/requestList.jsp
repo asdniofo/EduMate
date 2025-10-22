@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>요청 게시판</title>
+		<title>건의사항</title>
 		<link rel="stylesheet" href="/resources/css/teacher/list.css">
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
@@ -15,7 +15,7 @@
         <jsp:include page="../common/header.jsp" />
 		<div class="hero-section-wrapper">
         <div class="hero-section">
-            <h1 class="hero-title">관리자에게 요청하기</h1>
+            <h1 class="hero-title">건의사항</h1>
             <div class="hero-image"></div>
         </div>
     </div>
