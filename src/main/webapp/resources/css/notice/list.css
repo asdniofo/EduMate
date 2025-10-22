@@ -42,7 +42,7 @@ body {
 .hero-image {
     width: 180px;
     position: absolute;
-    right: 15%;
+    right: 30%;
     top: 50%;
     transform: translateY(-50%);
 }
