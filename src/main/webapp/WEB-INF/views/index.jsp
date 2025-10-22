@@ -29,10 +29,10 @@
                 <div class="ads-viewport" id="adsViewport">
                     <div class="ads-track" id="adsTrack">
                         <!-- 실제 광고들 (원본 순서대로) -->
-                        <div class="ad-box" onclick="location.href='#'">광고 1</div>
-                        <div class="ad-box" onclick="location.href='#'">광고 2</div>
-                        <div class="ad-box" onclick="location.href='#'">광고 3</div>
-                        <div class="ad-box" onclick="location.href='#'">광고 4</div>
+                        <div class="ad-box" id = "ad1" onclick="location.href='#'">광고 1</div>
+                        <div class="ad-box" id = "ad2" onclick="location.href='#'">광고 2</div>
+                        <div class="ad-box" id = "ad3" onclick="location.href='#'">광고 3</div>
+                        <div class="ad-box" id = "ad4" onclick="location.href='#'">광고 4</div>
                     </div>
                 </div>
 

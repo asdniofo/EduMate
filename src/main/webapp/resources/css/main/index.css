@@ -100,7 +100,6 @@ a {
             .ad-box {
                 flex: 0 0 60%; /* 👉 80%만 차지해서 양옆 보이게 함 */
                 height: 230px;
-                border-radius: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -111,8 +110,22 @@ a {
                 transition: transform 0.4s ease, opacity 0.4s ease;
                 transform: translateX(100px);
                 cursor: pointer;
-
-                border: 1px solid black;
+                background-size : cover;
+                background-position : center;
+                background-repeat : no-repeat;
+            }
+            
+            #ad1 {
+                background: url("/resources/images/adv/ad1.png");
+            }
+            #ad2 {
+                background: url("/resources/images/adv/ad2.png");
+            }
+            #ad3 {
+                background: url("/resources/images/adv/ad3.png");
+            }
+            #ad4 {
+                background: url("/resources/images/adv/ad4.png");
             }
 
             /* 컨트롤 버튼 스타일 (초기: 위치는 JS로 설정) */
