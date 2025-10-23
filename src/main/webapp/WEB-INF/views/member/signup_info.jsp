@@ -61,7 +61,7 @@
 				    <button type="button" id="verifyAuthBtn" class="btn-email-action btn-verify">인증 확인</button>
 				</div>
 	
-				<div id="authStatusMessage" class="auth-message"></div>
+				<div id="authStatusMessage" class="auth-message" style="display: none;"></div>
 				
 				<input type="hidden" id="emailAuthStatus" name="emailAuthStatus" value="N">
                 <!-- 이름 -->

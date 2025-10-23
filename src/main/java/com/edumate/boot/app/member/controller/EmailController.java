@@ -42,9 +42,13 @@ public class EmailController {
             response.put("success", true);
             response.put("message", "인증 메일이 발송되었습니다. 메일함을 확인해주세요.");
             return ResponseEntity.ok(response);
-        } catch (RuntimeException e) {
+        } catch (IllegalArgumentException e) { // 💡 FIX: 이메일 중복 예외 처리
             response.put("success", false);
-            response.put("message", "이메일 전송에 실패했습니다.");
+            response.put("message", e.getMessage()); // "이미 가입된 이메일 주소입니다."
+            return ResponseEntity.ok(response); // 200 OK로 반환하여 프론트에서 메시지를 정상적으로 표시
+        } catch (RuntimeException e) { // 이메일 발송 실패 등 기타 예외 처리
+            response.put("success", false);
+            response.put("message", "이메일 발송 시스템 오류가 발생했습니다.");
             // 💡 개발용: System.err.println(e.getMessage());
             return ResponseEntity.internalServerError().body(response);
         }

@@ -64,6 +64,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 초기 제출 버튼 비활성화 (HTML에서 disabled="true" 처리됨)
     nextBtn.disabled = true;
+	
+	function updateAuthMessage(message, color) {
+	    authStatusMessage.textContent = message;
+	    authStatusMessage.style.color = color;
+	    // 메시지가 비어있으면 display: none; 처리하여 공간을 차지하지 않게 함
+	    authStatusMessage.style.display = message ? 'block' : 'none'; 
+	}
 
     // 1. '인증 요청' 버튼 클릭 이벤트
     sendAuthBtn.addEventListener('click', function() {
@@ -89,10 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             authStatusMessage.textContent = data.message;
             if (data.success) {
-                authStatusMessage.style.color = '#5cb85c'; // 성공 시 초록색
+                updateAuthMessage(data.message, '#5cb85c'); // 성공 시 초록색
                 authCodeArea.style.display = 'flex'; // 인증 번호 입력창 표시
             } else {
-                authStatusMessage.style.color = 'red';
+                updateAuthMessage(data.message, 'red');
                 // 실패 시 다시 활성화
                 emailInput.disabled = false;
                 sendAuthBtn.disabled = false;
@@ -138,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (data.success) {
                 // 💡 인증 성공 시 처리
-                authStatusMessage.style.color = 'blue';
+                updateAuthMessage(data.message, 'blue');
                 emailAuthStatus.value = 'Y'; // Hidden 필드 값 변경
                 isEmailVerified = true;
                 authCodeInput.disabled = true;
@@ -147,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } else {
                 // 💡 인증 실패 시 처리
-                authStatusMessage.style.color = 'red';
+                updateAuthMessage(data.message, 'red');
                 emailAuthStatus.value = 'N'; 
                 isEmailVerified = false;
                 verifyAuthBtn.disabled = false;
@@ -155,8 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
             verifyAuthBtn.textContent = '인증 확인';
         })
         .catch(error => {
-            authStatusMessage.textContent = '네트워크 오류로 인증 확인에 실패했습니다.';
-            authStatusMessage.style.color = 'red';
+            updateAuthMessage('네트워크 오류로 인증 확인에 실패했습니다.', 'red');
             verifyAuthBtn.disabled = false;
             verifyAuthBtn.textContent = '인증 확인';
             console.error('Error:', error);

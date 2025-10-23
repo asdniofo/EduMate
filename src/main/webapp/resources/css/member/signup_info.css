@@ -211,7 +211,7 @@ input {
 .auth-message {
     font-size: 13px;
     margin-top: 5px;
-    min-height: 15px; /* 메시지가 없을 때 공간을 유지 */
+   /*  min-height: 15px; */ /* 메시지가 없을 때 공간을 유지 */
     text-align: left;
     padding: 0 5px;
 }

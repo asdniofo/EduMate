@@ -162,4 +162,8 @@
     <select id="getCount" resultType="int">
         SELECT COUNT(*) FROM REQUEST
     </select>
+    
+    <select id="checkEmailDuplication" resultType="_int">
+        SELECT COUNT(*) FROM MEMBER WHERE MEMBER_EMAIL = #{memberEamil}
+    </select>
 </mapper>

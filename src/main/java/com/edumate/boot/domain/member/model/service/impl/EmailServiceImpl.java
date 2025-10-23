@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.edumate.boot.domain.member.model.mapper.MemberMapper;
 import com.edumate.boot.domain.member.model.service.EmailService;
 
 import jakarta.mail.MessagingException;
@@ -18,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-private final JavaMailSender mailSender;
+	private final JavaMailSender mailSender;
+	private final MemberMapper memberMapper;
     
     // 💡 인증 코드를 저장할 임시 저장소 (Key: Email, Value: AuthCode) 실제 서비스 X
     private final Map<String, String> authCodeStore = new ConcurrentHashMap<>();
@@ -32,6 +34,13 @@ private final JavaMailSender mailSender;
 
     @Override
     public String sendAuthCode(String toEmail) {
+    	
+    	int count = memberMapper.checkEmailDuplication(toEmail);
+        if (count > 0) {
+            // 이미 등록된 이메일
+            throw new IllegalArgumentException("이미 가입된 이메일 주소입니다.");
+        }
+        
         String authCode = createCode();
         String title = "[EduMateBoot] 회원가입 이메일 인증 번호";
         String content = "인증 번호는 " + authCode + " 입니다.";
