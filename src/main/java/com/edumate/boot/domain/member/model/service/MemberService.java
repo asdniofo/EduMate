@@ -5,6 +5,10 @@ import java.util.Map;
 
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.app.member.dto.InsertRequestRequest;
+import com.edumate.boot.app.purchase.dto.LectureNoRequest;
+import com.edumate.boot.app.member.dto.MemberStatsRequest;
+import com.edumate.boot.app.member.dto.MyPostRequest;
+import com.edumate.boot.app.member.dto.MyCommentRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.member.model.vo.Request;
 import com.edumate.boot.domain.teacher.model.vo.Question;
@@ -35,4 +39,22 @@ public interface MemberService {
 	int updateQuestion(Request request);
 
     int getCount();
+
+    List<LectureNoRequest> findLectureById(String memberId);
+    
+    int updateMemberInfo(Member member);
+    
+    MemberStatsRequest getMemberStats(String memberId);
+    
+    List<MyPostRequest> getMyPosts(String memberId);
+    
+    List<MyPostRequest> getMyPostsWithSearch(Map<String, Object> searchMap);
+    
+    int getMyPostsTotalCount(Map<String, Object> searchMap);
+    
+    List<MyCommentRequest> getMyComments(String memberId);
+    
+    List<MyCommentRequest> getMyCommentsWithSearch(Map<String, Object> searchMap);
+    
+    int getMyCommentsTotalCount(Map<String, Object> searchMap);
 }

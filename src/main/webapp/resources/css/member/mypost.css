@@ -1,0 +1,270 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #fafafa;
+    color: #222;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+.main-container {
+    min-height: 100vh;
+}
+
+/* 히어로 섹션 */
+.hero-section-wrapper {
+    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-section {
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #000;
+}
+
+.hero-image {
+    width: 180px;
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 40px auto 60px;
+    padding: 0 20px;
+}
+
+.mypost-content {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 나의 글 섹션 */
+.mypost-section {
+    background: white;
+    box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+}
+
+.stats-info {
+    margin-left: auto;
+    color: #666;
+    font-size: 14px;
+}
+
+/* 검색 박스 */
+.search-box {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+}
+
+.search-box input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 300px;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.search-box button {
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-box button:hover {
+    background: #0056b3;
+}
+
+/* 글 목록 */
+.post-list {
+    background: #F4F4F4;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 15px;
+    min-height: auto;
+}
+
+.post-item {
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.post-item:hover {
+    background: #f8f9fa;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.post-item:last-child {
+    margin-bottom: 0;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.post-type-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.post-type-request {
+    background: #007bff;
+}
+
+.post-type-question {
+    background: #28a745;
+}
+
+.post-status {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+}
+
+.status-y {
+    background: #32E462;
+}
+
+.status-n {
+    background: #FF6060;
+}
+
+.post-date {
+    margin-left: auto;
+    color: #666;
+    font-size: 12px;
+}
+
+.post-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.post-content {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.no-posts {
+    text-align: center;
+    color: #999;
+    padding: 60px 20px;
+    font-size: 16px;
+}
+
+.back-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #0056b3;
+}
+
+/* 페이지네이션 스타일 */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 20px 0;
+}
+
+.pagination {
+    display: flex;
+    gap: 6px;
+}
+
+.page-btn {
+    padding: 9px 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    text-decoration: none;
+    color: #333;
+}
+
+.page-btn:hover {
+    background: #f3f3f3;
+}
+
+.page-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    font-weight: 700;
+}

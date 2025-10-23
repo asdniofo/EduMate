@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edumate.boot.domain.purchase.model.mapper.PurchaseMapper">
-    <!-- 사용자 잔액 업데이트 (충전) -->
     <update id="updateMoney" parameterType="map">
         UPDATE MEMBER SET MEMBER_MONEY = MEMBER_MONEY + #{amount}
         WHERE MEMBER_ID = #{memberId}

@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 @ToString
 @NoArgsConstructor
 public class Purchase {
-
+    private int purchaseNo;
+    private int lectureNo;
+    private String memberId;
 }

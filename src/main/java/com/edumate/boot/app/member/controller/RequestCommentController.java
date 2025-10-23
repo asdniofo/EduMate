@@ -32,8 +32,6 @@ public class RequestCommentController {
 	public int insertComment(@RequestBody AddRequestCommentRequest requestComment) {
 		try {
 			int result = rcService.insertRequestComment(requestComment);
-			System.out.println("댓글 내용 확인" + requestComment.getRequestCommentContent());
-			System.out.println(requestComment);
 			return result;
 		} catch (Exception e) {
 			return -1;
@@ -44,7 +42,6 @@ public class RequestCommentController {
 	public int deleteComment(int requestCommentNo) {
 		try {
 			int result = rcService.deleteComment(requestCommentNo);
-			System.out.println(requestCommentNo);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

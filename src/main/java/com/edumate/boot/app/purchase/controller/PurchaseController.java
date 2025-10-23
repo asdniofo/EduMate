@@ -68,11 +68,13 @@ public class PurchaseController {
 
             int result = pService.updateMoney(memberId, amount);
             if (result > 0) {
-                int lectureNo = (int) session.getAttribute("currentLectureNo");
-                if (lectureNo != 0) {
+                Object lectureNoObj = session.getAttribute("currentLectureNo");
+                if (lectureNoObj != null) {
+                    int lectureNo = (int) lectureNoObj;
                     return "redirect:/lecture/payment?lectureNo=" + lectureNo + "&chargeSuccess=true&chargeAmount=" + amount;
                 } else {
-                    return "redirect:/lecture/list?chargeSuccess=true&chargeAmount=" + amount;
+                    // 마이페이지에서 충전한 경우 마이페이지로 리다이렉트
+                    return "redirect:/member/mypage?chargeSuccess=true&chargeAmount=" + amount;
                 }
             } else {
                 model.addAttribute("errorMsg", "충전 처리 중 오류가 발생했습니다.");
