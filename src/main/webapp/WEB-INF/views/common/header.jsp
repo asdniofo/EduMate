@@ -49,10 +49,6 @@
                                         <!-- 관리자인 경우 -->
                                         <a href="/admin/main">관리자 페이지</a>
                                     </c:when>
-                                    <c:when test="${sessionScope.teacherYn eq 'Y'}">
-                                        <!-- 선생님인 경우 -->
-                                        <a href="/lecture/add">강의 추가</a>
-                                    </c:when>
                                     <c:otherwise>
                                         <!-- 일반 회원인 경우 -->
                                         <a href="/member/mypage">마이페이지</a>

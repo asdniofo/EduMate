@@ -166,4 +166,231 @@
     <select id="checkEmailDuplication" resultType="_int">
         SELECT COUNT(*) FROM MEMBER WHERE MEMBER_EMAIL = #{memberEamil}
     </select>
+
+    <select id="findLectureById" resultType="LectureNoRequest">
+        SELECT LECTURE_NO FROM PURCHASE
+        WHERE MEMBER_ID = #{memberId}
+        ORDER BY LECTURE_NO ASC
+    </select>
+
+    <update id="updateMemberInfo">
+        UPDATE MEMBER 
+        SET 
+            MEMBER_PW = #{memberPw},
+            MEMBER_NAME = #{memberName},
+            MEMBER_EMAIL = #{memberEmail},
+            MEMBER_BIRTH = #{memberBirth}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <select id="getMemberStats" resultType="com.edumate.boot.app.member.dto.MemberStatsRequest">
+        SELECT 
+            (SELECT COUNT(*) FROM REQUEST WHERE MEMBER_ID = #{memberId} AND REQUEST_YN = 'Y') AS requestCount,
+            (SELECT COUNT(*) FROM REQUEST_COMMENT WHERE MEMBER_ID = #{memberId} AND REQUEST_COMMENT_YN = 'Y') AS requestCommentCount,
+            (SELECT COUNT(*) FROM QUESTION WHERE MEMBER_ID = #{memberId} AND QUESTION_YN = 'Y') AS questionCount,
+            (SELECT COUNT(*) FROM QUESTION_COMMENT WHERE MEMBER_ID = #{memberId} AND QUESTION_COMMENT_YN = 'Y') AS questionCommentCount
+        FROM DUAL
+    </select>
+
+    <select id="getMyPosts" resultType="com.edumate.boot.app.member.dto.MyPostRequest">
+        SELECT 
+            REQUEST_NO AS postNo,
+            'REQUEST' AS postType,
+            REQUEST_TITLE AS postTitle,
+            REQUEST_CONTENT AS postContent,
+            WRITE_DATE AS writeDate,
+            MEMBER_ID AS memberId,
+            REQUEST_STATUS AS status
+        FROM REQUEST 
+        WHERE MEMBER_ID = #{memberId} AND REQUEST_YN = 'Y'
+        
+        UNION ALL
+        
+        SELECT 
+            QUESTION_NO AS postNo,
+            'QUESTION' AS postType,
+            QUESTION_TITLE AS postTitle,
+            QUESTION_CONTENT AS postContent,
+            WRITE_DATE AS writeDate,
+            MEMBER_ID AS memberId,
+            QUESTION_STATUS AS status
+        FROM QUESTION 
+        WHERE MEMBER_ID = #{memberId} AND QUESTION_YN = 'Y'
+        
+        ORDER BY writeDate DESC
+    </select>
+    
+    <select id="getMyPostsWithSearch" resultType="com.edumate.boot.app.member.dto.MyPostRequest">
+        SELECT 
+            REQUEST_NO AS postNo,
+            'REQUEST' AS postType,
+            REQUEST_TITLE AS postTitle,
+            REQUEST_CONTENT AS postContent,
+            WRITE_DATE AS writeDate,
+            MEMBER_ID AS memberId,
+            REQUEST_STATUS AS status
+        FROM REQUEST 
+        WHERE MEMBER_ID = #{memberId} AND REQUEST_YN = 'Y'
+        <if test="searchKeyword != null and searchKeyword != ''">
+            AND (
+                UPPER(REQUEST_TITLE) LIKE '%' || #{searchKeyword} || '%'
+                OR UPPER(REQUEST_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+            )
+        </if>
+        
+        UNION ALL
+        
+        SELECT 
+            QUESTION_NO AS postNo,
+            'QUESTION' AS postType,
+            QUESTION_TITLE AS postTitle,
+            QUESTION_CONTENT AS postContent,
+            WRITE_DATE AS writeDate,
+            MEMBER_ID AS memberId,
+            QUESTION_STATUS AS status
+        FROM QUESTION 
+        WHERE MEMBER_ID = #{memberId} AND QUESTION_YN = 'Y'
+        <if test="searchKeyword != null and searchKeyword != ''">
+            AND (
+                UPPER(QUESTION_TITLE) LIKE '%' || #{searchKeyword} || '%'
+                OR UPPER(QUESTION_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+            )
+        </if>
+        
+        ORDER BY writeDate DESC
+    </select>
+    
+    <select id="getMyPostsTotalCount" resultType="_int">
+        SELECT COUNT(*) FROM (
+            SELECT REQUEST_NO
+            FROM REQUEST 
+            WHERE MEMBER_ID = #{memberId} AND REQUEST_YN = 'Y'
+            <if test="searchKeyword != null and searchKeyword != ''">
+                AND (
+                    UPPER(REQUEST_TITLE) LIKE '%' || #{searchKeyword} || '%'
+                    OR UPPER(REQUEST_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+                )
+            </if>
+            
+            UNION ALL
+            
+            SELECT QUESTION_NO
+            FROM QUESTION 
+            WHERE MEMBER_ID = #{memberId} AND QUESTION_YN = 'Y'
+            <if test="searchKeyword != null and searchKeyword != ''">
+                AND (
+                    UPPER(QUESTION_TITLE) LIKE '%' || #{searchKeyword} || '%'
+                    OR UPPER(QUESTION_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+                )
+            </if>
+        ) total_posts
+    </select>
+    
+    <select id="getMyComments" resultType="com.edumate.boot.app.member.dto.MyCommentRequest">
+        SELECT 
+            CAST(rc.REQUEST_COMMENT_NO AS NUMBER) AS commentNo,
+            CAST('REQUEST' AS VARCHAR2(20)) AS commentType,
+            CAST(rc.REQUEST_COMMENT_CONTENT AS VARCHAR2(4000)) AS commentContent,
+            rc.WRITE_DATE AS writeDate,
+            CAST(rc.MEMBER_ID AS VARCHAR2(50)) AS memberId,
+            CAST(rc.REQUEST_COMMENT_YN AS VARCHAR2(10)) AS status,
+            CAST(r.REQUEST_NO AS NUMBER) AS parentPostNo,
+            CAST(r.REQUEST_TITLE AS VARCHAR2(4000)) AS parentPostTitle,
+            CAST('REQUEST' AS VARCHAR2(20)) AS parentPostType
+        FROM REQUEST_COMMENT rc
+        JOIN REQUEST r ON rc.REQUEST_NO = r.REQUEST_NO
+        WHERE rc.MEMBER_ID = #{memberId} AND rc.REQUEST_COMMENT_YN = 'Y'
+        
+        UNION ALL
+        
+        SELECT 
+            CAST(qc.QUESTION_COMMENT_NO AS NUMBER) AS commentNo,
+            CAST('QUESTION' AS VARCHAR2(20)) AS commentType,
+            CAST(qc.QUESTION_COMMENT_CONTENT AS VARCHAR2(4000)) AS commentContent,
+            qc.WRITE_DATE AS writeDate,
+            CAST(qc.MEMBER_ID AS VARCHAR2(50)) AS memberId,
+            CAST(qc.QUESTION_COMMENT_YN AS VARCHAR2(10)) AS status,
+            CAST(q.QUESTION_NO AS NUMBER) AS parentPostNo,
+            CAST(q.QUESTION_TITLE AS VARCHAR2(4000)) AS parentPostTitle,
+            CAST('QUESTION' AS VARCHAR2(20)) AS parentPostType
+        FROM QUESTION_COMMENT qc
+        JOIN QUESTION q ON qc.QUESTION_NO = q.QUESTION_NO
+        WHERE qc.MEMBER_ID = #{memberId} AND qc.QUESTION_COMMENT_YN = 'Y'
+        
+        ORDER BY writeDate DESC
+    </select>
+    
+    <select id="getMyCommentsWithSearch" resultType="com.edumate.boot.app.member.dto.MyCommentRequest">
+        SELECT 
+            CAST(rc.REQUEST_COMMENT_NO AS NUMBER) AS commentNo,
+            CAST('REQUEST' AS VARCHAR2(20)) AS commentType,
+            CAST(rc.REQUEST_COMMENT_CONTENT AS VARCHAR2(4000)) AS commentContent,
+            rc.WRITE_DATE AS writeDate,
+            CAST(rc.MEMBER_ID AS VARCHAR2(50)) AS memberId,
+            CAST(rc.REQUEST_COMMENT_YN AS VARCHAR2(10)) AS status,
+            CAST(r.REQUEST_NO AS NUMBER) AS parentPostNo,
+            CAST(r.REQUEST_TITLE AS VARCHAR2(4000)) AS parentPostTitle,
+            CAST('REQUEST' AS VARCHAR2(20)) AS parentPostType
+        FROM REQUEST_COMMENT rc
+        JOIN REQUEST r ON rc.REQUEST_NO = r.REQUEST_NO
+        WHERE rc.MEMBER_ID = #{memberId} AND rc.REQUEST_COMMENT_YN = 'Y'
+        <if test="searchKeyword != null and searchKeyword != ''">
+            AND (
+                UPPER(rc.REQUEST_COMMENT_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+                OR UPPER(r.REQUEST_TITLE) LIKE '%' || #{searchKeyword} || '%'
+            )
+        </if>
+        
+        UNION ALL
+        
+        SELECT 
+            CAST(qc.QUESTION_COMMENT_NO AS NUMBER) AS commentNo,
+            CAST('QUESTION' AS VARCHAR2(20)) AS commentType,
+            CAST(qc.QUESTION_COMMENT_CONTENT AS VARCHAR2(4000)) AS commentContent,
+            qc.WRITE_DATE AS writeDate,
+            CAST(qc.MEMBER_ID AS VARCHAR2(50)) AS memberId,
+            CAST(qc.QUESTION_COMMENT_YN AS VARCHAR2(10)) AS status,
+            CAST(q.QUESTION_NO AS NUMBER) AS parentPostNo,
+            CAST(q.QUESTION_TITLE AS VARCHAR2(4000)) AS parentPostTitle,
+            CAST('QUESTION' AS VARCHAR2(20)) AS parentPostType
+        FROM QUESTION_COMMENT qc
+        JOIN QUESTION q ON qc.QUESTION_NO = q.QUESTION_NO
+        WHERE qc.MEMBER_ID = #{memberId} AND qc.QUESTION_COMMENT_YN = 'Y'
+        <if test="searchKeyword != null and searchKeyword != ''">
+            AND (
+                UPPER(qc.QUESTION_COMMENT_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+                OR UPPER(q.QUESTION_TITLE) LIKE '%' || #{searchKeyword} || '%'
+            )
+        </if>
+        
+        ORDER BY writeDate DESC
+    </select>
+    
+    <select id="getMyCommentsTotalCount" resultType="_int">
+        SELECT COUNT(*) FROM (
+            SELECT rc.REQUEST_COMMENT_NO
+            FROM REQUEST_COMMENT rc
+            JOIN REQUEST r ON rc.REQUEST_NO = r.REQUEST_NO
+            WHERE rc.MEMBER_ID = #{memberId} AND rc.REQUEST_COMMENT_YN = 'Y'
+            <if test="searchKeyword != null and searchKeyword != ''">
+                AND (
+                    UPPER(rc.REQUEST_COMMENT_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+                    OR UPPER(r.REQUEST_TITLE) LIKE '%' || #{searchKeyword} || '%'
+                )
+            </if>
+            
+            UNION ALL
+            
+            SELECT qc.QUESTION_COMMENT_NO
+            FROM QUESTION_COMMENT qc
+            JOIN QUESTION q ON qc.QUESTION_NO = q.QUESTION_NO
+            WHERE qc.MEMBER_ID = #{memberId} AND qc.QUESTION_COMMENT_YN = 'Y'
+            <if test="searchKeyword != null and searchKeyword != ''">
+                AND (
+                    UPPER(qc.QUESTION_COMMENT_CONTENT) LIKE '%' || #{searchKeyword} || '%'
+                    OR UPPER(q.QUESTION_TITLE) LIKE '%' || #{searchKeyword} || '%'
+                )
+            </if>
+        ) total_comments
+    </select>
 </mapper>

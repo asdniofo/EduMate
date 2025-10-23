@@ -32,8 +32,6 @@ public class QuestionCommentController {
 	public int insertComment(@RequestBody QuestionCommentAddRequest questionComment) {
 		try {
 			int result = qcService.insertQuestionCommnet(questionComment);
-			System.out.println("댓글 내용 확인: " + questionComment.getQuestionCommentContent()); // ⬅️ NULL인지 확인
-			System.out.println(questionComment);
 			return result;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -46,7 +44,6 @@ public class QuestionCommentController {
 	public int deleteComment(int questionCommentNo) {
 		try {
 			int result = qcService.deleteComment(questionCommentNo);
-			System.out.println(questionCommentNo);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
