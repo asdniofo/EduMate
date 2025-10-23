@@ -12,22 +12,44 @@ body {
     background-color: #fafafa;
 }
 
-/* ===== 배너 ===== */
-.notice-banner {
-    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
+/* =========================
+   🔹 공지 상세 배너 (리스트와 동일)
+========================= */
+.hero-section-wrapper {
+    background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
+    padding: 80px 20px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
-    padding: 50px 100px 50px 200px;
+    position: relative;
 }
 
-.notice-banner h1 {
-    font-size: 36px;
+.hero-section {
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 42px;
     font-weight: 700;
+    color: #000;
 }
 
-.notice-banner img {
-    width: 200px;
+.hero-image {
+    width: 180px;
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/* hero-image: 배너 안에서 함께 정렬되도록 수정 */
+.hero-image {
+    width: 180px;
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* ===== 작성 섹션 ===== */

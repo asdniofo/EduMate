@@ -22,7 +22,7 @@ body {
    🔹 히어로 섹션
 ========================= */
 .hero-section-wrapper {
-    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
+    background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
     padding: 80px 20px;
     display: flex;
     justify-content: center;
