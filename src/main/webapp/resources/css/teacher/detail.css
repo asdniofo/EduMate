@@ -16,8 +16,7 @@ body {
 
 /* --- 1. 상단 타이틀 섹션 (그라데이션 배경) --- */
 .hero-section-wrapper {
-    background: linear-gradient(150.71deg, #CAEDFF 0%, #E5FFF4 100%);
-    padding-bottom: 80px; 
+    background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
 }
 
 .hero-section {
@@ -27,61 +26,25 @@ body {
     /* **수정**: 중앙 정렬** */
     justify-content: center; 
     position: relative;
-    padding: 120px 0; 
-}
-
-.hero-title-group {
-    display: flex;
-    align-items: center;
-    /* **수정**: 유동적인 중앙 정렬을 위해 transform 제거 */
-    transform: translateX(0); 
-    /* 내부 콘텐츠의 좌우 패딩을 조정하여 텍스트가 너무 가장자리에 붙지 않도록 함 */
-    padding: 0 20px; 
+    padding: 80px 20px 80px; 
 }
 
 .hero-title {
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 600;
     color: black;
+    /* 유동적 중앙 정렬을 위해 픽셀 마진 제거 */
+    margin-left: 0; 
     margin-right: 30px; 
 }
 
-/* Question Mark Image Placeholder (아이콘) */
-.hero-image {
-    width: 150px; 
-    height: 150px;
-    position: relative; 
-    z-index: 1;
-}
 
-.hero-image::before {
-    content: '?';
+.hero-image {
+    width: 180px;
     position: absolute;
-    top: 15px;
-    left: 20px;
-    width: 80px;
-    height: 80px;
-    font-size: 45px;
-    background: #FF6060;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: white;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    transform: rotate(10deg);
-}
-.hero-image::after {
-    content: '';
-    position: absolute;
-    top: 30px;
-    right: 0px;
-    width: 120px;
-    height: 80px;
-    background: #FFE082; 
-    border-radius: 20px 20px 0 20px;
-    transform: rotate(-5deg);
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* --- 2. 메인 콘텐츠 영역 (상세 정보 카드) --- */

@@ -11,9 +11,10 @@
 }
 
 body {
-    background-color: #fafafa;
-    color: #222;
-    line-height: 1.5;
+    /* **수정**: 고정 폭 제거, 유동적인 최대 폭 설정 */
+    max-width: 1920px; 
+    margin: 0 auto;
+    background-color: #FAFAFA;
     min-height: 100vh;
 }
 
@@ -37,6 +38,7 @@ body {
     font-size: 42px;
     font-weight: 700;
     color: #000;
+    margin-right: 30px;
 }
 
 .hero-image {

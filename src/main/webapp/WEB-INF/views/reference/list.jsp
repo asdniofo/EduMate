@@ -17,10 +17,17 @@
     <!-- Header -->
     <jsp:include page="../common/header.jsp" />
 
-    <div class="page-title-section">
+    <!-- <div class="page-title-section">
         <div class="page-title-text">자료실</div>
         <img class="page-title-image" src="/resources/img/reference-icon.png" alt="이미지" />
-    </div>
+    </div> -->
+    <section class="hero-section-wrapper">
+		<div class="hero-section">
+			<h1 class="hero-title">자료실</h1>
+			<img src="/resources/img/reference-icon.png"
+				alt="공지 아이콘" class="hero-image" />
+		</div>
+	</section>
 
     <!-- Content -->
     <div class="content">

@@ -20,6 +20,8 @@
                 <div class="hero-section">
                     <div class="hero-title-group">
                         <h1 class="hero-title">건의사항</h1>
+                        <img src="/resources/images/request/requestIcon.png"
+				alt="공지 아이콘" class="hero-image" />
                         <div class="hero-image"></div>
                     </div>
                 </div>

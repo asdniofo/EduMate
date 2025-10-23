@@ -16,6 +16,8 @@
 		<div class="hero-section-wrapper">
         <div class="hero-section">
             <h1 class="hero-title">질문과 답변</h1>
+            <img src="/resources/images/teacher/QnAIcon.png"
+				alt="질문 아이콘" class="hero-image" />
             <div class="hero-image"></div>
         </div>
     </div>

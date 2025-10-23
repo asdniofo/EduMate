@@ -1,13 +1,16 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #fafafa;
-    color: #333;
+    /* **수정**: 고정 폭 제거, 유동적인 최대 폭 설정 */
+    max-width: 1920px; 
+    margin: 0 auto;
+    background-color: #FAFAFA;
+    min-height: 100vh;
 }
 
 /* CSS Variables */

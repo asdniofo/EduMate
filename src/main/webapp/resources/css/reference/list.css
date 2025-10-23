@@ -1,11 +1,17 @@
 @charset "UTF-8";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Inter, Segoe UI, sans-serif;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+    /* **수정**: 고정 폭 제거, 유동적인 최대 폭 설정 */
+    max-width: 1920px; 
+    margin: 0 auto;
+    background-color: #FAFAFA;
+    min-height: 100vh;
 }
 
 .container {
@@ -13,6 +19,38 @@ body {
   flex-direction: column;
   flex: 1;
   background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
+}
+
+.hero-section-wrapper {
+    background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
+}
+
+.hero-section {
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    /* **수정**: 중앙 정렬** */
+    justify-content: center; 
+    position: relative;
+    padding: 80px 20px 80px; 
+}
+
+.hero-title {
+    font-size: 40px;
+    font-weight: 600;
+    color: black;
+    /* 유동적 중앙 정렬을 위해 픽셀 마진 제거 */
+    margin-left: 0; 
+    margin-right: 30px; 
+}
+
+
+.hero-image {
+    width: 180px;
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .search-box {
