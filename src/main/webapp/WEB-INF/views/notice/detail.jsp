@@ -16,18 +16,10 @@
 	<jsp:include page="../common/header.jsp" />
 	<!-- ===== 메인 ===== -->
 	<main>
-	<!-- ===== 배너 ===== -->
-		<section class="hero-section-wrapper">
-		    <div class="hero-section">
-		        <h1 class="hero-title">공지사항</h1>
-		    </div>
-		    <img src="/resources/images/notice/noticeIcon.png" alt="공지 아이콘" class="hero-image" />
-		</section>
-	
-<!-- 		<section class="notice-banner">
+		<section class="notice-banner">
 			<h1>공지사항</h1>
-			<img src="/resources/images/notice/noticeIcon.png" alt="공지 아이콘" class="hero-image"/>
-		</section> -->
+			<img src="notice-img.png" alt="공지 아이콘" />
+		</section>
 
 		<section class="notice-detail">
 			<div class="notice-header">
@@ -45,10 +37,8 @@
 
 			<div class="notice-buttons">
 				<div class="notice-buttons-left">
-					<c:if test="${adminYn eq 'Y'}">
-						<a href="update?noticeId=${notice.noticeId }" style="text-decoration: none"><button class="edit-btn">수정</button></a>
-						<a href="javascript:void(0)" onclick="checkDelete();"style="text-decoration: none"><button class="delete-btn">삭제</button></a>
-					</c:if>
+					<a href="update?noticeId=${notice.noticeId }" style="text-decoration: none"><button class="edit-btn">수정</button></a>
+					<a href="javascript:void(0)" onclick="checkDelete();"style="text-decoration: none"><button class="delete-btn">삭제</button></a>
 				</div>
 				<div class="notice-buttons-right">
 				<c:if test="${not empty prevNoticeNo}">

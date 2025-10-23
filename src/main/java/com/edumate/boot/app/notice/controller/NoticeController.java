@@ -1,7 +1,6 @@
 package com.edumate.boot.app.notice.controller;
 
 import com.edumate.boot.app.admin.controller.AdminController;
-import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.notice.model.service.NoticeService;
 import com.edumate.boot.domain.notice.model.vo.Notice;
 
@@ -89,17 +88,12 @@ public class NoticeController {
     
     @GetMapping("/detail")
     public String showNoticeDetail(
-    		HttpSession session
-    		, @RequestParam("noticeId") int noticeId
+    		@RequestParam("noticeId") int noticeId
     		, Model model) {
     	try {
 			Notice notice = noticeService.selectByOneNo(noticeId);
 			Integer prevNoticeNo = noticeService.selectPrevNotice(noticeId);
 			Integer nextNoticeNo = noticeService.selectNextNotice(noticeId);
-			Member member = (Member)session.getAttribute("member");
-			if(member != null) {
-				model.addAttribute("adminYn", member.getAdminYN());
-			}
 			noticeService.increaseViewCount(noticeId);
 			model.addAttribute("notice", notice);
 			model.addAttribute("prevNoticeNo", prevNoticeNo);
