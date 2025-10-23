@@ -148,3 +148,86 @@ input {
     background: #ccc;
     cursor: not-allowed;
 }
+
+/* --- 이메일 인증 섹션 스타일 --- */
+
+/* 이메일과 버튼 그룹을 감싸는 컨테이너 */
+.input-group {
+    display: flex;
+    gap: 10px; /* 기존 HTML의 gap: 10px 유지 */
+    width: 100%;
+}
+
+/* 폼 내부의 전체 너비를 차지하는 입력 필드 (기존 input 스타일 재사용) */
+.input-group .input-full {
+    flex: 2; /* 이메일 입력 필드가 버튼보다 넓게 */
+}
+
+#memberEmail{
+	width: 90%;
+}
+
+/* 이메일 인증 버튼들의 기본 스타일 */
+.btn-email-action {
+    /* 기존 .btn-login의 padding과 font-size를 따름 */
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px; /* input과 동일한 15px로 조정 */
+    cursor: pointer;
+    transition: background 0.3s ease;
+    -flex: 1; /* 인증 버튼이 적절한 너비를 차지하도록 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+/* 인증 요청 버튼 (기존 btn-login의 파란색 대신 약간 더 부드러운 색상 사용) */
+.btn-send {
+    background: #00b0ff; /* 밝은 파랑 */
+    color: white;
+}
+
+.btn-send:hover {
+    background: #0099e0;
+}
+
+/* 인증 확인 버튼 (기존 btn-login의 메인 파란색 사용) */
+.btn-verify {
+    background: #216dff; /* 메인 파랑 */
+    color: white;
+}
+
+.btn-verify:hover {
+    background: #0054f0;
+}
+
+/* 버튼 비활성화 상태 스타일 */
+.btn-email-action:disabled {
+    background: #ccc !important;
+    cursor: not-allowed;
+    color: #666;
+}
+
+/* 인증 상태 메시지 스타일 */
+.auth-message {
+    font-size: 13px;
+    margin-top: 5px;
+    min-height: 15px; /* 메시지가 없을 때 공간을 유지 */
+    text-align: left;
+    padding: 0 5px;
+}
+
+/* 인증 성공/실패 시 메시지 색상 */
+/* JavaScript에서 동적으로 스타일을 변경하지만, 기본 디자인을 위해 정의 */
+.auth-message.success {
+    color: #28a745; /* 녹색 */
+    font-weight: 500;
+}
+.auth-message.error {
+    color: #dc3545; /* 빨간색 */
+    font-weight: 500;
+}
+
+/* 아이디, 비밀번호 등 일반적인 입력 필드 스타일 간격 조정 */
+form > input:not(.btn-email-action) {
+    margin-top: 10px; /* 기존 gap: 15px을 고려하여 조정 */
+}
