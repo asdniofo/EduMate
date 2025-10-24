@@ -7,6 +7,7 @@ import com.edumate.boot.app.purchase.dto.LectureNoRequest;
 import com.edumate.boot.app.member.dto.MemberStatsRequest;
 import com.edumate.boot.app.member.dto.MyPostRequest;
 import com.edumate.boot.app.member.dto.MyCommentRequest;
+import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
@@ -73,4 +74,6 @@ public interface MemberMapper {
     List<MyCommentRequest> getMyCommentsWithSearch(Map<String, Object> searchMap, RowBounds rowBounds);
     
     int getMyCommentsTotalCount(Map<String, Object> searchMap);
+
+    List<Lecture> findTeacherLecture(String memberId);
 }

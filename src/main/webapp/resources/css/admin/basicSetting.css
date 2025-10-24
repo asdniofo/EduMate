@@ -51,54 +51,142 @@
     font-size: 14px;
 }
 
-/* 최근 활동 섹션 */
-.recent-activity {
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
+h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 
-.recent-activity h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #2c3e50;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 8px;
-}
-
-.activity-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.activity-item {
+/* 필터 섹션 */
+.sort-section {
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    padding: 12px;
-    background: #f8f9fa;
-    border: 1px solid #eee;
+    gap: 20px;
 }
 
-.activity-icon {
-    font-size: 20px;
-    margin-right: 12px;
-    width: 30px;
-    text-align: center;
-}
-
-.activity-content {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
+.sort-section label {
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
 }
 
-.activity-text {
-    color: #333;
+.sort-section input[type="radio"] {
+    margin-right: 5px;
 }
 
-.activity-time {
+.count-info {
+    margin-left: auto;
+    font-size: 14px;
     color: #666;
+    font-weight: 500;
+}
+
+/* 출금 요청 테이블 */
+.withdraw-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.withdraw-table th,
+.withdraw-table td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.withdraw-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.withdraw-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* 상태 배지 */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
     font-size: 12px;
+    font-weight: bold;
+}
+
+.status-요청 {
+    background-color: #ffeaa7;
+    color: #d63031;
+}
+
+.status-승인 {
+    background-color: #55efc4;
+    color: #00b894;
+}
+
+.status-거절 {
+    background-color: #fab1a0;
+    color: #e17055;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    margin: 0 3px;
+    font-size: 12px;
+}
+
+.btn.approve {
+    background: #27ae60;
+}
+
+.btn.approve:hover {
+    background: #219a52;
+}
+
+.btn.reject {
+    background: #e74c3c;
+}
+
+.btn.reject:hover {
+    background: #c0392b;
+}
+
+.processed-date {
+    font-size: 12px;
+    color: #666;
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pagination button {
+    margin: 0 4px;
+    background: #fff;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pagination button:hover {
+    background: #f5f6fa;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.pagination button.active {
+    background: #2d2f39;
+    color: white;
+    font-weight: bold;
 }

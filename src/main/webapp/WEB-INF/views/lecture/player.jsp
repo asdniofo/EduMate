@@ -71,8 +71,8 @@
                             <div class="ai-model-option selected" onclick="selectAiOption(this, 'AI에게 질문하기', event)">
                                 AI에게 질문하기
                             </div>
-                            <div class="ai-model-option" onclick="selectAiOption(this, '강사님에게 질문하기', event)">
-                                강사님에게 질문하기
+                            <div class="ai-model-option" onclick="selectAiOption(this, '질문 게시판', event)">
+                                질문 게시판
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                     <div class="instructor-question-container" id="instructor-question-container" style="display: none;">
                         <div class="instructor-form-wrapper">
                             <div class="instructor-header">
-                                <h3 class="instructor-title">강사님에게 질문하기</h3>
+                                <h3 class="instructor-title">질문 게시판</h3>
                                 <p class="instructor-subtitle">질문 제목과 내용을 입력해주세요.</p>
                             </div>
                             <form class="instructor-question-form" id="instructor-question-form" onsubmit="submitInstructorQuestion(event)">
@@ -350,7 +350,7 @@
                             messages.scrollTop = messages.scrollHeight;
                         });
                     } else {
-                        // 강사님에게 질문하기 - 기존 시뮬레이션 응답
+                        // 질문 게시판 - 기존 시뮬레이션 응답
                         setTimeout(() => {
                             const aiMessage = document.createElement("div");
                             aiMessage.className = "message ai";
@@ -489,7 +489,7 @@
                     // AI 채팅 메시지 초기화
                     chatMessages.innerHTML = '<div class="message ai"><div class="message-text">안녕하세요! ${lectureName} 강의에 대해 궁금한 점이 있으시면 언제든 물어보세요</div></div>';
                     chatMessages.scrollTop = chatMessages.scrollHeight;
-                } else if (value === "강사님에게 질문하기") {
+                } else if (value === "질문 게시판") {
                     // 강사님 질문 폼 표시
                     chatMessages.style.display = "none";
                     aiChatInput.style.display = "none";
