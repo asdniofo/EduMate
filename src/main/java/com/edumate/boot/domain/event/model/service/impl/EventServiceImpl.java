@@ -1,10 +1,11 @@
 package com.edumate.boot.domain.event.model.service.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +24,6 @@ public class EventServiceImpl implements EventService {
 
     private final EventMapper eventMapper;
 
-    // base upload dir (project root or absolute path)
-    private final Path uploadBase = Paths.get("uploads", "events");
-
     @Override
     public List<Event> getAllEvents() {
         return eventMapper.selectAllEvents();
@@ -33,8 +31,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getEventById(int eventId) {
-        Event e = eventMapper.selectEventById(eventId);
-        return e;
+        return eventMapper.selectEventById(eventId);
     }
 
     @Override
@@ -52,88 +49,125 @@ public class EventServiceImpl implements EventService {
         return eventMapper.selectNextEventId(eventId);
     }
 
-    private String storeFile(MultipartFile file, String subDir) throws IOException {
-        if (file == null || file.isEmpty()) return null;
-
-        Path dir = uploadBase.resolve(subDir);
-        Files.createDirectories(dir);
-
-        // unique filename: timestamp + original name
-        String orig = Paths.get(file.getOriginalFilename()).getFileName().toString();
-        String filename = System.currentTimeMillis() + "_" + orig;
-        Path target = dir.resolve(filename);
-
-        Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
-        // return relative path to be stored in DB (you can change as needed)
-        return "/uploads/events/" + subDir + "/" + filename;
-    }
-
     @Override
     @Transactional
     public int insertEvent(Event event, MultipartFile mainImage, List<MultipartFile> detailImages) throws Exception {
-        // 1) get next event id
-        int nextEventId = eventMapper.getNextEventId();
-        event.setEventId(nextEventId);
+        // 경로 설정
+        String basePath = "C:/EduMate/src/main/webapp/resources/images/event/";
+        String thumbnailPath = basePath + "thumbnail/";
+        String contentPath = basePath + "content/";
 
-        // 2) store main image
-        String mainPath = null;
+        // 디렉토리 생성
+        new File(thumbnailPath).mkdirs();
+        new File(contentPath).mkdirs();
+
+        // 썸네일 업로드
         if (mainImage != null && !mainImage.isEmpty()) {
-            mainPath = storeFile(mainImage, "main");
-            event.setEventPath(mainPath);
-            event.setEventSubpath(mainPath); // set thumbnail same for now
-        } else {
-            event.setEventPath("");
-            event.setEventSubpath("");
+            String thumbnailName = UUID.randomUUID() + "_" + mainImage.getOriginalFilename();
+            File thumbnailSave = new File(thumbnailPath + thumbnailName);
+            try (OutputStream os = new FileOutputStream(thumbnailSave)) {
+                os.write(mainImage.getBytes());
+            }
+            event.setEventSubpath("/resources/images/event/thumbnail/" + thumbnailName);
         }
 
-        // 3) insert event
-        eventMapper.insertEvent(event);
-
-        // 4) insert detail images
+        // 메인 이미지 설정 (첫 번째 콘텐츠 이미지 또는 썸네일)
         if (detailImages != null && !detailImages.isEmpty()) {
-            for (MultipartFile mf : detailImages) {
-                if (mf == null || mf.isEmpty()) continue;
-                int nextContentNo = eventMapper.getNextContentNo();
-                EventContent content = new EventContent();
-                content.setEContentNo(nextContentNo);
-                content.setEventId(nextEventId);
-                content.setEContentTitle(mf.getOriginalFilename());
-                String contentPath = storeFile(mf, "content");
-                content.setEContentPath(contentPath);
-                content.setEContentYn("Y");
-                eventMapper.insertEventContent(content);
+            MultipartFile first = detailImages.get(0);
+            if (!first.isEmpty()) {
+                String firstName = UUID.randomUUID() + "_" + first.getOriginalFilename();
+                File contentSave = new File(contentPath + firstName);
+                try (OutputStream os = new FileOutputStream(contentSave)) {
+                    os.write(first.getBytes());
+                }
+                event.setEventPath("/resources/images/event/content/" + firstName);
             }
         }
 
-        return nextEventId;
+        // 이벤트 등록
+        eventMapper.insertEvent(event);
+
+        // 등록된 EVENT_ID 가져오기
+        int eventId = event.getEventId();
+
+        // 콘텐츠 파일 업로드
+        if (detailImages != null) {
+            for (MultipartFile file : detailImages) {
+                if (file != null && !file.isEmpty()) {
+                    String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+                    File saveFile = new File(contentPath + fileName);
+                    try (OutputStream os = new FileOutputStream(saveFile)) {
+                        os.write(file.getBytes());
+                    }
+
+                    EventContent content = new EventContent();
+                    content.setEventId(eventId);
+                    content.setEContentTitle(file.getOriginalFilename());
+                    content.setEContentPath("/resources/images/event/content/" + fileName);
+                    content.setEContentYn("Y");
+
+                    eventMapper.insertEventContent(content);
+                }
+            }
+        }
+
+        return eventId;
+    }
+
+    @Override
+    public int insertEvent(Event event) {
+        return eventMapper.insertEvent(event);
+    }
+
+    @Override
+    public int insertEventContent(EventContent content) {
+        return eventMapper.insertEventContent(content);
     }
 
     @Override
     @Transactional
     public int updateEvent(Event event, MultipartFile mainImage, List<MultipartFile> detailImages) throws Exception {
-        // assume event.eventId is already set
-        // 1) handle main image if provided
+        // 경로 설정
+        String basePath = "C:/EduMate/src/main/webapp/resources/images/event/";
+        String thumbnailPath = basePath + "thumbnail/";
+        String contentPath = basePath + "content/";
+
+        // 디렉토리 생성
+        new File(thumbnailPath).mkdirs();
+        new File(contentPath).mkdirs();
+
+        // 메인 이미지 업데이트
         if (mainImage != null && !mainImage.isEmpty()) {
-            String mainPath = storeFile(mainImage, "main");
-            event.setEventPath(mainPath);
-            event.setEventSubpath(mainPath);
+            String thumbnailName = UUID.randomUUID() + "_" + mainImage.getOriginalFilename();
+            File thumbnailSave = new File(thumbnailPath + thumbnailName);
+            try (OutputStream os = new FileOutputStream(thumbnailSave)) {
+                os.write(mainImage.getBytes());
+            }
+            event.setEventSubpath("/resources/images/event/thumbnail/" + thumbnailName);
+            event.setEventPath("/resources/images/event/thumbnail/" + thumbnailName);
         }
-        // update board
+
+        // 이벤트 수정
         int updated = eventMapper.updateEvent(event);
 
-        // optional: add new detail images (we keep existing ones)
-        if (detailImages != null && !detailImages.isEmpty()) {
-            for (MultipartFile mf : detailImages) {
-                if (mf == null || mf.isEmpty()) continue;
-                int nextContentNo = eventMapper.getNextContentNo();
-                EventContent content = new EventContent();
-                content.setEContentNo(nextContentNo);
-                content.setEventId(event.getEventId());
-                content.setEContentTitle(mf.getOriginalFilename());
-                String contentPath = storeFile(mf, "content");
-                content.setEContentPath(contentPath);
-                content.setEContentYn("Y");
-                eventMapper.insertEventContent(content);
+        // 새로운 상세 이미지 추가
+        if (detailImages != null) {
+            for (MultipartFile file : detailImages) {
+                if (file != null && !file.isEmpty()) {
+                    String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+                    File saveFile = new File(contentPath + fileName);
+                    try (OutputStream os = new FileOutputStream(saveFile)) {
+                        os.write(file.getBytes());
+                    }
+
+                    EventContent content = new EventContent();
+                    content.setEventId(event.getEventId());
+                    content.setEContentTitle(file.getOriginalFilename());
+                    content.setEContentPath("/resources/images/event/content/" + fileName);
+                    content.setEContentYn("Y");
+
+                    eventMapper.insertEventContent(content);
+                }
             }
         }
 
@@ -144,14 +178,4 @@ public class EventServiceImpl implements EventService {
     public int deleteEvent(int eventId) {
         return eventMapper.deleteEvent(eventId);
     }
-
-	@Override
-	public int insertEvent(Event event) {
-		return eventMapper.insertEvent(event);
-	}
-
-	@Override
-	public int insertEventContent(EventContent content) {
-		return eventMapper.insertEventContent(content);
-	}
 }
