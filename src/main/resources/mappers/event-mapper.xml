@@ -85,15 +85,15 @@
             EVENT_ID, EVENT_TITLE, EVENT_SUBTITLE, EVENT_START, EVENT_END,
             EVENT_PATH, EVENT_SUBPATH, EVENT_YN, BOARD_YN
         ) VALUES (
-            SEQ_EVENT_ID.NEXTVAL,
-            #{eventTitle},
-            #{eventSubtitle},
-            #{eventStart},
-            #{eventEnd},
-            #{eventPath},
-            #{eventSubpath},
-            NVL(#{eventYn}, 'Y'),
-            NVL(#{boardYn}, 'Y')
+    SEQ_EVENT_ID.NEXTVAL,
+    #{eventTitle, jdbcType=VARCHAR},
+    #{eventSubtitle, jdbcType=VARCHAR},
+    #{eventStart, jdbcType=VARCHAR},
+    #{eventEnd, jdbcType=VARCHAR},
+    #{eventPath, jdbcType=VARCHAR},
+    #{eventSubpath, jdbcType=VARCHAR},
+    NVL(#{eventYn, jdbcType=VARCHAR}, 'Y'),
+    NVL(#{boardYn, jdbcType=VARCHAR}, 'Y')
         )
     </insert>
 
@@ -114,13 +114,13 @@
     <update id="updateEvent" parameterType="com.edumate.boot.domain.event.model.vo.Event">
         UPDATE EVENT_BOARD
         SET
-            EVENT_TITLE = #{eventTitle},
-            EVENT_SUBTITLE = #{eventSubtitle},
-            EVENT_START = #{eventStart},
-            EVENT_END = #{eventEnd},
-            EVENT_PATH = #{eventPath},
-            EVENT_SUBPATH = #{eventSubpath},
-            EVENT_YN = #{eventYn}
+        EVENT_TITLE = #{eventTitle},
+        EVENT_SUBTITLE = #{eventSubtitle},
+        EVENT_START = #{eventStart},
+        EVENT_END = #{eventEnd},
+        EVENT_PATH = #{eventPath},
+        EVENT_SUBPATH = #{eventSubpath},
+        EVENT_YN = #{eventYn, jdbcType=VARCHAR}
         WHERE EVENT_ID = #{eventId}
     </update>
 
@@ -128,5 +128,10 @@
     <delete id="deleteEvent" parameterType="int">
         DELETE FROM EVENT_BOARD WHERE EVENT_ID = #{eventId}
     </delete>
+    
+    <delete id="deleteEventContents" parameterType="int">
+    DELETE FROM EVENT_CONTENT
+    WHERE EVENT_ID = #{eventId}
+</delete>
 
 </mapper>
