@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -42,16 +43,29 @@
             <!-- 본문 -->
             <div class="event-content">
                 <!-- 메인 이미지 -->
-                <img src="${event.eventPath}" alt="이벤트 상세 메인 이미지" class="main-detail-img" />
+                <c:if test="${not empty event.eventPath}">
+                    <img src="${event.eventPath}" alt="이벤트 상세 메인 이미지" class="main-detail-img" />
+                </c:if>
 
                 <!-- 상세 이미지들 -->
                 <c:if test="${not empty contents}">
                     <div class="event-content-list">
                         <c:forEach var="content" items="${contents}">
                             <div class="event-content-item">
-                                <img src="${content.eContentPath}" alt="${content.eContentTitle}" />
+                                <%-- 원본 경로 사용 (파일이 존재하는 경우) --%>
+                                <c:set var="contentStr" value="${content.toString()}" />
+                                <c:set var="startPath" value="${fn:substringAfter(contentStr, 'eContentPath=\\'')}" />
+                                <c:set var="imagePath" value="${fn:substringBefore(startPath, '\\'')}" />
+                                <img src="${imagePath}" alt="Event Content Image" />
                             </div>
                         </c:forEach>
+                    </div>
+                </c:if>
+                
+                <!-- 콘텐츠가 없을 경우 메시지 -->
+                <c:if test="${empty contents}">
+                    <div class="no-content-message">
+                        <p>추가 이미지가 없습니다.</p>
                     </div>
                 </c:if>
             </div>
