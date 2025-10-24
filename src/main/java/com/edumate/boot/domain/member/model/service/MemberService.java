@@ -9,6 +9,7 @@ import com.edumate.boot.app.purchase.dto.LectureNoRequest;
 import com.edumate.boot.app.member.dto.MemberStatsRequest;
 import com.edumate.boot.app.member.dto.MyPostRequest;
 import com.edumate.boot.app.member.dto.MyCommentRequest;
+import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.member.model.vo.Request;
 import com.edumate.boot.domain.teacher.model.vo.Question;
@@ -57,4 +58,6 @@ public interface MemberService {
     List<MyCommentRequest> getMyCommentsWithSearch(Map<String, Object> searchMap);
     
     int getMyCommentsTotalCount(Map<String, Object> searchMap);
+
+    List<Lecture> findTeacherLecture(String memberId);
 }

@@ -11,6 +11,8 @@ import com.edumate.boot.app.member.dto.InsertRequestRequest;
 import com.edumate.boot.app.purchase.dto.LectureNoRequest;
 import com.edumate.boot.domain.admin.model.service.AdminService;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
+import com.edumate.boot.domain.lecture.model.vo.Lecture;
+import com.edumate.boot.domain.purchase.model.service.PurchaseService;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.member.model.vo.Request;
@@ -45,6 +47,7 @@ public class MemberController {
     private final MemberService memberService;
     private final AdminService aService;
     private final LectureService lService;
+    private final PurchaseService pService;
 
     @GetMapping("/login")
     public String showLogin() {
@@ -186,6 +189,73 @@ public class MemberController {
             model.addAttribute("msg", "입력하신 정보와 일치하는 회원이 없습니다.");
             return "member/find_info";
         }
+    }
+
+    @PostMapping("/withdraw")
+    @ResponseBody
+    public Map<String, Object> processWithdraw(@RequestBody Map<String, Object> requestData, HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                response.put("success", false);
+                response.put("message", "로그인이 필요합니다.");
+                return response;
+            }
+
+            String bank = (String) requestData.get("bank");
+            String accountNumber = (String) requestData.get("accountNumber");
+            int amount = (int) requestData.get("amount");
+
+            // 유효성 검사
+            if (bank == null || bank.trim().isEmpty()) {
+                response.put("success", false);
+                response.put("message", "은행을 선택해주세요.");
+                return response;
+            }
+
+            if (accountNumber == null || accountNumber.trim().isEmpty()) {
+                response.put("success", false);
+                response.put("message", "계좌번호를 입력해주세요.");
+                return response;
+            }
+
+            if (amount < 1000) {
+                response.put("success", false);
+                response.put("message", "최소 1,000원 이상 출금 가능합니다.");
+                return response;
+            }
+
+            // 잔액 확인
+            Member memberInfo = memberService.findByMemberId(memberId);
+            if (memberInfo == null) {
+                response.put("success", false);
+                response.put("message", "회원 정보를 찾을 수 없습니다.");
+                return response;
+            }
+
+            if (memberInfo.getMemberMoney() < amount) {
+                response.put("success", false);
+                response.put("message", "잔액이 부족합니다.");
+                return response;
+            }
+
+            // 출금 요청을 DB에 저장
+            int withdrawRequestResult = pService.insertWithdrawRequest(memberId, bank, accountNumber, amount);
+            if (withdrawRequestResult > 0) {
+                response.put("success", true);
+                response.put("message", "출금 신청이 완료되었습니다.\n관리자 승인 후 처리됩니다.");
+            } else {
+                response.put("success", false);
+                response.put("message", "출금 신청 중 오류가 발생했습니다.");
+            }
+
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "출금 신청 중 오류가 발생했습니다.");
+            e.printStackTrace();
+        }
+        return response;
     }
 
     @PostMapping("/updatePw")
@@ -416,23 +486,33 @@ public class MemberController {
                     memberType = "선생님";
                 }
 
-                List<LectureNoRequest> lList = memberService.findLectureById(memberId);
-                List<LectureListRequest> dList = new ArrayList<>();
-                // 전체 강의 정보 가져오기
-                for (int i = 0; i < lList.size(); i++) {
-                    List<LectureListRequest> lectureInfo = lService.selectOneById(lList.get(i).getLectureNo());
-                    if (lectureInfo != null && !lectureInfo.isEmpty()) {
-                        dList.addAll(lectureInfo);
+                if (memberType.equals("일반 회원")){
+                    List<LectureNoRequest> lList = memberService.findLectureById(memberId);
+                    List<LectureListRequest> dList = new ArrayList<>();
+                    Map<Integer, Integer> recentVideoMap = new HashMap<>();
+                    // 전체 강의 정보 가져오기
+                    for (int i = 0; i < lList.size(); i++) {
+                        List<LectureListRequest> lectureInfo = lService.selectOneById(lList.get(i).getLectureNo());
+                        if (lectureInfo != null && !lectureInfo.isEmpty()) {
+                            dList.addAll(lectureInfo);
+                            // 각 강의의 최근 시청한 비디오 번호 가져오기
+                            int recentVideoNo = pService.getRecentVideoNo(memberId, lList.get(i).getLectureNo());
+                            recentVideoMap.put(lList.get(i).getLectureNo(), recentVideoNo);
+                        }
                     }
+                    model.addAttribute("lectureList", dList); // 전체 강의 리스트
+                    model.addAttribute("recentVideoMap", recentVideoMap); // 최근 시청한 비디오 번호 맵
+                } else if (memberType.equals("선생님")){
+                    List<Lecture> lList = memberService.findTeacherLecture(memberId);
+                    model.addAttribute("lList", lList);
                 }
+
 
                 // 통계 데이터 조회
                 MemberStatsRequest stats = memberService.getMemberStats(memberId);
-
                 model.addAttribute("memberInfo", memberInfo);
                 model.addAttribute("memberType", memberType);
                 model.addAttribute("memberId", memberId);
-                model.addAttribute("lectureList", dList); // 전체 강의 리스트
                 model.addAttribute("requestCount", stats.getRequestCount()); // 건의사항 수
                 model.addAttribute("requestCommentCount", stats.getRequestCommentCount()); // 건의사항 댓글 수
                 model.addAttribute("questionCount", stats.getQuestionCount()); // 질문 수

@@ -340,6 +340,7 @@ body {
     max-width: 1400px;
     margin: 0px auto 40px auto;
     padding: 0 20px;
+    display: none;
 }
 
 .reviews-header {
@@ -600,3 +601,4 @@ body {
     border-top: 8px solid black;
     transition: transform 0.3s ease;
 }
+
