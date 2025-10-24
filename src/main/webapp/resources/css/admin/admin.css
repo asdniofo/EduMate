@@ -41,6 +41,10 @@ body {
     background: #1f212b;
 }
 
+.sidebar-menu li.active a {
+    color: #03CFF3;
+}
+
 .sidebar-menu a {
     display: flex;
     justify-content: space-between;
@@ -123,7 +127,7 @@ body {
 }
 
 .member-table {
-    width: 100%;
+    width: 1600px;
     border-collapse: collapse;
 }
 

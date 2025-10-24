@@ -20,6 +20,8 @@
                 <div class="hero-section">
                     <div class="hero-title-group">
                         <h1 class="hero-title">건의사항</h1>
+                        <img src="/resources/images/request/requestIcon.png"
+				alt="공지 아이콘" class="hero-image" />
                         <div class="hero-image"></div>
                     </div>
                 </div>
@@ -45,7 +47,7 @@
                         <p>${request.requestContent }</p>
                     </section>
 
-					<c:if test="${sessionScope.loginMember.adminYN eq 'Y' }">
+					<c:if test="${sessionScope.adminYn eq 'Y' }">
                     <section class="answer-input-section">
                         <div class="input-area-wrapper">
                             <textarea class="answer-textarea" id="answer-area" placeholder="답변 내용을 입력하세요."></textarea>
@@ -65,8 +67,8 @@
                     <section class="bottom-actions">
                         <div class="left-actions">
                         	<a href="/member/request"><button class="action-button">목록</button></a>
-                        	<c:if test="${sessionScope.loginMember.memberId eq request.memberId 
-                    			or sessionScope.loginMember.adminYN eq 'Y'}">
+                        	<c:if test="${sessionScope.memberId eq request.memberId
+                    			or sessionScope.adminYn eq 'Y'}">
 	                            <a href="/member/request/modify?requestNo=${request.requestNo }"><button class="action-button">수정</button></a>
 	                            <button class="action-button" id="delete-list-btn">삭제</button>
                             	<button class="action-button" id="change-status-btn">상태변경</button>

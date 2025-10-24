@@ -20,7 +20,9 @@
                 AI와 함께하는 최상급 공부<br />
                 언제 어디서나, 당신의 성장을 응원합니다.
             </div>
-            <div class="object"></div>
+            <div class="object">
+                <img src="/resources/images/adv/gemini.png" alt="Gemini AI">
+            </div>
         </section>
 
         <!-- ===== 광고 영역 (교체용) ===== -->

@@ -6,7 +6,9 @@
         <!-- 상단: 로고 + 검색창 -->
         <div class="top-row">
             <div id="logo">
-                <a href="/"><h1>로고</h1></a>
+                <a href="/">
+                    <img src="${pageContext.request.contextPath}/resources/images/common/logo.png">
+                </a>
                 <button class="categoryBtn">Ξ 카테고리</button>
 
             </div>
@@ -46,10 +48,6 @@
                                     <c:when test="${sessionScope.adminYn eq 'Y'}">
                                         <!-- 관리자인 경우 -->
                                         <a href="/admin/main">관리자 페이지</a>
-                                    </c:when>
-                                    <c:when test="${sessionScope.teacherYn eq 'Y'}">
-                                        <!-- 선생님인 경우 -->
-                                        <a href="/lecture/add">강의 추가</a>
                                     </c:when>
                                     <c:otherwise>
                                         <!-- 일반 회원인 경우 -->

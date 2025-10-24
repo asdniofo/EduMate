@@ -3,9 +3,12 @@ package com.edumate.boot.domain.member.model.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.edumate.boot.app.purchase.dto.LectureNoRequest;
+import com.edumate.boot.app.member.dto.MemberStatsRequest;
+import com.edumate.boot.app.member.dto.MyPostRequest;
+import com.edumate.boot.app.member.dto.MyCommentRequest;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
-
 import com.edumate.boot.app.member.dto.InsertQuestionRequest;
 import com.edumate.boot.app.member.dto.InsertRequestRequest;
 import com.edumate.boot.domain.member.model.vo.Member;
@@ -49,4 +52,25 @@ public interface MemberMapper {
 
 	int updateRequest(Request request);
 
+    int getCount();
+
+	int checkEmailDuplication(String toEmail);
+
+    List<LectureNoRequest> findLectureById(String memberId);
+    
+    int updateMemberInfo(Member member);
+    
+    MemberStatsRequest getMemberStats(String memberId);
+    
+    List<MyPostRequest> getMyPosts(String memberId);
+    
+    List<MyPostRequest> getMyPostsWithSearch(Map<String, Object> searchMap, RowBounds rowBounds);
+    
+    int getMyPostsTotalCount(Map<String, Object> searchMap);
+    
+    List<MyCommentRequest> getMyComments(String memberId);
+    
+    List<MyCommentRequest> getMyCommentsWithSearch(Map<String, Object> searchMap, RowBounds rowBounds);
+    
+    int getMyCommentsTotalCount(Map<String, Object> searchMap);
 }

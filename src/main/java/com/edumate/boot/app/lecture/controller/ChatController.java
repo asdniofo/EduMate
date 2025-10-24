@@ -97,7 +97,7 @@ public class ChatController {
             , HttpSession session) {
         try {
             LectureQuestionRequest qList = new LectureQuestionRequest();
-            String id = session.getAttribute("loginId").toString();
+            String id = (String) session.getAttribute("loginId");
             String title = request.get("title");
             String content = request.get("content");
 

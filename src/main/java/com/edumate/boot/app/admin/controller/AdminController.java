@@ -6,6 +6,10 @@ import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.admin.model.service.AdminService;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
+import com.edumate.boot.domain.member.model.service.MemberService;
+import com.edumate.boot.domain.notice.model.service.NoticeService;
+import com.edumate.boot.domain.reference.model.service.ReferenceService;
+import com.edumate.boot.domain.teacher.model.service.TeacherService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +25,10 @@ public class AdminController {
 
     private final AdminService aService;
     private final LectureService lService;
+    private final NoticeService nService;
+    private final ReferenceService rService;
+    private final TeacherService tService;
+    private final MemberService mService;
     
     @GetMapping("/main")
     public String showAdmin(HttpSession session) {
@@ -179,5 +187,19 @@ public class AdminController {
             case "instructor" -> "M.MEMBER_NAME ASC";
             default -> "L.LECTURE_NAME ASC";
         };
+    }
+
+    @GetMapping("/list")
+    public String showList(Model model) {
+        int rCount = rService.getTotalCount();
+        int nCount = nService.getTotalCount();
+        String filter = "ALL";
+        int tCount = tService.getTotalCount(filter);
+        int mCount = mService.getCount();
+        model.addAttribute("rCount", rCount);
+        model.addAttribute("nCount", nCount);
+        model.addAttribute("tCount", tCount);
+        model.addAttribute("mCount", mCount);
+        return "admin/admin_list";
     }
 }

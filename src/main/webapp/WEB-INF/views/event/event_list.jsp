@@ -77,7 +77,7 @@
         </div>
 
         <!-- ADMIN만 글쓰기 버튼 노출 -->
-        <c:if test="${loginUser.adminYn eq 'Y'}">
+        <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
             <a href="/event/insert" class="write-button">글쓰기</a>
         </c:if>
     </div>

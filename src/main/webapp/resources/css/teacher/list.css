@@ -7,16 +7,15 @@
 
 body {
     /* **수정**: 고정 폭 제거, 유동적인 최대 폭 설정 */
-    max-width: 1920px;
+    max-width: 1920px; 
     margin: 0 auto;
-    background-color: #FAFAFA; 
+    background-color: #FAFAFA;
     min-height: 100vh;
 }
 
 /* --- 1. 상단 타이틀 섹션 (그라데이션 배경) --- */
 .hero-section-wrapper {
     background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
-    padding-bottom: 80px; 
 }
 
 .hero-section {
@@ -26,7 +25,7 @@ body {
     /* **수정**: 중앙 정렬** */
     justify-content: center; 
     position: relative;
-    padding: 100px 20px 80px; 
+    padding: 80px 20px 80px; 
 }
 
 .hero-title {
@@ -38,19 +37,16 @@ body {
     margin-right: 30px; 
 }
 
-/* Question Mark Image Placeholder (3D 그래픽 시뮬레이션) */
+
 .hero-image {
     width: 180px;
-    height: 180px;
     position: absolute;
-    /* **수정**: 절대 위치를 %로 조정하여 유동적인 위치를 확보 */
-    right: 25%; 
+    right: 30%;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 1;
 }
 
-.hero-image::before {
+/* .hero-image::before {
     content: '?';
     position: absolute;
     top: 15px;
@@ -78,7 +74,7 @@ body {
     background: #FFE082; 
     border-radius: 20px 20px 0 20px;
     transform: rotate(-5deg);
-}
+} */
 
 /* --- 2. 메인 콘텐츠 영역 (흰색 질문 목록) --- */
 .atag {

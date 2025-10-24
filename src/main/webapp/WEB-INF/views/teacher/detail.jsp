@@ -20,7 +20,9 @@
                 <div class="hero-section">
                     <div class="hero-title-group">
                         <h1 class="hero-title">질문과 답변</h1>
-                        <div class="hero-image"></div>
+						<img src="/resources/images/teacher/QnAIcon.png"
+							alt="질문 아이콘" class="hero-image" />
+                        
                     </div>
                 </div>
             </header>

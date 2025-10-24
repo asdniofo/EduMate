@@ -1,13 +1,22 @@
 @charset "UTF-8";
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
-    background-color: #fafafa;
+    /* **수정**: 고정 폭 제거, 유동적인 최대 폭 설정 */
+    max-width: 1920px; 
+    margin: 0 auto;
+    background-color: #FAFAFA;
+    min-height: 100vh;
+}
+
+.hero-image {
+    width: 180px;
+    position: absolute;
 }
 
 /* ===== 헤더 ===== */
@@ -58,39 +67,33 @@ body {
 }
 
 /* ===== 배너 ===== */
-.notice-banner {
+.hero-section-wrapper {
     background: linear-gradient(120deg, #bce0fd, #d8f0ff);
+    padding: 80px 20px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
-    padding: 50px 100px 50px 200px;
+    position: relative;
 }
 
-.notice-banner h1 {
-    font-size: 36px;
+.hero-section {
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 42px;
     font-weight: 700;
+    color: #000;
+    margin-right: 30px;
 }
 
-.notice-banner img {
-    width: 200px;
-}/* ===== 배너 ===== */
-.notice-banner {
-    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 50px 100px 50px 200px;
+.hero-image {
+    width: 180px;
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
 }
-
-.notice-banner h1 {
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.notice-banner img {
-    width: 200px;
-}
-
 /* ===== 공지 상세 ===== */
 .notice-detail {
     background: #fff;

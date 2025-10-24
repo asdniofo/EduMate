@@ -50,8 +50,20 @@
                 </div>
 
                 <!-- 이메일 -->
-                <input type="email" id="memberEmail" name="memberEmail" placeholder="이메일" required>
-
+                <div class="input-group">
+	                <input type="email" id="memberEmail" name="memberEmail" placeholder="이메일" required>
+	                <button type="button" id="sendAuthBtn" class="btn-email-action btn-send">인증 요청</button>
+                </div>
+                
+                <!-- 이메일 인증번호 -->
+                <div id="authCodeArea" class="input-group" style="display: none;">
+				    <input type="text" id="authCodeInput" placeholder="인증 번호 6자리 입력" maxlength="6" class="input-full">
+				    <button type="button" id="verifyAuthBtn" class="btn-email-action btn-verify">인증 확인</button>
+				</div>
+	
+				<div id="authStatusMessage" class="auth-message" style="display: none;"></div>
+				
+				<input type="hidden" id="emailAuthStatus" name="emailAuthStatus" value="N">
                 <!-- 이름 -->
                 <input type="text" id="memberName" name="memberName" placeholder="이름" required>
 

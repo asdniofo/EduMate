@@ -1,5 +1,9 @@
 package com.edumate.boot.domain.member.model.service.impl;
 
+import com.edumate.boot.app.purchase.dto.LectureNoRequest;
+import com.edumate.boot.app.member.dto.MemberStatsRequest;
+import com.edumate.boot.app.member.dto.MyPostRequest;
+import com.edumate.boot.app.member.dto.MyCommentRequest;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.member.model.vo.Request;
@@ -114,5 +118,65 @@ public class MemberServiceImpl implements MemberService {
 	public int updateQuestion(Request request) {
 		return memberMapper.updateRequest(request);
 	}
+
+    @Override
+    public int getCount() {
+        int result = memberMapper.getCount();
+        return result;
+    }
+
+    @Override
+    public List<LectureNoRequest> findLectureById(String memberId) {
+        List<LectureNoRequest> lList = memberMapper.findLectureById(memberId);
+        return lList;
+    }
+
+    @Override
+    public int updateMemberInfo(Member member) {
+        return memberMapper.updateMemberInfo(member);
+    }
+
+    @Override
+    public MemberStatsRequest getMemberStats(String memberId) {
+        return memberMapper.getMemberStats(memberId);
+    }
+
+    @Override
+    public List<MyPostRequest> getMyPosts(String memberId) {
+        return memberMapper.getMyPosts(memberId);
+    }
+
+    @Override
+    public List<MyPostRequest> getMyPostsWithSearch(Map<String, Object> searchMap) {
+        int currentPage = (int) searchMap.get("currentPage");
+        int boardLimit = (int) searchMap.get("boardLimit");
+        int offset = (currentPage - 1) * boardLimit;
+        RowBounds rowBounds = new RowBounds(offset, boardLimit);
+        return memberMapper.getMyPostsWithSearch(searchMap, rowBounds);
+    }
+
+    @Override
+    public int getMyPostsTotalCount(Map<String, Object> searchMap) {
+        return memberMapper.getMyPostsTotalCount(searchMap);
+    }
+
+    @Override
+    public List<MyCommentRequest> getMyComments(String memberId) {
+        return memberMapper.getMyComments(memberId);
+    }
+
+    @Override
+    public List<MyCommentRequest> getMyCommentsWithSearch(Map<String, Object> searchMap) {
+        int currentPage = (int) searchMap.get("currentPage");
+        int boardLimit = (int) searchMap.get("boardLimit");
+        int offset = (currentPage - 1) * boardLimit;
+        RowBounds rowBounds = new RowBounds(offset, boardLimit);
+        return memberMapper.getMyCommentsWithSearch(searchMap, rowBounds);
+    }
+
+    @Override
+    public int getMyCommentsTotalCount(Map<String, Object> searchMap) {
+        return memberMapper.getMyCommentsTotalCount(searchMap);
+    }
 
 }
