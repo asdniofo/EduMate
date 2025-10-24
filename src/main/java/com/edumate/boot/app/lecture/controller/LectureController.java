@@ -4,6 +4,7 @@ import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.ReviewListRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
+import com.edumate.boot.domain.purchase.model.service.PurchaseService;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
 import com.edumate.boot.domain.member.model.vo.Member;
@@ -32,6 +33,7 @@ import java.util.Map;
 public class LectureController {
 
     private final LectureService lService;
+    private final PurchaseService pService;
 
     private String getFileType(String fileName) {
         String lowerFileName = fileName.toLowerCase();
@@ -222,6 +224,9 @@ public class LectureController {
 
             int result = lService.checkPurchase(memberId, lectureNo);
             if (result > 0) {
+                // 최근 시청한 비디오 업데이트
+                pService.updateRecentVideo(memberId, lectureNo, videoNo);
+                
                 List<VideoListRequest> nextVideo = lService.selectNextVideoById(lectureNo, nextVideoNo);
                 String lectureName = lService.selectNameById(lectureNo);
                 model.addAttribute("currentVideo", currentVideo);

@@ -18,7 +18,7 @@
         <aside class="sidebar">
             <div class="logo">Edumate</div>
             <ul class="sidebar-menu">
-                <li class="active"><a href="/admin/setting">기본 환경설정<span>&gt;</span></a></li>
+                <li class="active"><a href="/admin/setting">결제 관리<span>&gt;</span></a></li>
                 <li><a href="/admin/user">회원 관리<span>&gt;</span></a></li>
                 <li><a href="/admin/lecture">강의 관리<span>&gt;</span></a></li>
                 <li><a href="/admin/list">게시글 관리<span>&gt;</span></a></li>

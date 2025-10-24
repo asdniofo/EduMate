@@ -76,4 +76,116 @@
         DELETE FROM MEMBER WHERE MEMBER_ID = #{memberId}
     </delete>
     
+    <!-- 최근 출금 요청 목록 조회 -->
+    <select id="getRecentWithdrawRequests" resultType="map">
+        SELECT w.WITHDRAW_NO, w.MEMBER_ID, w.BANK, w.ACCOUNT_NO, w.AMOUNT,
+               w.CREATED_DATE, w.STATUS, m.MEMBER_NAME
+        FROM WITHDRAW_REQUEST w
+        JOIN MEMBER m ON w.MEMBER_ID = m.MEMBER_ID
+        ORDER BY w.CREATED_DATE DESC
+        FETCH FIRST 5 ROWS ONLY
+    </select>
+
+    <select id="getTotalWithDraw" resultType="int">
+        SELECT COUNT(*) FROM WITHDRAW_REQUEST
+    </select>
+
+    <select id="getWithDrawListPaging" resultType="WithDrawRequest">
+        SELECT * FROM (
+            SELECT ROWNUM AS rnum, sub.* FROM (
+                SELECT 
+                    w.WITHDRAW_NO as withDrawNo,
+                    w.MEMBER_ID as memberId,
+                    m.MEMBER_NAME as memberName,
+                    w.BANK as bank,
+                    w.ACCOUNT_NO as accountNo,
+                    w.AMOUNT as amount,
+                    w.CREATED_DATE as createDate,
+                    CASE 
+                        WHEN w.STATUS = 'PENDING' THEN '요청'
+                        WHEN w.STATUS = 'APPROVED' THEN '승인'
+                        WHEN w.STATUS = 'REJECTED' THEN '거절'
+                        ELSE w.STATUS
+                    END as status,
+                    w.PROCESSED_DATE as processedDate
+                FROM WITHDRAW_REQUEST w
+                JOIN MEMBER m ON w.MEMBER_ID = m.MEMBER_ID
+                <where>
+                    <choose>
+                        <when test="sortType == '요청'">
+                            w.STATUS = 'PENDING'
+                        </when>
+                        <when test="sortType == '승인'">
+                            w.STATUS = 'APPROVED'
+                        </when>
+                        <when test="sortType == '거절'">
+                            w.STATUS = 'REJECTED'
+                        </when>
+                        <otherwise>
+                            w.STATUS = 'PENDING'
+                        </otherwise>
+                    </choose>
+                </where>
+                <choose>
+                    <when test="sortType == '요청'">
+                        ORDER BY w.CREATED_DATE ASC
+                    </when>
+                    <when test="sortType == '승인'">
+                        ORDER BY w.PROCESSED_DATE DESC
+                    </when>
+                    <when test="sortType == '거절'">
+                        ORDER BY w.PROCESSED_DATE DESC
+                    </when>
+                    <otherwise>
+                        ORDER BY w.CREATED_DATE ASC
+                    </otherwise>
+                </choose>
+            ) sub
+        ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    </select>
+    
+    <select id="getTotalWithDrawByStatus" resultType="int">
+        SELECT COUNT(*) FROM WITHDRAW_REQUEST
+        <where>
+            <choose>
+                <when test="status == '요청'">
+                    STATUS = 'PENDING'
+                </when>
+                <when test="status == '승인'">
+                    STATUS = 'APPROVED'
+                </when>
+                <when test="status == '거절'">
+                    STATUS = 'REJECTED'
+                </when>
+                <otherwise>
+                    STATUS = 'PENDING'
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    
+    <!-- 출금 요청 승인 처리 -->
+    <update id="approveWithdrawRequest">
+        UPDATE WITHDRAW_REQUEST 
+        SET STATUS = 'APPROVED', PROCESSED_DATE = SYSTIMESTAMP
+        WHERE WITHDRAW_NO = #{withdrawNo}
+    </update>
+    
+    <!-- 출금 요청 거절 처리 -->
+    <update id="rejectWithdrawRequest">
+        UPDATE WITHDRAW_REQUEST 
+        SET STATUS = 'REJECTED', PROCESSED_DATE = SYSTIMESTAMP
+        WHERE WITHDRAW_NO = #{withdrawNo}
+    </update>
+    
+    <!-- 출금 요청 정보 조회 (거절 시 금액 복구를 위해) -->
+    <select id="getWithdrawRequestById" resultType="WithDrawRequest">
+        SELECT 
+            WITHDRAW_NO as withDrawNo,
+            MEMBER_ID as memberId,
+            AMOUNT as amount
+        FROM WITHDRAW_REQUEST
+        WHERE WITHDRAW_NO = #{withdrawNo}
+    </select>
+    
 </mapper>

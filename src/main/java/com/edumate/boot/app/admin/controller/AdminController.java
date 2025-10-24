@@ -2,6 +2,7 @@ package com.edumate.boot.app.admin.controller;
 
 import com.edumate.boot.app.admin.dto.UserListRequest;
 import com.edumate.boot.app.admin.dto.UserStatusRequest;
+import com.edumate.boot.app.admin.dto.WithDrawRequest;
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.admin.model.service.AdminService;
@@ -31,11 +32,38 @@ public class AdminController {
     private final MemberService mService;
     
     @GetMapping("/main")
-    public String showAdmin(HttpSession session) {
+    public String showAdmin(HttpSession session, Model model) {
         String adminYn = (String) session.getAttribute("adminYn");
         if (adminYn == null || !adminYn.equals("Y")) {
             return "redirect:/";
         }
+        
+        // 기본 페이지에서 출금 요청 데이터를 미리 로드
+        try {
+            int currentPage = 1;
+            int withDrawCountPerPage = 10;
+            String sortType = "요청";
+            
+            int totalCount = aService.getTotalWithDrawByStatus(sortType);
+            List<WithDrawRequest> wList = aService.getWithDrawListPaging(currentPage, withDrawCountPerPage, sortType);
+            int maxPage = (int) Math.ceil((double) totalCount / withDrawCountPerPage);
+            int naviCountPerPage = 5;
+            int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+            int endNavi = (startNavi - 1) + naviCountPerPage;
+            if (endNavi > maxPage) endNavi = maxPage;
+
+            model.addAttribute("wList", wList);
+            model.addAttribute("totalCount", totalCount);
+            model.addAttribute("currentPage", currentPage);
+            model.addAttribute("withDrawCountPerPage", withDrawCountPerPage);
+            model.addAttribute("maxPage", maxPage);
+            model.addAttribute("startNavi", startNavi);
+            model.addAttribute("endNavi", endNavi);
+            model.addAttribute("currentSort", sortType);
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+        }
+        
        return "admin/admin_main";
     }
     
@@ -107,13 +135,83 @@ public class AdminController {
     }
     
     @GetMapping("/setting")
-    public String showSetting(HttpSession session) {
+    public String showSetting(@RequestParam(value = "page", defaultValue = "1") int currentPage
+            ,@RequestParam(value = "status", defaultValue = "요청") String sortType
+            ,HttpSession session, Model model) {
         String adminYn = (String) session.getAttribute("adminYn");
         if (adminYn == null || !adminYn.equals("Y")) {
             return "redirect:/";
         }
+        try {
+            int withDrawCountPerPage = 10;
+            int totalCount = aService.getTotalWithDrawByStatus(sortType);
+            List<WithDrawRequest> wList = aService.getWithDrawListPaging(currentPage, withDrawCountPerPage, sortType);
+            int maxPage = (int) Math.ceil((double) totalCount / withDrawCountPerPage);
+            int naviCountPerPage = 5;
+            int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+            int endNavi = (startNavi - 1) + naviCountPerPage;
+            if (endNavi > maxPage) endNavi = maxPage;
+
+            model.addAttribute("wList", wList);
+            model.addAttribute("totalCount", totalCount);
+            model.addAttribute("currentPage", currentPage);
+            model.addAttribute("withDrawCountPerPage", withDrawCountPerPage);
+            model.addAttribute("maxPage", maxPage);
+            model.addAttribute("startNavi", startNavi);
+            model.addAttribute("endNavi", endNavi);
+            model.addAttribute("currentSort", sortType);
+        }catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "common/error";
+        }
        return "admin/basicSetting";
     }
+    
+    @PostMapping("/withdraw/approve")
+    @ResponseBody
+    public String approveWithdraw(@RequestParam int withdrawNo, HttpSession session) {
+        String adminYn = (String) session.getAttribute("adminYn");
+        if (adminYn == null || !adminYn.equals("Y")) {
+            return "권한이 없습니다.";
+        }
+        
+        try {
+            int result = aService.approveWithdrawRequest(withdrawNo);
+            if (result > 0) {
+                return "승인되었습니다.";
+            } else {
+                return "승인 처리에 실패했습니다.";
+            }
+        } catch (Exception e) {
+            return "오류가 발생했습니다: " + e.getMessage();
+        }
+    }
+    
+    @PostMapping("/withdraw/reject")
+    @ResponseBody
+    public String rejectWithdraw(@RequestParam int withdrawNo, HttpSession session) {
+        String adminYn = (String) session.getAttribute("adminYn");
+        if (adminYn == null || !adminYn.equals("Y")) {
+            return "권한이 없습니다.";
+        }
+        
+        try {
+            int result = aService.rejectWithdrawRequest(withdrawNo);
+            if (result > 0) {
+                return "거절되었습니다. 신청 금액이 복구되었습니다.";
+            } else {
+                return "거절 처리에 실패했습니다.";
+            }
+        } catch (Exception e) {
+            return "오류가 발생했습니다: " + e.getMessage();
+        }
+    }
+
+
+
+
+
+
     
     @GetMapping("/lecture")
     public String showLecture(@RequestParam(value = "page", defaultValue = "1") int currentPage

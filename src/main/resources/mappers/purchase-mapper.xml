@@ -12,10 +12,42 @@
         WHERE MEMBER_ID = #{memberId}
     </update>
     <insert id="updatePurchase">
-        INSERT INTO PURCHASE VALUES (SEQ_PURCHASE_NO.NEXTVAL, #{lectureNo}, #{memberId})
+        INSERT INTO PURCHASE VALUES (SEQ_PURCHASE_NO.NEXTVAL, #{lectureNo}, #{memberId}, #{videoNo})
     </insert>
-
-
-
+    <select id="findVideo" resultType="int">
+        SELECT VIDEO_NO FROM LECTURE_VIDEO WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN = 'Y'
+        ORDER BY VIDEO_ORDER ASC
+        FETCH FIRST 1 ROWS ONLY
+    </select>
+    
+    <update id="updateRecentVideo">
+        UPDATE PURCHASE SET VIDEO_NO = #{videoNo}
+        WHERE MEMBER_ID = #{memberId} AND LECTURE_NO = #{lectureNo}
+    </update>
+    
+    <select id="getRecentVideoNo" resultType="int">
+        SELECT VIDEO_NO FROM PURCHASE 
+        WHERE MEMBER_ID = #{memberId} AND LECTURE_NO = #{lectureNo}
+    </select>
+    
+    <update id="payToTeacher">
+        UPDATE MEMBER SET MEMBER_MONEY = MEMBER_MONEY + (#{amount} * 0.9)
+        WHERE MEMBER_ID = #{teacherId}
+    </update>
+    
+    <update id="withdrawMoney" parameterType="map">
+        UPDATE MEMBER SET MEMBER_MONEY = MEMBER_MONEY - #{amount}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+    
+    <update id="refundMoney" parameterType="map">
+        UPDATE MEMBER SET MEMBER_MONEY = MEMBER_MONEY + #{amount}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+    
+    <insert id="insertWithdrawRequest">
+        INSERT INTO WITHDRAW_REQUEST (WITHDRAW_NO, MEMBER_ID, BANK, ACCOUNT_NO, AMOUNT, CREATED_DATE, STATUS)
+        VALUES (SEQ_WITHDRAW_NO.NEXTVAL, #{memberId}, #{bank}, #{accountNumber}, #{amount}, SYSDATE, 'PENDING')
+    </insert>
 </mapper>
 

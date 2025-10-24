@@ -37,4 +37,7 @@ public interface EventMapper {
     // 시퀀스 조회 (Oracle용)
     int getNextEventId();
     int getNextContentNo();
+    
+    int deleteEventContents(int eventId);
+    
 }

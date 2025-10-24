@@ -9,7 +9,7 @@
 }
 
 .board-table {
-    width: 1600px;
+    width: 100%;
     background-color: white;
     border-collapse: collapse;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

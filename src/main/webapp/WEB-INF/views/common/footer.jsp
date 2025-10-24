@@ -11,29 +11,26 @@
     <body>
         <footer id="footer">
             <div class="footer-inner">
-                <!-- 상단 줄: 좌측(로고+정보) - 우측(전화번호/휴일) -->
                 <div class="footer-top">
-                    <div class="footer-logo">Logo</div>
-                    <div class="footer-info">
-                        <span>대표자 : 김호준</span><span> | </span><span>사업자번호 : 123-456-7890</span>
+                    <div class="footer-logo">Logo</div>  
+                    <div class="footer-info"> <span>대표자 : 김호준</span><span> | </span><span>사업자번호 : 123-456-7890</span>
                         <span> | </span><span>주소 : 중구 청계천로 120</span>
                     </div>
-                    <div class="footer-right">
+                    <div class="footer-right"> 
                         <span>전화번호 : 02)123-4567</span> |
                         <span>휴일 : 토 / 일 / 공휴일</span>
                     </div>
-                </div>
+                    </div>
 
-                <!-- 하단 줄: 중앙 저작권 + 우측 연락처 -->
-                <div class="footer-bottom">
-                    <div class="footer-copy">
-                        <span>© 2025 EduMate. All Rights Reserved.</span>
+                    <div class="footer-bottom">
+                        <div class="footer-copy">  
+                            <span class="copyright">© 2025 EduMate. All Rights Reserved.</span>
+                        </div>
+                        <div class="footer-contact">  
+                            <span>메일 : olauser1@ola.com</span> |
+                            <span>SNS : @olauser1</span>
+                        </div>
                     </div>
-                    <div class="footer-contact">
-                        <span>메일 : olauser1@ola.com</span> |
-                        <span>SNS : @olauser1</span>
-                    </div>
-                </div>
             </div>
         </footer>
     </body>

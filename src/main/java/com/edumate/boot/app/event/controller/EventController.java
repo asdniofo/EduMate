@@ -121,6 +121,19 @@ public class EventController {
         try {
             Event event = eventService.getEventById(eventId);
             List<EventContent> contents = eventService.getEventContents(eventId);
+            System.out.println("=== Debug: contents 리스트 확인 ===");
+            if (contents == null) {
+                System.out.println("contents is null");
+            } else {
+                System.out.println("contents.size() = " + contents.size());
+                for (Object obj : contents) {
+                    System.out.println("Object class: " + obj.getClass().getName());
+                    System.out.println(obj.toString());
+                }
+                for (EventContent content : contents) {
+                    System.out.println("eContentPath = " + content.getEContentPath());
+                }
+            }
             
             if (event == null) {
                 model.addAttribute("errorMsg", "존재하지 않는 이벤트입니다.");

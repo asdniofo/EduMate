@@ -24,8 +24,53 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public int updatePurchase(int lectureNo, String memberId) {
-        int result = pMapper.updatePurchase(lectureNo, memberId);
+    public int updatePurchase(int lectureNo, String memberId, int videoNo) {
+        int result = pMapper.updatePurchase(lectureNo, memberId, videoNo);
         return result;
+    }
+
+    @Override
+    public int findVideo(int lectureNo) {
+        int result = pMapper.findVideo(lectureNo);
+        return result;
+    }
+    
+    @Override
+    public int updateRecentVideo(String memberId, int lectureNo, int videoNo) {
+        int result = pMapper.updateRecentVideo(memberId, lectureNo, videoNo);
+        return result;
+    }
+    
+    @Override
+    public int getRecentVideoNo(String memberId, int lectureNo) {
+        int result = pMapper.getRecentVideoNo(memberId, lectureNo);
+        return result;
+    }
+    
+    @Override
+    public int payToTeacher(String teacherId, int amount) {
+        int result = pMapper.payToTeacher(teacherId, amount);
+        return result;
+    }
+    
+    @Override
+    public int withdrawMoney(String memberId, int amount) {
+        return pMapper.withdrawMoney(memberId, amount);
+    }
+    
+    @Override
+    public int refundMoney(String memberId, int amount) {
+        return pMapper.refundMoney(memberId, amount);
+    }
+    
+    @Override
+    public int insertWithdrawRequest(String memberId, String bank, String accountNumber, int amount) {
+        // 출금 신청 시 먼저 돈을 차감
+        int withdrawResult = pMapper.withdrawMoney(memberId, amount);
+        if (withdrawResult > 0) {
+            // 돈 차감 성공 시 출금 요청 등록
+            return pMapper.insertWithdrawRequest(memberId, bank, accountNumber, amount);
+        }
+        return 0;
     }
 }

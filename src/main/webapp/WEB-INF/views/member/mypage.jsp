@@ -63,45 +63,92 @@
                         </div>
                     </div>
 
-                    <!-- 현재 수강중인 강의 -->
-                    <div class="section">
-                        <div class="section-header">
-                            <h2 class="section-title">현재 수강중인 강의</h2>
-                            <!-- 검색 박스를 header 안으로 이동 -->
-                            <div class="course-search-box">
-                                <input type="text" id="courseSearchInput" placeholder="강의명, 강사명을 입력하세요"
-                                       onkeypress="handleCourseSearchEnter(event)">
-                                <button onclick="searchCourses()">🔍</button>
-                            </div>
-                        </div>
 
-                        <div class="course-content" id="courseContent">
-                            <c:choose>
-                                <c:when test="${not empty lectureList}">
-                                    <c:forEach items="${lectureList}" var="lecture" varStatus="status">
-                                        <a href="/lecture/details?lectureNo=${lecture.lectureNo}"
-                                           class="course-item ${status.index >= 3 ? 'hidden-course' : ''}"
-                                           style="${status.index >= 3 ? 'display: none;' : ''}">
-                                            <div class="course-title">${lecture.lectureName}</div>
-                                            <div class="course-instructor">${lecture.memberName}</div>
-                                            <div class="course-category">${lecture.lectureCategory}</div>
-                                        </a>
-                                    </c:forEach>
-                                    <c:if test="${fn:length(lectureList) > 3}">
-                                        <div class="toggle-courses-btn" onclick="toggleCourses()">
-                                            <span id="toggleText">더보기 (${fn:length(lectureList) - 3}개)</span>
-                                            <span id="toggleIcon">▼</span>
-                                        </div>
-                                    </c:if>
-                                </c:when>
-                                <c:otherwise>
-                                    <div style="text-align: center; color: #999; padding: 40px;">
-                                        수강중인 강의가 없습니다.
+                    <c:choose>
+                        <c:when test="${sessionScope.teacherYn eq 'N' && sessionScope.adminYn eq 'N'}">
+                            <!-- 현재 수강중인 강의 -->
+                            <div class="section">
+                                <div class="section-header">
+                                    <h2 class="section-title">현재 수강중인 강의</h2>
+                                    <!-- 검색 박스를 header 안으로 이동 -->
+                                    <div class="course-search-box">
+                                        <input type="text" id="courseSearchInput" placeholder="강의명, 강사명을 입력하세요"
+                                               onkeypress="handleCourseSearchEnter(event)">
+                                        <button onclick="searchCourses()">🔍</button>
                                     </div>
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-                    </div>
+                                </div>
+
+                                <div class="course-content" id="courseContent">
+                                    <c:choose>
+                                        <c:when test="${not empty lectureList}">
+                                            <c:forEach items="${lectureList}" var="lecture" varStatus="status">
+                                                <a href="/lecture/player?videoNo=${recentVideoMap[lecture.lectureNo]}"
+                                                   class="course-item ${status.index >= 3 ? 'hidden-course' : ''}"
+                                                   style="${status.index >= 3 ? 'display: none;' : ''}">
+                                                    <div class="course-title">${lecture.lectureName}</div>
+                                                    <div class="course-instructor">${lecture.memberName}</div>
+                                                    <div class="course-category">${lecture.lectureCategory}</div>
+                                                </a>
+                                            </c:forEach>
+                                            <c:if test="${fn:length(lectureList) > 3}">
+                                                <div class="toggle-courses-btn" onclick="toggleCourses()">
+                                                    <span id="toggleText">더보기 (${fn:length(lectureList) - 3}개)</span>
+                                                    <span id="toggleIcon">▼</span>
+                                                </div>
+                                            </c:if>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div style="text-align: center; color: #999; padding: 40px;">
+                                                수강중인 강의가 없습니다.
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:when test="${sessionScope.teacherYn eq 'Y'}">
+                            <!-- 현재 수강중인 강의 -->
+                            <div class="section">
+                                <div class="section-header">
+                                    <h2 class="section-title">내가 등록한 강의</h2>
+                                    <!-- 검색 박스를 header 안으로 이동 -->
+                                    <div class="course-search-box">
+                                        <input type="text" id="courseSearchInput" placeholder="강의명을 입력하세요"
+                                               onkeypress="handleCourseSearchEnter(event)">
+                                        <button onclick="searchCourses()">🔍</button>
+                                    </div>
+                                </div>
+
+                                <div class="course-content" id="courseContent">
+                                    <c:choose>
+                                        <c:when test="${not empty lList}">
+                                            <c:forEach items="${lList}" var="lecture" varStatus="status">
+                                                <a href="/lecture/details?lectureNo=${lecture.lectureNo}"
+                                                   class="course-item ${status.index >= 3 ? 'hidden-course' : ''}"
+                                                   style="${status.index >= 3 ? 'display: none;' : ''}">
+                                                    <div class="course-title">${lecture.lectureName}</div>
+                                                    <div class="course-instructor">${memberInfo.memberName}</div>
+                                                    <div class="course-category">${lecture.lectureCategory}</div>
+                                                </a>
+                                            </c:forEach>
+                                            <c:if test="${fn:length(lList) > 3}">
+                                                <div class="toggle-courses-btn" onclick="toggleCourses()">
+                                                    <span id="toggleText">더보기 (${fn:length(lList) - 3}개)</span>
+                                                    <span id="toggleIcon">▼</span>
+                                                </div>
+                                            </c:if>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div style="text-align: center; color: #999; padding: 40px;">
+                                                등록한 강의가 없습니다.
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                        </c:when>
+
+                    </c:choose>
                     <c:choose>
                         <c:when test="${sessionScope.teacherYn eq 'Y'}">
                             <div class="section">
@@ -110,16 +157,23 @@
                                     <div class="menu-text">강의 추가</div>
                                 </a>
                             </div>
+                            <div class="section">
+                                <a href="javascript:void(0);" onclick="openWithdrawPopup();" class="menu-item">
+                                    <div class="menu-icon">💰</div>
+                                    <div class="menu-text">잔액 출금하기</div>
+                                </a>
+                            </div>
+                        </c:when>
+                        <c:when test="${sessionScope.teacherYn eq 'N' && sessionScope.adminYn eq 'N'}">
+                            <!-- 잔고 충전하기 -->
+                            <div class="section">
+                                <a href="javascript:void(0);" onclick="openChargePopup();" class="menu-item">
+                                    <div class="menu-icon">💰</div>
+                                    <div class="menu-text">잔고 충전하기</div>
+                                </a>
+                            </div>
                         </c:when>
                     </c:choose>
-                    <!-- 잔고 충전하기 -->
-                    <div class="section">
-                        <a href="javascript:void(0);" onclick="openChargePopup();" class="menu-item">
-                            <div class="menu-icon">💰</div>
-                            <div class="menu-text">잔고 충전하기</div>
-                        </a>
-                    </div>
-
                     <!-- 내가 작성한 게시물 -->
                     <div class="section">
                         <a href="/member/mypost" class="menu-item">
@@ -183,6 +237,52 @@
                     <div class="charge-popup-buttons">
                         <button class="charge-popup-btn cancel" onclick="closeChargePopup()">취소</button>
                         <button class="charge-popup-btn confirm" onclick="processCharge()">충전하기</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 출금 팝업 -->
+            <div class="charge-popup-overlay" id="withdrawPopupOverlay" style="display: none;">
+                <div class="charge-popup">
+                    <h3 class="charge-popup-title">💸 잔액 출금</h3>
+
+                    <div class="withdraw-form">
+                        <!-- 은행 선택 -->
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="bankSelect" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">은행 선택</label>
+                            <select id="bankSelect" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; background: white;">
+                                <option value="">은행을 선택하세요</option>
+                                <option value="KB국민은행">KB국민은행</option>
+                                <option value="신한은행">신한은행</option>
+                                <option value="우리은행">우리은행</option>
+                                <option value="하나은행">하나은행</option>
+                                <option value="NH농협은행">NH농협은행</option>
+                                <option value="IBK기업은행">IBK기업은행</option>
+                                <option value="카카오뱅크">카카오뱅크</option>
+                                <option value="토스뱅크">토스뱅크</option>
+                                <option value="케이뱅크">케이뱅크</option>
+                            </select>
+                        </div>
+
+                        <!-- 계좌번호 입력 -->
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="accountNumber" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">계좌번호</label>
+                            <input type="text" id="accountNumber" placeholder="계좌번호를 입력하세요 (- 없이)" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                        </div>
+
+                        <!-- 출금 금액 -->
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="withdrawAmountInput" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">출금 금액 (현재 잔액: <fmt:formatNumber value="${memberInfo.memberMoney}" pattern="#,###"/>원)</label>
+                            <div class="amount-input-group" style="display: flex; gap: 10px; align-items: center;">
+                                <input type="text" class="charge-amount-input" id="withdrawAmountInput" placeholder="출금할 금액을 입력하세요" style="flex: 1; height: 46px; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; margin: 0;">
+                                <button class="full-amount-btn" onclick="setFullAmount()" style="height: 46px; padding: 0 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; white-space: nowrap;">전액</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charge-popup-buttons" style="margin-top: 15px;">
+                        <button class="charge-popup-btn cancel" onclick="closeWithdrawPopup()">취소</button>
+                        <button class="charge-popup-btn confirm" onclick="processWithdraw()">출금 신청</button>
                     </div>
                 </div>
             </div>
@@ -286,7 +386,92 @@
                         });
                 }
 
-                // 충전 금액 입력 시 포맷팅
+                // 출금 관련 함수들
+                function openWithdrawPopup() {
+                    const popup = document.getElementById('withdrawPopupOverlay');
+                    if (popup) {
+                        popup.style.display = 'flex';
+                    }
+                    
+                    // 폼 초기화
+                    document.getElementById('bankSelect').value = '';
+                    document.getElementById('accountNumber').value = '';
+                    document.getElementById('withdrawAmountInput').value = '';
+                }
+
+                function closeWithdrawPopup() {
+                    document.getElementById('withdrawPopupOverlay').style.display = 'none';
+                }
+
+                function setFullAmount() {
+                    const currentBalance = ${memberInfo.memberMoney};
+                    const input = document.getElementById('withdrawAmountInput');
+                    if (input) {
+                        input.value = currentBalance.toLocaleString();
+                    }
+                }
+
+                function processWithdraw() {
+                    const bank = document.getElementById('bankSelect').value;
+                    const accountNumber = document.getElementById('accountNumber').value;
+                    const withdrawInput = document.getElementById('withdrawAmountInput');
+                    const withdrawAmount = parseInt(withdrawInput.value.replace(/,/g, '')) || 0;
+                    
+                    // 유효성 검사
+                    if (!bank || bank.trim() === '') {
+                        alert('은행을 선택해주세요.');
+                        return;
+                    }
+                    
+                    if (!accountNumber || accountNumber.trim() === '') {
+                        alert('계좌번호를 입력해주세요.');
+                        return;
+                    }
+                    
+                    if (!withdrawAmount || withdrawAmount < 1000) {
+                        alert('최소 1,000원 이상 출금 가능합니다.');
+                        return;
+                    }
+                    
+                    const currentBalance = ${memberInfo.memberMoney};
+                    if (withdrawAmount > currentBalance) {
+                        alert('잔액이 부족합니다.');
+                        return;
+                    }
+                    
+                    if (!confirm(bank + '\n계좌번호: ' + accountNumber + '\n출금금액: ' + withdrawAmount.toLocaleString() + '원\n\n위 정보로 출금하시겠습니까?')) {
+                        return;
+                    }
+                    
+                    // 서버로 출금 요청
+                    fetch('/member/withdraw', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            bank: bank,
+                            accountNumber: accountNumber,
+                            amount: withdrawAmount
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('출금 신청이 완료되었습니다.\n처리까지 1-2일 소요됩니다.');
+                            closeWithdrawPopup();
+                            window.location.reload(); // 잔액 업데이트를 위해 새로고침
+                        } else {
+                            alert(data.message || '출금 신청에 실패했습니다.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('출금 신청 중 오류가 발생했습니다.');
+                    });
+                }
+
+                // 충전/출금 금액 입력 시 포맷팅
                 document.addEventListener('DOMContentLoaded', function () {
                     const chargeInput = document.getElementById('chargeAmountInput');
                     if (chargeInput) {
@@ -295,6 +480,31 @@
                             if (value) {
                                 e.target.value = parseInt(value).toLocaleString();
                             }
+                        });
+                    }
+                    
+                    const withdrawInput = document.getElementById('withdrawAmountInput');
+                    if (withdrawInput) {
+                        withdrawInput.addEventListener('input', function (e) {
+                            let value = e.target.value.replace(/[^0-9]/g, '');
+                            if (value) {
+                                const numericValue = parseInt(value);
+                                const currentBalance = ${memberInfo.memberMoney};
+                                
+                                // 현재 잔액보다 큰 금액은 입력 불가
+                                if (numericValue > currentBalance) {
+                                    e.target.value = currentBalance.toLocaleString();
+                                } else {
+                                    e.target.value = numericValue.toLocaleString();
+                                }
+                            }
+                        });
+                    }
+                    
+                    const accountInput = document.getElementById('accountNumber');
+                    if (accountInput) {
+                        accountInput.addEventListener('input', function (e) {
+                            e.target.value = e.target.value.replace(/[^0-9]/g, '');
                         });
                     }
 

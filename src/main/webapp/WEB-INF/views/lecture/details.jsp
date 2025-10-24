@@ -74,7 +74,7 @@
             </div>
 
             <!-- Reviews Section -->
-            <div class="reviews-section" id="reviews-section" style="display: none">
+            <div class="reviews-section" id="reviews-section">
                 <div class="reviews-header">
                     <h2 class="reviews-title">수강평</h2>
                     <div class="reviews-summary">

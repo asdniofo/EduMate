@@ -34,4 +34,5 @@ public interface EventService {
 
     // 이벤트 삭제
     int deleteEvent(int eventId);
+    int deleteEventContents(int eventId);
 }

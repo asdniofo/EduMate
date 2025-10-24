@@ -173,6 +173,14 @@
         ORDER BY LECTURE_NO ASC
     </select>
 
+    <select id="findTeacherLecture" resultType="Lecture">
+        SELECT * FROM LECTURE
+        WHERE MEMBER_ID = #{memberId}
+        ORDER BY LECTURE_NO ASC
+    </select>
+
+
+
     <update id="updateMemberInfo">
         UPDATE MEMBER 
         SET 
