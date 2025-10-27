@@ -72,7 +72,7 @@
 					</a>
 				</c:if>
 			</div>
-			<a href="#" class="write-button">글쓰기</a>
+			<a href="/notice/insert" class="write-button">글쓰기</a>
 		</div>
 	</main>
 	<jsp:include page="../common/footer.jsp" />
