@@ -228,5 +228,61 @@
     <update id="deleteLecture">
         UPDATE LECTURE SET LECTURE_YN = 'N' WHERE LECTURE_NO = #{lectureNo}
     </update>
+
+    <select id="findPurchaseById" resultType="int">
+        SELECT COUNT(*) FROM PURCHASE WHERE MEMBER_ID = #{memberId} AND LECTURE_NO = #{lectureNo}
+    </select>
+    
+    <select id="findOwnerBYId" resultType="int">
+        SELECT COUNT(*) FROM LECTURE WHERE MEMBER_ID = #{memberId} AND LECTURE_NO = #{lectureNo} AND LECTURE_YN = 'Y'
+    </select>
+
+    <select id="selectVideo" resultType="int">
+        SELECT VIDEO_NO FROM PURCHASE WHERE MEMBER_ID = #{memberId} AND LECTURE_NO = #{lectureNo}
+    </select>
+
+    <!-- 강의 수정 관련 쿼리 -->
+    <select id="selectLectureForEdit" resultType="Lecture">
+        SELECT LECTURE_NO, MEMBER_ID, LECTURE_NAME, LECTURE_CONTENT, 
+               LECTURE_PRICE, LECTURE_CATEGORY, LECTURE_PATH, LECTURE_CREATED_DATE, LECTURE_YN
+        FROM LECTURE 
+        WHERE LECTURE_NO = #{lectureNo} AND LECTURE_YN = 'Y'
+    </select>
+
+    <update id="updateLecture">
+        UPDATE LECTURE 
+        SET LECTURE_NAME = #{lectureName},
+            LECTURE_CONTENT = #{lectureContent},
+            LECTURE_PRICE = #{lecturePrice},
+            LECTURE_CATEGORY = #{lectureCategory}
+            <if test="lecturePath != null and lecturePath != ''">
+            , LECTURE_PATH = #{lecturePath}
+            </if>
+        WHERE LECTURE_NO = #{lectureNo} AND LECTURE_YN = 'Y'
+    </update>
+
+    <select id="getNextVideoOrder" resultType="int">
+        SELECT NVL(MAX(VIDEO_ORDER), 0) + 1
+        FROM LECTURE_VIDEO 
+        WHERE LECTURE_NO = #{lectureNo} AND VIDEO_YN = 'Y'
+    </select>
+
+    <update id="updateVideo">
+        UPDATE LECTURE_VIDEO 
+        SET VIDEO_TITLE = #{videoTitle}
+            <if test="videoPath != null and videoPath != ''">
+            , VIDEO_PATH = #{videoPath}
+            </if>
+            <if test="videoTime != null and videoTime > 0">
+            , VIDEO_TIME = #{videoTime}
+            </if>
+        WHERE VIDEO_NO = #{videoNo} AND VIDEO_YN = 'Y'
+    </update>
+
+    <update id="updateVideoOrder">
+        UPDATE LECTURE_VIDEO 
+        SET VIDEO_ORDER = #{newOrder}
+        WHERE VIDEO_NO = #{videoNo} AND VIDEO_YN = 'Y'
+    </update>
 </mapper>
 

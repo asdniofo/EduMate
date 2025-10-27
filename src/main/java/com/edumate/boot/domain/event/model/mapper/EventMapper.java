@@ -42,4 +42,5 @@ public interface EventMapper {
 
 	List<Event> selectEventsByKeyword(String keyword);
     
+    int getCount();
 }

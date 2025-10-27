@@ -132,7 +132,11 @@
     <delete id="deleteEventContents" parameterType="int">
     DELETE FROM EVENT_CONTENT
     WHERE EVENT_ID = #{eventId}
-</delete>
+    </delete>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM EVENT_CONTENT
+    </select>
 
 <select id="selectEventsByKeyword" parameterType="string" resultType="com.edumate.boot.domain.event.model.vo.Event">
     SELECT *

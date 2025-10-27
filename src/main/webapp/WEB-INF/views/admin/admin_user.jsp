@@ -20,7 +20,6 @@
         <tr>
             <th>회원 구분</th>
             <th>아이디</th>
-            <th>비밀번호</th>
             <th>이름</th>
             <th>생년월일</th>
             <th>설정</th>
@@ -31,11 +30,6 @@
             <tr>
                 <td>${user.memberType}</td>
                 <td>${user.memberId}</td>
-                <td>
-                    <span class="pw-mask">***************</span>
-                    <button class="btn show" onclick="togglePw(this, 'pw${status.index}')">보기</button>
-                    <span id="pw${status.index}" class="pw-real" style="display:none;">${user.memberPw}</span>
-                </td>
                 <td>${user.memberName}</td>
                 <td>${user.memberBirth}</td>
                 <td>
@@ -120,20 +114,6 @@
         });
     }
 
-    function togglePw(btn, pwId) {
-        const pwReal = document.getElementById(pwId);
-        const pwMask = btn.previousElementSibling;
-
-        if (pwReal.style.display === "none") {
-            pwReal.style.display = "inline";
-            pwMask.style.display = "none";
-            btn.textContent = "숨기기";
-        } else {
-            pwReal.style.display = "none";
-            pwMask.style.display = "inline";
-            btn.textContent = "보기";
-        }
-    }
 
     function openEditRow(btn, memberId) {
         const row = btn.closest('tr');
@@ -162,7 +142,7 @@
             b.disabled = false;
             b.style.backgroundColor = '#2980b9';
         });
-        
+
         // 현재 버튼만 선택된 상태로 표시
         btn.style.backgroundColor = '#1c6aa3';
 
@@ -172,38 +152,36 @@
         // 기존 데이터 추출
         const type = row.children[0].innerText.trim();
         const id = row.children[1].innerText.trim();
-        const name = row.children[3].innerText.trim();
-        const birth = row.children[4].innerText.trim();
+        const name = row.children[2].innerText.trim();
+        const birth = row.children[3].innerText.trim();
 
         // 새로운 수정행 추가
         const newRow = document.createElement('tr');
         newRow.className = 'edit-row';
         const cell = document.createElement('td');
-        cell.colSpan = 6;
+        cell.colSpan = 5;
 
         cell.innerHTML = `
-        <div class="edit-box">
-            <label>회원 구분:
-                <select id="editType-${id}">
+        <div class="edit-box" style="display: table; width: 100%; table-layout: fixed;">
+            <div style="display: table-cell; width: 20%; text-align: center; vertical-align: middle;">
+                <select id="editType-${id}" style="margin-left: -80px;">
                     <option ${type == '일반회원' ? 'selected' : ''}>일반회원</option>
                     <option ${type == '선생님' ? 'selected' : ''}>선생님</option>
                     <option ${type == '관리자' ? 'selected' : ''}>관리자</option>
                 </select>
-            </label>
-
-            <label>비밀번호:
-                <input type="password" id="editPw-${id}" placeholder="새 비밀번호 입력">
-            </label>
-
-            <label>이름:
-                <input type="text" id="editName-${id}" value="${name}">
-            </label>
-
-            <label>생년월일:
-                <input type="date" id="editBirth-${id}" value="${birth.replaceAll('.', '-')}">
-            </label>
-
-            <button class="btn save" onclick="saveEdit('${id}')">수정 완료</button>
+            </div>
+            <div style="display: table-cell; width: 20%; text-align: center; vertical-align: middle;">
+                <input type="password" id="editPw-${id}" placeholder="새 비밀번호 입력" style="width: 60%; margin-left: -60px;">
+            </div>
+            <div style="display: table-cell; width: 20%; text-align: center; vertical-align: middle;">
+                <input type="text" id="editName-${id}" value="${name}" placeholder="이름 입력" style="width: 40%; margin-left: -50px;">
+            </div>
+            <div style="display: table-cell; width: 20%; text-align: center; vertical-align: middle;">
+                <input type="date" id="editBirth-${id}" value="${birth.replaceAll('.', '-')}" style="width: 50%; margin-left: -150px;">
+            </div>
+            <div style="display: table-cell; width: 20%; text-align: center; vertical-align: middle;">
+                <button class="btn save" onclick="saveEdit('${id}')" style="margin-left: -50px;">수정 완료</button>
+            </div>
         </div>
     `;
         newRow.appendChild(cell);
@@ -215,12 +193,12 @@
         const editRow = document.querySelector('.edit-row');
         const originalRow = editRow.previousElementSibling;
         const actualMemberId = originalRow.children[1].innerText.trim(); // 아이디 컬럼
-        
+
         const typeSelect = editRow.querySelector('select');
         const pwInput = editRow.querySelector('input[type="password"]');
         const nameInput = editRow.querySelector('input[type="text"]:not([readonly])');
         const birthInput = editRow.querySelector('input[type="date"]');
-        
+
         const type = typeSelect ? typeSelect.value.trim() : '';
         const pw = pwInput ? pwInput.value.trim() : '';
         const name = nameInput ? nameInput.value.trim() : '';
@@ -254,7 +232,7 @@
                     b.disabled = false;
                     b.style.backgroundColor = '#2980b9';
                 });
-                
+
                 alert('회원 정보가 수정되었습니다.');
                 location.reload();
             },

@@ -37,4 +37,5 @@ public interface EventService {
     int deleteEventContents(int eventId);
 
 	List<Event> searchEvents(String trim);
+    int getCount();
 }

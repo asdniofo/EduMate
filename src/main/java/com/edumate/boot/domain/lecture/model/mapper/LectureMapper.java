@@ -66,4 +66,21 @@ public interface LectureMapper {
     void reorderVideosAfterDelete(int lectureNo, int deletedOrder);
     
     void deleteLecture(int lectureNo);
+
+    int findPurchaseById(String memberId, int lectureNo);
+
+    int findOwnerBYId(String memberId, int lectureNo);
+
+    int selectVideo(String memberId, int lectureNo);
+
+    // 강의 수정 관련 메서드
+    Lecture selectLectureForEdit(int lectureNo);
+    
+    int updateLecture(Lecture lecture);
+    
+    int getNextVideoOrder(int lectureNo);
+    
+    int updateVideo(LectureVideo video);
+    
+    void updateVideoOrder(int videoNo, int newOrder);
 }

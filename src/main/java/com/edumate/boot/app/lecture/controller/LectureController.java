@@ -8,6 +8,7 @@ import com.edumate.boot.domain.purchase.model.service.PurchaseService;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
 import com.edumate.boot.domain.member.model.vo.Member;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -181,14 +182,18 @@ public class LectureController {
     }
 
     @GetMapping("/details")
-    public String showLectureDetails(@ModelAttribute LectureListRequest lecture, @ModelAttribute ReviewListRequest review, @ModelAttribute VideoListRequest video, @RequestParam int lectureNo, Model model) {
+    public String showLectureDetails(@ModelAttribute LectureListRequest lecture
+            , @ModelAttribute ReviewListRequest review
+            , @ModelAttribute VideoListRequest video
+            , @RequestParam int lectureNo, Model model
+            , HttpSession session) {
         try {
+            String memberId = (String) session.getAttribute("loginId");
             List<LectureListRequest> lList = lService.selectOneById(lectureNo);
             List<ReviewListRequest> rList = lService.selectReviewById(lectureNo);
             int videoCount = lService.totalVideoById(lectureNo);
             int totalTime = lService.totalTimeById(lectureNo);
             List<VideoListRequest> vList = lService.selectVideoListById(lectureNo);
-
             StringBuilder totalTimeFormatted = new StringBuilder();
             int totalHour = totalTime / 3600;
             int totalMinute = (totalTime % 3600) / 60;
@@ -197,9 +202,26 @@ public class LectureController {
             if (totalMinute > 0) totalTimeFormatted.append(totalMinute).append("분 ");
             if (totalSecond > 0) totalTimeFormatted.append(totalSecond).append("초");
 
+            if (memberId != null) {
+                int purchaseYn = lService.findPurchaseById(memberId, lectureNo);
+                int findOwner = lService.findOwnerBYId(memberId, lectureNo);
+                String courseStatus;
+                if (findOwner == 1) {
+                    courseStatus = "OWNER";      // 본인 강의
+                } else if (purchaseYn == 1) {
+                    courseStatus = "PURCHASED";  // 구매함
+                    int videoNo = lService.selectVideo(memberId, lectureNo);
+                    model.addAttribute("videoNo", videoNo);
+                } else {
+                    courseStatus = "AVAILABLE";  // 미구매
+                }
+                model.addAttribute("courseStatus", courseStatus);
+            }
+
             model.addAttribute("lList", lList);
             model.addAttribute("rList", rList);
             model.addAttribute("vList", vList);
+
             model.addAttribute("videoCount", videoCount);
             model.addAttribute("totalTimeFormatted", totalTimeFormatted.toString().trim());
             return "lecture/details";
@@ -223,7 +245,8 @@ public class LectureController {
             int nextVideoNo = currentVideo.get(0).getVideoOrder() + 1;
 
             int result = lService.checkPurchase(memberId, lectureNo);
-            if (result > 0) {
+            int result2 = lService.findOwnerBYId(memberId, lectureNo);
+            if (result > 0 || result2 > 0) {
                 // 최근 시청한 비디오 업데이트
                 pService.updateRecentVideo(memberId, lectureNo, videoNo);
                 
@@ -326,5 +349,267 @@ public class LectureController {
             model.addAttribute("errorMsg", e.getMessage());
             return "common/error";
         }
+    }
+
+    @GetMapping("/edit")
+    public String showLectureEdit(@RequestParam("lectureNo") int lectureNo, HttpSession session, Model model) {
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                return "member/login";
+            }
+
+            // 강의 소유자 확인
+            int isOwner = lService.findOwnerBYId(memberId, lectureNo);
+            if (isOwner != 1) {
+                model.addAttribute("errorMsg", "강의 소유자만 수정할 수 있습니다.");
+                return "common/error";
+            }
+
+            // 강의 정보 조회
+            List<LectureListRequest> lectureList = lService.selectOneById(lectureNo);
+            Lecture lecture = lService.selectLectureForEdit(lectureNo);
+            
+            // 비디오 목록 조회
+            List<VideoListRequest> videoList = lService.selectVideoListById(lectureNo);
+
+            model.addAttribute("lecture", lecture);
+            model.addAttribute("videoList", videoList);
+            return "lecture/edit";
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "common/error";
+        }
+    }
+
+    @PostMapping("/edit")
+    public String editLecture(@RequestParam("lectureNo") int lectureNo,
+                             @RequestParam("lectureName") String lectureName,
+                             @RequestParam("lectureCategory") String lectureCategory,
+                             @RequestParam("lectureDescription") String lectureDescription,
+                             @RequestParam("lecturePrice") int lecturePrice,
+                             @RequestParam(value = "thumbnailImage", required = false) MultipartFile thumbnailImage,
+                             HttpSession session, Model model) {
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                return "member/login";
+            }
+
+            // 강의 소유자 확인
+            int isOwner = lService.findOwnerBYId(memberId, lectureNo);
+            if (isOwner != 1) {
+                model.addAttribute("errorMsg", "강의 소유자만 수정할 수 있습니다.");
+                return "common/error";
+            }
+
+            Lecture lecture = new Lecture();
+            lecture.setLectureNo(lectureNo);
+            lecture.setLectureName(lectureName);
+            lecture.setLectureContent(lectureDescription);
+            lecture.setLecturePrice(lecturePrice);
+            lecture.setLectureCategory(lectureCategory);
+
+            // 새 썸네일이 업로드된 경우
+            if (thumbnailImage != null && !thumbnailImage.isEmpty()) {
+                String thumbnailFileName = saveFile(thumbnailImage);
+                lecture.setLecturePath(thumbnailFileName);
+            }
+
+            int result = lService.updateLecture(lecture);
+            if (result > 0) {
+                return "redirect:/lecture/details?lectureNo=" + lectureNo;
+            } else {
+                model.addAttribute("errorMsg", "강의 수정에 실패했습니다.");
+                return "common/error";
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            return "common/error";
+        }
+    }
+
+    @PostMapping("/addChapter")
+    @ResponseBody
+    public Map<String, Object> addChapter(@RequestParam("lectureNo") int lectureNo,
+                                         @RequestParam("videoTitle") String videoTitle,
+                                         @RequestParam("videoFile") MultipartFile videoFile,
+                                         HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                response.put("success", false);
+                response.put("message", "로그인이 필요합니다.");
+                return response;
+            }
+
+            // 강의 소유자 확인
+            int isOwner = lService.findOwnerBYId(memberId, lectureNo);
+            if (isOwner != 1) {
+                response.put("success", false);
+                response.put("message", "권한이 없습니다.");
+                return response;
+            }
+
+            if (!videoFile.isEmpty()) {
+                // 영상 파일 저장
+                String videoFileName = saveFile(videoFile);
+                
+                // 영상 시간 추출
+                String uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/";
+                String fullFilePath = uploadPath + videoFileName;
+                int videoDuration = getVideoDuration(fullFilePath);
+
+                // 다음 순서 번호 조회
+                int nextOrder = lService.getNextVideoOrder(lectureNo);
+
+                LectureVideo video = new LectureVideo();
+                video.setLectureNo(lectureNo);
+                video.setVideoTitle(videoTitle);
+                video.setVideoOrder(nextOrder);
+                video.setVideoTime(videoDuration);
+                video.setVideoPath(videoFileName);
+
+                int result = lService.insertVideo(video);
+                if (result > 0) {
+                    response.put("success", true);
+                    response.put("message", "챕터가 추가되었습니다.");
+                } else {
+                    response.put("success", false);
+                    response.put("message", "챕터 추가에 실패했습니다.");
+                }
+            } else {
+                response.put("success", false);
+                response.put("message", "영상 파일을 선택해주세요.");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "오류가 발생했습니다: " + e.getMessage());
+        }
+        return response;
+    }
+
+    @PostMapping("/updateChapter")
+    @ResponseBody
+    public Map<String, Object> updateChapter(@RequestParam("videoNo") int videoNo,
+                                            @RequestParam("videoTitle") String videoTitle,
+                                            @RequestParam(value = "videoFile", required = false) MultipartFile videoFile,
+                                            HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                response.put("success", false);
+                response.put("message", "로그인이 필요합니다.");
+                return response;
+            }
+
+            LectureVideo video = new LectureVideo();
+            video.setVideoNo(videoNo);
+            video.setVideoTitle(videoTitle);
+
+            // 새 영상 파일이 업로드된 경우
+            if (videoFile != null && !videoFile.isEmpty()) {
+                String videoFileName = saveFile(videoFile);
+                String uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/";
+                String fullFilePath = uploadPath + videoFileName;
+                int videoDuration = getVideoDuration(fullFilePath);
+                
+                video.setVideoPath(videoFileName);
+                video.setVideoTime(videoDuration);
+            }
+
+            int result = lService.updateVideo(video);
+            if (result > 0) {
+                response.put("success", true);
+                response.put("message", "챕터가 수정되었습니다.");
+            } else {
+                response.put("success", false);
+                response.put("message", "챕터 수정에 실패했습니다.");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "오류가 발생했습니다: " + e.getMessage());
+        }
+        return response;
+    }
+
+    @PostMapping("/deleteChapter")
+    @ResponseBody
+    public Map<String, Object> deleteChapter(@RequestParam("videoNo") int videoNo,
+                                            @RequestParam("lectureNo") int lectureNo,
+                                            HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                response.put("success", false);
+                response.put("message", "로그인이 필요합니다.");
+                return response;
+            }
+
+            // 강의 소유자 확인
+            int isOwner = lService.findOwnerBYId(memberId, lectureNo);
+            if (isOwner != 1) {
+                response.put("success", false);
+                response.put("message", "권한이 없습니다.");
+                return response;
+            }
+
+            int result = lService.deleteVideo(videoNo, lectureNo);
+            if (result > 0) {
+                response.put("success", true);
+                response.put("message", "챕터가 삭제되었습니다.");
+            } else {
+                response.put("success", false);
+                response.put("message", "챕터 삭제에 실패했습니다.");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "오류가 발생했습니다: " + e.getMessage());
+        }
+        return response;
+    }
+
+    @PostMapping("/updateChapterOrder")
+    @ResponseBody
+    public Map<String, Object> updateChapterOrder(@RequestBody Map<String, Object> requestData,
+                                                  HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String memberId = (String) session.getAttribute("loginId");
+            if (memberId == null) {
+                response.put("success", false);
+                response.put("message", "로그인이 필요합니다.");
+                return response;
+            }
+
+            int lectureNo = (Integer) requestData.get("lectureNo");
+            
+            // 강의 소유자 확인
+            int isOwner = lService.findOwnerBYId(memberId, lectureNo);
+            if (isOwner != 1) {
+                response.put("success", false);
+                response.put("message", "권한이 없습니다.");
+                return response;
+            }
+
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> chapters = (List<Map<String, Object>>) requestData.get("chapters");
+            
+            int result = lService.updateVideoOrder(chapters);
+            if (result > 0) {
+                response.put("success", true);
+                response.put("message", "순서가 변경되었습니다.");
+            } else {
+                response.put("success", false);
+                response.put("message", "순서 변경에 실패했습니다.");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "오류가 발생했습니다: " + e.getMessage());
+        }
+        return response;
     }
 }

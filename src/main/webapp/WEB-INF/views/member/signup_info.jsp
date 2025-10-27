@@ -50,10 +50,24 @@
                 </div>
 
                 <!-- 이메일 -->
-                <div class="input-group">
-	                <input type="email" id="memberEmail" name="memberEmail" placeholder="이메일" required>
-	                <button type="button" id="sendAuthBtn" class="btn-email-action btn-send">인증 요청</button>
+                <div class="email-input-group">
+                    <input type="text" id="emailId" placeholder="이메일 아이디" required>
+                    <span class="email-separator">@</span>
+                    <select id="emailDomain" required>
+                        <option value="">도메인 선택</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="kakao.com">kakao.com</option>
+                        <option value="yahoo.com">yahoo.com</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="custom">직접입력</option>
+                    </select>
+                    <input type="text" id="customDomain" placeholder="도메인 입력" style="display: none;">
+                    <button type="button" id="sendAuthBtn" class="btn-email-action btn-send">인증 요청</button>
                 </div>
+                <input type="hidden" id="memberEmail" name="memberEmail" required>
                 
                 <!-- 이메일 인증번호 -->
                 <div id="authCodeArea" class="input-group" style="display: none;">

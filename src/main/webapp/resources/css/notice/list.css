@@ -93,11 +93,7 @@ body {
 /* 검색창 + 버튼 전체 */
 .search-bar {
     display: flex;
-<<<<<<< HEAD
-    justify-content: center; /* 오른쪽 정렬 */
-=======
     justify-content: flex-start; /* 오른쪽 정렬 */
->>>>>>> refs/remotes/origin/kwonjinho
     align-items: center;
     gap: 8px; /* 검색창과 버튼 사이 간격 */
     margin-bottom: 25px; /* 필요 시 여백 유지 */
@@ -105,13 +101,6 @@ body {
 
 /* 검색창 */
 .search-bar input {
-<<<<<<< HEAD
-    width: 800px; /* 기존 폭 유지 */
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-=======
   background-color: #EEEEEE;
   border-radius: 5px;
   padding: 10px 15px;
@@ -119,21 +108,9 @@ body {
   font-size: 14px;
   border: none;
   outline: none;
->>>>>>> refs/remotes/origin/kwonjinho
 }
 
 /* 버튼 */
-<<<<<<< HEAD
-.search-bar button {
-    width: 100px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    cursor: pointer;
-}
-=======
->>>>>>> refs/remotes/origin/kwonjinho
 
 
 

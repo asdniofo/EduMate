@@ -228,4 +228,10 @@ public class EventServiceImpl implements EventService {
     public List<Event> searchEvents(String keyword) {
         return eventMapper.selectEventsByKeyword(keyword);
     }
+    
+    @Override
+    public int getCount() {
+        int result = eventMapper.getCount();
+        return result;
+    }
 }

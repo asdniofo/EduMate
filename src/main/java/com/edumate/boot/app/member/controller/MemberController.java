@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -48,6 +49,7 @@ public class MemberController {
     private final AdminService aService;
     private final LectureService lService;
     private final PurchaseService pService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public String showLogin() {
@@ -57,9 +59,11 @@ public class MemberController {
     @PostMapping("/login")
     public String login(@RequestParam("memberId") String memberId, @RequestParam("memberPw") String memberPw, HttpSession session) {
 
-        Member loginUser = memberService.login(memberId, memberPw);
+        // 사용자 정보 조회 (ID로만)
+        Member loginUser = memberService.findByMemberId(memberId);
 
-        if (loginUser != null) {
+        // 사용자 존재 여부 확인 및 비밀번호 검증
+        if (loginUser != null && passwordEncoder.matches(memberPw, loginUser.getMemberPw())) {
             session.setAttribute("loginMember", loginUser);
             session.setAttribute("loginId", loginUser.getMemberId());
             session.setAttribute("adminYn", loginUser.getAdminYN());
@@ -105,7 +109,7 @@ public class MemberController {
         java.sql.Date birthDate = java.sql.Date.valueOf(memberBirth);
         Member member = new Member();
         member.setMemberId(memberId);
-        member.setMemberPw(memberPw);
+        member.setMemberPw(passwordEncoder.encode(memberPw)); // BCrypt 암호화
         member.setMemberName(memberName);
         member.setMemberEmail(memberEmail);
         member.setMemberBirth(memberBirth);
@@ -260,6 +264,9 @@ public class MemberController {
 
     @PostMapping("/updatePw")
     public String updatePw(Member member, Model model) {
+        // 비밀번호 BCrypt 암호화
+        member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
+        
         int result = memberService.updateMemberPw(member);
 
         if (result > 0) {
@@ -476,6 +483,9 @@ public class MemberController {
         if (memberId == null) {
             return "redirect:/member/login";
         }
+        if (adminYn.equals("Y")) {
+            return "redirect:/admin/main";
+        }
         try {
             Member memberInfo = memberService.findByMemberId(memberId);
             if (memberInfo != null) {
@@ -596,7 +606,7 @@ public class MemberController {
             // 현재는 임시로 Member 객체 생성하여 처리
             Member memberToUpdate = new Member();
             memberToUpdate.setMemberId(memberUpdateRequest.getMemberId());
-            memberToUpdate.setMemberPw(memberUpdateRequest.getMemberPw());
+            memberToUpdate.setMemberPw(passwordEncoder.encode(memberUpdateRequest.getMemberPw())); // BCrypt 암호화
             memberToUpdate.setMemberName(memberUpdateRequest.getMemberName());
             memberToUpdate.setMemberEmail(memberUpdateRequest.getMemberEmail());
             memberToUpdate.setMemberBirth(memberUpdateRequest.getMemberBirth());
