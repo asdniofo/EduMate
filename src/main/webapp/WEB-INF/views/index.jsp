@@ -25,28 +25,27 @@
             </div>
         </section>
 
-        <!-- ===== 광고 영역 (교체용) ===== -->
-        <section class="ads-section">
-            <div class="ads-wrapper">
-                <!-- 뷰포트: 가운데 정렬, 한 화면에 3개 보임 -->
-                <div class="ads-viewport" id="adsViewport">
-                    <div class="ads-track" id="adsTrack">
-                        <!-- 실제 광고들 (원본 순서대로) -->
-                        <div class="ad-box" id = "ad1" onclick="location.href='/event/list'">광고 1</div>
-                        <div class="ad-box" id = "ad2" onclick="location.href='/event/list'">광고 2</div>
-                        <div class="ad-box" id = "ad3" onclick="location.href='/event/list'">광고 3</div>
-                        <div class="ad-box" id = "ad4" onclick="location.href='/event/list'">광고 4</div>
+<!-- 광고 영역 -->
+<section class="ads-section">
+    <div class="ads-wrapper">
+        <div class="ads-viewport" id="adsViewport">
+            <div class="ads-track" id="adsTrack">
+                <c:forEach items="${adEvents}" var="event" varStatus="i">
+                    <div class="ad-box" 
+                         style="background: url('${event.eventPath}') center/cover no-repeat;" 
+                         onclick="location.href='/event/detail?eventId=${event.eventId}'">
                     </div>
-                </div>
-
-                <!-- 컨트롤 (JS가 위치를 계산합니다) -->
-                <div class="ads-controls" id="adsControls">
-                    <button id="prevBtn">◀</button>
-                    <button id="pauseBtn">⏸</button>
-                    <button id="nextBtn">▶</button>
-                </div>
+                </c:forEach>
             </div>
-        </section>
+        </div>
+
+        <div class="ads-controls" id="adsControls">
+            <button id="prevBtn">◀</button>
+            <button id="pauseBtn">⏸</button>
+            <button id="nextBtn">▶</button>
+        </div>
+    </div>
+</section>
 
         <!-- 아이콘 네비게이션 -->
         <div class="icon-nav">

@@ -4,6 +4,7 @@ import com.edumate.boot.app.purchase.dto.LectureNoRequest;
 import com.edumate.boot.app.member.dto.MemberStatsRequest;
 import com.edumate.boot.app.member.dto.MyPostRequest;
 import com.edumate.boot.app.member.dto.MyCommentRequest;
+import com.edumate.boot.domain.lecture.model.vo.Lecture;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.member.model.vo.Member;
 import com.edumate.boot.domain.member.model.vo.Request;
@@ -177,6 +178,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int getMyCommentsTotalCount(Map<String, Object> searchMap) {
         return memberMapper.getMyCommentsTotalCount(searchMap);
+    }
+
+    @Override
+    public List<Lecture> findTeacherLecture(String memberId) {
+        List<Lecture> lList = memberMapper.findTeacherLecture(memberId);
+        return lList;
     }
 
 }

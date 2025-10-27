@@ -74,7 +74,7 @@
             <div class="event-buttons">
                 <!-- 관리자 전용 -->
                 <div class="event-buttons-left">
-                    <c:if test="${loginUser.adminYn eq 'Y'}">
+                    <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
                         <a href="/event/update?eventId=${event.eventId}" style="text-decoration:none">
                             <button class="edit-btn">수정</button>
                         </a>

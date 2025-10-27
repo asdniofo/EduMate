@@ -106,8 +106,18 @@ public class PurchaseController {
             boolean purchaseSuccess = false;
             if ("balance".equals(paymentMethod)) {
                 int result1 = pService.minusMoney(memberId, amount);
-                int result2 = pService.updatePurchase(lectureNo, memberId);
-                if (result1 > 0 && result2 > 0) {
+                int videoNo = pService.findVideo(lectureNo);
+                int result2 = pService.updatePurchase(lectureNo, memberId, videoNo);
+                
+                // 강사에게 돈 지급
+                List<LectureListRequest> lectureInfo = lService.selectOneById(lectureNo);
+                if (!lectureInfo.isEmpty()) {
+                    String teacherId = lectureInfo.get(0).getMemberId();
+                    int result3 = pService.payToTeacher(teacherId, amount);
+                    if (result1 > 0 && result2 > 0 && result3 > 0) {
+                        purchaseSuccess = true;
+                    }
+                } else if (result1 > 0 && result2 > 0) {
                     purchaseSuccess = true;
                 }
             } else if ("external".equals(paymentMethod)) {
@@ -150,11 +160,21 @@ public class PurchaseController {
             String[] orderParts = orderId.split("_");
             if (orderParts.length >= 3) {
                 int lectureNo = Integer.parseInt(orderParts[2]);
-                int purchaseResult = pService.updatePurchase(lectureNo, memberId);
-                if (purchaseResult > 0) {
-                    List<LectureListRequest> lectureList = lService.selectOneById(lectureNo);
-                    String lectureName = !lectureList.isEmpty() ? lectureList.get(0).getLectureName() : "강의명";
-
+                int videoNo = pService.findVideo(lectureNo);
+                int purchaseResult = pService.updatePurchase(lectureNo, memberId, videoNo);
+                
+                // 강사에게 돈 지급
+                List<LectureListRequest> lectureList = lService.selectOneById(lectureNo);
+                String lectureName = !lectureList.isEmpty() ? lectureList.get(0).getLectureName() : "강의명";
+                String teacherId = !lectureList.isEmpty() ? lectureList.get(0).getMemberId() : null;
+                
+                boolean paymentComplete = purchaseResult > 0;
+                if (teacherId != null && purchaseResult > 0) {
+                    int teacherPayResult = pService.payToTeacher(teacherId, amount);
+                    paymentComplete = teacherPayResult > 0;
+                }
+                
+                if (paymentComplete) {
                     model.addAttribute("lectureNo", lectureNo);
                     model.addAttribute("lectureName", lectureName);
                     model.addAttribute("orderId", orderId);
