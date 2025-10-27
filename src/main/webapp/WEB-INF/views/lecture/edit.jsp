@@ -104,10 +104,6 @@
                         </div>
                     </div>
                     
-                    <!-- 수정 버튼 -->
-                    <div class="submit-container">
-                        <button type="submit" class="submit-btn">강의 정보 수정</button>
-                    </div>
                 </form>
                 
                 <!-- 챕터 관리 섹션 -->
@@ -151,6 +147,11 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                
+                <!-- 수정 버튼 -->
+                <div class="submit-container">
+                    <button type="submit" form="lectureEditForm" class="submit-btn">강의 정보 수정</button>
                 </div>
             </div>
         </div>
@@ -206,7 +207,7 @@
             const orderData = [];
             
             items.forEach((item, index) => {
-                const videoNo = item.getAttribute('data-video-no');
+                const videoNo = parseInt(item.getAttribute('data-video-no'));
                 const newOrder = index + 1;
                 orderData.push({ videoNo: videoNo, newOrder: newOrder });
                 
@@ -225,10 +226,10 @@
                     chapters: orderData
                 }),
                 success: function(response) {
-                    console.log('챕터 순서가 업데이트되었습니다.');
+                    // 이벤트 리바인딩
+                    rebindEvents();
                 },
                 error: function() {
-                    alert('챕터 순서 변경에 실패했습니다.');
                     location.reload(); // 실패시 페이지 새로고침
                 }
             });
@@ -290,12 +291,37 @@
             });
         }
 
-        // 폼 제출 시 로딩 표시
-        document.getElementById('lectureEditForm').addEventListener('submit', function(e) {
+        // 폼 제출 이벤트 바인딩 함수
+        function bindSubmitEvent() {
+            const form = document.getElementById('lectureEditForm');
             const submitBtn = document.querySelector('.submit-btn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = '수정 중...';
+            
+            if (form && submitBtn) {
+                // 기존 이벤트 리스너 제거
+                form.removeEventListener('submit', handleFormSubmit);
+                // 새 이벤트 리스너 추가
+                form.addEventListener('submit', handleFormSubmit);
+            }
+        }
+        
+        // 폼 제출 핸들러 함수
+        function handleFormSubmit(e) {
+            const submitBtn = document.querySelector('.submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = '수정 중...';
+            }
+        }
+        
+        // 페이지 로드 시 이벤트 바인딩
+        document.addEventListener('DOMContentLoaded', function() {
+            bindSubmitEvent();
         });
+        
+        // 챕터 순서 변경 후 이벤트 리바인딩
+        function rebindEvents() {
+            bindSubmitEvent();
+        }
 
     </script>
 </body>
