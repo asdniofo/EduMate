@@ -96,9 +96,8 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #E0E0E0;
 }
 
 .category-filter {
@@ -115,18 +114,12 @@ body {
   cursor: pointer;
   transition: color 0.2s, border-bottom 0.2s;
   padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-}
 
-.category-link:hover {
-  color: #000;
-  border-bottom: 2px solid #000;
 }
 
 .category-link.active {
   color: #000;
   font-weight: 600;
-  border-bottom: 2px solid #000;
 }
 
 /* --- 이하 기존 내용 유지 --- */
@@ -155,7 +148,7 @@ body {
 
 .reference-item {
   background: white;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 24px 35px;
   display: flex;
   justify-content: space-between;
@@ -166,7 +159,7 @@ body {
 }
 
 .reference-item:hover {
-  background: #FAFAFA;
+  background: #f0f8ff;
   transform: translateX(5px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }

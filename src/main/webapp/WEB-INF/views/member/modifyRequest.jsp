@@ -16,7 +16,8 @@
             <!-- 상단 영역 -->
             <div class="header-section">
                 <div class="title">건의사항 수정</div>
-                <img class="board-image" src="건의등록.jpg" alt="건의 등록 시각 자료" />
+                <img src="/resources/images/request/requestIcon.png"
+				alt="공지 아이콘" class="hero-image" />
             </div>
 
             <!-- 질문 등록 폼 -->

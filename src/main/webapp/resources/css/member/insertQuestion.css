@@ -9,6 +9,8 @@ body {
     background-color: #f9f9f9;
 }
 
+
+
 /* 메인 컨테이너 */
 .main-container {
     width: 100%;
@@ -31,6 +33,14 @@ body {
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+}
+
+.hero-image {
+    width: 180px;
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .title {

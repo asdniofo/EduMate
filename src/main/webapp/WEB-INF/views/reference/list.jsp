@@ -24,7 +24,7 @@
     <section class="hero-section-wrapper">
 		<div class="hero-section">
 			<h1 class="hero-title">자료실</h1>
-			<img src="/resources/img/reference-icon.png"
+			<img src="/resources/images/reference/reference-icon.png"
 				alt="공지 아이콘" class="hero-image" />
 		</div>
 	</section>

@@ -13,9 +13,12 @@
 <body>
     <jsp:include page="../common/header.jsp" />
 	<main>
-		<section class="notice-banner">
-			<h1>공지사항</h1>
-			<img src="notice-img.png" alt="공지 아이콘" />
+		<section class="hero-section-wrapper">
+			<div class="hero-section">
+				<h1 class="hero-title">공지사항</h1>
+				<img src="/resources/images/notice/noticeIcon.png"
+					alt="공지 아이콘" class="hero-image" />
+			</div>
 		</section>
 		<section class="notice-write">
 			<h2>공지사항 수정</h2>
