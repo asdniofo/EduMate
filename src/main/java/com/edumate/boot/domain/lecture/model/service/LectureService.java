@@ -6,6 +6,7 @@ import com.edumate.boot.domain.lecture.model.vo.LectureVideo;
 import com.edumate.boot.domain.member.model.vo.Member;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LectureService {
 
@@ -71,4 +72,23 @@ public interface LectureService {
     void deleteVideoAndReorder(int videoNo, int lectureNo);
     
     void deleteLecture(int lectureNo);
+
+    int findPurchaseById(String memberId, int lectureNo);
+
+    int findOwnerBYId(String memberId, int lectureNo);
+
+    int selectVideo(String memberId, int lectureNo);
+
+    // 강의 수정 관련 메서드
+    Lecture selectLectureForEdit(int lectureNo);
+    
+    int updateLecture(Lecture lecture);
+    
+    int getNextVideoOrder(int lectureNo);
+    
+    int updateVideo(LectureVideo video);
+    
+    int deleteVideo(int videoNo, int lectureNo);
+    
+    int updateVideoOrder(List<Map<String, Object>> chapters);
 }

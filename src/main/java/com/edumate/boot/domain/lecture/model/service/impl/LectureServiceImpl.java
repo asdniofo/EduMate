@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -275,6 +274,78 @@ public class LectureServiceImpl implements LectureService {
     @Override
     public void deleteLecture(int lectureNo) {
         lMapper.deleteLecture(lectureNo);
+    }
+
+    @Override
+    public int findPurchaseById(String memberId, int lectureNo) {
+        int result = lMapper.findPurchaseById(memberId, lectureNo);
+        return result;
+    }
+
+    @Override
+    public int findOwnerBYId(String memberId, int lectureNo) {
+        int result = lMapper.findOwnerBYId(memberId, lectureNo);
+        return result;
+    }
+
+    @Override
+    public int selectVideo(String memberId, int lectureNo) {
+        int result = lMapper.selectVideo(memberId, lectureNo);
+        return result;
+    }
+
+    @Override
+    public Lecture selectLectureForEdit(int lectureNo) {
+        Lecture lecture = lMapper.selectLectureForEdit(lectureNo);
+        return lecture;
+    }
+
+    @Override
+    public int updateLecture(Lecture lecture) {
+        int result = lMapper.updateLecture(lecture);
+        return result;
+    }
+
+    @Override
+    public int getNextVideoOrder(int lectureNo) {
+        int result = lMapper.getNextVideoOrder(lectureNo);
+        return result;
+    }
+
+    @Override
+    public int updateVideo(LectureVideo video) {
+        int result = lMapper.updateVideo(video);
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public int deleteVideo(int videoNo, int lectureNo) {
+        // 1. 삭제할 비디오의 순서 조회
+        int deletedOrder = lMapper.getVideoOrder(videoNo);
+        
+        // 2. 비디오 삭제 (VIDEO_YN = 'N')
+        lMapper.deleteVideo(videoNo);
+        
+        // 3. 삭제된 순서보다 큰 순서들을 1씩 감소
+        lMapper.reorderVideosAfterDelete(lectureNo, deletedOrder);
+        
+        return 1;
+    }
+
+    @Override
+    @Transactional
+    public int updateVideoOrder(List<Map<String, Object>> chapters) {
+        try {
+            for (Map<String, Object> chapter : chapters) {
+                int videoNo = (Integer) chapter.get("videoNo");
+                int newOrder = (Integer) chapter.get("newOrder");
+                lMapper.updateVideoOrder(videoNo, newOrder);
+            }
+            return 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
 }

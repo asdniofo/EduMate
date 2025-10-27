@@ -14,7 +14,7 @@
     <body>
         <div class="main-container">
             <!-- Header Include -->
-            <jsp:include page="../common/header.jsp" />
+            <jsp:include page="../common/header.jsp"/>
 
             <!-- Course Hero Section -->
             <div class="course-hero">
@@ -42,7 +42,32 @@
                         <div class="course-purchase">
                             <div class="course-price">₩ <fmt:formatNumber value="${lList[0].lecturePrice}"
                                                                           pattern="#,###"/></div>
-                            <button class="purchase-button" onclick="location.href='/lecture/payment?lectureNo=${lList[0].lectureNo}'">수강 신청</button>
+                            <c:choose>
+                                <c:when test="${courseStatus eq 'PURCHASED'}">
+                                    <button class="purchase-button"
+                                            onclick="location.href='/lecture/player?videoNo=${videoNo}'">
+                                        학습하기
+                                    </button>
+                                </c:when>
+                                <c:when test="${courseStatus eq 'AVAILABLE'}">
+                                    <button class="purchase-button"
+                                            onclick="location.href='/lecture/payment?lectureNo=${lList[0].lectureNo}'">
+                                        수강신청
+                                    </button>
+                                </c:when>
+                                <c:when test="${sessionScope.loginId eq null}">
+                                    <button class="purchase-button"
+                                            onclick="location.href='/member/login'">
+                                        로그인
+                                    </button>
+                                </c:when>
+                                <c:when test="${courseStatus eq 'OWNER'}">
+                                    <button class="purchase-button"
+                                            onclick="location.href='/lecture/edit?lectureNo=${lList[0].lectureNo}'">
+                                        수정하기
+                                    </button>
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
@@ -131,9 +156,9 @@
             </div>
 
         </div>
-        
+
         <!-- Footer Include -->
-        <jsp:include page="../common/footer.jsp" />
+        <jsp:include page="../common/footer.jsp"/>
 
         <script>
             function switchTab(element, section) {
