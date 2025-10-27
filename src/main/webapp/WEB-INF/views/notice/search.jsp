@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>질문과 답변</title>
+<title>EduMate - 공지 사항</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
 	rel="stylesheet" />
@@ -34,7 +34,6 @@
 		<form action="/notice/search" method="get">
 				<input type="text" placeholder="검색어를 입력하세요" 
 				name="searchKeyword" value="${searchKeyword }"/>
-				<button>🔍</button>
 			</div>
 		</form>
 

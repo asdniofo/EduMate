@@ -24,6 +24,11 @@
 	</section>
         <div class="main-container">
             <!-- 상단 영역 -->
+            <div class="header-section">
+                <div class="title">질문 수정</div>
+                <img src="/resources/images/teacher/QnAIcon.png"
+				alt="질문 아이콘" class="hero-image" />
+            </div>
 
             <!-- 질문 등록 폼 -->
             <form action="/teacher/question/modify" method="post" enctype="application/x-www-form-urlencoded">
