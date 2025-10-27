@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/common/footer.css">
 <link rel="stylesheet" href="/resources/css/event/event_insert.css">
+<link rel="stylesheet" href="/resources/css/common/main_banner.css">
 </head>
 <body>
     <!-- ===== 헤더 ===== -->
@@ -17,10 +18,14 @@
     <!-- ===== 메인 ===== -->
     <main>
         <!-- 배너 -->
-        <section class="event-banner">
-            <h1>이벤트 게시물 작성</h1>
-            <img src="/resources/images/event_icon.png" alt="이벤트 아이콘" />
-        </section>
+<section class="main-banner">
+            <div class="banner-text">
+                이벤트 작성
+            </div>
+            <div class="object">
+                <img src="/resources/images/event/icon/event_insert_icon.png">
+            </div>
+</section>
 
         <!-- 폼 영역 -->
         <section class="event-insert-section">

@@ -17,13 +17,15 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	<!-- 히어로 섹션 -->
-	<section class="hero-section-wrapper">
-		<div class="hero-section">
-			<h1 class="hero-title">공지사항</h1>
-			<img src="/mnt/data/55c63bbe-ef1e-46ec-b81a-eaf12b7bcb6c.png"
-				alt="공지 아이콘" class="hero-image" />
-		</div>
+	<!-- 메인 배너 -->
+	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
+	<section class="main-banner">
+    <div class="banner-text">
+        공지사항
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+    </div>
 	</section>
 
 	<!-- 메인 콘텐츠 -->

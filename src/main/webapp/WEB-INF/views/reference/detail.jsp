@@ -11,7 +11,17 @@
 <link rel="stylesheet" href="/resources/css/common/footer.css" />
 </head>
 <body>
-<jsp:include page="../common/header.jsp" />
+  	<jsp:include page="../common/header.jsp" />
+	<!-- 메인 배너 -->
+	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
+	<section class="main-banner">
+    <div class="banner-text">
+        자료 상세정보
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+    </div>
+	</section>
 <div class="container">
 <c:choose>
 <c:when test="${empty reference}">
@@ -35,6 +45,7 @@
 </div>
 </div>
 </div>
+
 
 <!-- Content -->
 <div class="content-wrapper">

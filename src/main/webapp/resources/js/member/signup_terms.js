@@ -8,17 +8,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 전체 동의 클릭 시 모든 체크박스 상태 변경
     allCheckbox.addEventListener("change", function() {
-        allCheckboxes.forEach(chk => chk.checked = allCheckbox.checked);
-    });
+    allCheckboxes.forEach(chk => chk.checked = allCheckbox.checked);
+    
+    // ★ 버튼 상태 업데이트
+    updateButtonState();
+});
 
-    // 개별 체크박스 변경 시 전체동의 상태 업데이트
-    allCheckboxes.forEach(chk => {
-        chk.addEventListener("change", () => {
-            const allChecked = Array.from(allCheckboxes).every(c => c.checked);
-            allCheckbox.checked = allChecked;
-        });
-    });
+// 개별 체크박스 변경 시 전체동의 상태 및 버튼 상태 업데이트
+allCheckboxes.forEach(chk => {
+    chk.addEventListener("change", () => {
+        const allChecked = Array.from(allCheckboxes).every(c => c.checked);
+        allCheckbox.checked = allChecked;
 
+        // ★ 버튼 상태 업데이트
+        updateButtonState();
+    });
+});
     // 제출 시 필수항목 체크 확인
     document.getElementById("terms-form").addEventListener("submit", function(e) {
         const unchecked = Array.from(requiredTerms).filter(c => !c.checked);

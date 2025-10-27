@@ -7,7 +7,7 @@
 	}
 	body {
 		font-family: Inter, Segoe UI, sans-serif;
-		background: linear-gradient(139deg, #CAEDFF 0%, #E5FFF4 100%);
+		background: #fafafa;
 		min-height: 100vh;
 	}
 	.container {

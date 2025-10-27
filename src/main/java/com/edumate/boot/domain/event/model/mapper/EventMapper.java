@@ -39,5 +39,7 @@ public interface EventMapper {
     int getNextContentNo();
     
     int deleteEventContents(int eventId);
+
+	List<Event> selectEventsByKeyword(String keyword);
     
 }

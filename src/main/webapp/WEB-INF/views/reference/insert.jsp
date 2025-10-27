@@ -13,19 +13,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  	<jsp:include page="../common/header.jsp" />
+	<!-- 메인 배너 -->
+	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
+	<section class="main-banner">
+    <div class="banner-text">
+        공지사항
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+    </div>
+	</section>
   <div class="container">
-
-    <!-- Header -->
-    <jsp:include page="../common/header.jsp" />
-
-    <!-- ✅ list.jsp와 동일한 타이틀 색상 -->
-    <div class="page-title-section">
-	  <div class="page-title-inner">
-	    <div class="page-title-text">자료 등록</div>
-	    <img class="page-title-image" src="/resources/img/reference-icon.png" alt="자료 등록 아이콘" />
-	  </div>
-	</div>
-
     <!-- ✅ 콘텐츠 영역 -->
     <div class="content">
       <div class="reference-write-container">

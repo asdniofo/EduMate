@@ -13,19 +13,18 @@
 	</head>
 	<body>
 	<jsp:include page="../common/header.jsp" />
+	<!-- 메인 배너 -->
+	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
+	<section class="main-banner">
+    <div class="banner-text">
+        질문 상세정보
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+    </div>
+	</section>
 		<div class="page-wrapper">
         <div class="content-area">
-
-            <header class="hero-section-wrapper">
-                <div class="hero-section">
-                    <div class="hero-title-group">
-                        <h1 class="hero-title">질문과 답변</h1>
-						<img src="/resources/images/teacher/QnAIcon.png"
-							alt="질문 아이콘" class="hero-image" />
-                        
-                    </div>
-                </div>
-            </header>
 
             <main class="main-content">
                 <div class="content-card">

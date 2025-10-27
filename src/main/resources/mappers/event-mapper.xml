@@ -134,4 +134,11 @@
     WHERE EVENT_ID = #{eventId}
 </delete>
 
+<select id="selectEventsByKeyword" parameterType="string" resultType="com.edumate.boot.domain.event.model.vo.Event">
+    SELECT *
+    FROM EVENT_BOARD
+    WHERE EVENT_TITLE LIKE '%' || #{keyword} || '%'
+    ORDER BY EVENT_ID DESC
+</select>
+
 </mapper>

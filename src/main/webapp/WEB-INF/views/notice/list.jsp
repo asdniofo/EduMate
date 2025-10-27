@@ -16,16 +16,18 @@
 <link rel="stylesheet" href="/resources/css/notice/list.css" />
 </head>
 <body>
-	 <div class="main-container">
 	<jsp:include page="../common/header.jsp" />
-	<!-- 히어로 섹션 -->
-	<section class="hero-section-wrapper">
-		<div class="hero-section">
-			<h1 class="hero-title">공지사항</h1>
-			<img src="/resources/images/notice/noticeIcon.png"
-				alt="공지 아이콘" class="hero-image" />
-		</div>
+	<!-- 메인 배너 -->
+	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
+	<section class="main-banner">
+    <div class="banner-text">
+        공지사항
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+    </div>
 	</section>
+	<div class="main-container">
 
 	<!-- 메인 콘텐츠 -->
 	<main class="main-content">
@@ -76,7 +78,7 @@
 			<a href="/notice/insert" class="write-button">글쓰기</a>
 		</div>
 	</main>
-	<jsp:include page="../common/footer.jsp" />
-	</div>
+</div>
+<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

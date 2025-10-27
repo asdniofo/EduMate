@@ -12,6 +12,7 @@ body {
     min-height: 1000px;
 }
 
+
 .login-icon{
     display: flex;
     background-color: #fff;
@@ -32,6 +33,11 @@ body {
     width: 1500px;
     height: 800px;
     max-width: 95%;
+
+    /* ★ 초기 위치, 투명도 */
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideUp 0.8s ease forwards;
 }
 
 .login-left {
@@ -142,4 +148,11 @@ input {
     background: #ffeaea;
     display: none;
     margin-bottom: 20px;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

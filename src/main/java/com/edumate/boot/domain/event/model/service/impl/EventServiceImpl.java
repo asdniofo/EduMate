@@ -223,4 +223,9 @@ public class EventServiceImpl implements EventService {
     public int deleteEventContents(int eventId) {
         return eventMapper.deleteEventContents(eventId);
     }
+    
+    @Override
+    public List<Event> searchEvents(String keyword) {
+        return eventMapper.selectEventsByKeyword(keyword);
+    }
 }

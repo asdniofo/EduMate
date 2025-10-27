@@ -14,21 +14,16 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	<!-- ===== 메인 ===== -->
-	<main>
-		<section class="hero-section-wrapper">
-			<div class="hero-section">
-				<h1 class="hero-title">공지사항</h1>
-				<img src="/resources/images/notice/noticeIcon.png"
-					alt="공지 아이콘" class="hero-image" />
-			</div>
-		</section>
-	
-<!-- 		<section class="notice-banner">
-			<h1>공지사항</h1>
-			<img src="/resources/images/notice/noticeIcon.png" alt="공지 아이콘" class="hero-image"/>
-		</section> -->
-
+	<!-- 메인 배너 -->
+	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
+	<section class="main-banner">
+    <div class="banner-text">
+        공지사항
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+    </div>
+	</section>
 		<section class="notice-detail">
 			<div class="notice-header">
 				<div class="notice-path">공지사항 &gt; ${notice.noticeTitle }</div>
