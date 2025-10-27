@@ -182,4 +182,24 @@ public class EventController {
             return "redirect:/event/detail?eventId=" + eventId + "&error=true";
         }
     }
+    
+    @GetMapping("/search")
+    public String searchEvents(@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+                               Model model) {
+        try {
+            List<Event> events;
+            if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
+                events = eventService.getAllEvents();
+            } else {
+                events = eventService.searchEvents(searchKeyword.trim());
+            }
+            model.addAttribute("eList", events);
+            model.addAttribute("searchKeyword", searchKeyword); // JSP에서 검색창 유지용
+            return "event/event_list";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMsg", "검색 중 오류가 발생했습니다.");
+            return "event/event_list";
+        }
+    }
 }

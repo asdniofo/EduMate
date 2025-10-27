@@ -10,29 +10,11 @@ body {
     background-color: #fafafa;
 }
 
-/* ===== 배너 ===== */
-.event-banner {
-    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 50px 100px 50px 200px;
-}
-
-.event-banner h1 {
-    font-size: 36px;
-    font-weight: 700;
-}
-
-.event-banner img {
-    width: 200px;
-}
-
 /* ===== 상세 컨텐츠 ===== */
 .event-detail {
     background: #fff;
     border-radius: 10px;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 40px auto;
     padding: 40px 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);

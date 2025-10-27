@@ -11,31 +11,73 @@ body {
     color: #222;
 }
 
-/* 히어로 섹션 */
-.hero-section-wrapper {
-    background: linear-gradient(120deg, #bce0fd, #d8f0ff);
-    padding: 80px 20px;
-    text-align: center;
+.main-banner {
     position: relative;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(to right, #cce0ff, #eaf5ff);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
-.hero-title {
-    font-size: 42px;
+.banner-text {
+    font-size: 28px;
     font-weight: 700;
-    color: #000;
-    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideUp 1s ease forwards;
+    margin-left: 150px;
+}
+
+.object {
+    width: 300;
+    height: 300px;
+    border-radius: 20px;
+    opacity: 0;
+    transform: translateY(80px);
+    animation: slideUp 1s ease forwards, floating 3s ease-in-out infinite;
+    animation-delay: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.object img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 /* 검색창 */
 .search-bar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 8px;
     margin-bottom: 25px;
+    margin-top: 25px;
 }
 
 .search-bar input {
-    width: 240px;
+    width: 800px;
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -47,6 +89,8 @@ body {
     border: 1px solid #ccc;
     background-color: #eee;
     cursor: pointer;
+    width : 100px;
+    
 }
 
 /* 이벤트 리스트 */
@@ -54,6 +98,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .event-card {
@@ -66,6 +112,7 @@ body {
     color: #000;
     padding: 20px 25px;
     transition: all 0.2s;
+    width: 1400px;
 }
 
 .event-card:hover {
@@ -100,7 +147,10 @@ body {
     color: #fff;
     padding: 6px 10px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 20px;
+    width: 8%;
+    height: 8%;
+    text-align: center;
 }
 
 .event-status.on {
@@ -117,19 +167,19 @@ body {
 }
 
 .event-title {
-    font-size: 18px;
+    font-size: 27px;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
 .event-desc {
-    font-size: 14px;
+    font-size: 20px;
     color: #555;
     margin-bottom: 10px;
 }
 
 .event-date {
-    font-size: 13px;
+    font-size: 16px;
     color: #888;
 }
 

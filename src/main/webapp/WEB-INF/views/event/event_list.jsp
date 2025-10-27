@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,18 +9,20 @@
 <title>이벤트 목록</title>
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/common/footer.css">
+<link rel="stylesheet" href="/resources/css/common/main_banner.css">
 <link rel="stylesheet" href="/resources/css/event/event_list.css">
 </head>
 <body>
+
 <jsp:include page="../common/header.jsp"/>
 
-<!-- Hero Section -->
-<section class="hero-section-wrapper">
-    <div class="hero-section">
-        <h1 class="hero-title">이벤트</h1>
-        <div class="hero-image" style="border:2px dashed #aaa; width:180px; height:180px; border-radius:20px; display:inline-block;">
-            📢 이벤트 아이콘
-        </div>
+<!-- 메인 배너 -->
+<section class="main-banner">
+    <div class="banner-text">
+        이벤트
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
     </div>
 </section>
 
@@ -35,15 +37,40 @@
 
     <!-- 이벤트 목록 -->
     <section class="event-list">
+        <!-- 현재 날짜 -->
+        <jsp:useBean id="now" class="java.util.Date" />
+
         <c:forEach items="${eList}" var="event">
+            <!-- eventStart, eventEnd가 Date 타입이면 바로 사용 가능 -->
+            <c:set var="startDate" value="${event.eventStart}" />
+            <c:set var="endDate" value="${event.eventEnd}" />
+
+            <!-- 진행 여부 계산 -->
+            <c:choose>
+                <c:when test="${now.time >= startDate.time && now.time <= endDate.time}">
+                    <c:set var="eventYn" value="Y" />
+                </c:when>
+                <c:otherwise>
+                    <c:set var="eventYn" value="N" />
+                </c:otherwise>
+            </c:choose>
+
+            <!-- 남은 일수 계산 -->
+            <c:set var="remainDays" value="${(endDate.time - now.time) / (1000*60*60*24)}" />
+
             <a href="/event/detail?eventId=${event.eventId}" class="event-card">
                 <div class="event-banner">
                     <img src="${event.eventSubpath}" alt="이벤트 배너" class="event-banner-img">
                 </div>
                 <div class="event-info">
-                    <div class="event-status ${event.eventYn eq 'Y' ? 'on' : 'end'}">
+                    <div class="event-status ${eventYn eq 'Y' ? 'on' : 'end'}">
                         <c:choose>
-                            <c:when test="${event.eventYn eq 'Y'}">진행중</c:when>
+                            <c:when test="${eventYn eq 'Y'}">
+                                진행중
+                                <c:if test="${remainDays <= 3 && remainDays >= 0}">
+                                    <span style="font-weight:500; color:yellow;">(D-${remainDays})</span>
+                                </c:if>
+                            </c:when>
                             <c:otherwise>종료</c:otherwise>
                         </c:choose>
                     </div>
@@ -51,8 +78,8 @@
                         <h3 class="event-title">${event.eventTitle}</h3>
                         <p class="event-desc">${event.eventSubtitle}</p>
                         <div class="event-date">
-                            <fmt:formatDate value="${event.eventStart}" pattern="yyyy.MM.dd"/> ~ 
-                            <fmt:formatDate value="${event.eventEnd}" pattern="yyyy.MM.dd"/>
+                            <fmt:formatDate value="${startDate}" pattern="yyyy.MM.dd"/> ~ 
+                            <fmt:formatDate value="${endDate}" pattern="yyyy.MM.dd"/>
                         </div>
                     </div>
                 </div>
@@ -76,7 +103,7 @@
             </c:if>
         </div>
 
-        <!-- ADMIN만 글쓰기 버튼 노출 -->
+        <!-- ADMIN만 글쓰기 버튼 -->
         <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
             <a href="/event/insert" class="write-button">글쓰기</a>
         </c:if>

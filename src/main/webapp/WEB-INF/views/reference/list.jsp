@@ -13,22 +13,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <!-- Header -->
     <jsp:include page="../common/header.jsp" />
-
-    <!-- <div class="page-title-section">
-        <div class="page-title-text">자료실</div>
-        <img class="page-title-image" src="/resources/img/reference-icon.png" alt="이미지" />
-    </div> -->
-    <section class="hero-section-wrapper">
-		<div class="hero-section">
-			<h1 class="hero-title">자료실</h1>
-			<img src="/resources/img/reference-icon.png"
-				alt="공지 아이콘" class="hero-image" />
-		</div>
+	<!-- 메인 배너 -->
+	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
+	<section class="main-banner">
+    <div class="banner-text">
+        자료실
+    </div>
+    <div class="object">
+        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+    </div>
 	</section>
-
+<div class="container">
     <!-- Content -->
     <div class="content">
 

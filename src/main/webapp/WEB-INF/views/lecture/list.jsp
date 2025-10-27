@@ -12,10 +12,18 @@
         <link rel="stylesheet" href="/resources/css/lecture/list.css">
     </head>
     <body>
+        <jsp:include page="../common/header.jsp" />
+        <link rel="stylesheet" href="/resources/css/common/main_banner.css">
+<section class="main-banner">
+        <div class="banner-text">
+            전체 강의
+        </div>
+        <div class="object">
+            <img src="/resources/images/event/icon/event_icon.png">
+        </div>
+</section>
         <div class="main-container">
             <!-- Header Include -->
-            <jsp:include page="../common/header.jsp" />
-
             <!-- Search Section -->
             <div class="search-section">
                 <div class="search-title">
