@@ -54,21 +54,6 @@ public class EventController {
             Integer prevEventId = eventService.getPrevEventId(eventId);
             Integer nextEventId = eventService.getNextEventId(eventId);
 
-            // 디버깅 로그
-            System.out.println("=== Event Detail Debug ===");
-            System.out.println("Event: " + event);
-            System.out.println("Contents size: " + (contents != null ? contents.size() : "null"));
-            if (contents != null && !contents.isEmpty()) {
-                for (EventContent content : contents) {
-                    System.out.println("Content: " + content);
-                }
-            } else {
-                System.out.println("No contents found for eventId: " + eventId);
-            }
-            System.out.println("Prev EventId: " + prevEventId);
-            System.out.println("Next EventId: " + nextEventId);
-            System.out.println("=========================");
-
             // 모델에 데이터 추가
             model.addAttribute("event", event);
             model.addAttribute("contents", contents);

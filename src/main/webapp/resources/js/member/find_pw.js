@@ -43,19 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
     checkInputs(); // 초기 상태 설정
 	
 	form.addEventListener("submit", (e) => {
-	       e.preventDefault(); // 실제 submit 막기
-
 	       // 비밀번호 일치 여부 재확인
 	       if (pwInput.value !== pwCheckInput.value) {
+	           e.preventDefault();
 	           alert("비밀번호가 일치하지 않습니다.");
 	           return;
 	       }
 
-	       // 서버에 비밀번호 변경 요청 (fetch 또는 form.submit())
-	       form.submit(); // 실제 서버 POST 요청
-
-	       // 완료 메시지
-	       alert("비밀번호가 성공적으로 변경되었습니다.");
-	       window.location.href = "/member/login"; // 로그인 페이지로 이동
+	       // 서버 응답을 기다리도록 form을 그대로 submit
+	       // 서버에서 success/fail 페이지로 리다이렉트 처리됨
 	   });
 });

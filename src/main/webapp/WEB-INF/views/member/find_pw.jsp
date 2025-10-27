@@ -30,7 +30,7 @@
             <h1 class="login-logo">■ LOGO</h1>
 
       <h2>비밀번호 재설정</h2>
-<form id="signupForm" action="/member/login" method="post">
+<form id="signupForm" action="/member/updatePw" method="post">
 	<div class="form-group">
 		<label for="memberId">아이디</label>
 		<input type="text" name="memberId" value="${memberId}" readonly>
