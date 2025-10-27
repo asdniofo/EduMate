@@ -51,7 +51,10 @@ document.addEventListener("submit", function(e) {
 
 // 이메일 인증
 document.addEventListener('DOMContentLoaded', function() {
-    const emailInput = document.getElementById('memberEmail');
+    const emailIdInput = document.getElementById('emailId');
+    const emailDomainSelect = document.getElementById('emailDomain');
+    const customDomainInput = document.getElementById('customDomain');
+    const memberEmailHidden = document.getElementById('memberEmail');
     const sendAuthBtn = document.getElementById('sendAuthBtn');
     const authCodeArea = document.getElementById('authCodeArea');
     const authCodeInput = document.getElementById('authCodeInput');
@@ -61,6 +64,58 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.getElementById('next-btn');
     
     let isEmailVerified = false; // 이메일 인증 상태 플래그
+
+    // 이메일 값 업데이트 함수
+    function updateEmailValue() {
+        const emailId = emailIdInput.value.trim();
+        let domain = '';
+        
+        if (emailDomainSelect.value === 'custom') {
+            domain = customDomainInput.value.trim();
+        } else {
+            domain = emailDomainSelect.value;
+        }
+        
+        if (emailId && domain) {
+            memberEmailHidden.value = emailId + '@' + domain;
+        } else {
+            memberEmailHidden.value = '';
+        }
+    }
+
+    // 도메인 선택 변경 시 처리
+    emailDomainSelect.addEventListener('change', function() {
+        if (this.value === 'custom') {
+            customDomainInput.style.display = 'block';
+            customDomainInput.required = true;
+        } else {
+            customDomainInput.style.display = 'none';
+            customDomainInput.required = false;
+            customDomainInput.value = '';
+        }
+        updateEmailValue();
+        resetEmailAuth();
+    });
+
+    // 이메일 입력 시 값 업데이트
+    emailIdInput.addEventListener('input', function() {
+        updateEmailValue();
+        resetEmailAuth();
+    });
+
+    customDomainInput.addEventListener('input', function() {
+        updateEmailValue();
+        resetEmailAuth();
+    });
+
+    // 이메일 인증 상태 초기화
+    function resetEmailAuth() {
+        isEmailVerified = false;
+        emailAuthStatus.value = 'N';
+        authCodeArea.style.display = 'none';
+        updateAuthMessage('', '');
+        nextBtn.disabled = true;
+    }
 
     // 초기 제출 버튼 비활성화 (HTML에서 disabled="true" 처리됨)
     nextBtn.disabled = true;
@@ -74,14 +129,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 1. '인증 요청' 버튼 클릭 이벤트
     sendAuthBtn.addEventListener('click', function() {
-        const email = emailInput.value.trim();
-        if (!email) {
-            alert('이메일을 입력해주세요.');
+        updateEmailValue(); // 최신 이메일 값으로 업데이트
+        const email = memberEmailHidden.value.trim();
+        
+        if (!email || !email.includes('@')) {
+            alert('올바른 이메일을 입력해주세요.');
             return;
         }
         
-        // 이메일 입력 필드와 버튼 비활성화 (재요청 방지)
-        emailInput.disabled = true;
+        // 이메일 입력 필드들과 버튼 비활성화 (재요청 방지)
+        emailIdInput.disabled = true;
+        emailDomainSelect.disabled = true;
+        customDomainInput.disabled = true;
         sendAuthBtn.disabled = true;
         sendAuthBtn.textContent = '발송 중...';
 
@@ -101,7 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 updateAuthMessage(data.message, 'red');
                 // 실패 시 다시 활성화
-                emailInput.disabled = false;
+                emailIdInput.disabled = false;
+                emailDomainSelect.disabled = false;
+                customDomainInput.disabled = false;
                 sendAuthBtn.disabled = false;
             }
             sendAuthBtn.textContent = '인증 요청';
@@ -109,7 +170,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             authStatusMessage.textContent = '네트워크 오류로 발송에 실패했습니다.';
             authStatusMessage.style.color = 'red';
-            emailInput.disabled = false;
+            emailIdInput.disabled = false;
+            emailDomainSelect.disabled = false;
+            customDomainInput.disabled = false;
             sendAuthBtn.disabled = false;
             sendAuthBtn.textContent = '인증 요청';
             console.error('Error:', error);
@@ -118,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 2. '인증 확인' 버튼 클릭 이벤트
     verifyAuthBtn.addEventListener('click', function() {
-        const email = emailInput.value.trim();
+        const email = memberEmailHidden.value.trim();
         const authCode = authCodeInput.value.trim();
 
         if (!authCode || authCode.length !== 6) {
@@ -173,15 +236,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('signupForm').addEventListener('submit', function(event) {
         // 비밀번호 일치 체크 로직은 signup_info.js에 있다고 가정
 
-        // 이메일 인증 여부 최종 확인
-		document.getElementById('memberEmail').disabled = false; 
+        // 최종 이메일 값 업데이트 및 필드 활성화
+        updateEmailValue();
+		document.getElementById('memberEmail').disabled = false;
+		document.getElementById('emailId').disabled = false;
+		document.getElementById('emailDomain').disabled = false;
+		document.getElementById('customDomain').disabled = false;
 
 	    // 이메일 인증 여부 최종 확인
 	    if (!isEmailVerified) {
 	        event.preventDefault(); // 폼 제출 중단
 
-	        // 폼 제출을 막았다면, 다시 disabled 속성을 true로 설정해주어야 합니다.
-	        document.getElementById('memberEmail').disabled = true; 
+	        // 폼 제출을 막았다면, 다시 disabled 속성을 설정
+	        document.getElementById('memberEmail').disabled = true;
+	        document.getElementById('emailId').disabled = true;
+		    document.getElementById('emailDomain').disabled = true;
+		    document.getElementById('customDomain').disabled = true; 
 	        
 	        alert('이메일 인증을 완료해야 회원가입을 진행할 수 있습니다.');
 	        authStatusMessage.textContent = '이메일 인증을 완료해주세요.';

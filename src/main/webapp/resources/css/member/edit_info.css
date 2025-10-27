@@ -151,3 +151,110 @@ body {
 .input-error {
     border: 2px solid #e74c3c !important;
 }
+
+/* 이메일 인증 관련 스타일 */
+.input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.input-group .input-full {
+    flex: 2;
+}
+
+/* 이메일 입력 그룹 스타일 */
+.email-input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.email-input-group input[type="text"] {
+    flex: 1;
+    min-width: 120px;
+}
+
+.email-separator {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 5px;
+}
+
+.email-input-group select {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.email-input-group select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.btn-email-action {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: 100px;
+    max-width: 120px;
+}
+
+.btn-send {
+    background: #007bff;
+    color: white;
+}
+
+.btn-send:hover:not(:disabled) {
+    background: #0056b3;
+}
+
+.btn-verify {
+    background: #28a745;
+    color: white;
+}
+
+.btn-verify:hover:not(:disabled) {
+    background: #1e7e34;
+}
+
+.btn-email-action:disabled {
+    background: #ccc !important;
+    cursor: not-allowed;
+    color: #666;
+}
+
+.auth-message {
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: left;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* 라벨과 메시지를 같은 줄에 표시 */
+.label-with-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+/* 인라인 인증 메시지 스타일 */
+.auth-message-inline {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}

@@ -167,37 +167,71 @@ input {
 	width: 90%;
 }
 
+/* 이메일 입력 그룹 스타일 */
+.email-input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.email-input-group input[type="text"] {
+    flex: 1;
+    min-width: 120px;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.email-separator {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 5px;
+}
+
+.email-input-group select {
+    flex: 1;
+    min-width: 140px;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
 /* 이메일 인증 버튼들의 기본 스타일 */
 .btn-email-action {
     /* 기존 .btn-login의 padding과 font-size를 따름 */
-    padding: 14px;
+    padding: 14px 20px;
     border: none;
     border-radius: 6px;
     font-size: 15px; /* input과 동일한 15px로 조정 */
     cursor: pointer;
     transition: background 0.3s ease;
-    -flex: 1; /* 인증 버튼이 적절한 너비를 차지하도록 */
     white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    min-width: 100px;
+    max-width: 120px;
 }
 
 /* 인증 요청 버튼 (기존 btn-login의 파란색 대신 약간 더 부드러운 색상 사용) */
 .btn-send {
-    background: #00b0ff; /* 밝은 파랑 */
+    background: #216dff; /* 기존 btn-login과 동일한 색상 */
     color: white;
 }
 
-.btn-send:hover {
-    background: #0099e0;
+.btn-send:hover:not(:disabled) {
+    background: #0054f0;
 }
 
 /* 인증 확인 버튼 (기존 btn-login의 메인 파란색 사용) */
 .btn-verify {
-    background: #216dff; /* 메인 파랑 */
+    background: #28a745; /* 초록색 */
     color: white;
 }
 
-.btn-verify:hover {
-    background: #0054f0;
+.btn-verify:hover:not(:disabled) {
+    background: #1e7e34;
 }
 
 /* 버튼 비활성화 상태 스타일 */
