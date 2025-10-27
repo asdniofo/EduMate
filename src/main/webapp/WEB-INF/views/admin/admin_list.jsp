@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <td><a href="/event/list">이벤트</a></td>
-            <td>나중에 수정하기</td>
+            <td>${eCount}</td>
         </tr>
         </tbody>
     </table>

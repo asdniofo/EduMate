@@ -132,6 +132,10 @@
     <delete id="deleteEventContents" parameterType="int">
     DELETE FROM EVENT_CONTENT
     WHERE EVENT_ID = #{eventId}
-</delete>
+    </delete>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM EVENT_CONTENT
+    </select>
 
 </mapper>

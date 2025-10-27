@@ -223,4 +223,10 @@ public class EventServiceImpl implements EventService {
     public int deleteEventContents(int eventId) {
         return eventMapper.deleteEventContents(eventId);
     }
+
+    @Override
+    public int getCount() {
+        int result = eventMapper.getCount();
+        return result;
+    }
 }

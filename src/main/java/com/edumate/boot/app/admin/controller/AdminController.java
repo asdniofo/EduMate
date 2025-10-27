@@ -6,6 +6,7 @@ import com.edumate.boot.app.admin.dto.WithDrawRequest;
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
 import com.edumate.boot.domain.admin.model.service.AdminService;
+import com.edumate.boot.domain.event.model.service.EventService;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.member.model.service.MemberService;
 import com.edumate.boot.domain.notice.model.service.NoticeService;
@@ -30,6 +31,7 @@ public class AdminController {
     private final ReferenceService rService;
     private final TeacherService tService;
     private final MemberService mService;
+    private final EventService eService;
     
     @GetMapping("/main")
     public String showAdmin(HttpSession session, Model model) {
@@ -294,10 +296,12 @@ public class AdminController {
         String filter = "ALL";
         int tCount = tService.getTotalCount(filter);
         int mCount = mService.getCount();
+        int eCount = eService.getCount();
         model.addAttribute("rCount", rCount);
         model.addAttribute("nCount", nCount);
         model.addAttribute("tCount", tCount);
         model.addAttribute("mCount", mCount);
+        model.addAttribute("eCount", eCount);
         return "admin/admin_list";
     }
 }

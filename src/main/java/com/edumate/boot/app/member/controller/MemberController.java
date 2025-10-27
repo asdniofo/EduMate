@@ -476,6 +476,9 @@ public class MemberController {
         if (memberId == null) {
             return "redirect:/member/login";
         }
+        if (adminYn.equals("Y")) {
+            return "redirect:/admin/main";
+        }
         try {
             Member memberInfo = memberService.findByMemberId(memberId);
             if (memberInfo != null) {
