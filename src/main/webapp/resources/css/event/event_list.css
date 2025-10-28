@@ -11,6 +11,12 @@ body {
     color: #222;
 }
 
+.main-content {
+    max-width: 1200px;
+    margin: 40px auto 60px;
+    padding: 0 20px;
+}
+
 @keyframes slideUp {
     to {
         opacity: 1;
@@ -197,4 +203,3 @@ body {
     background: #d1e5f0;
     transform: translateY(-2px);
 }
-
