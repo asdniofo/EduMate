@@ -20,9 +20,9 @@
     <div class="banner-text">
         공지사항
     </div>
-    <div class="object">
-        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
-    </div>
+        <div class="object">
+            <img src="/resources/images/reference/reference-icon.png" alt="자료실 아이콘">
+        </div>
 	</section>
   <div class="container">
     <!-- ✅ 콘텐츠 영역 -->

@@ -19,9 +19,9 @@
     <div class="banner-text">
         질문 상세정보
     </div>
-    <div class="object">
-        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
-    </div>
+        <div class="object">
+            <img src="/resources/images/teacher/QnAIcon.png" alt="질문 게시판 아이콘">
+        </div>
 	</section>
 		<div class="page-wrapper">
         <div class="content-area">

@@ -21,7 +21,7 @@
         </div>
 
         <div class="login-right">
-            <h1 class="login-logo">LOGO</h1>
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
 
             <div class="error-message" id="error-message">필수 항목 동의가 필요합니다.</div>
 

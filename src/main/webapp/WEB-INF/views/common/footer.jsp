@@ -12,7 +12,7 @@
         <footer id="footer">
             <div class="footer-inner">
                 <div class="footer-top">
-                    <div class="footer-logo">Logo</div>  
+                    <img class="footer-logo" src="${pageContext.request.contextPath}/resources/images/common/logo2.png">
                     <div class="footer-info"> <span>대표자 : 김호준</span><span> | </span><span>사업자번호 : 123-456-7890</span>
                         <span> | </span><span>주소 : 중구 청계천로 120</span>
                     </div>

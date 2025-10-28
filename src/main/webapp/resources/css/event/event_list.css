@@ -11,46 +11,6 @@ body {
     color: #222;
 }
 
-.main-banner {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    background: linear-gradient(to right, #cce0ff, #eaf5ff);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.banner-text {
-    font-size: 28px;
-    font-weight: 700;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: slideUp 1s ease forwards;
-    margin-left: 150px;
-}
-
-.object {
-    width: 300;
-    height: 300px;
-    border-radius: 20px;
-    opacity: 0;
-    transform: translateY(80px);
-    animation: slideUp 1s ease forwards, floating 3s ease-in-out infinite;
-    animation-delay: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.object img {
-    width: 80%;
-    height: 80%;
-    object-fit: cover;
-    border-radius: 20px;
-}
-
 @keyframes slideUp {
     to {
         opacity: 1;

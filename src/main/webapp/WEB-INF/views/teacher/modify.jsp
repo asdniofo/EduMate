@@ -18,9 +18,9 @@
     <div class="banner-text">
         공지사항
     </div>
-    <div class="object">
-        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
-    </div>
+        <div class="object">
+            <img src="/resources/images/teacher/QnAIcon.png" alt="질문 게시판 아이콘">
+        </div>
 	</section>
         <div class="main-container">
             <!-- 상단 영역 -->

@@ -24,8 +24,7 @@
         </div>
 
         <div class="login-right">
-            <h1 class="login-logo">LOGO</h1>
-
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
             <div class="error-message" id="error-message"></div>
 
             <form id="login-form" action="/member/login" method="post">
