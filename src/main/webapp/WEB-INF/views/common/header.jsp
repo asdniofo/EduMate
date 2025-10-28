@@ -9,8 +9,6 @@
                 <a href="/">
                     <img src="${pageContext.request.contextPath}/resources/images/common/logo.png">
                 </a>
-                <button class="categoryBtn">Ξ 카테고리</button>
-
             </div>
             <div id="search-nav">
             <form action="/lecture/list" method="get" style="display: inline;">
