@@ -11,52 +11,6 @@ body {
     color: #222;
 }
 
-.main-content {
-    max-width: 1200px;
-    margin: 40px auto 60px;
-    padding: 0 20px;
-}
-
-.main-banner {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    background: linear-gradient(to right, #cce0ff, #eaf5ff);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.banner-text {
-    font-size: 28px;
-    font-weight: 700;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: slideUp 1s ease forwards;
-    margin-left: 150px;
-}
-
-.object {
-    width: 300;
-    height: 300px;
-    border-radius: 20px;
-    opacity: 0;
-    transform: translateY(80px);
-    animation: slideUp 1s ease forwards, floating 3s ease-in-out infinite;
-    animation-delay: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.object img {
-    width: 80%;
-    height: 80%;
-    object-fit: cover;
-    border-radius: 20px;
-}
-
 @keyframes slideUp {
     to {
         opacity: 1;
@@ -84,13 +38,13 @@ body {
 
 /* 검색창 */
 .search-bar input {
-  background-color: #EEEEEE;
-  border-radius: 5px;
-  padding: 10px 15px;
-  width: 300px;
-  font-size: 14px;
-  border: none;
-  outline: none;
+    background-color: #EEEEEE;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 300px;
+    font-size: 14px;
+    border: none;
+    outline: none;
 }
 
 .search-bar button {
@@ -101,7 +55,7 @@ body {
     cursor: pointer;
     width : 100px;
     float : right;
-    
+
 }
 
 /* 이벤트 리스트 */
@@ -243,3 +197,4 @@ body {
     background: #d1e5f0;
     transform: translateY(-2px);
 }
+

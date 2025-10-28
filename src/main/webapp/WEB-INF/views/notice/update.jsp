@@ -18,9 +18,9 @@
     <div class="banner-text">
         공지사항 수정
     </div>
-    <div class="object">
-        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
-    </div>
+        <div class="object">
+            <img src="/resources/images/notice/noticeIcon.png" alt="공지사항 아이콘">
+        </div>
 	</section>
 			<form class="form-actions" action="/notice/update" method="post">
 			<!-- 제목 -->

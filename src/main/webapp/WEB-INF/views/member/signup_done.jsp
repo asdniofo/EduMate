@@ -25,7 +25,7 @@
         </div>
         <!-- 오른쪽 영역 -->
         <div class="login-right">
-            <h1 class="login-logo">■ LOGO</h1>
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
             <div class="complete-icon">🐵</div>
             <h2>회원가입이 완료되었어요</h2>
             <p>저희 학생이 되어주신걸 환영해요</p>

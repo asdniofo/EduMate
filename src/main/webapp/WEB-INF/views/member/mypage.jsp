@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/resources/css/common/header.css">
         <link rel="stylesheet" href="/resources/css/common/footer.css">
         <link rel="stylesheet" href="/resources/css/member/mypage.css">
+        <link rel="stylesheet" href="/resources/css/common/main_banner.css">
         <script src="https://js.tosspayments.com/v1/payment"></script>
     </head>
     <body>
@@ -18,11 +19,13 @@
             <!-- Header Include -->
             <jsp:include page="../common/header.jsp"/>
 
-            <!-- 히어로 섹션 -->
-            <section class="hero-section-wrapper">
-                <div class="hero-section">
-                    <h1 class="hero-title">마이페이지</h1>
-                    <img src="/resources/images/member/mypage.png" alt="마이페이지 아이콘" class="hero-image"/>
+
+            <section class="main-banner">
+                <div class="banner-text">
+                    마이페이지
+                </div>
+                <div class="object">
+                    <img src="/resources/images/member/mypage.png" alt="마이페이지 아이콘">
                 </div>
             </section>
 

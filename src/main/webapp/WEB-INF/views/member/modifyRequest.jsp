@@ -9,16 +9,19 @@
         <link rel="stylesheet" href="/resources/css/member/insertQuestion.css" />
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
+        <link rel="stylesheet" href="/resources/css/common/main_banner.css">
     </head>
     <body>
         <jsp:include page="../common/header.jsp" />
         <div class="main-container">
-            <!-- 상단 영역 -->
-            <div class="header-section">
-                <div class="title">건의사항 수정</div>
-                <img src="/resources/images/request/requestIcon.png"
-				alt="공지 아이콘" class="hero-image" />
-            </div>
+            <section class="main-banner">
+                <div class="banner-text">
+                    건의사항 수정
+                </div>
+                <div class="object">
+                    <img src="/resources/images/request/requestIcon.png" alt="건의사항 아이콘">
+                </div>
+            </section>
 
             <!-- 질문 등록 폼 -->
             <form action="/member/request/modify" method="post" enctype="application/x-www-form-urlencoded">

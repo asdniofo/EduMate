@@ -9,19 +9,30 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/member/edit_info.css">
+    <link rel="stylesheet" href="/resources/css/common/main_banner.css">
+    <link rel="stylesheet" href="/resources/css/member/mypage.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
 <body>
-    <!-- Header Include -->
-    <jsp:include page="../common/header.jsp" />
+    <div class="main-container">
+        <!-- Header Include -->
+        <jsp:include page="../common/header.jsp" />
 
-    <div class="edit-container">
-        <a href="/member/mypage" class="back-btn">← 마이페이지로 돌아가기</a>
-        
-        <h1 class="edit-title">내 정보 수정</h1>
-        
+        <section class="main-banner">
+            <div class="banner-text">
+                내 정보 수정
+            </div>
+            <div class="object">
+                <img src="/resources/images/member/mypage.png" alt="정보수정 아이콘">
+            </div>
+        </section>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+            <div class="mypage-content">
+                <div class="edit-container">
         <div class="edit-content">
             <div class="note">
                 📝 본인의 개인정보만 수정할 수 있습니다. 아이디는 변경할 수 없습니다.
@@ -106,8 +117,9 @@
                     <a href="/member/mypage" class="btn btn-secondary">취소</a>
                 </div>
             </form>
+                </div>
+            </div>
         </div>
-    </div>
 
     <script>
         $(document).ready(function() {
@@ -436,7 +448,9 @@
         }
     </script>
 
-    <!-- Footer Include -->
-    <jsp:include page="../common/footer.jsp" />
+
+    </div>
+        <!-- Footer Include -->
+        <jsp:include page="../common/footer.jsp" />
 </body>
 </html>

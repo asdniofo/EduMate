@@ -10,22 +10,20 @@
 		<link rel="stylesheet" href="/resources/css/teacher/detail.css">
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
+        <link rel="stylesheet" href="/resources/css/common/main_banner.css">
 	</head>
 	<body>
 	<jsp:include page="../common/header.jsp" />
 		<div class="page-wrapper">
         <div class="content-area">
-
-            <header class="hero-section-wrapper">
-                <div class="hero-section">
-                    <div class="hero-title-group">
-                        <h1 class="hero-title">건의사항</h1>
-                        <img src="/resources/images/request/requestIcon.png"
-				alt="공지 아이콘" class="hero-image" />
-                        <div class="hero-image"></div>
-                    </div>
+            <section class="main-banner">
+                <div class="banner-text">
+                    건의사항
                 </div>
-            </header>
+                <div class="object">
+                    <img src="/resources/images/request/requestIcon.png" alt="건의사항 아이콘">
+                </div>
+            </section>
 
             <main class="main-content">
                 <div class="content-card">

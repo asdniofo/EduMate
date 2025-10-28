@@ -11,17 +11,18 @@
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/member/mycomment.css">
+    <link rel="stylesheet" href="/resources/css/common/main_banner.css">
 </head>
 <body>
     <div class="main-container">
         <!-- Header Include -->
         <jsp:include page="../common/header.jsp" />
-        
-        <!-- 히어로 섹션 -->
-        <section class="hero-section-wrapper">
-            <div class="hero-section">
-                <h1 class="hero-title">나의 댓글</h1>
-                <img src="/resources/images/member/postcomment.png" alt="나의 댓글 아이콘" class="hero-image" />
+        <section class="main-banner">
+            <div class="banner-text">
+                나의 댓글
+            </div>
+            <div class="object">
+                <img src="/resources/images/member/postcomment.png" alt="나의 댓글 아이콘">
             </div>
         </section>
 

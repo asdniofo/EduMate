@@ -31,7 +31,7 @@
 
         <!-- 오른쪽 영역 -->
         <div class="login-right">
-            <h1 class="login-logo">■ LOGO</h1>
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
 
             <form action="/member/signup/info" method="post" id="signupForm">
                 

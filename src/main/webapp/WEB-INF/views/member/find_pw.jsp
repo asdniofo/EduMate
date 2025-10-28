@@ -27,7 +27,7 @@
 
         <!-- 오른쪽 영역 -->
         <div class="login-right">
-            <h1 class="login-logo">■ LOGO</h1>
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
 
       <h2>비밀번호 재설정</h2>
 <form id="signupForm" action="/member/updatePw" method="post">

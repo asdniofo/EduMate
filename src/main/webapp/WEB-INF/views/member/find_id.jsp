@@ -26,7 +26,7 @@
 
         <!-- 오른쪽 영역 -->
         <div class="login-right">
-            <h1 class="login-logo">■ LOGO</h1>
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
 
         <h2>아이디 찾기 결과</h2>
         <c:choose>

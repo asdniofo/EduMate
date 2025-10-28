@@ -9,15 +9,19 @@
         <link rel="stylesheet" href="/resources/css/member/insertQuestion.css" />
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
+        <link rel="stylesheet" href="/resources/css/common/main_banner.css">
     </head>
     <body>
         <jsp:include page="../common/header.jsp" />
         <div class="main-container">
-            <!-- 상단 영역 -->
-            <div class="header-section">
-                <div class="title">질문 등록</div>
-                <img class="board-image" src="질문등록.jpg" alt="질문 등록 시각 자료" />
-            </div>
+            <section class="main-banner">
+                <div class="banner-text">
+                    질문 등록
+                </div>
+                <div class="object">
+                    <img src="/resources/images/teacher/QnAIcon.png" alt="질문 등록 아이콘">
+                </div>
+            </section>
 
             <!-- 질문 등록 폼 -->
             <form action="/member/insertQuestion" method="post">

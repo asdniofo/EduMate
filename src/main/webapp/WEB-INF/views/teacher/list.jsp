@@ -20,7 +20,7 @@
         질문 게시판
     </div>
     <div class="object">
-        <img src="/resources/images/event/icon/event_icon.png" alt="이벤트 아이콘">
+        <img src="/resources/images/teacher/QnAIcon.png" alt="질문 게시판 아이콘">
     </div>
 	</section>
 
