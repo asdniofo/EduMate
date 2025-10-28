@@ -29,11 +29,15 @@
 <main class="main-content">
     <!-- 검색창 -->
     <form action="/event/search" method="get">
-        <div class="search-bar">
-            <input type="text" name="searchKeyword" value="${searchKeyword}" placeholder="이벤트를 검색하세요.">
-            <button type="submit">🔍</button>
-        </div>
-    </form>
+            <div class="search-bar">
+                <input type="text" placeholder="검색어를 입력하세요" 
+				name="searchKeyword" value="${searchKeyword }"/>
+                <button type="submit">🔍</button>
+                <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
+                    <a href="/event/insert" class="write-button">글쓰기</a>
+                </c:if>
+			</div>
+		</form>
 
     <!-- 이벤트 목록 -->
     <section class="event-list">
@@ -90,12 +94,12 @@
     <!-- 페이지네이션 + 글쓰기 -->
     <div class="bottom-actions">
         <div class="pagination">
-            <c:if test="${startNavi ne 1}">
+            <c:if test="${startNavi ne 0}">
                 <a href="/event/list?page=${startNavi - 1}"><button class="page-btn">이전</button></a>
             </c:if>
             <c:forEach begin="${startNavi}" end="${endNavi}" var="n">
                 <a href="/event/list?page=${n}">
-                    <button class="page-btn ${currentPage eq n ? 'active' : ''}">${n}</button>
+                    <button class="page-btn ${currentPage eq n ? 'active' : ''}">${n+1}</button>
                 </a>
             </c:forEach>
             <c:if test="${endNavi ne maxPage}">
