@@ -3,6 +3,7 @@ package com.edumate.boot.app.lecture.controller;
 import com.edumate.boot.app.lecture.dto.LectureListRequest;
 import com.edumate.boot.app.lecture.dto.ReviewListRequest;
 import com.edumate.boot.app.lecture.dto.VideoListRequest;
+import com.edumate.boot.common.util.CloudflareR2Service;
 import com.edumate.boot.domain.lecture.model.service.LectureService;
 import com.edumate.boot.domain.purchase.model.service.PurchaseService;
 import com.edumate.boot.domain.lecture.model.vo.Lecture;
@@ -35,6 +36,7 @@ public class LectureController {
 
     private final LectureService lService;
     private final PurchaseService pService;
+    private final CloudflareR2Service cloudflareR2Service;
 
     private String getFileType(String fileName) {
         String lowerFileName = fileName.toLowerCase();
@@ -55,20 +57,47 @@ public class LectureController {
         return "unknown";
     }
 
-    private int getVideoDuration(String filePath) {
+    /**
+     * 동영상 파일을 업로드하고 시간을 추출합니다.
+     * @param videoFile 업로드할 동영상 파일
+     * @return [업로드된 URL, 영상 시간(초)]
+     */
+    private String[] uploadVideoWithDuration(MultipartFile videoFile) throws IOException {
+        File tempFile = null;
         try {
+            // 임시 파일 생성
+            String originalFilename = videoFile.getOriginalFilename();
+            String extension = originalFilename != null && originalFilename.contains(".")
+                ? originalFilename.substring(originalFilename.lastIndexOf("."))
+                : ".tmp";
+            tempFile = File.createTempFile("video_", extension);
+            videoFile.transferTo(tempFile);
+
             // FFprobe 명령어로 영상 길이 추출
-            ProcessBuilder pb = new ProcessBuilder("ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", filePath);
-            Process process = pb.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String duration = reader.readLine();
-            if (duration != null && !duration.trim().isEmpty()) {
-                return (int) Double.parseDouble(duration.trim());
+            int videoDuration = 0;
+            try {
+                ProcessBuilder pb = new ProcessBuilder("ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", tempFile.getAbsolutePath());
+                Process process = pb.start();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String duration = reader.readLine();
+                if (duration != null && !duration.trim().isEmpty()) {
+                    videoDuration = (int) Double.parseDouble(duration.trim());
+                }
+            } catch (Exception e) {
+                System.err.println("영상 시간 추출 실패: " + e.getMessage());
             }
-        } catch (Exception e) {
-            System.err.println("영상 시간 추출 실패: " + e.getMessage());
+
+            // Cloudflare R2에 업로드 (임시 파일을 직접 업로드)
+            String fileName = java.util.UUID.randomUUID().toString() + extension;
+            String videoFileUrl = cloudflareR2Service.uploadFile(tempFile, "lecture/videos", fileName, videoFile.getContentType());
+
+            return new String[]{videoFileUrl, String.valueOf(videoDuration)};
+        } finally {
+            // 임시 파일 삭제
+            if (tempFile != null && tempFile.exists()) {
+                tempFile.delete();
+            }
         }
-        return 0;
     }
 
     private String generateSequentialFileName(String originalFileName, String uploadPath) {
@@ -95,21 +124,19 @@ public class LectureController {
     private String saveFile(MultipartFile file) throws IOException {
         String originalFileName = file.getOriginalFilename();
         String fileType = getFileType(originalFileName);
-        String uploadPath;
+        String folder;
 
         // 확장자에 따라 저장 경로 결정
         if ("image".equals(fileType)) {
-            uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
+            folder = "lecture/images";
         } else if ("video".equals(fileType)) {
-            uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/";
+            folder = "lecture/videos";
         } else {
             throw new IllegalArgumentException("지원하지 않는 파일 형식입니다: " + originalFileName);
         }
-        String newFileName = generateSequentialFileName(originalFileName, uploadPath);
-        File saveFile = new File(uploadPath + newFileName);
-        file.transferTo(saveFile);
 
-        return newFileName;
+        // Cloudflare R2에 업로드
+        return cloudflareR2Service.uploadFile(file, folder);
     }
 
     @GetMapping("/list")
@@ -301,22 +328,35 @@ public class LectureController {
 
             for (int i = 0; i < lectureVideos.length; i++) {
                 if (!lectureVideos[i].isEmpty()) {
-                    // 영상 파일 저장
-                    String videoFileName = saveFile(lectureVideos[i]);
+                    String fileType = getFileType(lectureVideos[i].getOriginalFilename());
 
-                    // 저장된 영상 파일의 실제 시간 추출
-                    String uploadPath = "video".equals(getFileType(lectureVideos[i].getOriginalFilename())) ? System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/" : System.getProperty("user.dir") + "/src/main/webapp/resources/images/lecture/";
-                    String fullFilePath = uploadPath + videoFileName;
-                    int videoDuration = getVideoDuration(fullFilePath);
+                    if ("video".equals(fileType)) {
+                        // 동영상: 시간 추출과 함께 업로드
+                        String[] uploadResult = uploadVideoWithDuration(lectureVideos[i]);
+                        String videoFileUrl = uploadResult[0];
+                        int videoDuration = Integer.parseInt(uploadResult[1]);
 
-                    LectureVideo video = new LectureVideo();
-                    video.setLectureNo(lectureNo);
-                    video.setVideoTitle(videoTitles[i]);
-                    video.setVideoOrder(i + 1);
-                    video.setVideoTime(videoDuration);
-                    video.setVideoPath(videoFileName);
+                        LectureVideo video = new LectureVideo();
+                        video.setLectureNo(lectureNo);
+                        video.setVideoTitle(videoTitles[i]);
+                        video.setVideoOrder(i + 1);
+                        video.setVideoTime(videoDuration);
+                        video.setVideoPath(videoFileUrl);
 
-                    int result2 = lService.insertVideo(video);
+                        int result2 = lService.insertVideo(video);
+                    } else {
+                        // 이미지: 일반 업로드
+                        String videoFileUrl = saveFile(lectureVideos[i]);
+
+                        LectureVideo video = new LectureVideo();
+                        video.setLectureNo(lectureNo);
+                        video.setVideoTitle(videoTitles[i]);
+                        video.setVideoOrder(i + 1);
+                        video.setVideoTime(0);
+                        video.setVideoPath(videoFileUrl);
+
+                        int result2 = lService.insertVideo(video);
+                    }
                 }
             }
             return "redirect:/lecture/list";
@@ -453,13 +493,20 @@ public class LectureController {
             }
 
             if (!videoFile.isEmpty()) {
-                // 영상 파일 저장
-                String videoFileName = saveFile(videoFile);
-                
-                // 영상 시간 추출
-                String uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/";
-                String fullFilePath = uploadPath + videoFileName;
-                int videoDuration = getVideoDuration(fullFilePath);
+                String fileType = getFileType(videoFile.getOriginalFilename());
+
+                String videoFileUrl;
+                int videoDuration = 0;
+
+                if ("video".equals(fileType)) {
+                    // 동영상: 시간 추출과 함께 업로드
+                    String[] uploadResult = uploadVideoWithDuration(videoFile);
+                    videoFileUrl = uploadResult[0];
+                    videoDuration = Integer.parseInt(uploadResult[1]);
+                } else {
+                    // 이미지: 일반 업로드
+                    videoFileUrl = saveFile(videoFile);
+                }
 
                 // 다음 순서 번호 조회
                 int nextOrder = lService.getNextVideoOrder(lectureNo);
@@ -469,7 +516,7 @@ public class LectureController {
                 video.setVideoTitle(videoTitle);
                 video.setVideoOrder(nextOrder);
                 video.setVideoTime(videoDuration);
-                video.setVideoPath(videoFileName);
+                video.setVideoPath(videoFileUrl);
 
                 int result = lService.insertVideo(video);
                 if (result > 0) {
@@ -511,12 +558,22 @@ public class LectureController {
 
             // 새 영상 파일이 업로드된 경우
             if (videoFile != null && !videoFile.isEmpty()) {
-                String videoFileName = saveFile(videoFile);
-                String uploadPath = System.getProperty("user.dir") + "/src/main/webapp/resources/videos/lecture/";
-                String fullFilePath = uploadPath + videoFileName;
-                int videoDuration = getVideoDuration(fullFilePath);
-                
-                video.setVideoPath(videoFileName);
+                String fileType = getFileType(videoFile.getOriginalFilename());
+
+                String videoFileUrl;
+                int videoDuration = 0;
+
+                if ("video".equals(fileType)) {
+                    // 동영상: 시간 추출과 함께 업로드
+                    String[] uploadResult = uploadVideoWithDuration(videoFile);
+                    videoFileUrl = uploadResult[0];
+                    videoDuration = Integer.parseInt(uploadResult[1]);
+                } else {
+                    // 이미지: 일반 업로드
+                    videoFileUrl = saveFile(videoFile);
+                }
+
+                video.setVideoPath(videoFileUrl);
                 video.setVideoTime(videoDuration);
             }
 

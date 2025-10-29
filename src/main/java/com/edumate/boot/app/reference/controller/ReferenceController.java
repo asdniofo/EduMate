@@ -1,5 +1,6 @@
 package com.edumate.boot.app.reference.controller;
 
+import com.edumate.boot.common.util.CloudflareR2Service;
 import com.edumate.boot.domain.reference.model.service.ReferenceService;
 import com.edumate.boot.domain.reference.model.vo.Reference;
 import com.edumate.boot.domain.member.model.vo.Member;
@@ -10,9 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/reference")
@@ -20,6 +19,7 @@ import java.util.UUID;
 public class ReferenceController {
 
     private final ReferenceService referenceService;
+    private final CloudflareR2Service cloudflareR2Service;
 
     // ==============================
     // 📄 전체 목록
@@ -147,14 +147,11 @@ public class ReferenceController {
 
             if (uploadFile != null && !uploadFile.getOriginalFilename().isBlank()) {
                 String originalName = uploadFile.getOriginalFilename();
-                String renamedName = UUID.randomUUID().toString() + "_" + originalName;
-
-                String folderPath = session.getServletContext().getRealPath("/resources/references");
-                uploadFile.transferTo(new File(folderPath + File.separator + renamedName));
+                String fileUrl = cloudflareR2Service.uploadFile(uploadFile, "references");
 
                 reference.setAttachmentName(originalName);
-                reference.setAttachmentRename(renamedName);
-                reference.setAttachmentPath("/resources/references/" + renamedName);
+                reference.setAttachmentRename(fileUrl);
+                reference.setAttachmentPath(fileUrl);
             }
 
             referenceService.insertReference(reference);
@@ -215,14 +212,18 @@ public class ReferenceController {
 
             if (reloadFile != null && !reloadFile.getOriginalFilename().isBlank()) {
                 String originalName = reloadFile.getOriginalFilename();
-                String renamedName = UUID.randomUUID().toString() + "_" + originalName;
 
-                String folderPath = session.getServletContext().getRealPath("/resources/archiveFiles");
-                reloadFile.transferTo(new File(folderPath + File.separator + renamedName));
+                // 기존 파일 삭제
+                if (originalRef.getAttachmentPath() != null && !originalRef.getAttachmentPath().isEmpty()) {
+                    cloudflareR2Service.deleteFile(originalRef.getAttachmentPath());
+                }
+
+                // 새 파일 업로드
+                String fileUrl = cloudflareR2Service.uploadFile(reloadFile, "references");
 
                 reference.setAttachmentName(originalName);
-                reference.setAttachmentRename(renamedName);
-                reference.setAttachmentPath("/resources/archiveFiles/" + renamedName);
+                reference.setAttachmentRename(fileUrl);
+                reference.setAttachmentPath(fileUrl);
             }
 
             referenceService.updateReference(reference);
