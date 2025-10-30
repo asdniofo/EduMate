@@ -22,7 +22,7 @@
                     <div class="video-player">
                         <h1 class="lesson-title">${currentVideo[0].videoOrder}. ${currentVideo[0].videoTitle}</h1>
                         <video id="video-element" class="video-element" preload="metadata" onclick="togglePlay()">
-                            <source src="/videos/lecture/${currentVideo[0].videoPath}" type="video/mp4">
+                            <source src="${currentVideo[0].videoPath}" type="video/mp4">
                             브라우저가 비디오를 지원하지 않습니다.
                         </video>
                         <div class="video-controls-custom">
