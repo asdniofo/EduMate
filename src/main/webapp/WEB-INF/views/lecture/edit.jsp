@@ -88,7 +88,7 @@
                             <div class="thumbnail-large-preview" id="currentThumbnail">
                                 <c:choose>
                                     <c:when test="${not empty lecture.lecturePath}">
-                                        <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${lecture.lecturePath}" alt="현재 썸네일" class="thumbnail-preview-large">
+                                        <img src="${lecture.lecturePath}" alt="현재 썸네일" class="thumbnail-preview-large">
                                     </c:when>
                                     <c:otherwise>
                                         <div class="thumbnail-placeholder">썸네일이 없습니다</div>

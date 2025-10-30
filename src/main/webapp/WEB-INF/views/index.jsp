@@ -52,7 +52,7 @@
             <div class="lecture-grid">
                 <c:forEach items="${pList }" var="popular" varStatus="i">
                     <div class="lecture-card" onclick="location.href='/lecture/details?lectureNo=${popular.lectureNo}'">
-                        <img class="lecture-img" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${popular.lecturePath}"></img>
+                        <img class="lecture-img" src="${popular.lecturePath}"></img>
                         <div class="lecture-info">
                             <p><b>${popular.lectureName }</b></p>
                             <p>${popular.time}</p>
@@ -69,7 +69,7 @@
             <div class="lecture-grid">
                 <c:forEach items="${rList }" var="recent" varStatus="i">
                     <div class="lecture-card" onclick="location.href='/lecture/details?lectureNo=${recent.lectureNo}'">
-                        <img class="lecture-img" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${recent.lecturePath}"></img>
+                        <img class="lecture-img" src="${recent.lecturePath}"></img>
                         <div class="lecture-info">
                             <p><b>${recent.lectureName }</b></p>
                             <p>${recent.time}</p>

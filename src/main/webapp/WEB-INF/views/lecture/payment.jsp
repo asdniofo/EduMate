@@ -91,7 +91,7 @@
 
                         <div class="course-info">
                             <div class="course-image">
-                                <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${lList[0].lecturePath}"
+                                <img src="${lList[0].lecturePath}"
                                      alt="${lList[0].lectureName}"/>
                             </div>
                             <div class="course-details">

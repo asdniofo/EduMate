@@ -70,7 +70,7 @@
                     <c:forEach items="${lList }" var="lecture" varStatus="i">
                         <div class="course-card" onclick="location.href='/lecture/details?lectureNo=${lecture.lectureNo}'">
                             <img class="course-image" 
-                                 src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${lecture.lecturePath}" 
+                                 src="${lecture.lecturePath}" 
                                  onerror="this.src='https://placehold.co/391x235'" 
                                  alt="Course"/>
                             <div class="course-info">
