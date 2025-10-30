@@ -17,15 +17,15 @@
         <!-- ë©”ì¸ ë°°ë„ˆ -->
         <section class="main-banner">
             <div class="banner-text">
-                AI?? ?•¨ê»˜í•˜?Š” ìµœìƒê¸? ê³µë?<br/>
-                ?–¸? œ ?–´?””?„œ?‚˜, ?‹¹?‹ ?˜ ?„±?ž¥?„ ?‘?›?•©?‹ˆ?‹¤.
+                AI?? ?ï¿½ï¿½ê»˜í•˜?ï¿½ï¿½ ìµœìƒï¿½? ê³µï¿½?<br/>
+                ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½, ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.
             </div>
             <div class="object">
                 <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/adv/gemini.png" alt="Gemini AI">
             </div>
         </section>
 
-        <!-- ê´‘ê³  ?˜?—­ -->
+        <!-- ê´‘ê³  ?ï¿½ï¿½?ï¿½ï¿½ -->
         <section class="ads-section">
             <div class="ads-wrapper">
                 <div class="ads-viewport" id="adsViewport">
@@ -41,49 +41,49 @@
 
                 <div class="ads-controls" id="adsControls">
                     <button id="prevBtn">??</button>
-                    <button id="pauseBtn">?¸</button>
-                    <button id="nextBtn">?–¶</button>
+                    <button id="pauseBtn">?ï¿½ï¿½</button>
+                    <button id="nextBtn">?ï¿½ï¿½</button>
                 </div>
             </div>
         </section>
-        <!-- ?¸ê¸? ê°•ì˜ -->
+        <!-- ?ï¿½ï¿½ï¿½? ê°•ì˜ -->
         <section class="lecture-section">
-            <h2>?¸ê¸? ê°•ì˜</h2>
+            <h2>?ï¿½ï¿½ï¿½? ê°•ì˜</h2>
             <div class="lecture-grid">
                 <c:forEach items="${pList }" var="popular" varStatus="i">
                     <div class="lecture-card" onclick="location.href='/lecture/details?lectureNo=${popular.lectureNo}'">
-                        <img class="lecture-img" src="/images/lecture/${popular.lecturePath}"></img>
+                        <img class="lecture-img" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${popular.lecturePath}"></img>
                         <div class="lecture-info">
                             <p><b>${popular.lectureName }</b></p>
                             <p>${popular.time}</p>
-                            <p>?‚© <fmt:formatNumber value="${popular.lecturePrice}" pattern="#,###"/></p>
+                            <p>?ï¿½ï¿½ <fmt:formatNumber value="${popular.lecturePrice}" pattern="#,###"/></p>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </section>
 
-        <!-- ìµœê·¼ ?˜¬?¼?˜¨ ê°•ì˜ -->
+        <!-- ìµœê·¼ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê°•ì˜ -->
         <section class="lecture-section">
-            <h2>ìµœê·¼ ?˜¬?¼?˜¨ ê°•ì˜</h2>
+            <h2>ìµœê·¼ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê°•ì˜</h2>
             <div class="lecture-grid">
                 <c:forEach items="${rList }" var="recent" varStatus="i">
                     <div class="lecture-card" onclick="location.href='/lecture/details?lectureNo=${recent.lectureNo}'">
-                        <img class="lecture-img" src="/images/lecture/${recent.lecturePath}"></img>
+                        <img class="lecture-img" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${recent.lecturePath}"></img>
                         <div class="lecture-info">
                             <p><b>${recent.lectureName }</b></p>
                             <p>${recent.time}</p>
-                            <p>?‚© <fmt:formatNumber value="${recent.lecturePrice}" pattern="#,###"/></p>
+                            <p>?ï¿½ï¿½ <fmt:formatNumber value="${recent.lecturePrice}" pattern="#,###"/></p>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </section>
 
-        <!-- ê³µì??‚¬?•­ / ?ž?œ ê²Œì‹œ?Œ -->
+        <!-- ê³µï¿½??ï¿½ï¿½?ï¿½ï¿½ / ?ï¿½ï¿½?ï¿½ï¿½ê²Œì‹œ?ï¿½ï¿½ -->
         <section class="board-section">
             <div class="board">
-                <h3><a href="/notice/list">ê³µì??‚¬?•­</a></h3>
+                <h3><a href="/notice/list">ê³µï¿½??ï¿½ï¿½?ï¿½ï¿½</a></h3>
                 <ul>
                     <c:forEach items="${nList }" var="notice" varStatus="i">
                         <li>
@@ -94,7 +94,7 @@
             </div>
 
             <div class="board">
-                <h3><a href="/notice/list">ì§ˆë¬¸ê²Œì‹œ?Œ</a></h3>
+                <h3><a href="/notice/list">ì§ˆë¬¸ê²Œì‹œ?ï¿½ï¿½</a></h3>
                 <ul>
                     <c:forEach items="${tList }" var="teacher" varStatus="i">
                         <li>

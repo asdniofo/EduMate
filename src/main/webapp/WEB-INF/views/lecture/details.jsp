@@ -18,7 +18,7 @@
 
             <!-- Course Hero Section -->
             <div class="course-hero">
-                <img class="course-image" src="/images/lecture/${lList[0].lecturePath}"
+                <img class="course-image" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/lecture/${lList[0].lecturePath}"
                      onerror="this.src='https://placehold.co/391x235'"
                      alt="Course"/>
                 <div class="course-details">

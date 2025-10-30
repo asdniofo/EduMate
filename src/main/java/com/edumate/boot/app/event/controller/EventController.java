@@ -1,11 +1,7 @@
 package com.edumate.boot.app.event.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
-import java.util.UUID;
 
 import com.edumate.boot.domain.event.model.service.EventService;
 import com.edumate.boot.domain.event.model.vo.Event;

@@ -7,7 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ë§ˆì´?˜?´ì§? | EduMate</title>
+        <title>ë§ˆì´?ï¿½ï¿½?ï¿½ï¿½ï¿½? | EduMate</title>
         <link rel="stylesheet" href="/resources/css/common/header.css">
         <link rel="stylesheet" href="/resources/css/common/footer.css">
         <link rel="stylesheet" href="/resources/css/member/mypage.css">
@@ -22,29 +22,29 @@
 
             <section class="main-banner">
                 <div class="banner-text">
-                    ë§ˆì´?˜?´ì§?
+                    ë§ˆì´?ï¿½ï¿½?ï¿½ï¿½ï¿½?
                 </div>
                 <div class="object">
-                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/member/mypage.png" alt="ë§ˆì´?˜?´ì§? ?•„?´ì½?">
+                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/member/mypage.png" alt="ë§ˆì´?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½?">
                 </div>
             </section>
 
-            <!-- ë©”ì¸ ì½˜í…ì¸? -->
+            <!-- ë©”ì¸ ì½˜í…ï¿½? -->
             <div class="main-content">
                 <div class="mypage-content">
 
-                    <!-- ?”„ë¡œí•„ ?„¹?…˜ -->
+                    <!-- ?ï¿½ï¿½ë¡œí•„ ?ï¿½ï¿½?ï¿½ï¿½ -->
                     <div class="profile-section">
-                        <img class="profile-image" src="/resources/images/common/mypage1.png" alt="">
+                        <img class="profile-image" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/mypage1.png" alt="">
                         <div class="profile-info">
                             <div class="user-grade">${memberType}</div>
                             <div class="user-name">
                                 <c:choose>
                                     <c:when test="${not empty memberInfo.memberName}">
-                                        ${memberInfo.memberName}?‹˜
+                                        ${memberInfo.memberName}?ï¿½ï¿½
                                     </c:when>
                                     <c:otherwise>
-                                        ${sessionScope.loginId}?‹˜
+                                        ${sessionScope.loginId}?ï¿½ï¿½
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -52,15 +52,15 @@
                                 <div class="stat-item">
                                     <div class="stat-number"><fmt:formatNumber value="${memberInfo.memberMoney}"
                                                                                pattern="#,###"/></div>
-                                    <div class="stat-label">?”ê³?</div>
+                                    <div class="stat-label">?ï¿½ï¿½ï¿½?</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-number">${requestCount + questionCount}</div>
-                                    <div class="stat-label">?‘?„±ê¸? ?ˆ˜</div>
+                                    <div class="stat-label">?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-number">${requestCommentCount + questionCommentCount}</div>
-                                    <div class="stat-label">?Œ“ê¸? ?ˆ˜</div>
+                                    <div class="stat-label">?ï¿½ï¿½ï¿½? ?ï¿½ï¿½</div>
                                 </div>
                             </div>
                         </div>
@@ -69,15 +69,15 @@
 
                     <c:choose>
                         <c:when test="${sessionScope.teacherYn eq 'N' && sessionScope.adminYn eq 'N'}">
-                            <!-- ?˜„?¬ ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ -->
+                            <!-- ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê°•ì¤‘?ï¿½ï¿½ ê°•ì˜ -->
                             <div class="section">
                                 <div class="section-header">
-                                    <h2 class="section-title">?˜„?¬ ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜</h2>
-                                    <!-- ê²??ƒ‰ ë°•ìŠ¤ë¥? header ?•ˆ?œ¼ë¡? ?´?™ -->
+                                    <h2 class="section-title">?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê°•ì¤‘?ï¿½ï¿½ ê°•ì˜</h2>
+                                    <!-- ï¿½??ï¿½ï¿½ ë°•ìŠ¤ï¿½? header ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ -->
                                     <div class="course-search-box">
-                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ëª?, ê°•ì‚¬ëª…ì„ ?…? ¥?•˜?„¸?š”"
+                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ï¿½?, ê°•ì‚¬ëª…ì„ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½"
                                                onkeypress="handleCourseSearchEnter(event)">
-                                        <button onclick="searchCourses()">?Ÿ”?</button>
+                                        <button onclick="searchCourses()">?ï¿½ï¿½?</button>
                                     </div>
                                 </div>
 
@@ -95,14 +95,14 @@
                                             </c:forEach>
                                             <c:if test="${fn:length(lectureList) > 3}">
                                                 <div class="toggle-courses-btn" onclick="toggleCourses()">
-                                                    <span id="toggleText">?”ë³´ê¸° (${fn:length(lectureList) - 3}ê°?)</span>
-                                                    <span id="toggleIcon">?–¼</span>
+                                                    <span id="toggleText">?ï¿½ï¿½ë³´ê¸° (${fn:length(lectureList) - 3}ï¿½?)</span>
+                                                    <span id="toggleIcon">?ï¿½ï¿½</span>
                                                 </div>
                                             </c:if>
                                         </c:when>
                                         <c:otherwise>
                                             <div style="text-align: center; color: #999; padding: 40px;">
-                                                ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ê°? ?—†?Šµ?‹ˆ?‹¤.
+                                                ?ï¿½ï¿½ê°•ì¤‘?ï¿½ï¿½ ê°•ì˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
@@ -110,15 +110,15 @@
                             </div>
                         </c:when>
                         <c:when test="${sessionScope.teacherYn eq 'Y'}">
-                            <!-- ?˜„?¬ ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ -->
+                            <!-- ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê°•ì¤‘?ï¿½ï¿½ ê°•ì˜ -->
                             <div class="section">
                                 <div class="section-header">
-                                    <h2 class="section-title">?‚´ê°? ?“±ë¡í•œ ê°•ì˜</h2>
-                                    <!-- ê²??ƒ‰ ë°•ìŠ¤ë¥? header ?•ˆ?œ¼ë¡? ?´?™ -->
+                                    <h2 class="section-title">?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ë¡í•œ ê°•ì˜</h2>
+                                    <!-- ï¿½??ï¿½ï¿½ ë°•ìŠ¤ï¿½? header ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ -->
                                     <div class="course-search-box">
-                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ëª…ì„ ?…? ¥?•˜?„¸?š”"
+                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ëª…ì„ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½"
                                                onkeypress="handleCourseSearchEnter(event)">
-                                        <button onclick="searchCourses()">?Ÿ”?</button>
+                                        <button onclick="searchCourses()">?ï¿½ï¿½?</button>
                                     </div>
                                 </div>
 
@@ -136,14 +136,14 @@
                                             </c:forEach>
                                             <c:if test="${fn:length(lList) > 3}">
                                                 <div class="toggle-courses-btn" onclick="toggleCourses()">
-                                                    <span id="toggleText">?”ë³´ê¸° (${fn:length(lList) - 3}ê°?)</span>
-                                                    <span id="toggleIcon">?–¼</span>
+                                                    <span id="toggleText">?ï¿½ï¿½ë³´ê¸° (${fn:length(lList) - 3}ï¿½?)</span>
+                                                    <span id="toggleIcon">?ï¿½ï¿½</span>
                                                 </div>
                                             </c:if>
                                         </c:when>
                                         <c:otherwise>
                                             <div style="text-align: center; color: #999; padding: 40px;">
-                                                ?“±ë¡í•œ ê°•ì˜ê°? ?—†?Šµ?‹ˆ?‹¤.
+                                                ?ï¿½ï¿½ë¡í•œ ê°•ì˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
@@ -156,136 +156,136 @@
                         <c:when test="${sessionScope.teacherYn eq 'Y'}">
                             <div class="section">
                                 <a href="/lecture/add" class="menu-item">
-                                    <div class="menu-icon">?Ÿ“?</div>
-                                    <div class="menu-text">ê°•ì˜ ì¶”ê?</div>
+                                    <div class="menu-icon">?ï¿½ï¿½?</div>
+                                    <div class="menu-text">ê°•ì˜ ì¶”ï¿½?</div>
                                 </a>
                             </div>
                             <div class="section">
                                 <a href="javascript:void(0);" onclick="openWithdrawPopup();" class="menu-item">
-                                    <div class="menu-icon">?Ÿ’?</div>
-                                    <div class="menu-text">?”?•¡ ì¶œê¸ˆ?•˜ê¸?</div>
+                                    <div class="menu-icon">?ï¿½ï¿½?</div>
+                                    <div class="menu-text">?ï¿½ï¿½?ï¿½ï¿½ ì¶œê¸ˆ?ï¿½ï¿½ï¿½?</div>
                                 </a>
                             </div>
                         </c:when>
                         <c:when test="${sessionScope.teacherYn eq 'N' && sessionScope.adminYn eq 'N'}">
-                            <!-- ?”ê³? ì¶©ì „?•˜ê¸? -->
+                            <!-- ?ï¿½ï¿½ï¿½? ì¶©ì „?ï¿½ï¿½ï¿½? -->
                             <div class="section">
                                 <a href="javascript:void(0);" onclick="openChargePopup();" class="menu-item">
-                                    <div class="menu-icon">?Ÿ’?</div>
-                                    <div class="menu-text">?”ê³? ì¶©ì „?•˜ê¸?</div>
+                                    <div class="menu-icon">?ï¿½ï¿½?</div>
+                                    <div class="menu-text">?ï¿½ï¿½ï¿½? ì¶©ì „?ï¿½ï¿½ï¿½?</div>
                                 </a>
                             </div>
                         </c:when>
                     </c:choose>
-                    <!-- ?‚´ê°? ?‘?„±?•œ ê²Œì‹œë¬? -->
+                    <!-- ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê²Œì‹œï¿½? -->
                     <div class="section">
                         <a href="/member/mypost" class="menu-item">
-                            <div class="menu-icon">?Ÿ“?</div>
-                            <div class="menu-text">?‚´ê°? ?‘?„±?•œ ê²Œì‹œë¬?</div>
+                            <div class="menu-icon">?ï¿½ï¿½?</div>
+                            <div class="menu-text">?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê²Œì‹œï¿½?</div>
                         </a>
                     </div>
 
-                    <!-- ?‚´ê°? ?‘?„±?•œ ?Œ“ê¸? -->
+                    <!-- ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? -->
                     <div class="section">
                         <a href="/member/mycomment" class="menu-item">
-                            <div class="menu-icon">?Ÿ’?</div>
-                            <div class="menu-text">?‚´ê°? ?‘?„±?•œ ?Œ“ê¸?</div>
+                            <div class="menu-icon">?ï¿½ï¿½?</div>
+                            <div class="menu-text">?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?</div>
                         </a>
                     </div>
 
-                    <!-- ?‚´ ? •ë³? ?ˆ˜? • -->
+                    <!-- ?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ -->
                     <div class="section">
                         <a href="/member/edit" class="menu-item">
-                            <div class="menu-icon">?š™ï¸?</div>
-                            <div class="menu-text">?‚´ ? •ë³? ?ˆ˜? •</div>
+                            <div class="menu-icon">?ï¿½ï¿½ï¿½?</div>
+                            <div class="menu-text">?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½</div>
                         </a>
                     </div>
 
-                    <!-- ë¡œê·¸?•„?›ƒ -->
+                    <!-- ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ -->
                     <div class="section">
                         <a href="/member/logout" class="menu-item">
-                            <div class="menu-icon">?Ÿš?</div>
-                            <div class="menu-text">ë¡œê·¸?•„?›ƒ</div>
+                            <div class="menu-icon">?ï¿½ï¿½?</div>
+                            <div class="menu-text">ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½</div>
                         </a>
                     </div>
 
-                    <!-- ?šŒ?› ?ƒˆ?‡´ -->
+                    <!-- ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ -->
                     <div class="section">
                         <a href="javascript:void(0);" onclick="deleteMember();" class="menu-item">
-                            <div class="menu-icon">?š ï¸?</div>
-                            <div class="menu-text">?šŒ?› ?ƒˆ?‡´</div>
+                            <div class="menu-icon">?ï¿½ï¿½ï¿½?</div>
+                            <div class="menu-text">?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½</div>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- ì¶©ì „ ?Œ?—… -->
+            <!-- ì¶©ì „ ?ï¿½ï¿½?ï¿½ï¿½ -->
             <div class="charge-popup-overlay" id="chargePopupOverlay">
                 <div class="charge-popup">
-                    <h3 class="charge-popup-title">?Ÿ’? ?”?•¡ ì¶©ì „</h3>
+                    <h3 class="charge-popup-title">?ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ì¶©ì „</h3>
 
                     <div class="charge-amount-section">
                         <input type="text" class="charge-amount-input" id="chargeAmountInput"
-                               placeholder="ì¶©ì „?•  ê¸ˆì•¡?„ ?…? ¥?•˜?„¸?š”">
+                               placeholder="ì¶©ì „?ï¿½ï¿½ ê¸ˆì•¡?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½">
                         <div class="charge-amount-buttons">
-                            <button class="charge-amount-btn" onclick="setChargeAmount(10000)">10,000?›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(30000)">30,000?›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(50000)">50,000?›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(100000)">100,000?›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(300000)">300,000?›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(500000)">500,000?›</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(10000)">10,000?ï¿½ï¿½</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(30000)">30,000?ï¿½ï¿½</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(50000)">50,000?ï¿½ï¿½</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(100000)">100,000?ï¿½ï¿½</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(300000)">300,000?ï¿½ï¿½</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(500000)">500,000?ï¿½ï¿½</button>
                         </div>
                     </div>
 
                     <div class="charge-popup-buttons">
                         <button class="charge-popup-btn cancel" onclick="closeChargePopup()">ì·¨ì†Œ</button>
-                        <button class="charge-popup-btn confirm" onclick="processCharge()">ì¶©ì „?•˜ê¸?</button>
+                        <button class="charge-popup-btn confirm" onclick="processCharge()">ì¶©ì „?ï¿½ï¿½ï¿½?</button>
                     </div>
                 </div>
             </div>
 
-            <!-- ì¶œê¸ˆ ?Œ?—… -->
+            <!-- ì¶œê¸ˆ ?ï¿½ï¿½?ï¿½ï¿½ -->
             <div class="charge-popup-overlay" id="withdrawPopupOverlay" style="display: none;">
                 <div class="charge-popup">
-                    <h3 class="charge-popup-title">?Ÿ’? ?”?•¡ ì¶œê¸ˆ</h3>
+                    <h3 class="charge-popup-title">?ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ì¶œê¸ˆ</h3>
 
                     <div class="withdraw-form">
-                        <!-- ???–‰ ?„ ?ƒ -->
+                        <!-- ???ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ -->
                         <div class="form-group" style="margin-bottom: 15px;">
-                            <label for="bankSelect" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">???–‰ ?„ ?ƒ</label>
+                            <label for="bankSelect" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">???ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½</label>
                             <select id="bankSelect" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; background: white;">
-                                <option value="">???–‰?„ ?„ ?ƒ?•˜?„¸?š”</option>
-                                <option value="KBêµ?ë¯¼ì??–‰">KBêµ?ë¯¼ì??–‰</option>
-                                <option value="?‹ ?•œ???–‰">?‹ ?•œ???–‰</option>
-                                <option value="?š°ë¦¬ì??–‰">?š°ë¦¬ì??–‰</option>
-                                <option value="?•˜?‚˜???–‰">?•˜?‚˜???–‰</option>
-                                <option value="NH?†?˜‘???–‰">NH?†?˜‘???–‰</option>
-                                <option value="IBKê¸°ì—…???–‰">IBKê¸°ì—…???–‰</option>
-                                <option value="ì¹´ì¹´?˜¤ë±…í¬">ì¹´ì¹´?˜¤ë±…í¬</option>
-                                <option value="?† ?Š¤ë±…í¬">?† ?Š¤ë±…í¬</option>
-                                <option value="ì¼??´ë±…í¬">ì¼??´ë±…í¬</option>
+                                <option value="">???ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½</option>
+                                <option value="KBï¿½?ë¯¼ï¿½??ï¿½ï¿½">KBï¿½?ë¯¼ï¿½??ï¿½ï¿½</option>
+                                <option value="?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½">?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½</option>
+                                <option value="?ï¿½ï¿½ë¦¬ï¿½??ï¿½ï¿½">?ï¿½ï¿½ë¦¬ï¿½??ï¿½ï¿½</option>
+                                <option value="?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½">?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½</option>
+                                <option value="NH?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½">NH?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½</option>
+                                <option value="IBKê¸°ì—…???ï¿½ï¿½">IBKê¸°ì—…???ï¿½ï¿½</option>
+                                <option value="ì¹´ì¹´?ï¿½ï¿½ë±…í¬">ì¹´ì¹´?ï¿½ï¿½ë±…í¬</option>
+                                <option value="?ï¿½ï¿½?ï¿½ï¿½ë±…í¬">?ï¿½ï¿½?ï¿½ï¿½ë±…í¬</option>
+                                <option value="ï¿½??ï¿½ï¿½ë±…í¬">ï¿½??ï¿½ï¿½ë±…í¬</option>
                             </select>
                         </div>
 
-                        <!-- ê³„ì¢Œë²ˆí˜¸ ?…? ¥ -->
+                        <!-- ê³„ì¢Œë²ˆí˜¸ ?ï¿½ï¿½?ï¿½ï¿½ -->
                         <div class="form-group" style="margin-bottom: 15px;">
                             <label for="accountNumber" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">ê³„ì¢Œë²ˆí˜¸</label>
-                            <input type="text" id="accountNumber" placeholder="ê³„ì¢Œë²ˆí˜¸ë¥? ?…? ¥?•˜?„¸?š” (- ?—†?´)" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                            <input type="text" id="accountNumber" placeholder="ê³„ì¢Œë²ˆí˜¸ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ (- ?ï¿½ï¿½?ï¿½ï¿½)" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
                         </div>
 
                         <!-- ì¶œê¸ˆ ê¸ˆì•¡ -->
                         <div class="form-group" style="margin-bottom: 0;">
-                            <label for="withdrawAmountInput" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">ì¶œê¸ˆ ê¸ˆì•¡ (?˜„?¬ ?”?•¡: <fmt:formatNumber value="${memberInfo.memberMoney}" pattern="#,###"/>?›)</label>
+                            <label for="withdrawAmountInput" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">ì¶œê¸ˆ ê¸ˆì•¡ (?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½: <fmt:formatNumber value="${memberInfo.memberMoney}" pattern="#,###"/>?ï¿½ï¿½)</label>
                             <div class="amount-input-group" style="display: flex; gap: 10px; align-items: center;">
-                                <input type="text" class="charge-amount-input" id="withdrawAmountInput" placeholder="ì¶œê¸ˆ?•  ê¸ˆì•¡?„ ?…? ¥?•˜?„¸?š”" style="flex: 1; height: 46px; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; margin: 0;">
-                                <button class="full-amount-btn" onclick="setFullAmount()" style="height: 46px; padding: 0 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; white-space: nowrap;">? „?•¡</button>
+                                <input type="text" class="charge-amount-input" id="withdrawAmountInput" placeholder="ì¶œê¸ˆ?ï¿½ï¿½ ê¸ˆì•¡?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½" style="flex: 1; height: 46px; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; margin: 0;">
+                                <button class="full-amount-btn" onclick="setFullAmount()" style="height: 46px; padding: 0 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; white-space: nowrap;">?ï¿½ï¿½?ï¿½ï¿½</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="charge-popup-buttons" style="margin-top: 15px;">
                         <button class="charge-popup-btn cancel" onclick="closeWithdrawPopup()">ì·¨ì†Œ</button>
-                        <button class="charge-popup-btn confirm" onclick="processWithdraw()">ì¶œê¸ˆ ?‹ ì²?</button>
+                        <button class="charge-popup-btn confirm" onclick="processWithdraw()">ì¶œê¸ˆ ?ï¿½ï¿½ï¿½?</button>
                     </div>
                 </div>
             </div>
@@ -293,9 +293,9 @@
             <script>
                 let chargeAmount = 0;
 
-                // ì¶©ì „ ê´?? ¨ ?•¨?ˆ˜?“¤
+                // ì¶©ì „ ï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
                 function openChargePopup() {
-                    // ë§ˆì´?˜?´ì§??—?„œ ì¶©ì „?•˜?Š” ê²ƒì„?„ ?„œë²„ì— ?•Œë¦? (?„¸?…˜ ? •ë¦¬ìš©)
+                    // ë§ˆì´?ï¿½ï¿½?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½ ì¶©ì „?ï¿½ï¿½?ï¿½ï¿½ ê²ƒì„?ï¿½ï¿½ ?ï¿½ï¿½ë²„ì— ?ï¿½ï¿½ï¿½? (?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë¦¬ìš©)
                     fetch('/member/clearLectureSession', {
                         method: 'POST',
                         headers: {
@@ -313,8 +313,8 @@
                             input.value = '';
                         }
                     }).catch(error => {
-                        console.error('?„¸?…˜ ? •ë¦? ì¤? ?˜¤ë¥?:', error);
-                        // ?˜¤ë¥˜ê? ?ˆ?–´?„ ?Œ?—…?? ?—´ê¸?
+                        console.error('?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ï¿½? ?ï¿½ï¿½ï¿½?:', error);
+                        // ?ï¿½ï¿½ë¥˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?? ?ï¿½ï¿½ï¿½?
                         const popup = document.getElementById('chargePopupOverlay');
                         if (popup) {
                             popup.style.display = 'flex';
@@ -341,15 +341,15 @@
                     chargeAmount = parseInt(inputAmount) || chargeAmount;
 
                     if (!chargeAmount || chargeAmount < 1000) {
-                        alert('ìµœì†Œ 1,000?› ?´?ƒ ì¶©ì „?•´ì£¼ì„¸?š”.');
+                        alert('ìµœì†Œ 1,000?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ì¶©ì „?ï¿½ï¿½ì£¼ì„¸?ï¿½ï¿½.');
                         return;
                     }
 
-                    // ?„œë²„ì—?„œ ê²°ì œ ? •ë³´ë?? ê°?? ¸???„œ ?† ?Š¤?˜?´ë¨¼ì¸  ?˜¸ì¶?
+                    // ?ï¿½ï¿½ë²„ì—?ï¿½ï¿½ ê²°ì œ ?ï¿½ï¿½ë³´ï¿½?? ï¿½??ï¿½ï¿½???ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ë¨¼ì¸  ?ï¿½ï¿½ï¿½?
                     requestChargePayment(chargeAmount);
                 }
 
-                // ?„œë²„ì—?„œ ê²°ì œ ? •ë³´ë?? ê°?? ¸???„œ ?† ?Š¤?˜?´ë¨¼ì¸  ?˜¸ì¶?
+                // ?ï¿½ï¿½ë²„ì—?ï¿½ï¿½ ê²°ì œ ?ï¿½ï¿½ë³´ï¿½?? ï¿½??ï¿½ï¿½???ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ë¨¼ì¸  ?ï¿½ï¿½ï¿½?
                 function requestChargePayment(amount) {
                     fetch('/purchase/toss/charge', {
                         method: 'POST',
@@ -374,29 +374,29 @@
                                 })
                                     .catch(function (error) {
                                         if (error.code === 'USER_CANCEL') {
-                                            console.log('ì¶©ì „?´ ì·¨ì†Œ?˜?—ˆ?Šµ?‹ˆ?‹¤.');
+                                            console.log('ì¶©ì „?ï¿½ï¿½ ì·¨ì†Œ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                                         } else {
-                                            alert('ì¶©ì „ ?š”ì²? ?‹¤?Œ¨: ' + error.message);
+                                            alert('ì¶©ì „ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½: ' + error.message);
                                         }
                                     });
                             } else {
-                                alert(data.message || 'ì¶©ì „ ?š”ì²??— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.');
+                                alert(data.message || 'ì¶©ì „ ?ï¿½ï¿½ï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('ì¶©ì „ ?š”ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
+                            alert('ì¶©ì „ ?ï¿½ï¿½ï¿½? ï¿½? ?ï¿½ï¿½ë¥˜ï¿½? ë°œìƒ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                         });
                 }
 
-                // ì¶œê¸ˆ ê´?? ¨ ?•¨?ˆ˜?“¤
+                // ì¶œê¸ˆ ï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
                 function openWithdrawPopup() {
                     const popup = document.getElementById('withdrawPopupOverlay');
                     if (popup) {
                         popup.style.display = 'flex';
                     }
                     
-                    // ?¼ ì´ˆê¸°?™”
+                    // ?ï¿½ï¿½ ì´ˆê¸°?ï¿½ï¿½
                     document.getElementById('bankSelect').value = '';
                     document.getElementById('accountNumber').value = '';
                     document.getElementById('withdrawAmountInput').value = '';
@@ -420,33 +420,33 @@
                     const withdrawInput = document.getElementById('withdrawAmountInput');
                     const withdrawAmount = parseInt(withdrawInput.value.replace(/,/g, '')) || 0;
                     
-                    // ?œ ?š¨?„± ê²??‚¬
+                    // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
                     if (!bank || bank.trim() === '') {
-                        alert('???–‰?„ ?„ ?ƒ?•´ì£¼ì„¸?š”.');
+                        alert('???ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ì£¼ì„¸?ï¿½ï¿½.');
                         return;
                     }
                     
                     if (!accountNumber || accountNumber.trim() === '') {
-                        alert('ê³„ì¢Œë²ˆí˜¸ë¥? ?…? ¥?•´ì£¼ì„¸?š”.');
+                        alert('ê³„ì¢Œë²ˆí˜¸ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ì£¼ì„¸?ï¿½ï¿½.');
                         return;
                     }
                     
                     if (!withdrawAmount || withdrawAmount < 1000) {
-                        alert('ìµœì†Œ 1,000?› ?´?ƒ ì¶œê¸ˆ ê°??Š¥?•©?‹ˆ?‹¤.');
+                        alert('ìµœì†Œ 1,000?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ì¶œê¸ˆ ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                         return;
                     }
                     
                     const currentBalance = ${memberInfo.memberMoney};
                     if (withdrawAmount > currentBalance) {
-                        alert('?”?•¡?´ ë¶?ì¡±í•©?‹ˆ?‹¤.');
+                        alert('?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ï¿½?ì¡±í•©?ï¿½ï¿½?ï¿½ï¿½.');
                         return;
                     }
                     
-                    if (!confirm(bank + '\nê³„ì¢Œë²ˆí˜¸: ' + accountNumber + '\nì¶œê¸ˆê¸ˆì•¡: ' + withdrawAmount.toLocaleString() + '?›\n\n?œ„ ? •ë³´ë¡œ ì¶œê¸ˆ?•˜?‹œê² ìŠµ?‹ˆê¹??')) {
+                    if (!confirm(bank + '\nê³„ì¢Œë²ˆí˜¸: ' + accountNumber + '\nì¶œê¸ˆê¸ˆì•¡: ' + withdrawAmount.toLocaleString() + '?ï¿½ï¿½\n\n?ï¿½ï¿½ ?ï¿½ï¿½ë³´ë¡œ ì¶œê¸ˆ?ï¿½ï¿½?ï¿½ï¿½ê² ìŠµ?ï¿½ï¿½ï¿½??')) {
                         return;
                     }
                     
-                    // ?„œë²„ë¡œ ì¶œê¸ˆ ?š”ì²?
+                    // ?ï¿½ï¿½ë²„ë¡œ ì¶œê¸ˆ ?ï¿½ï¿½ï¿½?
                     fetch('/member/withdraw', {
                         method: 'POST',
                         headers: {
@@ -461,20 +461,20 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('ì¶œê¸ˆ ?‹ ì²??´ ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.\nì²˜ë¦¬ê¹Œì? 1-2?¼ ?†Œ?š”?©?‹ˆ?‹¤.');
+                            alert('ì¶œê¸ˆ ?ï¿½ï¿½ï¿½??ï¿½ï¿½ ?ï¿½ï¿½ë£Œë˜?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.\nì²˜ë¦¬ê¹Œï¿½? 1-2?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                             closeWithdrawPopup();
-                            window.location.reload(); // ?”?•¡ ?—…?°?´?Š¸ë¥? ?œ„?•´ ?ƒˆë¡œê³ ì¹?
+                            window.location.reload(); // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë¡œê³ ï¿½?
                         } else {
-                            alert(data.message || 'ì¶œê¸ˆ ?‹ ì²??— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.');
+                            alert(data.message || 'ì¶œê¸ˆ ?ï¿½ï¿½ï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('ì¶œê¸ˆ ?‹ ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
+                        alert('ì¶œê¸ˆ ?ï¿½ï¿½ï¿½? ï¿½? ?ï¿½ï¿½ë¥˜ï¿½? ë°œìƒ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                     });
                 }
 
-                // ì¶©ì „/ì¶œê¸ˆ ê¸ˆì•¡ ?…? ¥ ?‹œ ?¬ë§·íŒ…
+                // ì¶©ì „/ì¶œê¸ˆ ê¸ˆì•¡ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ ?ï¿½ï¿½ë§·íŒ…
                 document.addEventListener('DOMContentLoaded', function () {
                     const chargeInput = document.getElementById('chargeAmountInput');
                     if (chargeInput) {
@@ -494,7 +494,7 @@
                                 const numericValue = parseInt(value);
                                 const currentBalance = ${memberInfo.memberMoney};
                                 
-                                // ?˜„?¬ ?”?•¡ë³´ë‹¤ ?° ê¸ˆì•¡?? ?…? ¥ ë¶ˆê?
+                                // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë³´ë‹¤ ?ï¿½ï¿½ ê¸ˆì•¡?? ?ï¿½ï¿½?ï¿½ï¿½ ë¶ˆï¿½?
                                 if (numericValue > currentBalance) {
                                     e.target.value = currentBalance.toLocaleString();
                                 } else {
@@ -511,29 +511,29 @@
                         });
                     }
 
-                    // URL ?ŒŒ?¼ë¯¸í„°?—?„œ ì¶©ì „ ê²°ê³¼ ?™•?¸
+                    // URL ?ï¿½ï¿½?ï¿½ï¿½ë¯¸í„°?ï¿½ï¿½?ï¿½ï¿½ ì¶©ì „ ê²°ê³¼ ?ï¿½ï¿½?ï¿½ï¿½
                     const urlParams = new URLSearchParams(window.location.search);
                     const chargeSuccess = urlParams.get('chargeSuccess');
                     const chargeAmount = urlParams.get('chargeAmount');
 
                     if (chargeSuccess === 'true' && chargeAmount) {
-                        // ì¶©ì „ ?„±ê³? ?Œ?—…
-                        alert('?Ÿ’? ì¶©ì „?´ ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤!\nì¶©ì „ ê¸ˆì•¡: ?‚©' + parseInt(chargeAmount).toLocaleString() + '?›');
-                        // URL?—?„œ ?ŒŒ?¼ë¯¸í„° ? œê±?
+                        // ì¶©ì „ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½
+                        alert('?ï¿½ï¿½? ì¶©ì „?ï¿½ï¿½ ?ï¿½ï¿½ë£Œë˜?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½!\nì¶©ì „ ê¸ˆì•¡: ?ï¿½ï¿½' + parseInt(chargeAmount).toLocaleString() + '?ï¿½ï¿½');
+                        // URL?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë¯¸í„° ?ï¿½ï¿½ï¿½?
                         window.history.replaceState({}, document.title, window.location.pathname);
-                        // ?˜?´ì§? ?ƒˆë¡œê³ ì¹¨í•˜?—¬ ?”?•¡ ?—…?°?´?Š¸
+                        // ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ë¡œê³ ì¹¨í•˜?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
                         window.location.reload();
                     } else if (chargeSuccess === 'false') {
-                        // ì¶©ì „ ?‹¤?Œ¨ ?Œ?—…
-                        alert('?Œì¶©ì „?— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.\n?‹¤?‹œ ?‹œ?„?•´ì£¼ì„¸?š”.');
-                        // URL?—?„œ ?ŒŒ?¼ë¯¸í„° ? œê±?
+                        // ì¶©ì „ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
+                        alert('?ï¿½ï¿½ì¶©ì „?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.\n?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ì£¼ì„¸?ï¿½ï¿½.');
+                        // URL?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë¯¸í„° ?ï¿½ï¿½ï¿½?
                         window.history.replaceState({}, document.title, window.location.pathname);
                     }
                 });
 
-                // ?šŒ?› ?ƒˆ?‡´ ?•¨?ˆ˜
+                // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
                 function deleteMember() {
-                    if (confirm('? •ë§ë¡œ ?šŒ?› ?ƒˆ?‡´ë¥? ?•˜?‹œê² ìŠµ?‹ˆê¹??\n\n?ƒˆ?‡´ ?‹œ ëª¨ë“  ?°?´?„°ê°? ?‚­? œ?˜ë©? ë³µêµ¬?•  ?ˆ˜ ?—†?Šµ?‹ˆ?‹¤.')) {
+                    if (confirm('?ï¿½ï¿½ë§ë¡œ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ê² ìŠµ?ï¿½ï¿½ï¿½??\n\n?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ ëª¨ë“  ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë³µêµ¬?ï¿½ï¿½ ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.')) {
                         const memberId = '${sessionScope.loginId}';
 
                         fetch('/member/delete', {
@@ -545,21 +545,21 @@
                         })
                             .then(response => {
                                 if (response.ok) {
-                                    alert('?šŒ?› ?ƒˆ?‡´ê°? ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.');
-                                    // ë¡œê·¸?•„?›ƒ ì²˜ë¦¬ ë°? ?„¸?…˜ ì´ˆê¸°?™”
+                                    alert('?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ë£Œë˜?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
+                                    // ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ ì²˜ë¦¬ ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ì´ˆê¸°?ï¿½ï¿½
                                     window.location.href = '/member/logout';
                                 } else {
-                                    alert('?šŒ?› ?ƒˆ?‡´ ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
+                                    alert('?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ï¿½? ?ï¿½ï¿½ë¥˜ï¿½? ë°œìƒ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                                 }
                             })
                             .catch(error => {
                                 console.error('Error:', error);
-                                alert('?šŒ?› ?ƒˆ?‡´ ?š”ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
+                                alert('?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ï¿½? ?ï¿½ï¿½ë¥˜ï¿½? ë°œìƒ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.');
                             });
                     }
                 }
 
-                // ê°•ì˜ ëª©ë¡ ?† ê¸? ?•¨?ˆ˜
+                // ê°•ì˜ ëª©ë¡ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½
                 function toggleCourses() {
                     const hiddenCourses = document.querySelectorAll('.hidden-course');
                     const toggleBtn = document.querySelector('.toggle-courses-btn');
@@ -569,30 +569,30 @@
                     let isExpanded = toggleBtn.classList.contains('expanded');
 
                     if (isExpanded) {
-                        // ? ‘ê¸?
+                        // ?ï¿½ï¿½ï¿½?
                         hiddenCourses.forEach(course => {
                             course.style.display = 'none';
                         });
-                        toggleText.textContent = '?”ë³´ê¸° (' + hiddenCourses.length + 'ê°?)';
-                        toggleIcon.textContent = '?–¼';
+                        toggleText.textContent = '?ï¿½ï¿½ë³´ê¸° (' + hiddenCourses.length + 'ï¿½?)';
+                        toggleIcon.textContent = '?ï¿½ï¿½';
                         toggleBtn.classList.remove('expanded');
                     } else {
-                        // ?¼ì¹˜ê¸°
+                        // ?ï¿½ï¿½ì¹˜ê¸°
                         hiddenCourses.forEach(course => {
                             course.style.display = 'flex';
                         });
-                        toggleText.textContent = '? ‘ê¸?';
-                        toggleIcon.textContent = '?–²';
+                        toggleText.textContent = '?ï¿½ï¿½ï¿½?';
+                        toggleIcon.textContent = '?ï¿½ï¿½';
                         toggleBtn.classList.add('expanded');
                     }
                 }
 
-                // ê°•ì˜ ê²??ƒ‰ ê´?? ¨ ?•¨?ˆ˜?“¤
-                let allCourses = []; // ? „ì²? ê°•ì˜ ?°?´?„° ???¥
+                // ê°•ì˜ ï¿½??ï¿½ï¿½ ï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+                let allCourses = []; // ?ï¿½ï¿½ï¿½? ê°•ì˜ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ???ï¿½ï¿½
 
-                // ?˜?´ì§? ë¡œë“œ ?‹œ ? „ì²? ê°•ì˜ ?°?´?„° ???¥
+                // ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë¡œë“œ ?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ê°•ì˜ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ???ï¿½ï¿½
                 document.addEventListener('DOMContentLoaded', function () {
-                    // ê¸°ì¡´ ê°•ì˜ ?š”?†Œ?“¤?„ ë°°ì—´ë¡? ???¥
+                    // ê¸°ì¡´ ê°•ì˜ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ë°°ì—´ï¿½? ???ï¿½ï¿½
                     const courseElements = document.querySelectorAll('.course-item');
                     courseElements.forEach(course => {
                         allCourses.push({
@@ -619,28 +619,28 @@
                     const courseContent = document.getElementById('courseContent');
 
                     if (!searchTerm) {
-                        // ê²??ƒ‰?–´ê°? ?—†?œ¼ë©? ?›?˜ ?ƒ?ƒœë¡? ë³µì›
+                        // ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë³µì›
                         restoreOriginalCourses();
                         return;
                     }
 
-                    // ê²??ƒ‰ ê²°ê³¼ ?•„?„°ë§?
+                    // ï¿½??ï¿½ï¿½ ê²°ê³¼ ?ï¿½ï¿½?ï¿½ï¿½ï¿½?
                     const filteredCourses = allCourses.filter(course =>
                         course.title.includes(searchTerm) ||
                         course.instructor.includes(searchTerm) ||
                         course.category.includes(searchTerm)
                     );
 
-                    // ê¸°ì¡´ ê°•ì˜ ëª©ë¡ ? œê±?
+                    // ê¸°ì¡´ ê°•ì˜ ëª©ë¡ ?ï¿½ï¿½ï¿½?
                     const existingCourses = courseContent.querySelectorAll('.course-item');
                     existingCourses.forEach(course => course.remove());
 
-                    // ?† ê¸? ë²„íŠ¼ ? œê±?
+                    // ?ï¿½ï¿½ï¿½? ë²„íŠ¼ ?ï¿½ï¿½ï¿½?
                     const toggleBtn = courseContent.querySelector('.toggle-courses-btn');
                     if (toggleBtn) toggleBtn.remove();
 
                     if (filteredCourses.length > 0) {
-                        // ?•„?„°ë§ëœ ê°•ì˜?“¤ ?‘œ?‹œ
+                        // ?ï¿½ï¿½?ï¿½ï¿½ë§ëœ ê°•ì˜?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
                         filteredCourses.forEach(course => {
                             const courseElement = course.element.cloneNode(true);
                             courseElement.style.display = 'flex';
@@ -648,10 +648,10 @@
                             courseContent.appendChild(courseElement);
                         });
                     } else {
-                        // ê²??ƒ‰ ê²°ê³¼ê°? ?—†?„ ?•Œ
+                        // ï¿½??ï¿½ï¿½ ê²°ê³¼ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½
                         const noResult = document.createElement('div');
                         noResult.style.cssText = 'text-align: center; color: #999; padding: 40px;';
-                        noResult.textContent = 'ê²??ƒ‰ ê²°ê³¼ê°? ?—†?Šµ?‹ˆ?‹¤.';
+                        noResult.textContent = 'ï¿½??ï¿½ï¿½ ê²°ê³¼ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.';
                         courseContent.appendChild(noResult);
                     }
                 }
@@ -659,11 +659,11 @@
                 function restoreOriginalCourses() {
                     const courseContent = document.getElementById('courseContent');
 
-                    // ê¸°ì¡´ ?‚´?š© ? œê±?
+                    // ê¸°ì¡´ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?
                     courseContent.innerHTML = '';
 
                     if (allCourses.length > 0) {
-                        // ?›?˜ ê°•ì˜?“¤ ë³µì›
+                        // ?ï¿½ï¿½?ï¿½ï¿½ ê°•ì˜?ï¿½ï¿½ ë³µì›
                         allCourses.forEach((course, index) => {
                             const courseElement = course.element.cloneNode(true);
                             if (index >= 3) {
@@ -675,18 +675,18 @@
                             courseContent.appendChild(courseElement);
                         });
 
-                        // ?† ê¸? ë²„íŠ¼ ë³µì› (4ê°? ?´?ƒ?¼ ?•Œë§?)
+                        // ?ï¿½ï¿½ï¿½? ë²„íŠ¼ ë³µì› (4ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?)
                         if (allCourses.length > 3) {
                             const toggleBtn = document.createElement('div');
                             toggleBtn.className = 'toggle-courses-btn';
                             toggleBtn.onclick = toggleCourses;
-                            toggleBtn.innerHTML = '<span id="toggleText">?”ë³´ê¸° (' + (allCourses.length - 3) + 'ê°?)</span><span id="toggleIcon">?–¼</span>';
+                            toggleBtn.innerHTML = '<span id="toggleText">?ï¿½ï¿½ë³´ê¸° (' + (allCourses.length - 3) + 'ï¿½?)</span><span id="toggleIcon">?ï¿½ï¿½</span>';
                             courseContent.appendChild(toggleBtn);
                         }
                     } else {
                         const noLecture = document.createElement('div');
                         noLecture.style.cssText = 'text-align: center; color: #999; padding: 40px;';
-                        noLecture.textContent = '?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ê°? ?—†?Šµ?‹ˆ?‹¤.';
+                        noLecture.textContent = '?ï¿½ï¿½ê°•ì¤‘?ï¿½ï¿½ ê°•ì˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.';
                         courseContent.appendChild(noLecture);
                     }
                 }

@@ -21,10 +21,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.SQLOutput;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,26 +97,6 @@ public class LectureController {
         }
     }
 
-    private String generateSequentialFileName(String originalFileName, String uploadPath) {
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String dateStr = sdf.format(new Date());
-
-        File uploadDir = new File(uploadPath);
-        int sequenceNumber = 1;
-        if (uploadDir.exists()) {
-            File[] files = uploadDir.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    String fileName = file.getName();
-                    if (fileName.startsWith(dateStr + "_")) {
-                        sequenceNumber++;
-                    }
-                }
-            }
-        }
-        return dateStr + "_" + String.format("%05d", sequenceNumber) + fileExtension;
-    }
 
     private String saveFile(MultipartFile file) throws IOException {
         String originalFileName = file.getOriginalFilename();
