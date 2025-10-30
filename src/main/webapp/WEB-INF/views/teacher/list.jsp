@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>μ§λ¬Έ κ²μ‹?</title>
+		<title>μ§λ¬Έ κ²μ‹ν</title>
 		<link rel="stylesheet" href="/resources/css/teacher/list.css">
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
@@ -17,10 +17,10 @@
 	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
 	<section class="main-banner">
     <div class="banner-text">
-        μ§λ¬Έ κ²μ‹?
+        μ§λ¬Έ κ²μ‹ν
     </div>
     <div class="object">
-        <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/teacher/QnAIcon.png" alt="μ§λ¬Έ κ²μ‹? ?•„?΄μ½?">
+        <img src="/resources/images/teacher/QnAIcon.png" alt="μ§λ¬Έ κ²μ‹ν μ•„μ΄μ½">
     </div>
 	</section>
 
@@ -29,7 +29,7 @@
             <div class="main-search-bar">
                 <form action="/teacher/question/search" method="get" class="search-form">
                 	<form>
-				    	<input type="text" name="searchKeyword" placeholder="κ²??ƒ‰?–΄λ¥? ?…? ¥?•΄μ£Όμ„Έ?”" value="${searchKeyword }">
+				    	<input type="text" name="searchKeyword" placeholder="κ²€μƒ‰μ–΄λ¥Ό μ…λ ¥ν•΄μ£Όμ„Έμ”" value="${searchKeyword }">
 				    </form>
 				    <input type="hidden" name="filter" value="${filter}"> 
 				    <button type="submit" class="search-btn"></button>
@@ -37,17 +37,17 @@
                 </div>
 	            <a href="/teacher/question/list?filter=ALL&page=1" 
 				   class="sort-by-text <c:if test="${empty filter || filter eq 'ALL'}">sort-current</c:if>">
-				   ? „μ²?
+				   μ „μ²΄
 				</a>
 				
 				<a href="/teacher/question/list?filter=Y&page=1" 
 				   class="sort-by-text <c:if test="${filter eq 'Y'}">sort-current</c:if>">
-				   ?•΄κ²?
+				   ν•΄κ²°
 				</a>
 				
 				<a href="/teacher/question/list?filter=N&page=1" 
 				   class="sort-by-text <c:if test="${filter eq 'N'}">sort-current</c:if>">
-				   λ―Έν•΄κ²?
+				   λ―Έν•΄κ²°
 				</a>
             </div>
         <section class="question-list">
@@ -56,10 +56,10 @@
 		            <article class="question-item">
 		                <div class="question-status-and-title">
 		                	<c:if test="${question.questionStatus eq 'N' }">
-			                    <div class="status-tag status-unresolved">λ―Έν•΄κ²?</div>
+			                    <div class="status-tag status-unresolved">λ―Έν•΄κ²°</div>
 		                	</c:if>
 		                	<c:if test="${question.questionStatus eq 'Y' }">
-			                    <div class="status-tag status-resolved">?•΄κ²?</div>
+			                    <div class="status-tag status-resolved">ν•΄κ²°</div>
 		                	</c:if>
 		                    <h2 class="question-title">${question.questionTitle }</h2>
 		                </div>
@@ -67,7 +67,7 @@
 		                <div class="question-meta">
 		                    <span>${question.memberId }</span>
 		                    <span><fmt:formatDate value="${question.writeDate}" pattern="yyyy-MM-dd HH:mm" /></span>
-		                    <!-- <span>?λ°? ?”„λ΅κ·Έ?λ°?</span> -->
+		                    <!-- <span>μλ°” ν”„λ΅κ·Έλλ°</span> -->
 		                </div>
 		            </article>
 		        </a>
@@ -81,7 +81,7 @@
             <div class="pagination-wrapper">
                 <div class="pagination">
                 	<c:if test="${startNavi ne 1 }">
-					    <a href="/teacher/question/list?page=${startNavi - 1 }&filter=${filter}" class="page-button">?΄? „</a>
+					    <a href="/teacher/question/list?page=${startNavi - 1 }&filter=${filter}" class="page-button">μ΄μ „</a>
 					</c:if>
 					
 					<c:forEach begin="${startNavi }" end="${endNavi }" var="n">
@@ -90,12 +90,12 @@
 					</c:forEach>
 					
 					<c:if test="${endNavi ne maxPage }">
-					    <a href="/teacher/question/list?page=${endNavi + 1 }&filter=${filter}" class="page-button">?‹¤?</a>
+					    <a href="/teacher/question/list?page=${endNavi + 1 }&filter=${filter}" class="page-button">λ‹¤μ</a>
 					</c:if>
                 </div>
             </div>
             <c:if test="${not empty sessionScope.loginId}">
-            <a href="/member/insertQuestion" class="write-button">κΈ??“°κΈ?</a>
+            <a href="/member/insertQuestion" class="write-button">κΈ€μ“°κΈ°</a>
             </c:if>
         </div>
     </main>

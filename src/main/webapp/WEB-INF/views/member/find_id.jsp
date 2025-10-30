@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>? •ë³´ì°¾ê¸? | EduMate</title>
+    <title>ì •ë³´ì°¾ê¸° | EduMate</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/resources/css/member/find_info.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
@@ -18,25 +18,25 @@
 <!-- Find Info -->
 <section class="login-container">
     <div class="login-box">
-        <!-- ?™¼ìª? ?˜?—­ -->
+        <!-- ì™¼ìª½ ì˜ì—­ -->
         <div class="login-left">
-            <div class="login-icon">?Ÿ”?</div>
-            <h2>? •ë³? ì°¾ê¸°</h2>
+            <div class="login-icon">ðŸ”</div>
+            <h2>ì •ë³´ ì°¾ê¸°</h2>
         </div>
 
-        <!-- ?˜¤ë¥¸ìª½ ?˜?—­ -->
+        <!-- ì˜¤ë¥¸ìª½ ì˜ì—­ -->
         <div class="login-right">
-            <img class="login-logo" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo.png">
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
 
-        <h2>?•„?´?”” ì°¾ê¸° ê²°ê³¼</h2>
+        <h2>ì•„ì´ë”” ì°¾ê¸° ê²°ê³¼</h2>
         <c:choose>
         <c:when test="${not empty foundId}">
-            <p>?šŒ?›?‹˜?˜ ?•„?´?””?Š” <strong>${foundId}</strong> ?ž…?‹ˆ?‹¤.</p>
-            <a href="/member/login">ë¡œê·¸?¸?•˜?Ÿ¬ ê°?ê¸?</a>
+            <p>íšŒì›ë‹˜ì˜ ì•„ì´ë””ëŠ” <strong>${foundId}</strong> ìž…ë‹ˆë‹¤.</p>
+            <a href="/member/login">ë¡œê·¸ì¸í•˜ëŸ¬ ê°€ê¸°</a>
         </c:when>
         <c:otherwise>
-            <p>?¼ì¹˜í•˜?Š” ?šŒ?› ? •ë³´ë?? ì°¾ì„ ?ˆ˜ ?—†?Šµ?‹ˆ?‹¤.</p>
-            <a href="/member/find">?‹¤?‹œ ?‹œ?„</a>
+            <p>ì¼ì¹˜í•˜ëŠ” íšŒì› ì •ë³´ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</p>
+            <a href="/member/find">ë‹¤ì‹œ ì‹œë„</a>
         </c:otherwise>
         </c:choose>
         </div>

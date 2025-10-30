@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>๋ก๊ทธ?ธ | EduMate</title>
+    <title>๋ก๊ทธ์ธ | EduMate</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/resources/css/member/login.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
@@ -19,28 +19,28 @@
 <section class="login-container">
     <div class="login-box">
         <div class="login-left">
-            <div class="login-icon">?‘?</div>
-            <h2>๋ก๊ทธ?ธ</h2>
+            <div class="login-icon">๐‘ค</div>
+            <h2>๋ก๊ทธ์ธ</h2>
         </div>
 
         <div class="login-right">
-            <img class="login-logo" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo.png">
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
             <div class="error-message" id="error-message"></div>
 
             <form id="login-form" action="/member/login" method="post">
-                <input type="text" name="memberId" placeholder="?•?ด?””">
-                <input type="password" name="memberPw" placeholder="๋น๋?๋ฒํธ">
+                <input type="text" name="memberId" placeholder="์•์ด๋””">
+                <input type="password" name="memberPw" placeholder="๋น๋ฐ€๋ฒํธ">
                 
                 <c:if test="${param.error == 1}">
-        			<p style="color:red;">?•?ด?”” ??” ๋น๋?๋ฒํธ๊ฐ? ?๋ชป๋?—?ต??ค.</p>
+        			<p style="color:red;">์•์ด๋”” ๋๋” ๋น๋ฐ€๋ฒํธ๊ฐ€ ์๋ชป๋์—์ต๋๋ค.</p>
     			</c:if>
 
-                <button type="submit" class="btn-login">๋ก๊ทธ?ธ</button>
+                <button type="submit" class="btn-login">๋ก๊ทธ์ธ</button>
             </form>
 
-            <button type="button" class="btn-join" onclick="location.href='signup/terms'">??๊ฐ??…</button>
+            <button type="button" class="btn-join" onclick="location.href='signup/terms'">ํ์๊ฐ€์…</button>
             <p class="find-info">
-                <a href="/member/find">?•?ด?”” / ๋น๋?๋ฒํธ๋ฅ? ??–ด๋ฒ๋ ธ?ต??ค.</a>
+                <a href="/member/find">์•์ด๋”” / ๋น๋ฐ€๋ฒํธ๋ฅผ ์์–ด๋ฒ๋ ธ์ต๋๋ค.</a>
             </p>
         </div>
     </div>

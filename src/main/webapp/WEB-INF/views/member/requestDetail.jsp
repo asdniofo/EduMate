@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>ê±´ì˜?‚¬?•­</title>
+		<title>ê±´ì˜ì‚¬í•­</title>
 		<link rel="stylesheet" href="/resources/css/teacher/detail.css">
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
@@ -18,10 +18,10 @@
         <div class="content-area">
             <section class="main-banner">
                 <div class="banner-text">
-                    ê±´ì˜?‚¬?•­
+                    ê±´ì˜ì‚¬í•­
                 </div>
                 <div class="object">
-                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/request/requestIcon.png" alt="ê±´ì˜?‚¬?•­ ?•„?´ì½?">
+                    <img src="/resources/images/request/requestIcon.png" alt="ê±´ì˜ì‚¬í•­ ì•„ì´ì½˜">
                 </div>
             </section>
 
@@ -31,14 +31,14 @@
                     <section class="question-header">
                         <div class="title-group">
                         	<c:if test="${request.requestStatus eq 'N' }">
-                            	<div class="status-tag-unresolved">ë¯¸í•´ê²?</div>
+                            	<div class="status-tag-unresolved">ë¯¸í•´ê²°</div>
                             </c:if>
                             <c:if test="${request.requestStatus eq 'Y' }">
-                            	<div class="status-tag-resolved">?•´ê²?</div>
+                            	<div class="status-tag-resolved">í•´ê²°</div>
                             </c:if>
                             <h2 class="question-title">${request.requestTitle }</h2>
                         </div>
-                        <p class="question-meta"><fmt:formatDate value="${request.writeDate}" pattern="yyyy-MM-dd HH:mm" /> &nbsp;|&nbsp; ?‘?„±? : ${request.memberId }</p>
+                        <p class="question-meta"><fmt:formatDate value="${request.writeDate}" pattern="yyyy-MM-dd HH:mm" /> &nbsp;|&nbsp; ì‘ì„±ì : ${request.memberId }</p>
                     </section>
                     
                     <section class="question-body">
@@ -48,8 +48,8 @@
 					<c:if test="${sessionScope.adminYn eq 'Y' }">
                     <section class="answer-input-section">
                         <div class="input-area-wrapper">
-                            <textarea class="answer-textarea" id="answer-area" placeholder="?‹µë³? ?‚´?š©?„ ?…? ¥?•˜?„¸?š”."></textarea>
-                            <button class="answer-submit-button" id="submit-button">?‹µë³?</button>
+                            <textarea class="answer-textarea" id="answer-area" placeholder="ë‹µë³€ ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”."></textarea>
+                            <button class="answer-submit-button" id="submit-button">ë‹µë³€</button>
                         </div>
                     </section>
                     </c:if>
@@ -67,25 +67,25 @@
                         	<a href="/member/request"><button class="action-button">ëª©ë¡</button></a>
                         	<c:if test="${sessionScope.memberId eq request.memberId
                     			or sessionScope.adminYn eq 'Y'}">
-	                            <a href="/member/request/modify?requestNo=${request.requestNo }"><button class="action-button">?ˆ˜? •</button></a>
-	                            <button class="action-button" id="delete-list-btn">?‚­? œ</button>
-                            	<button class="action-button" id="change-status-btn">?ƒ?ƒœë³?ê²?</button>
+	                            <a href="/member/request/modify?requestNo=${request.requestNo }"><button class="action-button">ìˆ˜ì •</button></a>
+	                            <button class="action-button" id="delete-list-btn">ì‚­ì œ</button>
+                            	<button class="action-button" id="change-status-btn">ìƒíƒœë³€ê²½</button>
                             </c:if>
                         </div>
                         <div class="right-actions">
-                        	<%-- ?Ÿ’? ?‹¤?Œ ë²„íŠ¼: nextQuestionNo ë³??ˆ˜?— ê°’ì´ ?ˆ?„ ?•Œë§? ë²„íŠ¼ ?‘œ?‹œ --%>
+                        	<%-- ğŸ’¡ ë‹¤ìŒ ë²„íŠ¼: nextQuestionNo ë³€ìˆ˜ì— ê°’ì´ ìˆì„ ë•Œë§Œ ë²„íŠ¼ í‘œì‹œ --%>
 					        <c:if test="${not empty nextRequestNo}">
 					            <button class="action-button" 
 					                    onclick="location.href='detail?requestNo=${nextRequestNo}';">
-					                ?´? „
+					                ì´ì „
 					            </button>
 					        </c:if>
 					        
-                            <%-- ?Ÿ’? ?´? „ ë²„íŠ¼: prevQuestionNo ë³??ˆ˜?— ê°’ì´ ?ˆ?„ ?•Œë§? ë²„íŠ¼ ?‘œ?‹œ --%>
+                            <%-- ğŸ’¡ ì´ì „ ë²„íŠ¼: prevQuestionNo ë³€ìˆ˜ì— ê°’ì´ ìˆì„ ë•Œë§Œ ë²„íŠ¼ í‘œì‹œ --%>
 					        <c:if test="${not empty prevRequestNo}">
 					            <button class="action-button" 
 					                    onclick="location.href='detail?requestNo=${prevRequestNo}';">
-					                ?‹¤?Œ
+					                ë‹¤ìŒ
 					            </button>
 					        </c:if>
                         </div>
@@ -102,22 +102,22 @@
 	const loginMemberId = "${sessionScope.loginId}";
     
     function deleteComment(requestCommentNo) {
-        // ... (deleteComment ?•¨?ˆ˜ ë¡œì§?? ê·¸ë?ë¡? ?œ ì§?) ...
-        //console.log("? „?‹¬?œ ?Œ“ê¸? ë²ˆí˜¸:", requestCommentNo);
+        // ... (deleteComment í•¨ìˆ˜ ë¡œì§ì€ ê·¸ëŒ€ë¡œ ìœ ì§€) ...
+        //console.log("ì „ë‹¬ëœ ëŒ“ê¸€ ë²ˆí˜¸:", requestCommentNo);
         
-        if(confirm("? •ë§ë¡œ ?‚­? œ?•˜?‹œê² ìŠµ?‹ˆê¹??")){
+        if(confirm("ì •ë§ë¡œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
             fetch("/request/comment/delete?requestCommentNo=" + requestCommentNo) 
             .then(response => response.text()) 
             .then(text => {
                 const result = parseInt(text.trim());
                 if(result > 0){
-                    alert("?Œ“ê¸? ?‚­? œê°? ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.");
+                    alert("ëŒ“ê¸€ ì‚­ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
                     getCommentList();
                 }else {
-                    alert("?Œ“ê¸? ?‚­? œê°? ?™„ë£Œë˜ì§? ?•Š?•˜?Šµ?‹ˆ?‹¤.");
+                    alert("ëŒ“ê¸€ ì‚­ì œê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
                 }
             })
-            .catch(error => console.error("?Œ“ê¸? ?‚­? œ ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤:", error));
+            .catch(error => console.error("ëŒ“ê¸€ ì‚­ì œ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤:", error));
         }
     }
 
@@ -132,20 +132,20 @@
                 
                 let deleteButtonHtml = '';
                 
-                // ?Ÿ’? ìµœì¢… ?ˆ˜? •: ???†Œë¬¸ìê¹Œì? ?†µ?¼?•˜?—¬ ë¹„êµ (ê°??¥ ?•ˆ? „?•¨)
+                // ğŸ’¡ ìµœì¢… ìˆ˜ì •: ëŒ€ì†Œë¬¸ìê¹Œì§€ í†µì¼í•˜ì—¬ ë¹„êµ (ê°€ì¥ ì•ˆì „í•¨)
                 const isMyComment = (loginMemberId.trim().toLowerCase() === comment.memberId.trim().toLowerCase());
                 
-                // --- (ì½˜ì†” ?””ë²„ê¹… ì½”ë“œ - ?•ˆ? •?™”) ---
-                //console.log(`-- ?Œ“ê¸? No ${comment.questionCommentNo} --`);
-                //console.log("ë¡œê·¸?¸ ID:", loginMemberId.trim().toLowerCase(), "/ ?Œ“ê¸? ID:", comment.memberId.trim().toLowerCase(), "/ ?¼ì¹?:", isMyComment);
+                // --- (ì½˜ì†” ë””ë²„ê¹… ì½”ë“œ - ì•ˆì •í™”) ---
+                //console.log(`-- ëŒ“ê¸€ No ${comment.questionCommentNo} --`);
+                //console.log("ë¡œê·¸ì¸ ID:", loginMemberId.trim().toLowerCase(), "/ ëŒ“ê¸€ ID:", comment.memberId.trim().toLowerCase(), "/ ì¼ì¹˜:", isMyComment);
                 // ------------------------------------
                 
                 if (isMyComment) {
-                	// ?Ÿ’? FINAL FIX: commentNoë¥? ?”°?˜´?‘œë¡? ê°ì‹¸?„œ ? „?‹¬ (ë¬¸ì?—´ë¡? ê°•ì œ)
+                	// ğŸ’¡ FINAL FIX: commentNoë¥¼ ë”°ì˜´í‘œë¡œ ê°ì‹¸ì„œ ì „ë‹¬ (ë¬¸ìì—´ë¡œ ê°•ì œ)
                     const onclickCode = `deleteComment('${comment.requestCommentNo}');`; 
                     
-                    // deleteButtonHtml?— ?”°?˜´?‘œê°? ?‚½?…?œ onclick ì½”ë“œë¥? ?‚¬?š©
-                    deleteButtonHtml = `<button class="delete-btn" onclick="${onclickCode}">?‚­? œ</button>`;
+                    // deleteButtonHtmlì— ë”°ì˜´í‘œê°€ ì‚½ì…ëœ onclick ì½”ë“œë¥¼ ì‚¬ìš©
+                    deleteButtonHtml = `<button class="delete-btn" onclick="${onclickCode}">ì‚­ì œ</button>`;
 			    }
                 
                 const itemDiv = document.createElement("div");
@@ -154,7 +154,7 @@
                 itemDiv.innerHTML = `
                     <div class="answer-header">
                         <span class="answer-author">\${comment.memberId}</span> 
-                        <span class="answer-date">\${comment.writeDate} ?‘?„±</span>
+                        <span class="answer-date">\${comment.writeDate} ì‘ì„±</span>
                     </div>
                     <div class="answer-content">
                         <p>\${comment.requestCommentContent}</p> 
@@ -167,14 +167,14 @@
 				const commentActionsDiv = itemDiv.querySelector(".comment-actions");
                 
                 if (isMyComment) {
-                    // 2. ?Ÿ’? FINAL FIX: ë²„íŠ¼ ?š”?†Œë¥? ì§ì ‘ ?ƒ?„±?•˜ê³? ?´ë²¤íŠ¸ ë¦¬ìŠ¤?„ˆ ?—°ê²?
+                    // 2. ğŸ’¡ FINAL FIX: ë²„íŠ¼ ìš”ì†Œë¥¼ ì§ì ‘ ìƒì„±í•˜ê³  ì´ë²¤íŠ¸ ë¦¬ìŠ¤ë„ˆ ì—°ê²°
                     const deleteBtn = document.createElement("button");
                     deleteBtn.className = "delete-btn";
-                    deleteBtn.textContent = "?‚­? œ";
+                    deleteBtn.textContent = "ì‚­ì œ";
                     
-                    // 3. ?Ÿ’? addEventListenerë¡? ?•ˆ? „?•˜ê²? ?´ë²¤íŠ¸ ?—°ê²?
+                    // 3. ğŸ’¡ addEventListenerë¡œ ì•ˆì „í•˜ê²Œ ì´ë²¤íŠ¸ ì—°ê²°
                     deleteBtn.addEventListener('click', () => {
-                        // comment.questionCommentNo ê°’ì„ ì§ì ‘ ì°¸ì¡°?•˜?—¬ ? „?‹¬
+                        // comment.questionCommentNo ê°’ì„ ì§ì ‘ ì°¸ì¡°í•˜ì—¬ ì „ë‹¬
                         deleteComment(comment.requestCommentNo); 
                     });
                     
@@ -183,22 +183,22 @@
                 
             })
         })
-        .catch(error => console.error("?Œ“ê¸? ëª©ë¡ ì¡°íšŒ ?˜¤ë¥? : " + error));
+        .catch(error => console.error("ëŒ“ê¸€ ëª©ë¡ ì¡°íšŒ ì˜¤ë¥˜ : " + error));
     }
     getCommentList();
 		
     const submitButton = document.querySelector("#submit-button");
     if (submitButton){
     	submitButton.addEventListener("click", function(){
-    		// ?Œ“ê¸? ?“±ë¡? ë²„íŠ¼ ?´ë¦? ?‹œ ?‹¤?–‰?˜?Š” ì½”ë“œ
-    		// ?…? ¥?œ ê°’ì„ ê°?? ¸???„œ ?„œë²„ë¡œ ? „?†¡?•˜?Š” ë¡œì§?„ êµ¬í˜„?•´?•¼ ?•©?‹ˆ?‹¤.
-    		// Ajaxë¥? ?‚¬?š©?•˜?—¬ ë¹„ë™ê¸°ì ?œ¼ë¡? ?Œ“ê¸??„ ì¶”ê?
+    		// ëŒ“ê¸€ ë“±ë¡ ë²„íŠ¼ í´ë¦­ ì‹œ ì‹¤í–‰ë˜ëŠ” ì½”ë“œ
+    		// ì…ë ¥ëœ ê°’ì„ ê°€ì ¸ì™€ì„œ ì„œë²„ë¡œ ì „ì†¡í•˜ëŠ” ë¡œì§ì„ êµ¬í˜„í•´ì•¼ í•©ë‹ˆë‹¤.
+    		// Ajaxë¥¼ ì‚¬ìš©í•˜ì—¬ ë¹„ë™ê¸°ì ìœ¼ë¡œ ëŒ“ê¸€ì„ ì¶”ê°€
     		const requestCommentContent = document.querySelector("#answer-area").value;
     		if(requestCommentContent.trim() === "") {
-    			alert("?Œ“ê¸? ?‚´?š©?„ ?…? ¥?•˜?„¸?š”.");
+    			alert("ëŒ“ê¸€ ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.");
     			return;
     		}
-    		// ê²Œì‹œê¸? ë²ˆí˜¸
+    		// ê²Œì‹œê¸€ ë²ˆí˜¸
     		const requestNo = ${request.requestNo};
     		const memberId = "${request.memberId }";
     		const data = {
@@ -206,7 +206,7 @@
     		    "memberId": loginMemberId,
     		    "requestCommentContent": requestCommentContent
     		};
-    		// ?°?´?„° fetch API ?´?š©?•˜?—¬ ë³´ë‚´ê¸?
+    		// ë°ì´í„° fetch API ì´ìš©í•˜ì—¬ ë³´ë‚´ê¸°
     		fetch("/request/comment/add", {
     			method: "POST",
     			headers: {
@@ -217,52 +217,52 @@
     		.then(text => {
     			const result = parseInt(text.trim());
     			if(result > 0){
-    				alert("?Œ“ê¸? ?“±ë¡ì´ ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.");
+    				alert("ëŒ“ê¸€ ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
     				getCommentList();
     			}else {
-    				alert("?Œ“ê¸? ?“±ë¡ì´ ?™„ë£Œë˜ì§? ?•Š?•˜?Šµ?‹ˆ?‹¤.");
+    				alert("ëŒ“ê¸€ ë“±ë¡ì´ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
     			}
     			document.querySelector("#answer-area").value = "";
     		})
-    		.catch(error => alert("?Œ“ê¸? ?“±ë¡? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤."));
+    		.catch(error => alert("ëŒ“ê¸€ ë“±ë¡ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."));
     	})
     }
 		
 	const currentRequestNo = ${request.requestNo};
 
 	document.querySelector("#delete-list-btn").addEventListener("click", function() {
-	    if (confirm("? •ë§? ?´ ì§ˆë¬¸?„ ?‚­? œ?•˜?‹œê² ìŠµ?‹ˆê¹??")) {
+	    if (confirm("ì •ë§ ì´ ì§ˆë¬¸ì„ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")) {
 	        
 	    	fetch(`/member/request/delete?requestNo=${request.requestNo}`)
 	        
-	        // ?Ÿ’? 1. ?‘?‹µ?„ ?…?Š¤?Š¸ë¡? ë°›ê³  (Controllerê°? ?ˆ«?ë§? ë°˜í™˜)
+	        // ğŸ’¡ 1. ì‘ë‹µì„ í…ìŠ¤íŠ¸ë¡œ ë°›ê³  (Controllerê°€ ìˆ«ìë§Œ ë°˜í™˜)
 	        .then(response => response.text()) 
 	        
-	        // ?Ÿ’? 2. ?ˆ«? ?ŒŒ?‹± ?›„ ?„±ê³?/?‹¤?Œ¨ ì²˜ë¦¬
+	        // ğŸ’¡ 2. ìˆ«ì íŒŒì‹± í›„ ì„±ê³µ/ì‹¤íŒ¨ ì²˜ë¦¬
 	        .then(text => {
 	            const result = parseInt(text.trim());
 	            
 	            if (result > 0) {
-	                alert("?‚­? œ?˜?—ˆ?Šµ?‹ˆ?‹¤.");
+	                alert("ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	                
-	                // ?‚­? œ ?„±ê³? ?›„ ëª©ë¡ ?˜?´ì§?ë¡? ?´?™ (Controllerê°? ë¦¬ë‹¤?´? ‰?Š¸ë¥? ?•ˆ?•˜ë¯?ë¡? ?—¬ê¸°ì„œ ì²˜ë¦¬)
+	                // ì‚­ì œ ì„±ê³µ í›„ ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™ (Controllerê°€ ë¦¬ë‹¤ì´ë ‰íŠ¸ë¥¼ ì•ˆí•˜ë¯€ë¡œ ì—¬ê¸°ì„œ ì²˜ë¦¬)
 	                window.location.href = "/member/request"; 
 	            } else {
-	                alert("ì§ˆë¬¸ ?‚­? œ?— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤. (ê²°ê³¼: 0)");
+	                alert("ì§ˆë¬¸ ì‚­ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. (ê²°ê³¼: 0)");
 	            }
 	        })
 	        
-	        // 3. ?˜¤ë¥? ì²˜ë¦¬
+	        // 3. ì˜¤ë¥˜ ì²˜ë¦¬
 	        .catch(error => {
-	            alert("ì§ˆë¬¸ ?‚­? œ ì²˜ë¦¬ ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤. (?„¤?Š¸?›Œ?¬/?ŒŒ?‹± ?˜¤ë¥?)");
-	            console.error("?‚­? œ ?˜¤ë¥?:", error);
+	            alert("ì§ˆë¬¸ ì‚­ì œ ì²˜ë¦¬ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (ë„¤íŠ¸ì›Œí¬/íŒŒì‹± ì˜¤ë¥˜)");
+	            console.error("ì‚­ì œ ì˜¤ë¥˜:", error);
 	        });
 	    }
 	});
 	
 	document.querySelector("#change-status-btn").addEventListener("click", function() {
 	    
-	    if (confirm("ì§ˆë¬¸ ?ƒ?ƒœë¥? ë³?ê²½í•˜?‹œê² ìŠµ?‹ˆê¹??")) {
+	    if (confirm("ì§ˆë¬¸ ìƒíƒœë¥¼ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")) {
 	        
 	        fetch(`/member/request/change/status?requestNo=${request.requestNo}`)
 	        
@@ -271,17 +271,17 @@
 	            const result = parseInt(text.trim());
 	            
 	            if (result > 0) {
-	                alert("ì§ˆë¬¸ ?ƒ?ƒœê°? ?„±ê³µì ?œ¼ë¡? ë³?ê²½ë˜?—ˆ?Šµ?‹ˆ?‹¤."); 
+	                alert("ì§ˆë¬¸ ìƒíƒœê°€ ì„±ê³µì ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤."); 
 	                
 	                window.location.reload(); 
 	            } else {
-	                alert("?ƒ?ƒœ ë³?ê²½ì— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤. (DB ?˜¤ë¥?)");
+	                alert("ìƒíƒœ ë³€ê²½ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. (DB ì˜¤ë¥˜)");
 	            }
 	        })
 	        
 	        .catch(error => {
-	            alert("?ƒ?ƒœ ë³?ê²? ?š”ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤. (?„¤?Š¸?›Œ?¬/?ŒŒ?‹± ?˜¤ë¥?)");
-	            console.error("?ƒ?ƒœ ë³?ê²? ?˜¤ë¥?:", error);
+	            alert("ìƒíƒœ ë³€ê²½ ìš”ì²­ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (ë„¤íŠ¸ì›Œí¬/íŒŒì‹± ì˜¤ë¥˜)");
+	            console.error("ìƒíƒœ ë³€ê²½ ì˜¤ë¥˜:", error);
 	        });
 	    }
 	});

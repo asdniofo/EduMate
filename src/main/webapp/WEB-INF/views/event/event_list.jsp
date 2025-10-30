@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>?ù¥Î≤§Ìä∏ Î™©Î°ù</title>
+<title>Ïù¥Î≤§Ìä∏ Î™©Î°ù</title>
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/common/footer.css">
 <link rel="stylesheet" href="/resources/css/common/main_banner.css">
@@ -19,37 +19,37 @@
 <!-- Î©îÏù∏ Î∞∞ÎÑà -->
 <section class="main-banner">
     <div class="banner-text">
-        ?ù¥Î≤§Ìä∏
+        Ïù¥Î≤§Ìä∏
     </div>
     <div class="object">
-        <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/event/event_icon.png" alt="?ù¥Î≤§Ìä∏ ?ïÑ?ù¥ÏΩ?">
+        <img src="/resources/images/event/icon/event_icon.png" alt="Ïù¥Î≤§Ìä∏ ÏïÑÏù¥ÏΩò">
     </div>
 </section>
 
 <main class="main-content">
-    <!-- Í≤??ÉâÏ∞? -->
+    <!-- Í≤ÄÏÉâÏ∞Ω -->
     <form action="/event/search" method="get">
             <div class="search-bar">
-                <input type="text" placeholder="Í≤??Éâ?ñ¥Î•? ?ûÖ?†•?ïò?Ñ∏?öî" 
+                <input type="text" placeholder="Í≤ÄÏÉâÏñ¥Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî" 
 				name="searchKeyword" value="${searchKeyword }"/>
-                <button type="submit">?üî?</button>
+                <button type="submit">üîç</button>
                 <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
-                    <a href="/event/insert" class="write-button">Í∏??ì∞Í∏?</a>
+                    <a href="/event/insert" class="write-button">Í∏ÄÏì∞Í∏∞</a>
                 </c:if>
 			</div>
 		</form>
 
-    <!-- ?ù¥Î≤§Ìä∏ Î™©Î°ù -->
+    <!-- Ïù¥Î≤§Ìä∏ Î™©Î°ù -->
     <section class="event-list">
-        <!-- ?òÑ?û¨ ?Ç†Ïß? -->
+        <!-- ÌòÑÏû¨ ÎÇ†Ïßú -->
         <jsp:useBean id="now" class="java.util.Date" />
 
         <c:forEach items="${eList}" var="event">
-            <!-- eventStart, eventEndÍ∞? Date ???ûÖ?ù¥Î©? Î∞îÎ°ú ?Ç¨?ö© Í∞??ä• -->
+            <!-- eventStart, eventEndÍ∞Ä Date ÌÉÄÏûÖÏù¥Î©¥ Î∞îÎ°ú ÏÇ¨Ïö© Í∞ÄÎä• -->
             <c:set var="startDate" value="${event.eventStart}" />
             <c:set var="endDate" value="${event.eventEnd}" />
 
-            <!-- ÏßÑÌñâ ?ó¨Î∂? Í≥ÑÏÇ∞ -->
+            <!-- ÏßÑÌñâ Ïó¨Î∂Ä Í≥ÑÏÇ∞ -->
             <c:choose>
                 <c:when test="${now.time >= startDate.time && now.time <= endDate.time}">
                     <c:set var="eventYn" value="Y" />
@@ -59,18 +59,18 @@
                 </c:otherwise>
             </c:choose>
 
-            <!-- ?Ç®?? ?ùº?àò Í≥ÑÏÇ∞ -->
+            <!-- ÎÇ®ÏùÄ ÏùºÏàò Í≥ÑÏÇ∞ -->
             <c:set var="remainDays" value="${(endDate.time - now.time) / (1000*60*60*24)}" />
 
             <a href="/event/detail?eventId=${event.eventId}" class="event-card">
                 <div class="event-banner">
-                    <img src="${event.eventSubpath}" alt="?ù¥Î≤§Ìä∏ Î∞∞ÎÑà" class="event-banner-img">
+                    <img src="${event.eventSubpath}" alt="Ïù¥Î≤§Ìä∏ Î∞∞ÎÑà" class="event-banner-img">
                 </div>
                 <div class="event-info">
                     <div class="event-status ${eventYn eq 'Y' ? 'on' : 'end'}">
                         <c:choose>
                             <c:when test="${eventYn eq 'Y'}">
-                                ÏßÑÌñâÏ§?
+                                ÏßÑÌñâÏ§ë
                                 <c:if test="${remainDays <= 3 && remainDays >= 0}">
                                     <span style="font-weight:500; color:yellow;">(D-${remainDays})</span>
                                 </c:if>
@@ -91,11 +91,11 @@
         </c:forEach>
     </section>
 
-    <!-- ?éò?ù¥Ïß??Ñ§?ù¥?Öò + Í∏??ì∞Í∏? -->
+    <!-- ÌéòÏù¥ÏßÄÎÑ§Ïù¥ÏÖò + Í∏ÄÏì∞Í∏∞ -->
     <div class="bottom-actions">
         <div class="pagination">
             <c:if test="${startNavi ne 0}">
-                <a href="/event/list?page=${startNavi - 1}"><button class="page-btn">?ù¥?†Ñ</button></a>
+                <a href="/event/list?page=${startNavi - 1}"><button class="page-btn">Ïù¥Ï†Ñ</button></a>
             </c:if>
             <c:forEach begin="${startNavi}" end="${endNavi}" var="n">
                 <a href="/event/list?page=${n}">
@@ -103,13 +103,13 @@
                 </a>
             </c:forEach>
             <c:if test="${endNavi ne maxPage}">
-                <a href="/event/list?page=${endNavi + 1}"><button class="page-btn">?ã§?ùå</button></a>
+                <a href="/event/list?page=${endNavi + 1}"><button class="page-btn">Îã§Ïùå</button></a>
             </c:if>
         </div>
 
-        <!-- ADMINÎß? Í∏??ì∞Í∏? Î≤ÑÌäº -->
+        <!-- ADMINÎßå Í∏ÄÏì∞Í∏∞ Î≤ÑÌäº -->
         <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
-            <a href="/event/insert" class="write-button">Í∏??ì∞Í∏?</a>
+            <a href="/event/insert" class="write-button">Í∏ÄÏì∞Í∏∞</a>
         </c:if>
     </div>
 </main>

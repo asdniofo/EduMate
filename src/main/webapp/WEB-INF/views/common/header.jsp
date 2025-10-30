@@ -7,7 +7,7 @@
         <div class="top-row">
             <div id="logo">
                 <a href="/">
-                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo.png">
+                    <img src="${pageContext.request.contextPath}/resources/images/common/logo.png">
                 </a>
             </div>
             <div id="search-nav">
@@ -32,13 +32,13 @@
                         <div class="user-menu">
                             <c:choose>
                                 <c:when test="${sessionScope.adminYn eq 'Y'}">
-                                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/mypage3.png" alt="관리자" class="user-icon">
+                                    <img src="${pageContext.request.contextPath}/resources/images/common/mypage3.png" alt="관리자" class="user-icon">
                                 </c:when>
                                 <c:when test="${sessionScope.teacherYn eq 'Y'}">
-                                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/mypage2.png" alt="선생님" class="user-icon">
+                                    <img src="${pageContext.request.contextPath}/resources/images/common/mypage2.png" alt="선생님" class="user-icon">
                                 </c:when>
                                 <c:otherwise>
-                                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/mypage4.png" alt="마이페이지" class="user-icon">
+                                    <img src="${pageContext.request.contextPath}/resources/images/common/mypage4.png" alt="마이페이지" class="user-icon">
                                 </c:otherwise>
                             </c:choose>
                             <div class="dropdown-menu">
@@ -59,7 +59,7 @@
                     <c:otherwise>
                         <!-- 로그인되지 않은 상태 - 로그인 페이지로 이동 -->
                         <a href="/member/login">
-                            <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/mypage1.png" alt="로그인" class="user-icon">
+                            <img src="${pageContext.request.contextPath}/resources/images/common/mypage1.png" alt="로그인" class="user-icon">
                         </a>
                     </c:otherwise>
                 </c:choose>

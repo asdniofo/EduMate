@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>?•½ê´? ?™?˜</title>
+    <title>ì•½ê´€ ë™ì˜</title>
     <link rel="stylesheet" href="/resources/css/member/signup_terms.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
@@ -16,79 +16,79 @@
 <section class="login-container">
     <div class="login-box">
         <div class="login-left">
-            <div class="login-icon">?Ÿ“?</div>
-            <h2>?•½ê´? ?™?˜</h2>
+            <div class="login-icon">ðŸ“</div>
+            <h2>ì•½ê´€ ë™ì˜</h2>
         </div>
 
         <div class="login-right">
-            <img class="login-logo" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo.png">
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
 
-            <div class="error-message" id="error-message">?•„?ˆ˜ ?•­ëª? ?™?˜ê°? ?•„?š”?•©?‹ˆ?‹¤.</div>
+            <div class="error-message" id="error-message">í•„ìˆ˜ í•­ëª© ë™ì˜ê°€ í•„ìš”í•©ë‹ˆë‹¤.</div>
 
             <form id="terms-form" action="/member/signup/info" method="get">
                 <div class="terms-list">
 
-                    <!-- ? „ì²? ?™?˜ -->
+                    <!-- ì „ì²´ ë™ì˜ -->
                     <label class="terms-item all-agree">
                         <input type="checkbox" id="agreeAll">
-                        <span><strong>? „ì²? ?•½ê´??— ?™?˜?•©?‹ˆ?‹¤.</strong></span>
+                        <span><strong>ì „ì²´ ì•½ê´€ì— ë™ì˜í•©ë‹ˆë‹¤.</strong></span>
                     </label>
 
-                    <!-- ?•„?ˆ˜ ?•½ê´? -->
+                    <!-- í•„ìˆ˜ ì•½ê´€ -->
                     <div class="terms-row">
                         <label class="terms-item">
                             <input type="checkbox" name="terms1" class="required-term">
-                            <span>ê°œì¸? •ë³? ?´?š©?•½ê´??— ?™?˜?•©?‹ˆ?‹¤.</span>
+                            <span>ê°œì¸ì •ë³´ ì´ìš©ì•½ê´€ì— ë™ì˜í•©ë‹ˆë‹¤.</span>
                         </label>
-                        <a href="#" class="terms-link" data-terms="1">?•½ê´??™•?¸</a>
+                        <a href="#" class="terms-link" data-terms="1">ì•½ê´€í™•ì¸</a>
                     </div>
 
                     <div class="terms-row">
                         <label class="terms-item">
                             <input type="checkbox" name="terms2" class="required-term">
-                            <span>?„œë¹„ìŠ¤ ?´?š©?•½ê´??— ?™?˜?•©?‹ˆ?‹¤.</span>
+                            <span>ì„œë¹„ìŠ¤ ì´ìš©ì•½ê´€ì— ë™ì˜í•©ë‹ˆë‹¤.</span>
                         </label>
-                        <a href="#" class="terms-link" data-terms="2">?•½ê´??™•?¸</a>
+                        <a href="#" class="terms-link" data-terms="2">ì•½ê´€í™•ì¸</a>
                     </div>
 
                     <div class="terms-row">
                         <label class="terms-item">
                             <input type="checkbox" name="terms3" class="required-term">
-                            <span>?œ„ì¹˜ê¸°ë°? ?„œë¹„ìŠ¤ ?´?š©?•½ê´??— ?™?˜?•©?‹ˆ?‹¤.</span>
+                            <span>ìœ„ì¹˜ê¸°ë°˜ ì„œë¹„ìŠ¤ ì´ìš©ì•½ê´€ì— ë™ì˜í•©ë‹ˆë‹¤.</span>
                         </label>
-                        <a href="#" class="terms-link" data-terms="3">?•½ê´??™•?¸</a>
+                        <a href="#" class="terms-link" data-terms="3">ì•½ê´€í™•ì¸</a>
                     </div>
 
-                    <!-- ?„ ?ƒ ?•½ê´? -->
+                    <!-- ì„ íƒ ì•½ê´€ -->
                     <div class="terms-row">
                         <label class="terms-item">
                             <input type="checkbox" name="terms4">
-                            <span>(?„ ?ƒ) ë§ˆì??Œ… ? •ë³? ?ˆ˜?‹ ?— ?™?˜?•©?‹ˆ?‹¤.</span>
+                            <span>(ì„ íƒ) ë§ˆì¼€íŒ… ì •ë³´ ìˆ˜ì‹ ì— ë™ì˜í•©ë‹ˆë‹¤.</span>
                         </label>
-                        <a href="#" class="terms-link" data-terms="4">?•½ê´??™•?¸</a>
+                        <a href="#" class="terms-link" data-terms="4">ì•½ê´€í™•ì¸</a>
                     </div>
 
                     <div class="terms-row">
                         <label class="terms-item">
                             <input type="checkbox" name="terms5">
-                            <span>(?„ ?ƒ) ë§žì¶¤?˜• ê´‘ê³  ?ˆ˜?‹ ?— ?™?˜?•©?‹ˆ?‹¤.</span>
+                            <span>(ì„ íƒ) ë§žì¶¤í˜• ê´‘ê³  ìˆ˜ì‹ ì— ë™ì˜í•©ë‹ˆë‹¤.</span>
                         </label>
-                        <a href="#" class="terms-link" data-terms="5">?•½ê´??™•?¸</a>
+                        <a href="#" class="terms-link" data-terms="5">ì•½ê´€í™•ì¸</a>
                     </div>
                 </div>
 
-                <button type="submit" id="next-btn" class="btn-next" onclick="location.href='/info'">?‹¤?Œ</button>
+                <button type="submit" id="next-btn" class="btn-next" onclick="location.href='/info'">ë‹¤ìŒ</button>
             </form>
         </div>
     </div>
 </section>
 
-<!-- ?Ÿ“? ?•½ê´? ?Œ?—… ëª¨ë‹¬ -->
+<!-- ðŸ“„ ì•½ê´€ íŒì—… ëª¨ë‹¬ -->
 <div id="terms-modal" class="modal">
     <div class="modal-content">
-        <h2 id="modal-title">?•½ê´? ? œëª?</h2>
-        <div id="modal-text" class="modal-text">?•½ê´? ?‚´?š©?´ ?—¬ê¸°ì— ?‘œ?‹œ?©?‹ˆ?‹¤.</div>
-        <button id="modal-close" class="btn-close">?‹«ê¸?</button>
+        <h2 id="modal-title">ì•½ê´€ ì œëª©</h2>
+        <div id="modal-text" class="modal-text">ì•½ê´€ ë‚´ìš©ì´ ì—¬ê¸°ì— í‘œì‹œë©ë‹ˆë‹¤.</div>
+        <button id="modal-close" class="btn-close">ë‹«ê¸°</button>
     </div>
 </div>
 

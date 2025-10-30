@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>?��보찾�? | EduMate</title>
+    <title>정보찾기 | EduMate</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/resources/css/member/find_pw.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
@@ -19,41 +19,41 @@
 <!-- Find Info -->
 <section class="login-container">
     <div class="login-box">
-        <!-- ?���? ?��?�� -->
+        <!-- 왼쪽 영역 -->
         <div class="login-left">
-            <div class="login-icon">?��?</div>
-            <h2>?���? 찾기</h2>
+            <div class="login-icon">🔍</div>
+            <h2>정보 찾기</h2>
         </div>
 
-        <!-- ?��른쪽 ?��?�� -->
+        <!-- 오른쪽 영역 -->
         <div class="login-right">
-            <img class="login-logo" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo.png">
+            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
 
-      <h2>비�?번호 ?��?��?��</h2>
+      <h2>비밀번호 재설정</h2>
 <form id="signupForm" action="/member/updatePw" method="post">
 	<div class="form-group">
-		<label for="memberId">?��?��?��</label>
+		<label for="memberId">아이디</label>
 		<input type="text" name="memberId" value="${memberId}" readonly>
 	</div>
     <div class="form-group">
-        <label for="memberPw">비�?번호</label>
-        <input type="password" id="memberPw" name="memberPw" placeholder="비�?번호 ?��?��" required>
+        <label for="memberPw">비밀번호</label>
+        <input type="password" id="memberPw" name="memberPw" placeholder="비밀번호 입력" required>
     </div>
 
     <div class="form-group">
-        <label for="memberPwCheck">비�?번호 ?��?��?��</label>
-        <input type="password" id="memberPwCheck" name="memberPwCheck" placeholder="비�?번호 ?��?��?��" required>
-        <p id="pw-error" class="error-text">비�?번호�? ?��치하�? ?��?��?��?��.</p>
+        <label for="memberPwCheck">비밀번호 재입력</label>
+        <input type="password" id="memberPwCheck" name="memberPwCheck" placeholder="비밀번호 재입력" required>
+        <p id="pw-error" class="error-text">비밀번호가 일치하지 않습니다.</p>
     </div>
 
-    <button id="next-btn" type="submit">�?�?</button>
+    <button id="next-btn" type="submit">변경</button>
 </form>
 </section>
 
 <div class="modal-overlay" id="modal">
     <div class="modal">
-        <h3>비�?번호�? ?��공적?���? �?경되?��?��?��?��.</h3>
-        <button id="confirmBtn">?��?��</button>
+        <h3>비밀번호가 성공적으로 변경되었습니다.</h3>
+        <button id="confirmBtn">확인</button>
     </div>
 </div>
 

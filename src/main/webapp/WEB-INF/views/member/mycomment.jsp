@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>?‚˜?˜ ?Œ“ê¸? | EduMate</title>
+    <title>ë‚˜ì˜ ëŒ“ê¸€ | EduMate</title>
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/member/mycomment.css">
@@ -19,36 +19,36 @@
         <jsp:include page="../common/header.jsp" />
         <section class="main-banner">
             <div class="banner-text">
-                ?‚˜?˜ ?Œ“ê¸?
+                ë‚˜ì˜ ëŒ“ê¸€
             </div>
             <div class="object">
-                <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/member/postcomment.png" alt="?‚˜?˜ ?Œ“ê¸? ?•„?´ì½?">
+                <img src="/resources/images/member/postcomment.png" alt="ë‚˜ì˜ ëŒ“ê¸€ ì•„ì´ì½˜">
             </div>
         </section>
 
-        <!-- ë©”ì¸ ì½˜í…ì¸? -->
+        <!-- ë©”ì¸ ì½˜í…ì¸  -->
         <div class="main-content">
             <div class="mycomment-content">
-                <a href="/member/mypage" class="back-btn">?† ë§ˆì´?˜?´ì§?ë¡? ?Œ?•„ê°?ê¸?</a>
+                <a href="/member/mypage" class="back-btn">â† ë§ˆì´í˜ì´ì§€ë¡œ ëŒì•„ê°€ê¸°</a>
                 
-                <!-- ?‚˜?˜ ?Œ“ê¸? ?„¹?…˜ -->
+                <!-- ë‚˜ì˜ ëŒ“ê¸€ ì„¹ì…˜ -->
                 <div class="mycomment-section">
                     <div class="section-header">
-                        <h2 class="section-title">?‚˜?˜ ?‘?„±?Œ“ê¸?</h2>
+                        <h2 class="section-title">ë‚˜ì˜ ì‘ì„±ëŒ“ê¸€</h2>
                         <div class="stats-info">
-                            ì´? <strong>${totalComments}</strong>ê°œì˜ ?Œ“ê¸?
+                            ì´ <strong>${totalComments}</strong>ê°œì˜ ëŒ“ê¸€
                         </div>
                     </div>
                     
-                    <!-- ê²??ƒ‰ ë°•ìŠ¤ -->
+                    <!-- ê²€ìƒ‰ ë°•ìŠ¤ -->
                     <form action="/member/mycomment" method="get">
                         <div class="search-box">
-                            <input type="text" name="searchKeyword" value="${searchKeyword}" placeholder="?Œ“ê¸? ?‚´?š©?´?‚˜ ?›ê¸? ? œëª©ìœ¼ë¡? ê²??ƒ‰...">
-                            <button type="submit">?Ÿ”?</button>
+                            <input type="text" name="searchKeyword" value="${searchKeyword}" placeholder="ëŒ“ê¸€ ë‚´ìš©ì´ë‚˜ ì›ê¸€ ì œëª©ìœ¼ë¡œ ê²€ìƒ‰...">
+                            <button type="submit">ğŸ”</button>
                         </div>
                     </form>
                     
-                    <!-- ?Œ“ê¸? ëª©ë¡ -->
+                    <!-- ëŒ“ê¸€ ëª©ë¡ -->
                     <div class="comment-list" id="commentList">
                         <c:choose>
                             <c:when test="${not empty myComments}">
@@ -57,10 +57,10 @@
                                         <div class="comment-header">
                                             <c:choose>
                                                 <c:when test="${comment.commentType == 'REQUEST'}">
-                                                    <span class="comment-type-badge comment-type-request">ê±´ì˜?‚¬?•­ ?Œ“ê¸?</span>
+                                                    <span class="comment-type-badge comment-type-request">ê±´ì˜ì‚¬í•­ ëŒ“ê¸€</span>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <span class="comment-type-badge comment-type-question">ì§ˆë¬¸ ?Œ“ê¸?</span>
+                                                    <span class="comment-type-badge comment-type-question">ì§ˆë¬¸ ëŒ“ê¸€</span>
                                                 </c:otherwise>
                                             </c:choose>
                                             
@@ -69,21 +69,21 @@
                                             </span>
                                         </div>
                                         
-                                        <!-- ?›ê¸? ? •ë³? -->
+                                        <!-- ì›ê¸€ ì •ë³´ -->
                                         <div class="parent-post">
                                             <div class="parent-post-label">
                                                 <c:choose>
-                                                    <c:when test="${comment.parentPostType == 'REQUEST'}">?Œ“ê¸??„ ?‘?„±?•œ ê±´ì˜?‚¬?•­:</c:when>
-                                                    <c:otherwise>?Œ“ê¸??„ ?‘?„±?•œ ì§ˆë¬¸:</c:otherwise>
+                                                    <c:when test="${comment.parentPostType == 'REQUEST'}">ëŒ“ê¸€ì„ ì‘ì„±í•œ ê±´ì˜ì‚¬í•­:</c:when>
+                                                    <c:otherwise>ëŒ“ê¸€ì„ ì‘ì„±í•œ ì§ˆë¬¸:</c:otherwise>
                                                 </c:choose>
                                             </div>
                                             <div class="parent-post-title">${comment.parentPostTitle}</div>
                                         </div>
                                         
-                                        <!-- êµ¬ë¶„?„  -->
+                                        <!-- êµ¬ë¶„ì„  -->
                                         <div class="divider"></div>
                                         
-                                        <!-- ?Œ“ê¸? ?‚´?š© -->
+                                        <!-- ëŒ“ê¸€ ë‚´ìš© -->
                                         <div class="comment-content">
                                             <c:choose>
                                                 <c:when test="${fn:length(comment.commentContent) > 100}">
@@ -101,10 +101,10 @@
                                 <div class="no-comments">
                                     <c:choose>
                                         <c:when test="${not empty searchKeyword}">
-                                            '${searchKeyword}' ê²??ƒ‰ ê²°ê³¼ê°? ?—†?Šµ?‹ˆ?‹¤.
+                                            '${searchKeyword}' ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.
                                         </c:when>
                                         <c:otherwise>
-                                            ?‘?„±?•œ ?Œ“ê¸??´ ?—†?Šµ?‹ˆ?‹¤.
+                                            ì‘ì„±í•œ ëŒ“ê¸€ì´ ì—†ìŠµë‹ˆë‹¤.
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
@@ -112,16 +112,16 @@
                         </c:choose>
                     </div>
                     
-                    <!-- ?˜?´ì§??„¤?´?…˜ -->
+                    <!-- í˜ì´ì§€ë„¤ì´ì…˜ -->
                     <c:if test="${maxPage > 1}">
                         <div class="pagination-wrapper">
                             <div class="pagination">
-                                <!-- ?´? „ ë²„íŠ¼ -->
+                                <!-- ì´ì „ ë²„íŠ¼ -->
                                 <c:if test="${startNavi > 1}">
-                                    <a href="/member/mycomment?page=${startNavi-1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">?´? „</a>
+                                    <a href="/member/mycomment?page=${startNavi-1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">ì´ì „</a>
                                 </c:if>
                                 
-                                <!-- ?˜?´ì§? ë²ˆí˜¸ -->
+                                <!-- í˜ì´ì§€ ë²ˆí˜¸ -->
                                 <c:forEach begin="${startNavi}" end="${endNavi}" var="n">
                                     <a href="/member/mycomment?page=${n}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" 
                                        class="page-btn <c:if test='${currentPage eq n}'>active</c:if>">
@@ -129,9 +129,9 @@
                                     </a>
                                 </c:forEach>
                                 
-                                <!-- ?‹¤?Œ ë²„íŠ¼ -->
+                                <!-- ë‹¤ìŒ ë²„íŠ¼ -->
                                 <c:if test="${endNavi < maxPage}">
-                                    <a href="/member/mycomment?page=${endNavi+1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">?‹¤?Œ</a>
+                                    <a href="/member/mycomment?page=${endNavi+1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">ë‹¤ìŒ</a>
                                 </c:if>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
     </div>
 
     <script>
-        // ?›ê¸?ë¡? ?´?™
+        // ì›ê¸€ë¡œ ì´ë™
         function goToParentPost(postType, postNo) {
             if (postType === 'REQUEST') {
                 window.location.href = '/member/request/detail?requestNo=' + postNo;
@@ -154,11 +154,11 @@
             }
         }
 
-        // ?˜?´ì§? ë¡œë“œ ?‹œ ?‹¤?–‰
+        // í˜ì´ì§€ ë¡œë“œ ì‹œ ì‹¤í–‰
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('?‚˜?˜ ?Œ“ê¸? ?˜?´ì§?ê°? ë¡œë“œ?˜?—ˆ?Šµ?‹ˆ?‹¤.');
+            console.log('ë‚˜ì˜ ëŒ“ê¸€ í˜ì´ì§€ê°€ ë¡œë“œë˜ì—ˆìŠµë‹ˆë‹¤.');
             
-            // ê²??ƒ‰?–´ê°? ?ˆ?„ ?•Œ ?…? ¥ì°½ì— ?¬ì»¤ìŠ¤
+            // ê²€ìƒ‰ì–´ê°€ ìˆì„ ë•Œ ì…ë ¥ì°½ì— í¬ì»¤ìŠ¤
             const searchInput = document.querySelector('input[name="searchKeyword"]');
             if (searchInput && searchInput.value) {
                 searchInput.focus();

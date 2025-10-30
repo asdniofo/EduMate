@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>EduMate - Í≥µÏ? ?Ç¨?ï≠</title>
+<title>EduMate - Í≥µÏßÄ ÏÇ¨Ìï≠</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
 	rel="stylesheet" />
@@ -21,18 +21,18 @@
 	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
 	<section class="main-banner">
     <div class="banner-text">
-        Í≥µÏ??Ç¨?ï≠
+        Í≥µÏßÄÏÇ¨Ìï≠
     </div>
         <div class="object">
-            <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/notice/noticeIcon.png" alt="Í≥µÏ??Ç¨?ï≠ ?ïÑ?ù¥ÏΩ?">
+            <img src="/resources/images/notice/noticeIcon.png" alt="Í≥µÏßÄÏÇ¨Ìï≠ ÏïÑÏù¥ÏΩò">
         </div>
 	</section>
 
-	<!-- Î©îÏù∏ ÏΩòÌÖêÏ∏? -->
+	<!-- Î©îÏù∏ ÏΩòÌÖêÏ∏† -->
 	<main class="main-content">
 			<div class="search-bar">
 		<form action="/notice/search" method="get">
-				<input type="text" placeholder="Í≤??Éâ?ñ¥Î•? ?ûÖ?†•?ïò?Ñ∏?öî" 
+				<input type="text" placeholder="Í≤ÄÏÉâÏñ¥Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî" 
 				name="searchKeyword" value="${searchKeyword }"/>
 			</div>
 		</form>
@@ -43,7 +43,7 @@
 					class="question-link">
 					<article class="question-item">
 						<div class="question-left">
-							<span class="status-tag">Í≥µÏ??Ç¨?ï≠</span>
+							<span class="status-tag">Í≥µÏßÄÏÇ¨Ìï≠</span>
 							<h2 class="question-title">${notice.noticeTitle }</h2>
 						</div>
 					</article> <span class="write-date"><fmt:formatDate
@@ -52,12 +52,12 @@
 			</c:forEach>
 		</section>
 
-		<!-- ?ïò?ã® ?éò?ù¥Ïß??Ñ§?ù¥?Öò + Í∏??ì∞Í∏? Î≤ÑÌäº -->
+		<!-- ÌïòÎã® ÌéòÏù¥ÏßÄÎÑ§Ïù¥ÏÖò + Í∏ÄÏì∞Í∏∞ Î≤ÑÌäº -->
 		<div class="bottom-actions">
 			<div class="pagination">
 				<c:if test="${startNavi ne 1 }">
 						<a href="/notice/search?page=${startNavi-1 }&searchKeyword=${searchKeyword}">
-							<button class="page-btn">?ù¥?†Ñ</button>
+							<button class="page-btn">Ïù¥Ï†Ñ</button>
 						</a>
 				</c:if>
 				<c:forEach begin="${startNavi }" end="${endNavi }" var="n">
@@ -69,11 +69,11 @@
 				</c:forEach>
 				<c:if test="${endNavi ne maxPage }">
 					<a href="/notice/search?page=${endNavi + 1 }&searchKeyword=${searchKeyword}">
-						<button class="page-btn">?ã§?ùå</button>
+						<button class="page-btn">Îã§Ïùå</button>
 					</a>
 				</c:if>
 			</div>
-			<a href="/notice/insert" class="write-button">Í∏??ì∞Í∏?</a>
+			<a href="/notice/insert" class="write-button">Í∏ÄÏì∞Í∏∞</a>
 		</div>
 	</main>
 	<jsp:include page="../common/footer.jsp" />

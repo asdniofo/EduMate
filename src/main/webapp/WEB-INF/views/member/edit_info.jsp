@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>?‚´ ? •ë³? ?ˆ˜? • | EduMate</title>
+    <title>ë‚´ ì •ë³´ ìˆ˜ì • | EduMate</title>
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/member/edit_info.css">
@@ -22,57 +22,57 @@
 
         <section class="main-banner">
             <div class="banner-text">
-                ?‚´ ? •ë³? ?ˆ˜? •
+                ë‚´ ì •ë³´ ìˆ˜ì •
             </div>
             <div class="object">
-                <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/member/mypage.png" alt="? •ë³´ìˆ˜? • ?•„?´ì½?">
+                <img src="/resources/images/member/mypage.png" alt="ì •ë³´ìˆ˜ì • ì•„ì´ì½˜">
             </div>
         </section>
 
-        <!-- ë©”ì¸ ì½˜í…ì¸? -->
+        <!-- ë©”ì¸ ì½˜í…ì¸  -->
         <div class="main-content">
             <div class="mypage-content">
                 <div class="edit-container">
         <div class="edit-content">
             <div class="note">
-                ?Ÿ“? ë³¸ì¸?˜ ê°œì¸? •ë³´ë§Œ ?ˆ˜? •?•  ?ˆ˜ ?ˆ?Šµ?‹ˆ?‹¤. ?•„?´?””?Š” ë³?ê²½í•  ?ˆ˜ ?—†?Šµ?‹ˆ?‹¤.
+                ğŸ“ ë³¸ì¸ì˜ ê°œì¸ì •ë³´ë§Œ ìˆ˜ì •í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì•„ì´ë””ëŠ” ë³€ê²½í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
             </div>
             
             <div id="alertMessage" style="display: none;"></div>
             
             <form id="editForm" class="edit-form">
                 <div class="form-group">
-                    <label for="memberId">?•„?´?””</label>
+                    <label for="memberId">ì•„ì´ë””</label>
                     <input type="text" id="memberId" value="${memberInfo.memberId}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label for="memberPw">?ƒˆ ë¹„ë?ë²ˆí˜¸</label>
-                    <input type="password" id="memberPw" placeholder="?ƒˆ ë¹„ë?ë²ˆí˜¸ë¥? ?…? ¥?•˜?„¸?š”" required>
+                    <label for="memberPw">ìƒˆ ë¹„ë°€ë²ˆí˜¸</label>
+                    <input type="password" id="memberPw" placeholder="ìƒˆ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="memberPwConfirm">ë¹„ë?ë²ˆí˜¸ ?™•?¸</label>
-                    <input type="password" id="memberPwConfirm" placeholder="ë¹„ë?ë²ˆí˜¸ë¥? ?‹¤?‹œ ?…? ¥?•˜?„¸?š”" required>
+                    <label for="memberPwConfirm">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
+                    <input type="password" id="memberPwConfirm" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”" required>
                 </div>
 
-                <!-- ë¹„ë?ë²ˆí˜¸ ë¶ˆì¼ì¹? ê²½ê³  -->
+                <!-- ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜ ê²½ê³  -->
                 <div id="pw-error" style="color: #e74c3c; font-size: 14px; margin-top: -15px; margin-bottom: 15px; display: none; font-weight: 500;">
-                    ?š ï¸? ë¹„ë?ë²ˆí˜¸ê°? ?¼ì¹˜í•˜ì§? ?•Š?Šµ?‹ˆ?‹¤.
+                    âš ï¸ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
                 </div>
 
                 <div class="form-group">
-                    <label for="memberName">?´ë¦?</label>
+                    <label for="memberName">ì´ë¦„</label>
                     <input type="text" id="memberName" value="${memberInfo.memberName}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="memberEmail">?´ë©”ì¼</label>
+                    <label for="memberEmail">ì´ë©”ì¼</label>
                     <div class="email-input-group">
-                        <input type="text" id="emailId" placeholder="?´ë©”ì¼ ?•„?´?””" required>
+                        <input type="text" id="emailId" placeholder="ì´ë©”ì¼ ì•„ì´ë””" required>
                         <span class="email-separator">@</span>
                         <select id="emailDomain" required>
-                            <option value="">?„ë©”ì¸ ?„ ?ƒ</option>
+                            <option value="">ë„ë©”ì¸ ì„ íƒ</option>
                             <option value="gmail.com">gmail.com</option>
                             <option value="naver.com">naver.com</option>
                             <option value="daum.net">daum.net</option>
@@ -80,30 +80,30 @@
                             <option value="yahoo.com">yahoo.com</option>
                             <option value="hotmail.com">hotmail.com</option>
                             <option value="nate.com">nate.com</option>
-                            <option value="custom">ì§ì ‘?…? ¥</option>
+                            <option value="custom">ì§ì ‘ì…ë ¥</option>
                         </select>
-                        <input type="text" id="customDomain" placeholder="?„ë©”ì¸ ?…? ¥" style="display: none;">
-                        <button type="button" id="sendAuthBtn" class="btn-email-action btn-send">?¸ì¦? ?š”ì²?</button>
+                        <input type="text" id="customDomain" placeholder="ë„ë©”ì¸ ì…ë ¥" style="display: none;">
+                        <button type="button" id="sendAuthBtn" class="btn-email-action btn-send">ì¸ì¦ ìš”ì²­</button>
                     </div>
                     <input type="hidden" id="memberEmail" value="${memberInfo.memberEmail}" required>
                 </div>
                 
-                <!-- ?´ë©”ì¼ ?¸ì¦ë²ˆ?˜¸ -->
+                <!-- ì´ë©”ì¼ ì¸ì¦ë²ˆí˜¸ -->
                 <div id="authCodeArea" class="form-group" style="display: none;">
                     <div class="label-with-message">
-                        <label for="authCodeInput">?¸ì¦? ë²ˆí˜¸</label>
+                        <label for="authCodeInput">ì¸ì¦ ë²ˆí˜¸</label>
                         <span id="authStatusMessage" class="auth-message-inline" style="display: none;"></span>
                     </div>
                     <div class="input-group">
-                        <input type="text" id="authCodeInput" placeholder="?¸ì¦? ë²ˆí˜¸ 6?ë¦? ?…? ¥" maxlength="6" class="input-full">
-                        <button type="button" id="verifyAuthBtn" class="btn-email-action btn-verify">?¸ì¦? ?™•?¸</button>
+                        <input type="text" id="authCodeInput" placeholder="ì¸ì¦ ë²ˆí˜¸ 6ìë¦¬ ì…ë ¥" maxlength="6" class="input-full">
+                        <button type="button" id="verifyAuthBtn" class="btn-email-action btn-verify">ì¸ì¦ í™•ì¸</button>
                     </div>
                 </div>
                 
                 <input type="hidden" id="emailAuthStatus" name="emailAuthStatus" value="N">
 
                 <div class="form-group">
-                    <label for="memberBirth">?ƒ?…„?›”?¼</label>
+                    <label for="memberBirth">ìƒë…„ì›”ì¼</label>
                     <input type="date" id="memberBirth" value="${memberInfo.memberBirth}" required>
                 </div>
 
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" class="btn btn-primary">? •ë³? ?ˆ˜? •</button>
+                    <button type="submit" class="btn btn-primary">ì •ë³´ ìˆ˜ì •</button>
                     <a href="/member/mypage" class="btn btn-secondary">ì·¨ì†Œ</a>
                 </div>
             </form>
@@ -123,7 +123,7 @@
 
     <script>
         $(document).ready(function() {
-            // ?‹¤?‹œê°? ë¹„ë?ë²ˆí˜¸ ?¼ì¹? ê²??‚¬
+            // ì‹¤ì‹œê°„ ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ ê²€ì‚¬
             const pwInput = document.getElementById('memberPw');
             const pwConfirmInput = document.getElementById('memberPwConfirm');
             const pwError = document.getElementById('pw-error');
@@ -144,7 +144,7 @@
             pwInput.addEventListener('input', checkPasswordMatch);
             pwConfirmInput.addEventListener('input', checkPasswordMatch);
 
-            // ?´ë©”ì¼ ?¸ì¦? ê¸°ëŠ¥
+            // ì´ë©”ì¼ ì¸ì¦ ê¸°ëŠ¥
             const emailIdInput = document.getElementById('emailId');
             const emailDomainSelect = document.getElementById('emailDomain');
             const customDomainInput = document.getElementById('customDomain');
@@ -156,16 +156,16 @@
             const authStatusMessage = document.getElementById('authStatusMessage');
             const emailAuthStatus = document.getElementById('emailAuthStatus');
             
-            let isEmailVerified = false; // ?´ë©”ì¼ ?¸ì¦? ?ƒ?ƒœ ?”Œ?˜ê·?
-            let originalEmail = memberEmailHidden.value; // ?›?˜ ?´ë©”ì¼ ???¥
+            let isEmailVerified = false; // ì´ë©”ì¼ ì¸ì¦ ìƒíƒœ í”Œë˜ê·¸
+            let originalEmail = memberEmailHidden.value; // ì›ë˜ ì´ë©”ì¼ ì €ì¥
 
-            // ?˜?´ì§? ë¡œë“œ ?‹œ ê¸°ì¡´ ?´ë©”ì¼ ë¶„ë¦¬?•´?„œ ?‘œ?‹œ
+            // í˜ì´ì§€ ë¡œë“œ ì‹œ ê¸°ì¡´ ì´ë©”ì¼ ë¶„ë¦¬í•´ì„œ í‘œì‹œ
             function parseExistingEmail() {
                 if (originalEmail) {
                     const [id, domain] = originalEmail.split('@');
                     emailIdInput.value = id;
                     
-                    // ?„ë©”ì¸?´ ?„ ?ƒì§??— ?ˆ?Š”ì§? ?™•?¸
+                    // ë„ë©”ì¸ì´ ì„ íƒì§€ì— ìˆëŠ”ì§€ í™•ì¸
                     const domainOptions = Array.from(emailDomainSelect.options).map(opt => opt.value);
                     if (domainOptions.includes(domain)) {
                         emailDomainSelect.value = domain;
@@ -178,7 +178,7 @@
                 updateEmailValue();
             }
 
-            // ?´ë©”ì¼ ê°? ?—…?°?´?Š¸ ?•¨?ˆ˜
+            // ì´ë©”ì¼ ê°’ ì—…ë°ì´íŠ¸ í•¨ìˆ˜
             function updateEmailValue() {
                 const emailId = emailIdInput.value.trim();
                 let domain = '';
@@ -196,7 +196,7 @@
                 }
             }
 
-            // ?„ë©”ì¸ ?„ ?ƒ ë³?ê²? ?‹œ ì²˜ë¦¬
+            // ë„ë©”ì¸ ì„ íƒ ë³€ê²½ ì‹œ ì²˜ë¦¬
             emailDomainSelect.addEventListener('change', function() {
                 if (this.value === 'custom') {
                     customDomainInput.style.display = 'block';
@@ -210,7 +210,7 @@
                 checkEmailChange();
             });
 
-            // ?´ë©”ì¼ ?…? ¥ ?‹œ ê°? ?—…?°?´?Š¸
+            // ì´ë©”ì¼ ì…ë ¥ ì‹œ ê°’ ì—…ë°ì´íŠ¸
             emailIdInput.addEventListener('input', function() {
                 updateEmailValue();
                 checkEmailChange();
@@ -221,7 +221,7 @@
                 checkEmailChange();
             });
 
-            // ?˜?´ì§? ë¡œë“œ ?‹œ ê¸°ì¡´ ?´ë©”ì¼ ?ŒŒ?‹±
+            // í˜ì´ì§€ ë¡œë“œ ì‹œ ê¸°ì¡´ ì´ë©”ì¼ íŒŒì‹±
             parseExistingEmail();
 
             function updateAuthMessage(message, color) {
@@ -235,7 +235,7 @@
                 }
             }
 
-            // ?´ë©”ì¼ ë³?ê²? ?™•?¸ ?•¨?ˆ˜
+            // ì´ë©”ì¼ ë³€ê²½ í™•ì¸ í•¨ìˆ˜
             function checkEmailChange() {
                 const currentEmail = memberEmailHidden.value;
                 
@@ -245,31 +245,31 @@
                     authCodeArea.style.display = 'none';
                     updateAuthMessage('', '');
                     sendAuthBtn.disabled = false;
-                    sendAuthBtn.textContent = '?¸ì¦? ?š”ì²?';
+                    sendAuthBtn.textContent = 'ì¸ì¦ ìš”ì²­';
                 } else {
-                    // ?›?˜ ?´ë©”ì¼ë¡? ?˜?Œ? ¸?‹¤ë©? ?¸ì¦ëœ ê²ƒìœ¼ë¡? ê°„ì£¼
+                    // ì›ë˜ ì´ë©”ì¼ë¡œ ë˜ëŒë ¸ë‹¤ë©´ ì¸ì¦ëœ ê²ƒìœ¼ë¡œ ê°„ì£¼
                     isEmailVerified = true;
                     emailAuthStatus.value = 'Y';
-                    updateAuthMessage('ê¸°ì¡´ ?´ë©”ì¼', 'blue');
+                    updateAuthMessage('ê¸°ì¡´ ì´ë©”ì¼', 'blue');
                 }
             }
 
-            // 1. '?¸ì¦? ?š”ì²?' ë²„íŠ¼ ?´ë¦? ?´ë²¤íŠ¸
+            // 1. 'ì¸ì¦ ìš”ì²­' ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸
             sendAuthBtn.addEventListener('click', function() {
-                updateEmailValue(); // ìµœì‹  ?´ë©”ì¼ ê°’ìœ¼ë¡? ?—…?°?´?Š¸
+                updateEmailValue(); // ìµœì‹  ì´ë©”ì¼ ê°’ìœ¼ë¡œ ì—…ë°ì´íŠ¸
                 const email = memberEmailHidden.value.trim();
                 
                 if (!email || !email.includes('@')) {
-                    alert('?˜¬ë°”ë¥¸ ?´ë©”ì¼?„ ?…? ¥?•´ì£¼ì„¸?š”.');
+                    alert('ì˜¬ë°”ë¥¸ ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.');
                     return;
                 }
                 
-                // ?´ë©”ì¼ ?…? ¥ ?•„?“œ?“¤ê³? ë²„íŠ¼ ë¹„í™œ?„±?™” (?¬?š”ì²? ë°©ì?)
+                // ì´ë©”ì¼ ì…ë ¥ í•„ë“œë“¤ê³¼ ë²„íŠ¼ ë¹„í™œì„±í™” (ì¬ìš”ì²­ ë°©ì§€)
                 emailIdInput.disabled = true;
                 emailDomainSelect.disabled = true;
                 customDomainInput.disabled = true;
                 sendAuthBtn.disabled = true;
-                sendAuthBtn.textContent = 'ë°œì†¡ ì¤?...';
+                sendAuthBtn.textContent = 'ë°œì†¡ ì¤‘...';
 
                 fetch('/member/email/sendAuth', {
                     method: 'POST',
@@ -281,41 +281,41 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        updateAuthMessage(data.message, '#5cb85c'); // ?„±ê³? ?‹œ ì´ˆë¡?ƒ‰
-                        authCodeArea.style.display = 'block'; // ?¸ì¦? ë²ˆí˜¸ ?…? ¥ì°? ?‘œ?‹œ
+                        updateAuthMessage(data.message, '#5cb85c'); // ì„±ê³µ ì‹œ ì´ˆë¡ìƒ‰
+                        authCodeArea.style.display = 'block'; // ì¸ì¦ ë²ˆí˜¸ ì…ë ¥ì°½ í‘œì‹œ
                     } else {
                         updateAuthMessage(data.message, 'red');
-                        // ?‹¤?Œ¨ ?‹œ ?‹¤?‹œ ?™œ?„±?™”
+                        // ì‹¤íŒ¨ ì‹œ ë‹¤ì‹œ í™œì„±í™”
                         emailIdInput.disabled = false;
                         emailDomainSelect.disabled = false;
                         customDomainInput.disabled = false;
                         sendAuthBtn.disabled = false;
                     }
-                    sendAuthBtn.textContent = '?¸ì¦? ?š”ì²?';
+                    sendAuthBtn.textContent = 'ì¸ì¦ ìš”ì²­';
                 })
                 .catch(error => {
-                    updateAuthMessage('?„¤?Š¸?›Œ?¬ ?˜¤ë¥˜ë¡œ ë°œì†¡?— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.', 'red');
+                    updateAuthMessage('ë„¤íŠ¸ì›Œí¬ ì˜¤ë¥˜ë¡œ ë°œì†¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.', 'red');
                     emailIdInput.disabled = false;
                     emailDomainSelect.disabled = false;
                     customDomainInput.disabled = false;
                     sendAuthBtn.disabled = false;
-                    sendAuthBtn.textContent = '?¸ì¦? ?š”ì²?';
+                    sendAuthBtn.textContent = 'ì¸ì¦ ìš”ì²­';
                     console.error('Error:', error);
                 });
             });
 
-            // 2. '?¸ì¦? ?™•?¸' ë²„íŠ¼ ?´ë¦? ?´ë²¤íŠ¸
+            // 2. 'ì¸ì¦ í™•ì¸' ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸
             verifyAuthBtn.addEventListener('click', function() {
                 const email = memberEmailHidden.value.trim();
                 const authCode = authCodeInput.value.trim();
 
                 if (!authCode || authCode.length !== 6) {
-                    alert('6?ë¦? ?¸ì¦? ë²ˆí˜¸ë¥? ? •?™•?ˆ ?…? ¥?•´ì£¼ì„¸?š”.');
+                    alert('6ìë¦¬ ì¸ì¦ ë²ˆí˜¸ë¥¼ ì •í™•íˆ ì…ë ¥í•´ì£¼ì„¸ìš”.');
                     return;
                 }
 
                 verifyAuthBtn.disabled = true;
-                verifyAuthBtn.textContent = '?™•?¸ ì¤?...';
+                verifyAuthBtn.textContent = 'í™•ì¸ ì¤‘...';
 
                 fetch('/member/email/verifyAuth', {
                     method: 'POST',
@@ -330,29 +330,29 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // ?¸ì¦? ?„±ê³? ?‹œ ì²˜ë¦¬
+                        // ì¸ì¦ ì„±ê³µ ì‹œ ì²˜ë¦¬
                         updateAuthMessage(data.message, 'blue');
-                        emailAuthStatus.value = 'Y'; // Hidden ?•„?“œ ê°? ë³?ê²?
+                        emailAuthStatus.value = 'Y'; // Hidden í•„ë“œ ê°’ ë³€ê²½
                         isEmailVerified = true;
                         authCodeInput.disabled = true;
-                        verifyAuthBtn.style.display = 'none'; // ?¸ì¦? ?™•?¸ ë²„íŠ¼ ?ˆ¨ê¸°ê¸°
-                        // ?´ë©”ì¼ ?•„?“œ?“¤ ?‹¤?‹œ ?™œ?„±?™”
+                        verifyAuthBtn.style.display = 'none'; // ì¸ì¦ í™•ì¸ ë²„íŠ¼ ìˆ¨ê¸°ê¸°
+                        // ì´ë©”ì¼ í•„ë“œë“¤ ë‹¤ì‹œ í™œì„±í™”
                         emailIdInput.disabled = false;
                         emailDomainSelect.disabled = false;
                         customDomainInput.disabled = false;
                     } else {
-                        // ?¸ì¦? ?‹¤?Œ¨ ?‹œ ì²˜ë¦¬
+                        // ì¸ì¦ ì‹¤íŒ¨ ì‹œ ì²˜ë¦¬
                         updateAuthMessage(data.message, 'red');
                         emailAuthStatus.value = 'N'; 
                         isEmailVerified = false;
                         verifyAuthBtn.disabled = false;
                     }
-                    verifyAuthBtn.textContent = '?¸ì¦? ?™•?¸';
+                    verifyAuthBtn.textContent = 'ì¸ì¦ í™•ì¸';
                 })
                 .catch(error => {
-                    updateAuthMessage('?„¤?Š¸?›Œ?¬ ?˜¤ë¥˜ë¡œ ?¸ì¦? ?™•?¸?— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.', 'red');
+                    updateAuthMessage('ë„¤íŠ¸ì›Œí¬ ì˜¤ë¥˜ë¡œ ì¸ì¦ í™•ì¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.', 'red');
                     verifyAuthBtn.disabled = false;
-                    verifyAuthBtn.textContent = '?¸ì¦? ?™•?¸';
+                    verifyAuthBtn.textContent = 'ì¸ì¦ í™•ì¸';
                     console.error('Error:', error);
                 });
             });
@@ -360,7 +360,7 @@
             $('#editForm').on('submit', function(e) {
                 e.preventDefault();
                 
-                updateEmailValue(); // ìµœì‹  ?´ë©”ì¼ ê°’ìœ¼ë¡? ?—…?°?´?Š¸
+                updateEmailValue(); // ìµœì‹  ì´ë©”ì¼ ê°’ìœ¼ë¡œ ì—…ë°ì´íŠ¸
                 
                 const memberData = {
                     memberId: $('#memberId').val(),
@@ -372,38 +372,38 @@
 
                 const memberPwConfirm = $('#memberPwConfirm').val();
 
-                // ë¹„ë?ë²ˆí˜¸ ?¼ì¹? ?™•?¸
+                // ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ í™•ì¸
                 if (memberData.memberPw !== memberPwConfirm) {
-                    showAlert('ë¹„ë?ë²ˆí˜¸ê°? ?¼ì¹˜í•˜ì§? ?•Š?Šµ?‹ˆ?‹¤.', 'error');
+                    showAlert('ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.', 'error');
                     return;
                 }
 
-                // ë¹„ë?ë²ˆí˜¸ ?…? ¥ ?™•?¸
+                // ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ í™•ì¸
                 if (!memberData.memberPw) {
-                    showAlert('ë¹„ë?ë²ˆí˜¸ë¥? ?…? ¥?•´ì£¼ì„¸?š”.', 'error');
+                    showAlert('ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.', 'error');
                     return;
                 }
 
-                // ?´ë©”ì¼ ?˜•?‹ ?™•?¸
+                // ì´ë©”ì¼ í˜•ì‹ í™•ì¸
                 if (!isValidEmail(memberData.memberEmail)) {
-                    showAlert('?˜¬ë°”ë¥¸ ?´ë©”ì¼ ?˜•?‹?„ ?…? ¥?•´ì£¼ì„¸?š”.', 'error');
+                    showAlert('ì˜¬ë°”ë¥¸ ì´ë©”ì¼ í˜•ì‹ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.', 'error');
                     return;
                 }
 
-                // ?´ë©”ì¼?´ ë³?ê²½ëœ ê²½ìš° ?¸ì¦? ?™•?¸
+                // ì´ë©”ì¼ì´ ë³€ê²½ëœ ê²½ìš° ì¸ì¦ í™•ì¸
                 if (memberData.memberEmail !== originalEmail && !isEmailVerified) {
-                    showAlert('?´ë©”ì¼?´ ë³?ê²½ë˜?—ˆ?Šµ?‹ˆ?‹¤. ?´ë©”ì¼ ?¸ì¦ì„ ?™„ë£Œí•´ì£¼ì„¸?š”.', 'error');
+                    showAlert('ì´ë©”ì¼ì´ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤. ì´ë©”ì¼ ì¸ì¦ì„ ì™„ë£Œí•´ì£¼ì„¸ìš”.', 'error');
                     return;
                 }
 
-                // reCAPTCHA ?™•?¸
+                // reCAPTCHA í™•ì¸
                 const recaptchaResponse = grecaptcha.getResponse();
                 if (!recaptchaResponse) {
-                    showAlert('ìº¡ì± ë¥? ?™„ë£Œí•´ì£¼ì„¸?š”.', 'error');
+                    showAlert('ìº¡ì± ë¥¼ ì™„ë£Œí•´ì£¼ì„¸ìš”.', 'error');
                     return;
                 }
 
-                // ?„œë²„ë¡œ ? „?†¡?•  ?°?´?„°?— reCAPTCHA ?‘?‹µê³? ?´ë©”ì¼ ?¸ì¦? ?ƒ?ƒœ ì¶”ê?
+                // ì„œë²„ë¡œ ì „ì†¡í•  ë°ì´í„°ì— reCAPTCHA ì‘ë‹µê³¼ ì´ë©”ì¼ ì¸ì¦ ìƒíƒœ ì¶”ê°€
                 memberData.recaptchaResponse = recaptchaResponse;
                 memberData.emailAuthStatus = emailAuthStatus.value;
 
@@ -423,7 +423,7 @@
                         }
                     },
                     error: function(xhr, status, error) {
-                        showAlert('?ˆ˜? • ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤: ' + error, 'error');
+                        showAlert('ìˆ˜ì • ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤: ' + error, 'error');
                     }
                 });
             });
@@ -436,7 +436,7 @@
             alertDiv.text(message);
             alertDiv.show();
             
-            // 3ì´? ?›„ ??™?œ¼ë¡? ?ˆ¨ê¸°ê¸°
+            // 3ì´ˆ í›„ ìë™ìœ¼ë¡œ ìˆ¨ê¸°ê¸°
             setTimeout(function() {
                 alertDiv.fadeOut();
             }, 3000);
