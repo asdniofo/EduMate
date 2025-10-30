@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Ï†ïÎ≥¥Ï∞æÍ∏∞ | EduMate</title>
+    <title>?†ïÎ≥¥Ï∞æÍ∏? | EduMate</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/resources/css/member/find_info.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
@@ -19,20 +19,20 @@
 <!-- Find Info -->
 <section class="login-container">
     <div class="login-box">
-        <!-- ÏôºÏ™Ω ÏòÅÏó≠ -->
+        <!-- ?ôºÏ™? ?òÅ?ó≠ -->
         <div class="login-left">
-            <div class="login-icon">üîç</div>
-            <h2>Ï†ïÎ≥¥ Ï∞æÍ∏∞</h2>
+            <div class="login-icon">?üî?</div>
+            <h2>?†ïÎ≥? Ï∞æÍ∏∞</h2>
         </div>
 
-        <!-- Ïò§Î•∏Ï™Ω ÏòÅÏó≠ -->
+        <!-- ?ò§Î•∏Ï™Ω ?òÅ?ó≠ -->
         <div class="login-right">
-            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
+            <img class="login-logo" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo.png">
 
-            <!-- ÏÉÅÎã® ÌÉ≠ -->
+            <!-- ?ÉÅ?ã® ?É≠ -->
             <div class="tab-container">
-                <button class="tab-btn active" id="tab-id">ÏïÑÏù¥Îîî</button>
-                <button class="tab-btn" id="tab-pw">ÎπÑÎ∞ÄÎ≤àÌò∏</button>
+                <button class="tab-btn active" id="tab-id">?ïÑ?ù¥?îî</button>
+                <button class="tab-btn" id="tab-pw">ÎπÑÎ?Î≤àÌò∏</button>
             </div>
             <c:choose>
         <c:when test="${empty foundId}">
@@ -43,18 +43,18 @@
         </c:when>
         </c:choose>
 
-            <!-- ÏïÑÏù¥Îîî Ï∞æÍ∏∞ Ìèº -->
+            <!-- ?ïÑ?ù¥?îî Ï∞æÍ∏∞ ?èº -->
             <form id="find-id-form" class="form-section active" method="post" action="/member/findId">
-                <input type="text" name="memberName" placeholder="Ïù¥Î¶Ñ" required>
-                <input type="date" name="memberBirth" placeholder="ÏÉùÎÖÑÏõîÏùº" required>
-                <input type="email" name="memberEmail" placeholder="Ïù¥Î©îÏùº" required>
+                <input type="text" name="memberName" placeholder="?ù¥Î¶?" required>
+                <input type="date" name="memberBirth" placeholder="?Éù?ÖÑ?õî?ùº" required>
+                <input type="email" name="memberEmail" placeholder="?ù¥Î©îÏùº" required>
                 <button type="submit" class="btn-login">Ï∞æÍ∏∞</button>
             </form>
 
-            <!-- ÎπÑÎ∞ÄÎ≤àÌò∏ Ï∞æÍ∏∞ Ìèº -->
+            <!-- ÎπÑÎ?Î≤àÌò∏ Ï∞æÍ∏∞ ?èº -->
             <form id="find-pw-form" class="form-section" method="post" action="/member/findPw">
-                <input type="text" name="memberId" placeholder="ÏïÑÏù¥Îîî" required>
-                <input type="email" name="memberEmail" placeholder="Ïù¥Î©îÏùº" required>
+                <input type="text" name="memberId" placeholder="?ïÑ?ù¥?îî" required>
+                <input type="email" name="memberEmail" placeholder="?ù¥Î©îÏùº" required>
                 <button type="submit" class="btn-login">Ï∞æÍ∏∞</button>
             </form>
         </div>

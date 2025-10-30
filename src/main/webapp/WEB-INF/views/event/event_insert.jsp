@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ì´ë²¤íŠ¸ ê²Œì‹œë¬¼ ì‘ì„±</title>
+<title>?´ë²¤íŠ¸ ê²Œì‹œë¬? ?‘?„±</title>
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/common/footer.css">
 <link rel="stylesheet" href="/resources/css/event/event_insert.css">
 <link rel="stylesheet" href="/resources/css/common/main_banner.css">
 </head>
 <body>
-    <!-- ===== í—¤ë” ===== -->
+    <!-- ===== ?—¤?” ===== -->
     <jsp:include page="../common/header.jsp" />
 
     <!-- ===== ë©”ì¸ ===== -->
@@ -20,26 +20,26 @@
         <!-- ë°°ë„ˆ -->
 <section class="main-banner">
             <div class="banner-text">
-                ì´ë²¤íŠ¸ ì‘ì„±
+                ?´ë²¤íŠ¸ ?‘?„±
             </div>
             <div class="object">
-                <img src="/resources/images/event/icon/event_insert_icon.png">
+                <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/event/event_insert_icon.png">
             </div>
 </section>
 
-        <!-- í¼ ì˜ì—­ -->
+        <!-- ?¼ ?˜?—­ -->
         <section class="event-insert-section">
             <form action="/event/insert" method="post" enctype="multipart/form-data" class="event-form">
-                <!-- ì œëª© -->
+                <!-- ? œëª? -->
                 <div class="form-group">
-                    <label>ì œëª©</label>
-                    <input type="text" name="eventTitle" placeholder="ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”." required>
+                    <label>? œëª?</label>
+                    <input type="text" name="eventTitle" placeholder="? œëª©ì„ ?…? ¥?•´ì£¼ì„¸?š”." required>
                 </div>
 
-                <!-- ë¶€ì œëª© -->
+                <!-- ë¶?? œëª? -->
                 <div class="form-group">
-                    <label>ë¶€ì œëª©</label>
-                    <input type="text" name="eventSubtitle" placeholder="ë¶€ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.">
+                    <label>ë¶?? œëª?</label>
+                    <input type="text" name="eventSubtitle" placeholder="ë¶?? œëª©ì„ ?…? ¥?•´ì£¼ì„¸?š”.">
                 </div>
 
                 <!-- ì§„í–‰ ê¸°ê°„ -->
@@ -51,34 +51,34 @@
                     </div>
                 </div>
 
-                <!-- ì¸ë„¤ì¼ ì—…ë¡œë“œ -->
+                <!-- ?¸?„¤?¼ ?—…ë¡œë“œ -->
                 <div class="form-group">
-                    <label>ì´ë²¤íŠ¸ ì¸ë„¤ì¼</label>
+                    <label>?´ë²¤íŠ¸ ?¸?„¤?¼</label>
                     <input type="file" name="thumbnailFile" id="thumbnailFile" accept="image/*" required>
                     <div id="thumbnailPreview" class="preview-box"></div>
                 </div>
 
-                <!-- ìƒì„¸ ì´ë¯¸ì§€ ì—…ë¡œë“œ -->
+                <!-- ?ƒ?„¸ ?´ë¯¸ì? ?—…ë¡œë“œ -->
                 <div class="form-group">
-                    <label>ìƒì„¸ ì´ë¯¸ì§€</label>
+                    <label>?ƒ?„¸ ?´ë¯¸ì?</label>
                     <input type="file" name="contentFiles" id="contentFiles" accept="image/*" multiple>
                     <div id="contentPreview" class="preview-box"></div>
                 </div>
 
                 <!-- ë²„íŠ¼ -->
                 <div class="form-actions">
-                    <button type="submit" class="submit-btn">ë“±ë¡í•˜ê¸°</button>
+                    <button type="submit" class="submit-btn">?“±ë¡í•˜ê¸?</button>
                     <button type="button" class="cancel-btn" onclick="location.href='/event/list'">ì·¨ì†Œ</button>
                 </div>
             </form>
         </section>
     </main>
 
-    <!-- ===== í‘¸í„° ===== -->
+    <!-- ===== ?‘¸?„° ===== -->
     <jsp:include page="../common/footer.jsp" />
 
     <script>
-        // ì¸ë„¤ì¼ ë¯¸ë¦¬ë³´ê¸°
+        // ?¸?„¤?¼ ë¯¸ë¦¬ë³´ê¸°
         document.getElementById('thumbnailFile').addEventListener('change', function (e) {
             const preview = document.getElementById('thumbnailPreview');
             preview.innerHTML = '';
@@ -90,7 +90,7 @@
             }
         });
 
-        // ìƒì„¸ ì´ë¯¸ì§€ ë¯¸ë¦¬ë³´ê¸°
+        // ?ƒ?„¸ ?´ë¯¸ì? ë¯¸ë¦¬ë³´ê¸°
         document.getElementById('contentFiles').addEventListener('change', function (e) {
             const preview = document.getElementById('contentPreview');
             preview.innerHTML = '';

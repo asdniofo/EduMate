@@ -127,16 +127,16 @@ a {
 }
 
 #ad1 {
-    background: url("/resources/images/adv/ad1.png");
+    background: url("https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/adv/ad1.png");
 }
 #ad2 {
-    background: url("/resources/images/adv/ad2.png");
+    background: url("https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/adv/ad2.png");
 }
 #ad3 {
-    background: url("/resources/images/adv/ad3.png");
+    background: url("https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/adv/ad3.png");
 }
 #ad4 {
-    background: url("/resources/images/adv/ad4.png");
+    background: url("https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/adv/ad4.png");
 }
 
 /* 컨트롤 버튼 스타일 (초기: 위치는 JS로 설정) */

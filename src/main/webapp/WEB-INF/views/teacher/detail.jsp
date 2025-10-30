@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>ì§ˆë¬¸ ìƒì„¸</title>
+		<title>ì§ˆë¬¸ ?ƒ?„¸</title>
 		<link rel="stylesheet" href="/resources/css/teacher/detail.css">
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
@@ -17,10 +17,10 @@
 	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
 	<section class="main-banner">
     <div class="banner-text">
-        ì§ˆë¬¸ ìƒì„¸ì •ë³´
+        ì§ˆë¬¸ ?ƒ?„¸? •ë³?
     </div>
         <div class="object">
-            <img src="/resources/images/teacher/QnAIcon.png" alt="ì§ˆë¬¸ ê²Œì‹œíŒ ì•„ì´ì½˜">
+            <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/teacher/QnAIcon.png" alt="ì§ˆë¬¸ ê²Œì‹œ?Œ ?•„?´ì½?">
         </div>
 	</section>
 		<div class="page-wrapper">
@@ -32,14 +32,14 @@
                     <section class="question-header">
                         <div class="title-group">
                         	<c:if test="${question.questionStatus eq 'N' }">
-                            	<div class="status-tag-unresolved">ë¯¸í•´ê²°</div>
+                            	<div class="status-tag-unresolved">ë¯¸í•´ê²?</div>
                             </c:if>
                             <c:if test="${question.questionStatus eq 'Y' }">
-                            	<div class="status-tag-resolved">í•´ê²°</div>
+                            	<div class="status-tag-resolved">?•´ê²?</div>
                             </c:if>
                             <h2 class="question-title">${question.questionTitle }</h2>
                         </div>
-                        <p class="question-meta"><fmt:formatDate value="${question.writeDate}" pattern="yyyy-MM-dd HH:mm" /> &nbsp;|&nbsp; ì‘ì„±ì : ${question.memberId }</p>
+                        <p class="question-meta"><fmt:formatDate value="${question.writeDate}" pattern="yyyy-MM-dd HH:mm" /> &nbsp;|&nbsp; ?‘?„±? : ${question.memberId }</p>
                     </section>
                     
                     <section class="question-body">
@@ -49,8 +49,8 @@
 
                     <section class="answer-input-section">
                         <div class="input-area-wrapper">
-                            <textarea class="answer-textarea" id="answer-area" placeholder="ë‹µë³€ ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”."></textarea>
-                            <button class="answer-submit-button" id="submit-button">ë‹µë³€</button>
+                            <textarea class="answer-textarea" id="answer-area" placeholder="?‹µë³? ?‚´?š©?„ ?…? ¥?•˜?„¸?š”."></textarea>
+                            <button class="answer-submit-button" id="submit-button">?‹µë³?</button>
                         </div>
                     </section>
                     
@@ -67,27 +67,27 @@
                         	<a href="/teacher/question/list"><button class="action-button">ëª©ë¡</button></a>
                         	<c:if test="${sessionScope.loginMember.memberId eq question.memberId 
                     			or sessionScope.loginMember.adminYN eq 'Y'}">
-	                            <a href="/teacher/question/modify?questionNo=${question.questionNo }"><button class="action-button">ìˆ˜ì •</button></a>
-	                            <button class="action-button" id="delete-list-btn">ì‚­ì œ</button>
+	                            <a href="/teacher/question/modify?questionNo=${question.questionNo }"><button class="action-button">?ˆ˜? •</button></a>
+	                            <button class="action-button" id="delete-list-btn">?‚­? œ</button>
                             </c:if>
                             <c:if test="${sessionScope.loginMember.memberId eq question.memberId }">
-                            	<button class="action-button" id="change-status-btn">ìƒíƒœë³€ê²½</button>
+                            	<button class="action-button" id="change-status-btn">?ƒ?ƒœë³?ê²?</button>
                             </c:if>
                         </div>
                         <div class="right-actions">
-                            <%-- ğŸ’¡ ì´ì „ ë²„íŠ¼: prevQuestionNo ë³€ìˆ˜ì— ê°’ì´ ìˆì„ ë•Œë§Œ ë²„íŠ¼ í‘œì‹œ --%>
+                            <%-- ?Ÿ’? ?´? „ ë²„íŠ¼: prevQuestionNo ë³??ˆ˜?— ê°’ì´ ?ˆ?„ ?•Œë§? ë²„íŠ¼ ?‘œ?‹œ --%>
 					        <c:if test="${not empty prevQuestionNo}">
 					            <button class="action-button" 
 					                    onclick="location.href='detail?questionNo=${prevQuestionNo}';">
-					                ì´ì „
+					                ?´? „
 					            </button>
 					        </c:if>
 					        
-					        <%-- ğŸ’¡ ë‹¤ìŒ ë²„íŠ¼: nextQuestionNo ë³€ìˆ˜ì— ê°’ì´ ìˆì„ ë•Œë§Œ ë²„íŠ¼ í‘œì‹œ --%>
+					        <%-- ?Ÿ’? ?‹¤?Œ ë²„íŠ¼: nextQuestionNo ë³??ˆ˜?— ê°’ì´ ?ˆ?„ ?•Œë§? ë²„íŠ¼ ?‘œ?‹œ --%>
 					        <c:if test="${not empty nextQuestionNo}">
 					            <button class="action-button" 
 					                    onclick="location.href='detail?questionNo=${nextQuestionNo}';">
-					                ë‹¤ìŒ
+					                ?‹¤?Œ
 					            </button>
 					        </c:if>
                         </div>
@@ -101,25 +101,25 @@
 	<jsp:include page="../common/footer.jsp" />
 	
 	<script>
-	const loginMemberId = "${sessionScope.loginId}"; // ì´ ê°’ì€ 'aaaaaaa'ì…ë‹ˆë‹¤.
+	const loginMemberId = "${sessionScope.loginId}"; // ?´ ê°’ì? 'aaaaaaa'?…?‹ˆ?‹¤.
     
     function deleteComment(questionCommentNo) {
-        // ... (deleteComment í•¨ìˆ˜ ë¡œì§ì€ ê·¸ëŒ€ë¡œ ìœ ì§€) ...
-        //console.log("ì „ë‹¬ëœ ëŒ“ê¸€ ë²ˆí˜¸:", questionCommentNo);
+        // ... (deleteComment ?•¨?ˆ˜ ë¡œì§?? ê·¸ë?ë¡? ?œ ì§?) ...
+        //console.log("? „?‹¬?œ ?Œ“ê¸? ë²ˆí˜¸:", questionCommentNo);
         
-        if(confirm("ì •ë§ë¡œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
+        if(confirm("? •ë§ë¡œ ?‚­? œ?•˜?‹œê² ìŠµ?‹ˆê¹??")){
             fetch("/question/comment/delete?questionCommentNo=" + questionCommentNo) 
             .then(response => response.text()) 
             .then(text => {
                 const result = parseInt(text.trim());
                 if(result > 0){
-                    alert("ëŒ“ê¸€ ì‚­ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+                    alert("?Œ“ê¸? ?‚­? œê°? ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.");
                     getCommentList();
                 }else {
-                    alert("ëŒ“ê¸€ ì‚­ì œê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+                    alert("?Œ“ê¸? ?‚­? œê°? ?™„ë£Œë˜ì§? ?•Š?•˜?Šµ?‹ˆ?‹¤.");
                 }
             })
-            .catch(error => console.error("ëŒ“ê¸€ ì‚­ì œ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤:", error));
+            .catch(error => console.error("?Œ“ê¸? ?‚­? œ ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤:", error));
         }
     }
 
@@ -134,20 +134,20 @@
                 
                 let deleteButtonHtml = '';
                 
-                // ğŸ’¡ ìµœì¢… ìˆ˜ì •: ëŒ€ì†Œë¬¸ìê¹Œì§€ í†µì¼í•˜ì—¬ ë¹„êµ (ê°€ì¥ ì•ˆì „í•¨)
+                // ?Ÿ’? ìµœì¢… ?ˆ˜? •: ???†Œë¬¸ìê¹Œì? ?†µ?¼?•˜?—¬ ë¹„êµ (ê°??¥ ?•ˆ? „?•¨)
                 const isMyComment = (loginMemberId.trim().toLowerCase() === comment.memberId.trim().toLowerCase());
                 
-                // --- (ì½˜ì†” ë””ë²„ê¹… ì½”ë“œ - ì•ˆì •í™”) ---
-                //console.log(`-- ëŒ“ê¸€ No ${comment.questionCommentNo} --`);
-                //console.log("ë¡œê·¸ì¸ ID:", loginMemberId.trim().toLowerCase(), "/ ëŒ“ê¸€ ID:", comment.memberId.trim().toLowerCase(), "/ ì¼ì¹˜:", isMyComment);
+                // --- (ì½˜ì†” ?””ë²„ê¹… ì½”ë“œ - ?•ˆ? •?™”) ---
+                //console.log(`-- ?Œ“ê¸? No ${comment.questionCommentNo} --`);
+                //console.log("ë¡œê·¸?¸ ID:", loginMemberId.trim().toLowerCase(), "/ ?Œ“ê¸? ID:", comment.memberId.trim().toLowerCase(), "/ ?¼ì¹?:", isMyComment);
                 // ------------------------------------
                 
                 if (isMyComment) {
-                	// ğŸ’¡ FINAL FIX: commentNoë¥¼ ë”°ì˜´í‘œë¡œ ê°ì‹¸ì„œ ì „ë‹¬ (ë¬¸ìì—´ë¡œ ê°•ì œ)
+                	// ?Ÿ’? FINAL FIX: commentNoë¥? ?”°?˜´?‘œë¡? ê°ì‹¸?„œ ? „?‹¬ (ë¬¸ì?—´ë¡? ê°•ì œ)
                     const onclickCode = `deleteComment('${comment.questionCommentNo}');`; 
                     
-                    // deleteButtonHtmlì— ë”°ì˜´í‘œê°€ ì‚½ì…ëœ onclick ì½”ë“œë¥¼ ì‚¬ìš©
-                    deleteButtonHtml = `<button class="delete-btn" onclick="${onclickCode}">ì‚­ì œ</button>`;
+                    // deleteButtonHtml?— ?”°?˜´?‘œê°? ?‚½?…?œ onclick ì½”ë“œë¥? ?‚¬?š©
+                    deleteButtonHtml = `<button class="delete-btn" onclick="${onclickCode}">?‚­? œ</button>`;
 			    }
                 
                 const itemDiv = document.createElement("div");
@@ -156,7 +156,7 @@
                 itemDiv.innerHTML = `
                     <div class="answer-header">
                         <span class="answer-author">\${comment.memberId}</span> 
-                        <span class="answer-date">\${comment.writeDate} ì‘ì„±</span>
+                        <span class="answer-date">\${comment.writeDate} ?‘?„±</span>
                     </div>
                     <div class="answer-content">
                         <p>\${comment.questionCommentContent}</p> 
@@ -169,14 +169,14 @@
 				const commentActionsDiv = itemDiv.querySelector(".comment-actions");
                 
                 if (isMyComment) {
-                    // 2. ğŸ’¡ FINAL FIX: ë²„íŠ¼ ìš”ì†Œë¥¼ ì§ì ‘ ìƒì„±í•˜ê³  ì´ë²¤íŠ¸ ë¦¬ìŠ¤ë„ˆ ì—°ê²°
+                    // 2. ?Ÿ’? FINAL FIX: ë²„íŠ¼ ?š”?†Œë¥? ì§ì ‘ ?ƒ?„±?•˜ê³? ?´ë²¤íŠ¸ ë¦¬ìŠ¤?„ˆ ?—°ê²?
                     const deleteBtn = document.createElement("button");
                     deleteBtn.className = "delete-btn";
-                    deleteBtn.textContent = "ì‚­ì œ";
+                    deleteBtn.textContent = "?‚­? œ";
                     
-                    // 3. ğŸ’¡ addEventListenerë¡œ ì•ˆì „í•˜ê²Œ ì´ë²¤íŠ¸ ì—°ê²°
+                    // 3. ?Ÿ’? addEventListenerë¡? ?•ˆ? „?•˜ê²? ?´ë²¤íŠ¸ ?—°ê²?
                     deleteBtn.addEventListener('click', () => {
-                        // comment.questionCommentNo ê°’ì„ ì§ì ‘ ì°¸ì¡°í•˜ì—¬ ì „ë‹¬
+                        // comment.questionCommentNo ê°’ì„ ì§ì ‘ ì°¸ì¡°?•˜?—¬ ? „?‹¬
                         deleteComment(comment.questionCommentNo); 
                     });
                     
@@ -185,20 +185,20 @@
                 
             })
         })
-        .catch(error => console.error("ëŒ“ê¸€ ëª©ë¡ ì¡°íšŒ ì˜¤ë¥˜ : " + error));
+        .catch(error => console.error("?Œ“ê¸? ëª©ë¡ ì¡°íšŒ ?˜¤ë¥? : " + error));
     }
     getCommentList();
 		
 		document.querySelector("#submit-button").addEventListener("click", function(){
-			// ëŒ“ê¸€ ë“±ë¡ ë²„íŠ¼ í´ë¦­ ì‹œ ì‹¤í–‰ë˜ëŠ” ì½”ë“œ
-			// ì…ë ¥ëœ ê°’ì„ ê°€ì ¸ì™€ì„œ ì„œë²„ë¡œ ì „ì†¡í•˜ëŠ” ë¡œì§ì„ êµ¬í˜„í•´ì•¼ í•©ë‹ˆë‹¤.
-			// Ajaxë¥¼ ì‚¬ìš©í•˜ì—¬ ë¹„ë™ê¸°ì ìœ¼ë¡œ ëŒ“ê¸€ì„ ì¶”ê°€
+			// ?Œ“ê¸? ?“±ë¡? ë²„íŠ¼ ?´ë¦? ?‹œ ?‹¤?–‰?˜?Š” ì½”ë“œ
+			// ?…? ¥?œ ê°’ì„ ê°?? ¸???„œ ?„œë²„ë¡œ ? „?†¡?•˜?Š” ë¡œì§?„ êµ¬í˜„?•´?•¼ ?•©?‹ˆ?‹¤.
+			// Ajaxë¥? ?‚¬?š©?•˜?—¬ ë¹„ë™ê¸°ì ?œ¼ë¡? ?Œ“ê¸??„ ì¶”ê?
 			const QuestionCommentContent = document.querySelector("#answer-area").value;
 			if(QuestionCommentContent.trim() === "") {
-				alert("ëŒ“ê¸€ ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.");
+				alert("?Œ“ê¸? ?‚´?š©?„ ?…? ¥?•˜?„¸?š”.");
 				return;
 			}
-			// ê²Œì‹œê¸€ ë²ˆí˜¸
+			// ê²Œì‹œê¸? ë²ˆí˜¸
 			const questionNo = ${question.questionNo };
 			const memberId = "${question.memberId }";
 			const data = {
@@ -206,7 +206,7 @@
 			    "memberId": loginMemberId,
 			    "questionCommentContent": QuestionCommentContent
 			};
-			// ë°ì´í„° fetch API ì´ìš©í•˜ì—¬ ë³´ë‚´ê¸°
+			// ?°?´?„° fetch API ?´?š©?•˜?—¬ ë³´ë‚´ê¸?
 			fetch("/question/comment/add", {
 				method: "POST",
 				headers: {
@@ -217,76 +217,76 @@
 			.then(text => {
 				const result = parseInt(text.trim());
 				if(result > 0){
-					alert("ëŒ“ê¸€ ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+					alert("?Œ“ê¸? ?“±ë¡ì´ ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.");
 					getCommentList();
 				}else {
-					alert("ëŒ“ê¸€ ë“±ë¡ì´ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+					alert("?Œ“ê¸? ?“±ë¡ì´ ?™„ë£Œë˜ì§? ?•Š?•˜?Šµ?‹ˆ?‹¤.");
 				}
 				document.querySelector("#answer-area").value = "";
 			})
-			.catch(error => alert("ëŒ“ê¸€ ë“±ë¡ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤."));
+			.catch(error => alert("?Œ“ê¸? ?“±ë¡? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤."));
 		})
 		
 	const currentQuestionNo = ${question.questionNo};
 
 	document.querySelector("#delete-list-btn").addEventListener("click", function() {
-	    if (confirm("ì •ë§ ì´ ì§ˆë¬¸ì„ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")) {
+	    if (confirm("? •ë§? ?´ ì§ˆë¬¸?„ ?‚­? œ?•˜?‹œê² ìŠµ?‹ˆê¹??")) {
 	        
 	    	fetch(`/teacher/question/delete?questionNo=${question.questionNo}`)
 	        
-	        // ğŸ’¡ 1. ì‘ë‹µì„ í…ìŠ¤íŠ¸ë¡œ ë°›ê³  (Controllerê°€ ìˆ«ìë§Œ ë°˜í™˜)
+	        // ?Ÿ’? 1. ?‘?‹µ?„ ?…?Š¤?Š¸ë¡? ë°›ê³  (Controllerê°? ?ˆ«?ë§? ë°˜í™˜)
 	        .then(response => response.text()) 
 	        
-	        // ğŸ’¡ 2. ìˆ«ì íŒŒì‹± í›„ ì„±ê³µ/ì‹¤íŒ¨ ì²˜ë¦¬
+	        // ?Ÿ’? 2. ?ˆ«? ?ŒŒ?‹± ?›„ ?„±ê³?/?‹¤?Œ¨ ì²˜ë¦¬
 	        .then(text => {
 	            const result = parseInt(text.trim());
 	            
 	            if (result > 0) {
-	                alert("ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
+	                alert("?‚­? œ?˜?—ˆ?Šµ?‹ˆ?‹¤.");
 	                
-	                // ì‚­ì œ ì„±ê³µ í›„ ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™ (Controllerê°€ ë¦¬ë‹¤ì´ë ‰íŠ¸ë¥¼ ì•ˆí•˜ë¯€ë¡œ ì—¬ê¸°ì„œ ì²˜ë¦¬)
+	                // ?‚­? œ ?„±ê³? ?›„ ëª©ë¡ ?˜?´ì§?ë¡? ?´?™ (Controllerê°? ë¦¬ë‹¤?´? ‰?Š¸ë¥? ?•ˆ?•˜ë¯?ë¡? ?—¬ê¸°ì„œ ì²˜ë¦¬)
 	                window.location.href = "/teacher/question/list"; 
 	            } else {
-	                alert("ì§ˆë¬¸ ì‚­ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. (ê²°ê³¼: 0)");
+	                alert("ì§ˆë¬¸ ?‚­? œ?— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤. (ê²°ê³¼: 0)");
 	            }
 	        })
 	        
-	        // 3. ì˜¤ë¥˜ ì²˜ë¦¬
+	        // 3. ?˜¤ë¥? ì²˜ë¦¬
 	        .catch(error => {
-	            alert("ì§ˆë¬¸ ì‚­ì œ ì²˜ë¦¬ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (ë„¤íŠ¸ì›Œí¬/íŒŒì‹± ì˜¤ë¥˜)");
-	            console.error("ì‚­ì œ ì˜¤ë¥˜:", error);
+	            alert("ì§ˆë¬¸ ?‚­? œ ì²˜ë¦¬ ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤. (?„¤?Š¸?›Œ?¬/?ŒŒ?‹± ?˜¤ë¥?)");
+	            console.error("?‚­? œ ?˜¤ë¥?:", error);
 	        });
 	    }
 	});
 	
 	document.querySelector("#change-status-btn").addEventListener("click", function() {
 	    
-	    // 1. í™•ì¸ ë©”ì‹œì§€ë¥¼ ì¼ë°˜ì ì¸ ìƒíƒœ ë³€ê²½ ë©”ì‹œì§€ë¡œ ë³€ê²½
-	    if (confirm("ì§ˆë¬¸ ìƒíƒœë¥¼ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")) {
+	    // 1. ?™•?¸ ë©”ì‹œì§?ë¥? ?¼ë°˜ì ?¸ ?ƒ?ƒœ ë³?ê²? ë©”ì‹œì§?ë¡? ë³?ê²?
+	    if (confirm("ì§ˆë¬¸ ?ƒ?ƒœë¥? ë³?ê²½í•˜?‹œê² ìŠµ?‹ˆê¹??")) {
 	        
-	        // 2. fetch ìš”ì²­ (ê²½ë¡œì— '/teacher' í¬í•¨)
+	        // 2. fetch ?š”ì²? (ê²½ë¡œ?— '/teacher' ?¬?•¨)
 	        fetch(`/teacher/question/change/status?questionNo=${question.questionNo}`)
 	        
-	        // 3. ì„œë²„ ì‘ë‹µ ì²˜ë¦¬
+	        // 3. ?„œë²? ?‘?‹µ ì²˜ë¦¬
 	        .then(response => response.text()) 
 	        .then(text => {
 	            const result = parseInt(text.trim());
 	            
 	            if (result > 0) {
-	                // ğŸ’¡ ë©”ì‹œì§€ ìˆ˜ì •: í† ê¸€ë˜ì—ˆìŒì„ ì•Œë¦¼
-	                alert("ì§ˆë¬¸ ìƒíƒœê°€ ì„±ê³µì ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤."); 
+	                // ?Ÿ’? ë©”ì‹œì§? ?ˆ˜? •: ?† ê¸??˜?—ˆ?Œ?„ ?•Œë¦?
+	                alert("ì§ˆë¬¸ ?ƒ?ƒœê°? ?„±ê³µì ?œ¼ë¡? ë³?ê²½ë˜?—ˆ?Šµ?‹ˆ?‹¤."); 
 	                
-	                // ë³€ê²½ í›„ ìƒì„¸ í˜ì´ì§€ë¥¼ ìƒˆë¡œê³ ì¹¨í•˜ì—¬ ë°”ë€ ìƒíƒœë¥¼ ì¦‰ì‹œ ë°˜ì˜
+	                // ë³?ê²? ?›„ ?ƒ?„¸ ?˜?´ì§?ë¥? ?ƒˆë¡œê³ ì¹¨í•˜?—¬ ë°”ë?? ?ƒ?ƒœë¥? ì¦‰ì‹œ ë°˜ì˜
 	                window.location.reload(); 
 	            } else {
-	                alert("ìƒíƒœ ë³€ê²½ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. (DB ì˜¤ë¥˜)");
+	                alert("?ƒ?ƒœ ë³?ê²½ì— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤. (DB ?˜¤ë¥?)");
 	            }
 	        })
 	        
-	        // 4. ì˜¤ë¥˜ ì²˜ë¦¬
+	        // 4. ?˜¤ë¥? ì²˜ë¦¬
 	        .catch(error => {
-	            alert("ìƒíƒœ ë³€ê²½ ìš”ì²­ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. (ë„¤íŠ¸ì›Œí¬/íŒŒì‹± ì˜¤ë¥˜)");
-	            console.error("ìƒíƒœ ë³€ê²½ ì˜¤ë¥˜:", error);
+	            alert("?ƒ?ƒœ ë³?ê²? ?š”ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤. (?„¤?Š¸?›Œ?¬/?ŒŒ?‹± ?˜¤ë¥?)");
+	            console.error("?ƒ?ƒœ ë³?ê²? ?˜¤ë¥?:", error);
 	        });
 	    }
 	});

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ê³µì§€ì‚¬í•­ ìƒì„¸</title>
+<title>ê³µì??‚¬?•­ ?ƒ?„¸</title>
 <link rel="stylesheet" href="/resources/css/notice/detail.css" />
 <link rel="stylesheet" href="/resources/css/common/header.css" />
 <link rel="stylesheet" href="/resources/css/common/footer.css" />
@@ -18,19 +18,19 @@
 	<link rel="stylesheet" href="/resources/css/common/main_banner.css">
 	<section class="main-banner">
     <div class="banner-text">
-        ê³µì§€ì‚¬í•­
+        ê³µì??‚¬?•­
     </div>
     <div class="object">
-        <img src="/resources/images/notice/noticeIcon.png" alt="ê³µì§€ì‚¬í•­ ì•„ì´ì½˜">
+        <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/notice/noticeIcon.png" alt="ê³µì??‚¬?•­ ?•„?´ì½?">
     </div>
 	</section>
 		<section class="notice-detail">
 			<div class="notice-header">
-				<div class="notice-path">ê³µì§€ì‚¬í•­ &gt; ${notice.noticeTitle }</div>
+				<div class="notice-path">ê³µì??‚¬?•­ &gt; ${notice.noticeTitle }</div>
 				<div class="notice-meta">
 					<span><fmt:formatDate value="${notice.writeDate}"
 							pattern="yyyy-MM-dd HH:mm" /></span> 
-							<span style="margin-left:20px">ì¡°íšŒìˆ˜ ${notice.viewCount}</span>
+							<span style="margin-left:20px">ì¡°íšŒ?ˆ˜ ${notice.viewCount}</span>
 				</div>
 			</div>
 
@@ -41,16 +41,16 @@
 			<div class="notice-buttons">
 				<div class="notice-buttons-left">
 					<c:if test="${adminYn eq 'Y'}">
-						<a href="update?noticeId=${notice.noticeId }" style="text-decoration: none"><button class="edit-btn">ìˆ˜ì •</button></a>
-						<a href="javascript:void(0)" onclick="checkDelete();"style="text-decoration: none"><button class="delete-btn">ì‚­ì œ</button></a>
+						<a href="update?noticeId=${notice.noticeId }" style="text-decoration: none"><button class="edit-btn">?ˆ˜? •</button></a>
+						<a href="javascript:void(0)" onclick="checkDelete();"style="text-decoration: none"><button class="delete-btn">?‚­? œ</button></a>
 					</c:if>
 				</div>
 				<div class="notice-buttons-right">
 				<c:if test="${not empty prevNoticeNo}">
-					<button class="prev-btn" onclick="location.href='detail?noticeId=${prevNoticeNo}'">ì´ì „</button>
+					<button class="prev-btn" onclick="location.href='detail?noticeId=${prevNoticeNo}'">?´? „</button>
 				</c:if>
 				<c:if test="${not empty nextNoticeNo}">
-					<button class="next-btn" onclick="location.href='detail?noticeId=${nextNoticeNo}'">ë‹¤ìŒ</button>
+					<button class="next-btn" onclick="location.href='detail?noticeId=${nextNoticeNo}'">?‹¤?Œ</button>
 				</c:if>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 	<jsp:include page="../common/footer.jsp" />
 	<script>
 		function checkDelete(){
-			if(confirm('ì •ë§ë¡œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?')){
+			if(confirm('? •ë§ë¡œ ?‚­? œ?•˜?‹œê² ìŠµ?‹ˆê¹??')){
 				location.href = '/notice/delete?noticeId=${notice.noticeId}';
 			}
 		}

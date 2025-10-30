@@ -17,7 +17,7 @@
             <!-- 사이드바 -->
             <aside class="sidebar">
                 <a href="/admin/main">
-                    <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo2.png">
+                    <img class="login-logo" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo2.png">
                 </a>
                 <ul class="sidebar-menu">
                     <li class="active"><a href="/admin/setting">결제 관리<span>&gt;</span></a></li>

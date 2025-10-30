@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>ë¡œê·¸ì¸ | EduMate</title>
+    <title>ë¡œê·¸?¸ | EduMate</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/resources/css/member/signup_done.css">
     <link rel="stylesheet" href="/resources/css/common/header.css">
@@ -17,20 +17,20 @@
 <!-- Login -->
 <section class="login-container">
     <div class="login-box">
-        <!-- ì™¼ìª½ ì˜ì—­ -->
+        <!-- ?™¼ìª? ?˜?—­ -->
         <div class="login-left">
-            <div class="login-icon">ðŸ‘¤</div>
-            <h2>íšŒì›ê°€ìž…</h2>
-            <p>ê°€ìž… ì™„ë£Œ</p>
+            <div class="login-icon">?Ÿ‘?</div>
+            <h2>?šŒ?›ê°??ž…</h2>
+            <p>ê°??ž… ?™„ë£?</p>
         </div>
-        <!-- ì˜¤ë¥¸ìª½ ì˜ì—­ -->
+        <!-- ?˜¤ë¥¸ìª½ ?˜?—­ -->
         <div class="login-right">
-            <img class="login-logo" src="${pageContext.request.contextPath}/resources/images/common/logo.png">
-            <div class="complete-icon">ðŸµ</div>
-            <h2>íšŒì›ê°€ìž…ì´ ì™„ë£Œë˜ì—ˆì–´ìš”</h2>
-            <p>ì €í¬ í•™ìƒì´ ë˜ì–´ì£¼ì‹ ê±¸ í™˜ì˜í•´ìš”</p>
-            <button class="btn-login" onclick="location.href = '/member/login'">ë¡œê·¸ì¸</button>
-            <button class="btn-main" onclick="location.href = '/'">ë©”ì¸í™”ë©´</button>
+            <img class="login-logo" src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/images/logo.png">
+            <div class="complete-icon">?Ÿ?</div>
+            <h2>?šŒ?›ê°??ž…?´ ?™„ë£Œë˜?—ˆ?–´?š”</h2>
+            <p>???¬ ?•™?ƒ?´ ?˜?–´ì£¼ì‹ ê±? ?™˜?˜?•´?š”</p>
+            <button class="btn-login" onclick="location.href = '/member/login'">ë¡œê·¸?¸</button>
+            <button class="btn-main" onclick="location.href = '/'">ë©”ì¸?™”ë©?</button>
         </div>
     </div>
 </section>

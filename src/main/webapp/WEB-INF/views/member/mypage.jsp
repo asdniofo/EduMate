@@ -7,7 +7,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ë§ˆì´í˜ì´ì§€ | EduMate</title>
+        <title>ë§ˆì´?˜?´ì§? | EduMate</title>
         <link rel="stylesheet" href="/resources/css/common/header.css">
         <link rel="stylesheet" href="/resources/css/common/footer.css">
         <link rel="stylesheet" href="/resources/css/member/mypage.css">
@@ -22,18 +22,18 @@
 
             <section class="main-banner">
                 <div class="banner-text">
-                    ë§ˆì´í˜ì´ì§€
+                    ë§ˆì´?˜?´ì§?
                 </div>
                 <div class="object">
-                    <img src="/resources/images/member/mypage.png" alt="ë§ˆì´í˜ì´ì§€ ì•„ì´ì½˜">
+                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/member/mypage.png" alt="ë§ˆì´?˜?´ì§? ?•„?´ì½?">
                 </div>
             </section>
 
-            <!-- ë©”ì¸ ì½˜í…ì¸  -->
+            <!-- ë©”ì¸ ì½˜í…ì¸? -->
             <div class="main-content">
                 <div class="mypage-content">
 
-                    <!-- í”„ë¡œí•„ ì„¹ì…˜ -->
+                    <!-- ?”„ë¡œí•„ ?„¹?…˜ -->
                     <div class="profile-section">
                         <img class="profile-image" src="/resources/images/common/mypage1.png" alt="">
                         <div class="profile-info">
@@ -41,10 +41,10 @@
                             <div class="user-name">
                                 <c:choose>
                                     <c:when test="${not empty memberInfo.memberName}">
-                                        ${memberInfo.memberName}ë‹˜
+                                        ${memberInfo.memberName}?‹˜
                                     </c:when>
                                     <c:otherwise>
-                                        ${sessionScope.loginId}ë‹˜
+                                        ${sessionScope.loginId}?‹˜
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -52,15 +52,15 @@
                                 <div class="stat-item">
                                     <div class="stat-number"><fmt:formatNumber value="${memberInfo.memberMoney}"
                                                                                pattern="#,###"/></div>
-                                    <div class="stat-label">ì”ê³ </div>
+                                    <div class="stat-label">?”ê³?</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-number">${requestCount + questionCount}</div>
-                                    <div class="stat-label">ì‘ì„±ê¸€ ìˆ˜</div>
+                                    <div class="stat-label">?‘?„±ê¸? ?ˆ˜</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-number">${requestCommentCount + questionCommentCount}</div>
-                                    <div class="stat-label">ëŒ“ê¸€ ìˆ˜</div>
+                                    <div class="stat-label">?Œ“ê¸? ?ˆ˜</div>
                                 </div>
                             </div>
                         </div>
@@ -69,15 +69,15 @@
 
                     <c:choose>
                         <c:when test="${sessionScope.teacherYn eq 'N' && sessionScope.adminYn eq 'N'}">
-                            <!-- í˜„ì¬ ìˆ˜ê°•ì¤‘ì¸ ê°•ì˜ -->
+                            <!-- ?˜„?¬ ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ -->
                             <div class="section">
                                 <div class="section-header">
-                                    <h2 class="section-title">í˜„ì¬ ìˆ˜ê°•ì¤‘ì¸ ê°•ì˜</h2>
-                                    <!-- ê²€ìƒ‰ ë°•ìŠ¤ë¥¼ header ì•ˆìœ¼ë¡œ ì´ë™ -->
+                                    <h2 class="section-title">?˜„?¬ ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜</h2>
+                                    <!-- ê²??ƒ‰ ë°•ìŠ¤ë¥? header ?•ˆ?œ¼ë¡? ?´?™ -->
                                     <div class="course-search-box">
-                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ëª…, ê°•ì‚¬ëª…ì„ ì…ë ¥í•˜ì„¸ìš”"
+                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ëª?, ê°•ì‚¬ëª…ì„ ?…? ¥?•˜?„¸?š”"
                                                onkeypress="handleCourseSearchEnter(event)">
-                                        <button onclick="searchCourses()">ğŸ”</button>
+                                        <button onclick="searchCourses()">?Ÿ”?</button>
                                     </div>
                                 </div>
 
@@ -95,14 +95,14 @@
                                             </c:forEach>
                                             <c:if test="${fn:length(lectureList) > 3}">
                                                 <div class="toggle-courses-btn" onclick="toggleCourses()">
-                                                    <span id="toggleText">ë”ë³´ê¸° (${fn:length(lectureList) - 3}ê°œ)</span>
-                                                    <span id="toggleIcon">â–¼</span>
+                                                    <span id="toggleText">?”ë³´ê¸° (${fn:length(lectureList) - 3}ê°?)</span>
+                                                    <span id="toggleIcon">?–¼</span>
                                                 </div>
                                             </c:if>
                                         </c:when>
                                         <c:otherwise>
                                             <div style="text-align: center; color: #999; padding: 40px;">
-                                                ìˆ˜ê°•ì¤‘ì¸ ê°•ì˜ê°€ ì—†ìŠµë‹ˆë‹¤.
+                                                ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ê°? ?—†?Šµ?‹ˆ?‹¤.
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
@@ -110,15 +110,15 @@
                             </div>
                         </c:when>
                         <c:when test="${sessionScope.teacherYn eq 'Y'}">
-                            <!-- í˜„ì¬ ìˆ˜ê°•ì¤‘ì¸ ê°•ì˜ -->
+                            <!-- ?˜„?¬ ?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ -->
                             <div class="section">
                                 <div class="section-header">
-                                    <h2 class="section-title">ë‚´ê°€ ë“±ë¡í•œ ê°•ì˜</h2>
-                                    <!-- ê²€ìƒ‰ ë°•ìŠ¤ë¥¼ header ì•ˆìœ¼ë¡œ ì´ë™ -->
+                                    <h2 class="section-title">?‚´ê°? ?“±ë¡í•œ ê°•ì˜</h2>
+                                    <!-- ê²??ƒ‰ ë°•ìŠ¤ë¥? header ?•ˆ?œ¼ë¡? ?´?™ -->
                                     <div class="course-search-box">
-                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ëª…ì„ ì…ë ¥í•˜ì„¸ìš”"
+                                        <input type="text" id="courseSearchInput" placeholder="ê°•ì˜ëª…ì„ ?…? ¥?•˜?„¸?š”"
                                                onkeypress="handleCourseSearchEnter(event)">
-                                        <button onclick="searchCourses()">ğŸ”</button>
+                                        <button onclick="searchCourses()">?Ÿ”?</button>
                                     </div>
                                 </div>
 
@@ -136,14 +136,14 @@
                                             </c:forEach>
                                             <c:if test="${fn:length(lList) > 3}">
                                                 <div class="toggle-courses-btn" onclick="toggleCourses()">
-                                                    <span id="toggleText">ë”ë³´ê¸° (${fn:length(lList) - 3}ê°œ)</span>
-                                                    <span id="toggleIcon">â–¼</span>
+                                                    <span id="toggleText">?”ë³´ê¸° (${fn:length(lList) - 3}ê°?)</span>
+                                                    <span id="toggleIcon">?–¼</span>
                                                 </div>
                                             </c:if>
                                         </c:when>
                                         <c:otherwise>
                                             <div style="text-align: center; color: #999; padding: 40px;">
-                                                ë“±ë¡í•œ ê°•ì˜ê°€ ì—†ìŠµë‹ˆë‹¤.
+                                                ?“±ë¡í•œ ê°•ì˜ê°? ?—†?Šµ?‹ˆ?‹¤.
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
@@ -156,136 +156,136 @@
                         <c:when test="${sessionScope.teacherYn eq 'Y'}">
                             <div class="section">
                                 <a href="/lecture/add" class="menu-item">
-                                    <div class="menu-icon">ğŸ“š</div>
-                                    <div class="menu-text">ê°•ì˜ ì¶”ê°€</div>
+                                    <div class="menu-icon">?Ÿ“?</div>
+                                    <div class="menu-text">ê°•ì˜ ì¶”ê?</div>
                                 </a>
                             </div>
                             <div class="section">
                                 <a href="javascript:void(0);" onclick="openWithdrawPopup();" class="menu-item">
-                                    <div class="menu-icon">ğŸ’°</div>
-                                    <div class="menu-text">ì”ì•¡ ì¶œê¸ˆí•˜ê¸°</div>
+                                    <div class="menu-icon">?Ÿ’?</div>
+                                    <div class="menu-text">?”?•¡ ì¶œê¸ˆ?•˜ê¸?</div>
                                 </a>
                             </div>
                         </c:when>
                         <c:when test="${sessionScope.teacherYn eq 'N' && sessionScope.adminYn eq 'N'}">
-                            <!-- ì”ê³  ì¶©ì „í•˜ê¸° -->
+                            <!-- ?”ê³? ì¶©ì „?•˜ê¸? -->
                             <div class="section">
                                 <a href="javascript:void(0);" onclick="openChargePopup();" class="menu-item">
-                                    <div class="menu-icon">ğŸ’°</div>
-                                    <div class="menu-text">ì”ê³  ì¶©ì „í•˜ê¸°</div>
+                                    <div class="menu-icon">?Ÿ’?</div>
+                                    <div class="menu-text">?”ê³? ì¶©ì „?•˜ê¸?</div>
                                 </a>
                             </div>
                         </c:when>
                     </c:choose>
-                    <!-- ë‚´ê°€ ì‘ì„±í•œ ê²Œì‹œë¬¼ -->
+                    <!-- ?‚´ê°? ?‘?„±?•œ ê²Œì‹œë¬? -->
                     <div class="section">
                         <a href="/member/mypost" class="menu-item">
-                            <div class="menu-icon">ğŸ“</div>
-                            <div class="menu-text">ë‚´ê°€ ì‘ì„±í•œ ê²Œì‹œë¬¼</div>
+                            <div class="menu-icon">?Ÿ“?</div>
+                            <div class="menu-text">?‚´ê°? ?‘?„±?•œ ê²Œì‹œë¬?</div>
                         </a>
                     </div>
 
-                    <!-- ë‚´ê°€ ì‘ì„±í•œ ëŒ“ê¸€ -->
+                    <!-- ?‚´ê°? ?‘?„±?•œ ?Œ“ê¸? -->
                     <div class="section">
                         <a href="/member/mycomment" class="menu-item">
-                            <div class="menu-icon">ğŸ’¬</div>
-                            <div class="menu-text">ë‚´ê°€ ì‘ì„±í•œ ëŒ“ê¸€</div>
+                            <div class="menu-icon">?Ÿ’?</div>
+                            <div class="menu-text">?‚´ê°? ?‘?„±?•œ ?Œ“ê¸?</div>
                         </a>
                     </div>
 
-                    <!-- ë‚´ ì •ë³´ ìˆ˜ì • -->
+                    <!-- ?‚´ ? •ë³? ?ˆ˜? • -->
                     <div class="section">
                         <a href="/member/edit" class="menu-item">
-                            <div class="menu-icon">âš™ï¸</div>
-                            <div class="menu-text">ë‚´ ì •ë³´ ìˆ˜ì •</div>
+                            <div class="menu-icon">?š™ï¸?</div>
+                            <div class="menu-text">?‚´ ? •ë³? ?ˆ˜? •</div>
                         </a>
                     </div>
 
-                    <!-- ë¡œê·¸ì•„ì›ƒ -->
+                    <!-- ë¡œê·¸?•„?›ƒ -->
                     <div class="section">
                         <a href="/member/logout" class="menu-item">
-                            <div class="menu-icon">ğŸšª</div>
-                            <div class="menu-text">ë¡œê·¸ì•„ì›ƒ</div>
+                            <div class="menu-icon">?Ÿš?</div>
+                            <div class="menu-text">ë¡œê·¸?•„?›ƒ</div>
                         </a>
                     </div>
 
-                    <!-- íšŒì› íƒˆí‡´ -->
+                    <!-- ?šŒ?› ?ƒˆ?‡´ -->
                     <div class="section">
                         <a href="javascript:void(0);" onclick="deleteMember();" class="menu-item">
-                            <div class="menu-icon">âš ï¸</div>
-                            <div class="menu-text">íšŒì› íƒˆí‡´</div>
+                            <div class="menu-icon">?š ï¸?</div>
+                            <div class="menu-text">?šŒ?› ?ƒˆ?‡´</div>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- ì¶©ì „ íŒì—… -->
+            <!-- ì¶©ì „ ?Œ?—… -->
             <div class="charge-popup-overlay" id="chargePopupOverlay">
                 <div class="charge-popup">
-                    <h3 class="charge-popup-title">ğŸ’° ì”ì•¡ ì¶©ì „</h3>
+                    <h3 class="charge-popup-title">?Ÿ’? ?”?•¡ ì¶©ì „</h3>
 
                     <div class="charge-amount-section">
                         <input type="text" class="charge-amount-input" id="chargeAmountInput"
-                               placeholder="ì¶©ì „í•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”">
+                               placeholder="ì¶©ì „?•  ê¸ˆì•¡?„ ?…? ¥?•˜?„¸?š”">
                         <div class="charge-amount-buttons">
-                            <button class="charge-amount-btn" onclick="setChargeAmount(10000)">10,000ì›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(30000)">30,000ì›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(50000)">50,000ì›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(100000)">100,000ì›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(300000)">300,000ì›</button>
-                            <button class="charge-amount-btn" onclick="setChargeAmount(500000)">500,000ì›</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(10000)">10,000?›</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(30000)">30,000?›</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(50000)">50,000?›</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(100000)">100,000?›</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(300000)">300,000?›</button>
+                            <button class="charge-amount-btn" onclick="setChargeAmount(500000)">500,000?›</button>
                         </div>
                     </div>
 
                     <div class="charge-popup-buttons">
                         <button class="charge-popup-btn cancel" onclick="closeChargePopup()">ì·¨ì†Œ</button>
-                        <button class="charge-popup-btn confirm" onclick="processCharge()">ì¶©ì „í•˜ê¸°</button>
+                        <button class="charge-popup-btn confirm" onclick="processCharge()">ì¶©ì „?•˜ê¸?</button>
                     </div>
                 </div>
             </div>
 
-            <!-- ì¶œê¸ˆ íŒì—… -->
+            <!-- ì¶œê¸ˆ ?Œ?—… -->
             <div class="charge-popup-overlay" id="withdrawPopupOverlay" style="display: none;">
                 <div class="charge-popup">
-                    <h3 class="charge-popup-title">ğŸ’¸ ì”ì•¡ ì¶œê¸ˆ</h3>
+                    <h3 class="charge-popup-title">?Ÿ’? ?”?•¡ ì¶œê¸ˆ</h3>
 
                     <div class="withdraw-form">
-                        <!-- ì€í–‰ ì„ íƒ -->
+                        <!-- ???–‰ ?„ ?ƒ -->
                         <div class="form-group" style="margin-bottom: 15px;">
-                            <label for="bankSelect" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">ì€í–‰ ì„ íƒ</label>
+                            <label for="bankSelect" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">???–‰ ?„ ?ƒ</label>
                             <select id="bankSelect" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; background: white;">
-                                <option value="">ì€í–‰ì„ ì„ íƒí•˜ì„¸ìš”</option>
-                                <option value="KBêµ­ë¯¼ì€í–‰">KBêµ­ë¯¼ì€í–‰</option>
-                                <option value="ì‹ í•œì€í–‰">ì‹ í•œì€í–‰</option>
-                                <option value="ìš°ë¦¬ì€í–‰">ìš°ë¦¬ì€í–‰</option>
-                                <option value="í•˜ë‚˜ì€í–‰">í•˜ë‚˜ì€í–‰</option>
-                                <option value="NHë†í˜‘ì€í–‰">NHë†í˜‘ì€í–‰</option>
-                                <option value="IBKê¸°ì—…ì€í–‰">IBKê¸°ì—…ì€í–‰</option>
-                                <option value="ì¹´ì¹´ì˜¤ë±…í¬">ì¹´ì¹´ì˜¤ë±…í¬</option>
-                                <option value="í† ìŠ¤ë±…í¬">í† ìŠ¤ë±…í¬</option>
-                                <option value="ì¼€ì´ë±…í¬">ì¼€ì´ë±…í¬</option>
+                                <option value="">???–‰?„ ?„ ?ƒ?•˜?„¸?š”</option>
+                                <option value="KBêµ?ë¯¼ì??–‰">KBêµ?ë¯¼ì??–‰</option>
+                                <option value="?‹ ?•œ???–‰">?‹ ?•œ???–‰</option>
+                                <option value="?š°ë¦¬ì??–‰">?š°ë¦¬ì??–‰</option>
+                                <option value="?•˜?‚˜???–‰">?•˜?‚˜???–‰</option>
+                                <option value="NH?†?˜‘???–‰">NH?†?˜‘???–‰</option>
+                                <option value="IBKê¸°ì—…???–‰">IBKê¸°ì—…???–‰</option>
+                                <option value="ì¹´ì¹´?˜¤ë±…í¬">ì¹´ì¹´?˜¤ë±…í¬</option>
+                                <option value="?† ?Š¤ë±…í¬">?† ?Š¤ë±…í¬</option>
+                                <option value="ì¼??´ë±…í¬">ì¼??´ë±…í¬</option>
                             </select>
                         </div>
 
-                        <!-- ê³„ì¢Œë²ˆí˜¸ ì…ë ¥ -->
+                        <!-- ê³„ì¢Œë²ˆí˜¸ ?…? ¥ -->
                         <div class="form-group" style="margin-bottom: 15px;">
                             <label for="accountNumber" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">ê³„ì¢Œë²ˆí˜¸</label>
-                            <input type="text" id="accountNumber" placeholder="ê³„ì¢Œë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” (- ì—†ì´)" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                            <input type="text" id="accountNumber" placeholder="ê³„ì¢Œë²ˆí˜¸ë¥? ?…? ¥?•˜?„¸?š” (- ?—†?´)" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
                         </div>
 
                         <!-- ì¶œê¸ˆ ê¸ˆì•¡ -->
                         <div class="form-group" style="margin-bottom: 0;">
-                            <label for="withdrawAmountInput" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">ì¶œê¸ˆ ê¸ˆì•¡ (í˜„ì¬ ì”ì•¡: <fmt:formatNumber value="${memberInfo.memberMoney}" pattern="#,###"/>ì›)</label>
+                            <label for="withdrawAmountInput" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">ì¶œê¸ˆ ê¸ˆì•¡ (?˜„?¬ ?”?•¡: <fmt:formatNumber value="${memberInfo.memberMoney}" pattern="#,###"/>?›)</label>
                             <div class="amount-input-group" style="display: flex; gap: 10px; align-items: center;">
-                                <input type="text" class="charge-amount-input" id="withdrawAmountInput" placeholder="ì¶œê¸ˆí•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”" style="flex: 1; height: 46px; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; margin: 0;">
-                                <button class="full-amount-btn" onclick="setFullAmount()" style="height: 46px; padding: 0 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; white-space: nowrap;">ì „ì•¡</button>
+                                <input type="text" class="charge-amount-input" id="withdrawAmountInput" placeholder="ì¶œê¸ˆ?•  ê¸ˆì•¡?„ ?…? ¥?•˜?„¸?š”" style="flex: 1; height: 46px; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; margin: 0;">
+                                <button class="full-amount-btn" onclick="setFullAmount()" style="height: 46px; padding: 0 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; white-space: nowrap;">? „?•¡</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="charge-popup-buttons" style="margin-top: 15px;">
                         <button class="charge-popup-btn cancel" onclick="closeWithdrawPopup()">ì·¨ì†Œ</button>
-                        <button class="charge-popup-btn confirm" onclick="processWithdraw()">ì¶œê¸ˆ ì‹ ì²­</button>
+                        <button class="charge-popup-btn confirm" onclick="processWithdraw()">ì¶œê¸ˆ ?‹ ì²?</button>
                     </div>
                 </div>
             </div>
@@ -293,9 +293,9 @@
             <script>
                 let chargeAmount = 0;
 
-                // ì¶©ì „ ê´€ë ¨ í•¨ìˆ˜ë“¤
+                // ì¶©ì „ ê´?? ¨ ?•¨?ˆ˜?“¤
                 function openChargePopup() {
-                    // ë§ˆì´í˜ì´ì§€ì—ì„œ ì¶©ì „í•˜ëŠ” ê²ƒì„ì„ ì„œë²„ì— ì•Œë¦¼ (ì„¸ì…˜ ì •ë¦¬ìš©)
+                    // ë§ˆì´?˜?´ì§??—?„œ ì¶©ì „?•˜?Š” ê²ƒì„?„ ?„œë²„ì— ?•Œë¦? (?„¸?…˜ ? •ë¦¬ìš©)
                     fetch('/member/clearLectureSession', {
                         method: 'POST',
                         headers: {
@@ -313,8 +313,8 @@
                             input.value = '';
                         }
                     }).catch(error => {
-                        console.error('ì„¸ì…˜ ì •ë¦¬ ì¤‘ ì˜¤ë¥˜:', error);
-                        // ì˜¤ë¥˜ê°€ ìˆì–´ë„ íŒì—…ì€ ì—´ê¸°
+                        console.error('?„¸?…˜ ? •ë¦? ì¤? ?˜¤ë¥?:', error);
+                        // ?˜¤ë¥˜ê? ?ˆ?–´?„ ?Œ?—…?? ?—´ê¸?
                         const popup = document.getElementById('chargePopupOverlay');
                         if (popup) {
                             popup.style.display = 'flex';
@@ -341,15 +341,15 @@
                     chargeAmount = parseInt(inputAmount) || chargeAmount;
 
                     if (!chargeAmount || chargeAmount < 1000) {
-                        alert('ìµœì†Œ 1,000ì› ì´ìƒ ì¶©ì „í•´ì£¼ì„¸ìš”.');
+                        alert('ìµœì†Œ 1,000?› ?´?ƒ ì¶©ì „?•´ì£¼ì„¸?š”.');
                         return;
                     }
 
-                    // ì„œë²„ì—ì„œ ê²°ì œ ì •ë³´ë¥¼ ê°€ì ¸ì™€ì„œ í† ìŠ¤í˜ì´ë¨¼ì¸  í˜¸ì¶œ
+                    // ?„œë²„ì—?„œ ê²°ì œ ? •ë³´ë?? ê°?? ¸???„œ ?† ?Š¤?˜?´ë¨¼ì¸  ?˜¸ì¶?
                     requestChargePayment(chargeAmount);
                 }
 
-                // ì„œë²„ì—ì„œ ê²°ì œ ì •ë³´ë¥¼ ê°€ì ¸ì™€ì„œ í† ìŠ¤í˜ì´ë¨¼ì¸  í˜¸ì¶œ
+                // ?„œë²„ì—?„œ ê²°ì œ ? •ë³´ë?? ê°?? ¸???„œ ?† ?Š¤?˜?´ë¨¼ì¸  ?˜¸ì¶?
                 function requestChargePayment(amount) {
                     fetch('/purchase/toss/charge', {
                         method: 'POST',
@@ -374,29 +374,29 @@
                                 })
                                     .catch(function (error) {
                                         if (error.code === 'USER_CANCEL') {
-                                            console.log('ì¶©ì „ì´ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤.');
+                                            console.log('ì¶©ì „?´ ì·¨ì†Œ?˜?—ˆ?Šµ?‹ˆ?‹¤.');
                                         } else {
-                                            alert('ì¶©ì „ ìš”ì²­ ì‹¤íŒ¨: ' + error.message);
+                                            alert('ì¶©ì „ ?š”ì²? ?‹¤?Œ¨: ' + error.message);
                                         }
                                     });
                             } else {
-                                alert(data.message || 'ì¶©ì „ ìš”ì²­ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');
+                                alert(data.message || 'ì¶©ì „ ?š”ì²??— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.');
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('ì¶©ì „ ìš”ì²­ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.');
+                            alert('ì¶©ì „ ?š”ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
                         });
                 }
 
-                // ì¶œê¸ˆ ê´€ë ¨ í•¨ìˆ˜ë“¤
+                // ì¶œê¸ˆ ê´?? ¨ ?•¨?ˆ˜?“¤
                 function openWithdrawPopup() {
                     const popup = document.getElementById('withdrawPopupOverlay');
                     if (popup) {
                         popup.style.display = 'flex';
                     }
                     
-                    // í¼ ì´ˆê¸°í™”
+                    // ?¼ ì´ˆê¸°?™”
                     document.getElementById('bankSelect').value = '';
                     document.getElementById('accountNumber').value = '';
                     document.getElementById('withdrawAmountInput').value = '';
@@ -420,33 +420,33 @@
                     const withdrawInput = document.getElementById('withdrawAmountInput');
                     const withdrawAmount = parseInt(withdrawInput.value.replace(/,/g, '')) || 0;
                     
-                    // ìœ íš¨ì„± ê²€ì‚¬
+                    // ?œ ?š¨?„± ê²??‚¬
                     if (!bank || bank.trim() === '') {
-                        alert('ì€í–‰ì„ ì„ íƒí•´ì£¼ì„¸ìš”.');
+                        alert('???–‰?„ ?„ ?ƒ?•´ì£¼ì„¸?š”.');
                         return;
                     }
                     
                     if (!accountNumber || accountNumber.trim() === '') {
-                        alert('ê³„ì¢Œë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+                        alert('ê³„ì¢Œë²ˆí˜¸ë¥? ?…? ¥?•´ì£¼ì„¸?š”.');
                         return;
                     }
                     
                     if (!withdrawAmount || withdrawAmount < 1000) {
-                        alert('ìµœì†Œ 1,000ì› ì´ìƒ ì¶œê¸ˆ ê°€ëŠ¥í•©ë‹ˆë‹¤.');
+                        alert('ìµœì†Œ 1,000?› ?´?ƒ ì¶œê¸ˆ ê°??Š¥?•©?‹ˆ?‹¤.');
                         return;
                     }
                     
                     const currentBalance = ${memberInfo.memberMoney};
                     if (withdrawAmount > currentBalance) {
-                        alert('ì”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.');
+                        alert('?”?•¡?´ ë¶?ì¡±í•©?‹ˆ?‹¤.');
                         return;
                     }
                     
-                    if (!confirm(bank + '\nê³„ì¢Œë²ˆí˜¸: ' + accountNumber + '\nì¶œê¸ˆê¸ˆì•¡: ' + withdrawAmount.toLocaleString() + 'ì›\n\nìœ„ ì •ë³´ë¡œ ì¶œê¸ˆí•˜ì‹œê² ìŠµë‹ˆê¹Œ?')) {
+                    if (!confirm(bank + '\nê³„ì¢Œë²ˆí˜¸: ' + accountNumber + '\nì¶œê¸ˆê¸ˆì•¡: ' + withdrawAmount.toLocaleString() + '?›\n\n?œ„ ? •ë³´ë¡œ ì¶œê¸ˆ?•˜?‹œê² ìŠµ?‹ˆê¹??')) {
                         return;
                     }
                     
-                    // ì„œë²„ë¡œ ì¶œê¸ˆ ìš”ì²­
+                    // ?„œë²„ë¡œ ì¶œê¸ˆ ?š”ì²?
                     fetch('/member/withdraw', {
                         method: 'POST',
                         headers: {
@@ -461,20 +461,20 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('ì¶œê¸ˆ ì‹ ì²­ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\nì²˜ë¦¬ê¹Œì§€ 1-2ì¼ ì†Œìš”ë©ë‹ˆë‹¤.');
+                            alert('ì¶œê¸ˆ ?‹ ì²??´ ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.\nì²˜ë¦¬ê¹Œì? 1-2?¼ ?†Œ?š”?©?‹ˆ?‹¤.');
                             closeWithdrawPopup();
-                            window.location.reload(); // ì”ì•¡ ì—…ë°ì´íŠ¸ë¥¼ ìœ„í•´ ìƒˆë¡œê³ ì¹¨
+                            window.location.reload(); // ?”?•¡ ?—…?°?´?Š¸ë¥? ?œ„?•´ ?ƒˆë¡œê³ ì¹?
                         } else {
-                            alert(data.message || 'ì¶œê¸ˆ ì‹ ì²­ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');
+                            alert(data.message || 'ì¶œê¸ˆ ?‹ ì²??— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.');
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('ì¶œê¸ˆ ì‹ ì²­ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.');
+                        alert('ì¶œê¸ˆ ?‹ ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
                     });
                 }
 
-                // ì¶©ì „/ì¶œê¸ˆ ê¸ˆì•¡ ì…ë ¥ ì‹œ í¬ë§·íŒ…
+                // ì¶©ì „/ì¶œê¸ˆ ê¸ˆì•¡ ?…? ¥ ?‹œ ?¬ë§·íŒ…
                 document.addEventListener('DOMContentLoaded', function () {
                     const chargeInput = document.getElementById('chargeAmountInput');
                     if (chargeInput) {
@@ -494,7 +494,7 @@
                                 const numericValue = parseInt(value);
                                 const currentBalance = ${memberInfo.memberMoney};
                                 
-                                // í˜„ì¬ ì”ì•¡ë³´ë‹¤ í° ê¸ˆì•¡ì€ ì…ë ¥ ë¶ˆê°€
+                                // ?˜„?¬ ?”?•¡ë³´ë‹¤ ?° ê¸ˆì•¡?? ?…? ¥ ë¶ˆê?
                                 if (numericValue > currentBalance) {
                                     e.target.value = currentBalance.toLocaleString();
                                 } else {
@@ -511,29 +511,29 @@
                         });
                     }
 
-                    // URL íŒŒë¼ë¯¸í„°ì—ì„œ ì¶©ì „ ê²°ê³¼ í™•ì¸
+                    // URL ?ŒŒ?¼ë¯¸í„°?—?„œ ì¶©ì „ ê²°ê³¼ ?™•?¸
                     const urlParams = new URLSearchParams(window.location.search);
                     const chargeSuccess = urlParams.get('chargeSuccess');
                     const chargeAmount = urlParams.get('chargeAmount');
 
                     if (chargeSuccess === 'true' && chargeAmount) {
-                        // ì¶©ì „ ì„±ê³µ íŒì—…
-                        alert('ğŸ’° ì¶©ì „ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤!\nì¶©ì „ ê¸ˆì•¡: â‚©' + parseInt(chargeAmount).toLocaleString() + 'ì›');
-                        // URLì—ì„œ íŒŒë¼ë¯¸í„° ì œê±°
+                        // ì¶©ì „ ?„±ê³? ?Œ?—…
+                        alert('?Ÿ’? ì¶©ì „?´ ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤!\nì¶©ì „ ê¸ˆì•¡: ?‚©' + parseInt(chargeAmount).toLocaleString() + '?›');
+                        // URL?—?„œ ?ŒŒ?¼ë¯¸í„° ? œê±?
                         window.history.replaceState({}, document.title, window.location.pathname);
-                        // í˜ì´ì§€ ìƒˆë¡œê³ ì¹¨í•˜ì—¬ ì”ì•¡ ì—…ë°ì´íŠ¸
+                        // ?˜?´ì§? ?ƒˆë¡œê³ ì¹¨í•˜?—¬ ?”?•¡ ?—…?°?´?Š¸
                         window.location.reload();
                     } else if (chargeSuccess === 'false') {
-                        // ì¶©ì „ ì‹¤íŒ¨ íŒì—…
-                        alert('âŒì¶©ì „ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.\në‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.');
-                        // URLì—ì„œ íŒŒë¼ë¯¸í„° ì œê±°
+                        // ì¶©ì „ ?‹¤?Œ¨ ?Œ?—…
+                        alert('?Œì¶©ì „?— ?‹¤?Œ¨?–ˆ?Šµ?‹ˆ?‹¤.\n?‹¤?‹œ ?‹œ?„?•´ì£¼ì„¸?š”.');
+                        // URL?—?„œ ?ŒŒ?¼ë¯¸í„° ? œê±?
                         window.history.replaceState({}, document.title, window.location.pathname);
                     }
                 });
 
-                // íšŒì› íƒˆí‡´ í•¨ìˆ˜
+                // ?šŒ?› ?ƒˆ?‡´ ?•¨?ˆ˜
                 function deleteMember() {
-                    if (confirm('ì •ë§ë¡œ íšŒì› íƒˆí‡´ë¥¼ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?\n\níƒˆí‡´ ì‹œ ëª¨ë“  ë°ì´í„°ê°€ ì‚­ì œë˜ë©° ë³µêµ¬í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.')) {
+                    if (confirm('? •ë§ë¡œ ?šŒ?› ?ƒˆ?‡´ë¥? ?•˜?‹œê² ìŠµ?‹ˆê¹??\n\n?ƒˆ?‡´ ?‹œ ëª¨ë“  ?°?´?„°ê°? ?‚­? œ?˜ë©? ë³µêµ¬?•  ?ˆ˜ ?—†?Šµ?‹ˆ?‹¤.')) {
                         const memberId = '${sessionScope.loginId}';
 
                         fetch('/member/delete', {
@@ -545,21 +545,21 @@
                         })
                             .then(response => {
                                 if (response.ok) {
-                                    alert('íšŒì› íƒˆí‡´ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.');
-                                    // ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬ ë° ì„¸ì…˜ ì´ˆê¸°í™”
+                                    alert('?šŒ?› ?ƒˆ?‡´ê°? ?™„ë£Œë˜?—ˆ?Šµ?‹ˆ?‹¤.');
+                                    // ë¡œê·¸?•„?›ƒ ì²˜ë¦¬ ë°? ?„¸?…˜ ì´ˆê¸°?™”
                                     window.location.href = '/member/logout';
                                 } else {
-                                    alert('íšŒì› íƒˆí‡´ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.');
+                                    alert('?šŒ?› ?ƒˆ?‡´ ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
                                 }
                             })
                             .catch(error => {
                                 console.error('Error:', error);
-                                alert('íšŒì› íƒˆí‡´ ìš”ì²­ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.');
+                                alert('?šŒ?› ?ƒˆ?‡´ ?š”ì²? ì¤? ?˜¤ë¥˜ê? ë°œìƒ?–ˆ?Šµ?‹ˆ?‹¤.');
                             });
                     }
                 }
 
-                // ê°•ì˜ ëª©ë¡ í† ê¸€ í•¨ìˆ˜
+                // ê°•ì˜ ëª©ë¡ ?† ê¸? ?•¨?ˆ˜
                 function toggleCourses() {
                     const hiddenCourses = document.querySelectorAll('.hidden-course');
                     const toggleBtn = document.querySelector('.toggle-courses-btn');
@@ -569,30 +569,30 @@
                     let isExpanded = toggleBtn.classList.contains('expanded');
 
                     if (isExpanded) {
-                        // ì ‘ê¸°
+                        // ? ‘ê¸?
                         hiddenCourses.forEach(course => {
                             course.style.display = 'none';
                         });
-                        toggleText.textContent = 'ë”ë³´ê¸° (' + hiddenCourses.length + 'ê°œ)';
-                        toggleIcon.textContent = 'â–¼';
+                        toggleText.textContent = '?”ë³´ê¸° (' + hiddenCourses.length + 'ê°?)';
+                        toggleIcon.textContent = '?–¼';
                         toggleBtn.classList.remove('expanded');
                     } else {
-                        // í¼ì¹˜ê¸°
+                        // ?¼ì¹˜ê¸°
                         hiddenCourses.forEach(course => {
                             course.style.display = 'flex';
                         });
-                        toggleText.textContent = 'ì ‘ê¸°';
-                        toggleIcon.textContent = 'â–²';
+                        toggleText.textContent = '? ‘ê¸?';
+                        toggleIcon.textContent = '?–²';
                         toggleBtn.classList.add('expanded');
                     }
                 }
 
-                // ê°•ì˜ ê²€ìƒ‰ ê´€ë ¨ í•¨ìˆ˜ë“¤
-                let allCourses = []; // ì „ì²´ ê°•ì˜ ë°ì´í„° ì €ì¥
+                // ê°•ì˜ ê²??ƒ‰ ê´?? ¨ ?•¨?ˆ˜?“¤
+                let allCourses = []; // ? „ì²? ê°•ì˜ ?°?´?„° ???¥
 
-                // í˜ì´ì§€ ë¡œë“œ ì‹œ ì „ì²´ ê°•ì˜ ë°ì´í„° ì €ì¥
+                // ?˜?´ì§? ë¡œë“œ ?‹œ ? „ì²? ê°•ì˜ ?°?´?„° ???¥
                 document.addEventListener('DOMContentLoaded', function () {
-                    // ê¸°ì¡´ ê°•ì˜ ìš”ì†Œë“¤ì„ ë°°ì—´ë¡œ ì €ì¥
+                    // ê¸°ì¡´ ê°•ì˜ ?š”?†Œ?“¤?„ ë°°ì—´ë¡? ???¥
                     const courseElements = document.querySelectorAll('.course-item');
                     courseElements.forEach(course => {
                         allCourses.push({
@@ -619,28 +619,28 @@
                     const courseContent = document.getElementById('courseContent');
 
                     if (!searchTerm) {
-                        // ê²€ìƒ‰ì–´ê°€ ì—†ìœ¼ë©´ ì›ë˜ ìƒíƒœë¡œ ë³µì›
+                        // ê²??ƒ‰?–´ê°? ?—†?œ¼ë©? ?›?˜ ?ƒ?ƒœë¡? ë³µì›
                         restoreOriginalCourses();
                         return;
                     }
 
-                    // ê²€ìƒ‰ ê²°ê³¼ í•„í„°ë§
+                    // ê²??ƒ‰ ê²°ê³¼ ?•„?„°ë§?
                     const filteredCourses = allCourses.filter(course =>
                         course.title.includes(searchTerm) ||
                         course.instructor.includes(searchTerm) ||
                         course.category.includes(searchTerm)
                     );
 
-                    // ê¸°ì¡´ ê°•ì˜ ëª©ë¡ ì œê±°
+                    // ê¸°ì¡´ ê°•ì˜ ëª©ë¡ ? œê±?
                     const existingCourses = courseContent.querySelectorAll('.course-item');
                     existingCourses.forEach(course => course.remove());
 
-                    // í† ê¸€ ë²„íŠ¼ ì œê±°
+                    // ?† ê¸? ë²„íŠ¼ ? œê±?
                     const toggleBtn = courseContent.querySelector('.toggle-courses-btn');
                     if (toggleBtn) toggleBtn.remove();
 
                     if (filteredCourses.length > 0) {
-                        // í•„í„°ë§ëœ ê°•ì˜ë“¤ í‘œì‹œ
+                        // ?•„?„°ë§ëœ ê°•ì˜?“¤ ?‘œ?‹œ
                         filteredCourses.forEach(course => {
                             const courseElement = course.element.cloneNode(true);
                             courseElement.style.display = 'flex';
@@ -648,10 +648,10 @@
                             courseContent.appendChild(courseElement);
                         });
                     } else {
-                        // ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ì„ ë•Œ
+                        // ê²??ƒ‰ ê²°ê³¼ê°? ?—†?„ ?•Œ
                         const noResult = document.createElement('div');
                         noResult.style.cssText = 'text-align: center; color: #999; padding: 40px;';
-                        noResult.textContent = 'ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.';
+                        noResult.textContent = 'ê²??ƒ‰ ê²°ê³¼ê°? ?—†?Šµ?‹ˆ?‹¤.';
                         courseContent.appendChild(noResult);
                     }
                 }
@@ -659,11 +659,11 @@
                 function restoreOriginalCourses() {
                     const courseContent = document.getElementById('courseContent');
 
-                    // ê¸°ì¡´ ë‚´ìš© ì œê±°
+                    // ê¸°ì¡´ ?‚´?š© ? œê±?
                     courseContent.innerHTML = '';
 
                     if (allCourses.length > 0) {
-                        // ì›ë˜ ê°•ì˜ë“¤ ë³µì›
+                        // ?›?˜ ê°•ì˜?“¤ ë³µì›
                         allCourses.forEach((course, index) => {
                             const courseElement = course.element.cloneNode(true);
                             if (index >= 3) {
@@ -675,18 +675,18 @@
                             courseContent.appendChild(courseElement);
                         });
 
-                        // í† ê¸€ ë²„íŠ¼ ë³µì› (4ê°œ ì´ìƒì¼ ë•Œë§Œ)
+                        // ?† ê¸? ë²„íŠ¼ ë³µì› (4ê°? ?´?ƒ?¼ ?•Œë§?)
                         if (allCourses.length > 3) {
                             const toggleBtn = document.createElement('div');
                             toggleBtn.className = 'toggle-courses-btn';
                             toggleBtn.onclick = toggleCourses;
-                            toggleBtn.innerHTML = '<span id="toggleText">ë”ë³´ê¸° (' + (allCourses.length - 3) + 'ê°œ)</span><span id="toggleIcon">â–¼</span>';
+                            toggleBtn.innerHTML = '<span id="toggleText">?”ë³´ê¸° (' + (allCourses.length - 3) + 'ê°?)</span><span id="toggleIcon">?–¼</span>';
                             courseContent.appendChild(toggleBtn);
                         }
                     } else {
                         const noLecture = document.createElement('div');
                         noLecture.style.cssText = 'text-align: center; color: #999; padding: 40px;';
-                        noLecture.textContent = 'ìˆ˜ê°•ì¤‘ì¸ ê°•ì˜ê°€ ì—†ìŠµë‹ˆë‹¤.';
+                        noLecture.textContent = '?ˆ˜ê°•ì¤‘?¸ ê°•ì˜ê°? ?—†?Šµ?‹ˆ?‹¤.';
                         courseContent.appendChild(noLecture);
                     }
                 }

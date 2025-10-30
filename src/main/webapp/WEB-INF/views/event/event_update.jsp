@@ -6,37 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ì´ë²¤íŠ¸ ê²Œì‹œë¬¼ ìˆ˜ì •</title>
+<title>?´ë²¤íŠ¸ ê²Œì‹œë¬? ?ˆ˜? •</title>
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/common/footer.css">
 <link rel="stylesheet" href="/resources/css/event/event_insert.css">
 </head>
 <body>
-    <!-- ===== í—¤ë” ===== -->
+    <!-- ===== ?—¤?” ===== -->
     <jsp:include page="../common/header.jsp" />
 
     <!-- ===== ë©”ì¸ ===== -->
     <main>
         <!-- ë°°ë„ˆ -->
         <section class="event-banner">
-            <h1>ì´ë²¤íŠ¸ ê²Œì‹œë¬¼ ìˆ˜ì •</h1>
-            <img src="/resources/images/event_icon.png" alt="ì´ë²¤íŠ¸ ì•„ì´ì½˜" />
+            <h1>?´ë²¤íŠ¸ ê²Œì‹œë¬? ?ˆ˜? •</h1>
+            <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/event/event_icon.png" alt="?´ë²¤íŠ¸ ?•„?´ì½?" />
         </section>
 
-        <!-- í¼ ì˜ì—­ -->
+        <!-- ?¼ ?˜?—­ -->
         <section class="event-insert-section">
             <form action="/event/update" method="post" enctype="multipart/form-data" class="event-form">
                 <input type="hidden" name="eventId" value="${event.eventId}">
 
-                <!-- ì œëª© -->
+                <!-- ? œëª? -->
                 <div class="form-group">
-                    <label>ì œëª©</label>
+                    <label>? œëª?</label>
                     <input type="text" name="eventTitle" value="${event.eventTitle}" required>
                 </div>
 
-                <!-- ë¶€ì œëª© -->
+                <!-- ë¶?? œëª? -->
                 <div class="form-group">
-                    <label>ë¶€ì œëª©</label>
+                    <label>ë¶?? œëª?</label>
                     <input type="text" name="eventSubtitle" value="${event.eventSubtitle}">
                 </div>
 
@@ -49,25 +49,25 @@
                     </div>
                 </div>
 
-                <!-- ì¸ë„¤ì¼ ì—…ë¡œë“œ -->
+                <!-- ?¸?„¤?¼ ?—…ë¡œë“œ -->
                 <div class="form-group">
-                    <label>ì´ë²¤íŠ¸ ì¸ë„¤ì¼</label>
+                    <label>?´ë²¤íŠ¸ ?¸?„¤?¼</label>
                     <input type="file" name="thumbnailFile" id="thumbnailFile" accept="image/*">
                     <div id="thumbnailPreview" class="preview-box">
                         <c:if test="${not empty event.eventPath}">
-                            <img src="${event.eventPath}" alt="ì¸ë„¤ì¼">
+                            <img src="${event.eventPath}" alt="?¸?„¤?¼">
                         </c:if>
                     </div>
                 </div>
 
-                <!-- ìƒì„¸ ì´ë¯¸ì§€ ì—…ë¡œë“œ -->
+                <!-- ?ƒ?„¸ ?´ë¯¸ì? ?—…ë¡œë“œ -->
                 <div class="form-group">
-                    <label>ìƒì„¸ ì´ë¯¸ì§€</label>
+                    <label>?ƒ?„¸ ?´ë¯¸ì?</label>
                     <input type="file" name="contentFiles" id="contentFiles" accept="image/*" multiple>
                     <div id="contentPreview" class="preview-box">
 <c:if test="${not empty contents}">
     <c:forEach items="${contents}" var="content">
-        <img src="${content.eContentPath}" alt="ì´ë²¤íŠ¸ ì´ë¯¸ì§€"/>
+        <img src="${content.eContentPath}" alt="?´ë²¤íŠ¸ ?´ë¯¸ì?"/>
     </c:forEach>
 </c:if>
                     </div>
@@ -75,18 +75,18 @@
 
                 <!-- ë²„íŠ¼ -->
                 <div class="form-actions">
-                    <button type="submit" class="submit-btn">ìˆ˜ì •í•˜ê¸°</button>
+                    <button type="submit" class="submit-btn">?ˆ˜? •?•˜ê¸?</button>
                     <button type="button" class="cancel-btn" onclick="location.href='/event/list'">ì·¨ì†Œ</button>
                 </div>
             </form>
         </section>
     </main>
 
-    <!-- ===== í‘¸í„° ===== -->
+    <!-- ===== ?‘¸?„° ===== -->
     <jsp:include page="../common/footer.jsp" />
 
     <script>
-        // ì¸ë„¤ì¼ ë¯¸ë¦¬ë³´ê¸°
+        // ?¸?„¤?¼ ë¯¸ë¦¬ë³´ê¸°
         document.getElementById('thumbnailFile').addEventListener('change', function (e) {
             const preview = document.getElementById('thumbnailPreview');
             preview.innerHTML = '';
@@ -98,7 +98,7 @@
             }
         });
 
-        // ìƒì„¸ ì´ë¯¸ì§€ ë¯¸ë¦¬ë³´ê¸°
+        // ?ƒ?„¸ ?´ë¯¸ì? ë¯¸ë¦¬ë³´ê¸°
         document.getElementById('contentFiles').addEventListener('change', function (e) {
             const preview = document.getElementById('contentPreview');
             preview.innerHTML = '';

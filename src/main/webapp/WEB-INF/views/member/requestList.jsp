@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Í±¥ÏùòÏÇ¨Ìï≠</title>
+        <title>Í±¥Ïùò?Ç¨?ï≠</title>
         <link rel="stylesheet" href="/resources/css/teacher/list.css">
         <link rel="stylesheet" href="/resources/css/common/header.css"/>
         <link rel="stylesheet" href="/resources/css/common/footer.css"/>
@@ -16,10 +16,10 @@
         <jsp:include page="../common/header.jsp"/>
         <section class="main-banner">
             <div class="banner-text">
-                Í±¥ÏùòÏÇ¨Ìï≠
+                Í±¥Ïùò?Ç¨?ï≠
             </div>
             <div class="object">
-                <img src="/resources/images/request/requestIcon.png" alt="Í±¥ÏùòÏÇ¨Ìï≠ ÏïÑÏù¥ÏΩò">
+                <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/request/requestIcon.png" alt="Í±¥Ïùò?Ç¨?ï≠ ?ïÑ?ù¥ÏΩ?">
             </div>
         </section>
 
@@ -27,22 +27,22 @@
             <div class="content-top-area">
                 <div class="main-search-bar">
                     <form action="/member/request" method="get" class="search-form">
-                        <input type="text" name="searchKeyword" placeholder="Í≤ÄÏÉâÏñ¥Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî" value="${searchKeyword }">
+                        <input type="text" name="searchKeyword" placeholder="Í≤??Éâ?ñ¥Î•? ?ûÖ?†•?ï¥Ï£ºÏÑ∏?öî" value="${searchKeyword }">
                         <input type="hidden" name="filter" value="${filter}">
                         <button type="submit" class="search-btn"></button>
                     </form>
                 </div>
                 <a href="/member/request?filter=ALL&searchKeyword=${searchKeyword}&page=1"
                    class="sort-by-text <c:if test="${empty filter || filter eq 'ALL'}">sort-current</c:if>">
-                    Ï†ÑÏ≤¥
+                    ?†ÑÏ≤?
                 </a>
                 <a href="/member/request?filter=Y&searchKeyword=${searchKeyword}&page=1"
                    class="sort-by-text <c:if test="${filter eq 'Y'}">sort-current</c:if>">
-                    Ìï¥Í≤∞
+                    ?ï¥Í≤?
                 </a>
                 <a href="/member/request?filter=N&searchKeyword=${searchKeyword}&page=1"
                    class="sort-by-text <c:if test="${filter eq 'N'}">sort-current</c:if>">
-                    ÎØ∏Ìï¥Í≤∞
+                    ÎØ∏Ìï¥Í≤?
                 </a>
             </div>
             <section class="question-list">
@@ -51,10 +51,10 @@
                         <article class="question-item">
                             <div class="question-status-and-title">
                                 <c:if test="${request.requestStatus eq 'N' }">
-                                    <div class="status-tag status-unresolved">ÎØ∏Ìï¥Í≤∞</div>
+                                    <div class="status-tag status-unresolved">ÎØ∏Ìï¥Í≤?</div>
                                 </c:if>
                                 <c:if test="${request.requestStatus eq 'Y' }">
-                                    <div class="status-tag status-resolved">Ìï¥Í≤∞</div>
+                                    <div class="status-tag status-resolved">?ï¥Í≤?</div>
                                 </c:if>
                                 <h2 class="question-title">${request.requestTitle }</h2>
                             </div>
@@ -76,7 +76,7 @@
                     <div class="pagination">
                         <c:if test="${startNavi ne 1 }">
                             <a href="/member/request?page=${startNavi - 1 }&searchKeyword=${searchKeyword}&filter=${filter}"
-                               class="page-button">Ïù¥Ï†Ñ</a>
+                               class="page-button">?ù¥?†Ñ</a>
                         </c:if>
                         <c:forEach begin="${startNavi }" end="${endNavi }" var="n">
                             <a href="/member/request?page=${n }&searchKeyword=${searchKeyword}&filter=${filter}"
@@ -84,13 +84,13 @@
                         </c:forEach>
                         <c:if test="${endNavi ne maxPage }">
                             <a href="/member/request?page=${endNavi + 1 }&searchKeyword=${searchKeyword}&filter=${filter}"
-                               class="page-button">Îã§Ïùå</a>
+                               class="page-button">?ã§?ùå</a>
                         </c:if>
                     </div>
                 </div>
 
                 <c:if test="${not empty sessionScope.loginId}">
-                    <a href="/member/request/insert" class="write-button">Í∏ÄÏì∞Í∏∞</a>
+                    <a href="/member/request/insert" class="write-button">Í∏??ì∞Í∏?</a>
                 </c:if>
             </div>
         </main>

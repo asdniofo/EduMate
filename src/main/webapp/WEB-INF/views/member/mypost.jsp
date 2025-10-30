@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÎÇòÏùò Í∏Ä | EduMate</title>
+    <title>?Çò?ùò Í∏? | EduMate</title>
     <link rel="stylesheet" href="/resources/css/common/header.css">
     <link rel="stylesheet" href="/resources/css/common/footer.css">
     <link rel="stylesheet" href="/resources/css/member/mypost.css">
@@ -19,36 +19,36 @@
         <jsp:include page="../common/header.jsp" />
         <section class="main-banner">
             <div class="banner-text">
-                ÎÇòÏùò Í∏Ä
+                ?Çò?ùò Í∏?
             </div>
             <div class="object">
-                <img src="/resources/images/member/postcomment.png" alt="ÎÇòÏùò Í∏Ä ÏïÑÏù¥ÏΩò">
+                <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/member/postcomment.png" alt="?Çò?ùò Í∏? ?ïÑ?ù¥ÏΩ?">
             </div>
         </section>
 
-        <!-- Î©îÏù∏ ÏΩòÌÖêÏ∏† -->
+        <!-- Î©îÏù∏ ÏΩòÌÖêÏ∏? -->
         <div class="main-content">
             <div class="mypost-content">
-                <a href="/member/mypage" class="back-btn">‚Üê ÎßàÏù¥ÌéòÏù¥ÏßÄÎ°ú ÎèåÏïÑÍ∞ÄÍ∏∞</a>
+                <a href="/member/mypage" class="back-btn">?Üê ÎßàÏù¥?éò?ù¥Ïß?Î°? ?èå?ïÑÍ∞?Í∏?</a>
                 
-                <!-- ÎÇòÏùò Í∏Ä ÏÑπÏÖò -->
+                <!-- ?Çò?ùò Í∏? ?Ñπ?Öò -->
                 <div class="mypost-section">
                     <div class="section-header">
-                        <h2 class="section-title">ÎÇòÏùò ÏûëÏÑ±Í∏Ä</h2>
+                        <h2 class="section-title">?Çò?ùò ?ûë?Ñ±Í∏?</h2>
                         <div class="stats-info">
-                            Ï¥ù <strong>${totalPosts}</strong>Í∞úÏùò Í∏Ä
+                            Ï¥? <strong>${totalPosts}</strong>Í∞úÏùò Í∏?
                         </div>
                     </div>
                     
-                    <!-- Í≤ÄÏÉâ Î∞ïÏä§ -->
+                    <!-- Í≤??Éâ Î∞ïÏä§ -->
                     <form action="/member/mypost" method="get">
                         <div class="search-box">
-                            <input type="text" name="searchKeyword" value="${searchKeyword}" placeholder="Ï†úÎ™©ÏúºÎ°ú Í≤ÄÏÉâ...">
-                            <button type="submit">üîç</button>
+                            <input type="text" name="searchKeyword" value="${searchKeyword}" placeholder="?†úÎ™©ÏúºÎ°? Í≤??Éâ...">
+                            <button type="submit">?üî?</button>
                         </div>
                     </form>
                     
-                    <!-- Í∏Ä Î™©Î°ù -->
+                    <!-- Í∏? Î™©Î°ù -->
                     <div class="post-list" id="postList">
                         <c:choose>
                             <c:when test="${not empty myPosts}">
@@ -57,7 +57,7 @@
                                         <div class="post-header">
                                             <c:choose>
                                                 <c:when test="${post.postType == 'REQUEST'}">
-                                                    <span class="post-type-badge post-type-request">Í±¥ÏùòÏÇ¨Ìï≠</span>
+                                                    <span class="post-type-badge post-type-request">Í±¥Ïùò?Ç¨?ï≠</span>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <span class="post-type-badge post-type-question">ÏßàÎ¨∏</span>
@@ -68,16 +68,16 @@
                                                 <c:when test="${post.status == 'Y'}">
                                                     <span class="post-status status-y">
                                                         <c:choose>
-                                                            <c:when test="${post.postType == 'REQUEST'}">Ï≤òÎ¶¨ÏôÑÎ£å</c:when>
-                                                            <c:otherwise>Ìï¥Í≤∞</c:otherwise>
+                                                            <c:when test="${post.postType == 'REQUEST'}">Ï≤òÎ¶¨?ôÑÎ£?</c:when>
+                                                            <c:otherwise>?ï¥Í≤?</c:otherwise>
                                                         </c:choose>
                                                     </span>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <span class="post-status status-n">
                                                         <c:choose>
-                                                            <c:when test="${post.postType == 'REQUEST'}">Í≤ÄÌÜ†Ï§ë</c:when>
-                                                            <c:otherwise>ÎØ∏Ìï¥Í≤∞</c:otherwise>
+                                                            <c:when test="${post.postType == 'REQUEST'}">Í≤??Ü†Ï§?</c:when>
+                                                            <c:otherwise>ÎØ∏Ìï¥Í≤?</c:otherwise>
                                                         </c:choose>
                                                     </span>
                                                 </c:otherwise>
@@ -105,10 +105,10 @@
                                 <div class="no-posts">
                                     <c:choose>
                                         <c:when test="${not empty searchKeyword}">
-                                            '${searchKeyword}' Í≤ÄÏÉâ Í≤∞Í≥ºÍ∞Ä ÏóÜÏäµÎãàÎã§.
+                                            '${searchKeyword}' Í≤??Éâ Í≤∞Í≥ºÍ∞? ?óÜ?äµ?ãà?ã§.
                                         </c:when>
                                         <c:otherwise>
-                                            ÏûëÏÑ±Ìïú Í∏ÄÏù¥ ÏóÜÏäµÎãàÎã§.
+                                            ?ûë?Ñ±?ïú Í∏??ù¥ ?óÜ?äµ?ãà?ã§.
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
@@ -116,16 +116,16 @@
                         </c:choose>
                     </div>
                     
-                    <!-- ÌéòÏù¥ÏßÄÎÑ§Ïù¥ÏÖò -->
+                    <!-- ?éò?ù¥Ïß??Ñ§?ù¥?Öò -->
                     <c:if test="${maxPage > 1}">
                         <div class="pagination-wrapper">
                             <div class="pagination">
-                                <!-- Ïù¥Ï†Ñ Î≤ÑÌäº -->
+                                <!-- ?ù¥?†Ñ Î≤ÑÌäº -->
                                 <c:if test="${startNavi > 1}">
-                                    <a href="/member/mypost?page=${startNavi-1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">Ïù¥Ï†Ñ</a>
+                                    <a href="/member/mypost?page=${startNavi-1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">?ù¥?†Ñ</a>
                                 </c:if>
                                 
-                                <!-- ÌéòÏù¥ÏßÄ Î≤àÌò∏ -->
+                                <!-- ?éò?ù¥Ïß? Î≤àÌò∏ -->
                                 <c:forEach begin="${startNavi}" end="${endNavi}" var="n">
                                     <a href="/member/mypost?page=${n}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" 
                                        class="page-btn <c:if test='${currentPage eq n}'>active</c:if>">
@@ -133,9 +133,9 @@
                                     </a>
                                 </c:forEach>
                                 
-                                <!-- Îã§Ïùå Î≤ÑÌäº -->
+                                <!-- ?ã§?ùå Î≤ÑÌäº -->
                                 <c:if test="${endNavi < maxPage}">
-                                    <a href="/member/mypost?page=${endNavi+1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">Îã§Ïùå</a>
+                                    <a href="/member/mypost?page=${endNavi+1}<c:if test='${not empty searchKeyword}'>&searchKeyword=${searchKeyword}</c:if>" class="page-btn">?ã§?ùå</a>
                                 </c:if>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
     </div>
 
     <script>
-        // Í∏Ä ÏÉÅÏÑ∏Î≥¥Í∏∞Î°ú Ïù¥Îèô
+        // Í∏? ?ÉÅ?Ñ∏Î≥¥Í∏∞Î°? ?ù¥?èô
         function goToPost(postType, postNo) {
             if (postType === 'REQUEST') {
                 window.location.href = '/member/request/detail?requestNo=' + postNo;
@@ -158,11 +158,11 @@
             }
         }
 
-        // ÌéòÏù¥ÏßÄ Î°úÎìú Ïãú Ïã§Ìñâ
+        // ?éò?ù¥Ïß? Î°úÎìú ?ãú ?ã§?ñâ
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('ÎÇòÏùò Í∏Ä ÌéòÏù¥ÏßÄÍ∞Ä Î°úÎìúÎêòÏóàÏäµÎãàÎã§.');
+            console.log('?Çò?ùò Í∏? ?éò?ù¥Ïß?Í∞? Î°úÎìú?êò?óà?äµ?ãà?ã§.');
             
-            // Í≤ÄÏÉâÏñ¥Í∞Ä ÏûàÏùÑ Îïå ÏûÖÎ†•Ï∞ΩÏóê Ìè¨Ïª§Ïä§
+            // Í≤??Éâ?ñ¥Í∞? ?ûà?ùÑ ?ïå ?ûÖ?†•Ï∞ΩÏóê ?è¨Ïª§Ïä§
             const searchInput = document.querySelector('input[name="searchKeyword"]');
             if (searchInput && searchInput.value) {
                 searchInput.focus();

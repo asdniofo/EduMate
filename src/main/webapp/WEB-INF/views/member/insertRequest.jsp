@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>ÏöîÏ≤≠ Îì±Î°ù</title>
+        <title>?öîÏ≤? ?ì±Î°?</title>
         <link rel="stylesheet" href="/resources/css/member/insertQuestion.css" />
         <link rel="stylesheet" href="/resources/css/common/header.css" />
         <link rel="stylesheet" href="/resources/css/common/footer.css" />
@@ -16,40 +16,40 @@
         <div class="main-container">
             <section class="main-banner">
                 <div class="banner-text">
-                    ÏöîÏ≤≠ Îì±Î°ù
+                    ?öîÏ≤? ?ì±Î°?
                 </div>
                 <div class="object">
-                    <img src="/resources/images/request/requestIcon.png" alt="ÏöîÏ≤≠ Îì±Î°ù ÏïÑÏù¥ÏΩò">
+                    <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/request/requestIcon.png" alt="?öîÏ≤? ?ì±Î°? ?ïÑ?ù¥ÏΩ?">
                 </div>
             </section>
 
-            <!-- ÏßàÎ¨∏ Îì±Î°ù Ìèº -->
+            <!-- ÏßàÎ¨∏ ?ì±Î°? ?èº -->
             <form action="/member/request/insert" method="post">
                 <div class="form-container">
                     <div class="form-wrapper">
-                        <!-- ÏßàÎ¨∏ Ï†úÎ™© -->
+                        <!-- ÏßàÎ¨∏ ?†úÎ™? -->
                         <div class="input-section">
-                            <label for="question-title" class="input-label">ÏöîÏ≤≠ Ï†úÎ™©</label>
+                            <label for="question-title" class="input-label">?öîÏ≤? ?†úÎ™?</label>
                             <input
                                 type="text"
                                 id="question-title"
                                 class="input-field"
-                                placeholder="Ï†úÎ™©ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî." 
+                                placeholder="?†úÎ™©ÏùÑ ?ûÖ?†•?ï¥Ï£ºÏÑ∏?öî." 
                                 name="requestTitle"/>
                         </div>
 
-                        <!-- ÏßàÎ¨∏ ÎÇ¥Ïö© -->
+                        <!-- ÏßàÎ¨∏ ?Ç¥?ö© -->
                         <div class="input-section">
-                            <label for="question-content" class="input-label">ÏöîÏ≤≠ ÎÇ¥Ïö©</label>
+                            <label for="question-content" class="input-label">?öîÏ≤? ?Ç¥?ö©</label>
                             <textarea
                                 id="question-content"
                                 class="input-field"
-                                placeholder="ÏßàÎ¨∏ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî"
+                                placeholder="ÏßàÎ¨∏?ùÑ ?ûÖ?†•?ï¥Ï£ºÏÑ∏?öî"
                                 name="requestContent"></textarea>
                         </div>
 
-                        <!-- Ï†úÏ∂ú Î≤ÑÌäº -->
-                        <button class="submit-button">Îì±Î°ù</button>
+                        <!-- ?†úÏ∂? Î≤ÑÌäº -->
+                        <button class="submit-button">?ì±Î°?</button>
                     </div>
                 </div>
             </form>

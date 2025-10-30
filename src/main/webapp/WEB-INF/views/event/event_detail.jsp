@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${event.eventTitle} - ì´ë²¤íŠ¸ ìƒì„¸</title>
+<title>${event.eventTitle} - ?´ë²¤íŠ¸ ?ƒ?„¸</title>
 <link rel="stylesheet" href="/resources/css/event/event_detail.css" />
 <link rel="stylesheet" href="/resources/css/common/header.css" />
 <link rel="stylesheet" href="/resources/css/common/footer.css" />
@@ -20,10 +20,10 @@
 <link rel="stylesheet" href="/resources/css/common/main_banner.css">
 <section class="main-banner">
             <div class="banner-text">
-                ì´ë²¤íŠ¸ ì •ë³´
+                ?´ë²¤íŠ¸ ? •ë³?
             </div>
             <div class="object">
-                <img src="/resources/images/event/icon/event_icon.png">
+                <img src="https://pub-f8fd744877724e40a29110baaa7d9f66.r2.dev/common/event/event_icon.png">
             </div>
 </section>
     
@@ -47,14 +47,14 @@
         %>
 
         <div class="event-header">
-            <div class="event-path">ì´ë²¤íŠ¸ &gt; ${event.eventTitle}</div>
+            <div class="event-path">?´ë²¤íŠ¸ &gt; ${event.eventTitle}</div>
             <div class="event-meta">
                 <span>
                     <fmt:formatDate value="${event.eventStart}" pattern="yyyy-MM-dd" /> ~ 
                     <fmt:formatDate value="${event.eventEnd}" pattern="yyyy-MM-dd" />
                 </span>
                 <span class="event-status <%= isOngoing ? "on" : "end" %>">
-                    <%= isOngoing ? "ì§„í–‰ì¤‘" : "ì¢…ë£Œ" %>
+                    <%= isOngoing ? "ì§„í–‰ì¤?" : "ì¢…ë£Œ" %>
                     <% if (isOngoing && remainDays <= 3 && remainDays >= 0) { %>
                         <span style="font-weight:500; color:yellow;">(D-<%= remainDays %>)</span>
                     <% } %>
@@ -65,20 +65,20 @@
             <div class="event-buttons-left">
                 <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
                     <a href="/event/update?eventId=${event.eventId}" style="text-decoration:none">
-                        <button class="edit-btn">ìˆ˜ì •</button>
+                        <button class="edit-btn">?ˆ˜? •</button>
                     </a>
                     <a href="javascript:void(0)" onclick="checkDelete();" style="text-decoration:none">
-                        <button class="delete-btn">ì‚­ì œ</button>
+                        <button class="delete-btn">?‚­? œ</button>
                     </a>
                 </c:if>
             </div>
 
             <div class="event-buttons-right">
                 <c:if test="${not empty prevEventId}">
-                    <button class="prev-btn" onclick="location.href='/event/detail?eventId=${prevEventId}'">ì´ì „</button>
+                    <button class="prev-btn" onclick="location.href='/event/detail?eventId=${prevEventId}'">?´? „</button>
                 </c:if>
                 <c:if test="${not empty nextEventId}">
-                    <button class="next-btn" onclick="location.href='/event/detail?eventId=${nextEventId}'">ë‹¤ìŒ</button>
+                    <button class="next-btn" onclick="location.href='/event/detail?eventId=${nextEventId}'">?‹¤?Œ</button>
                 </c:if>
                 <button class="list-btn" onclick="location.href='/event/list'">ëª©ë¡</button>
             </div>
@@ -100,7 +100,7 @@
 
             <c:if test="${empty contents}">
                 <div class="no-content-message">
-                    <p>ì¶”ê°€ ì´ë¯¸ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.</p>
+                    <p>ì¶”ê? ?´ë¯¸ì?ê°? ?—†?Šµ?‹ˆ?‹¤.</p>
                 </div>
             </c:if>
         </div>
@@ -109,20 +109,20 @@
             <div class="event-buttons-left">
                 <c:if test="${sessionScope.loginMember.adminYN eq 'Y'}">
                     <a href="/event/update?eventId=${event.eventId}" style="text-decoration:none">
-                        <button class="edit-btn">ìˆ˜ì •</button>
+                        <button class="edit-btn">?ˆ˜? •</button>
                     </a>
                     <a href="javascript:void(0)" onclick="checkDelete();" style="text-decoration:none">
-                        <button class="delete-btn">ì‚­ì œ</button>
+                        <button class="delete-btn">?‚­? œ</button>
                     </a>
                 </c:if>
             </div>
 
             <div class="event-buttons-right">
                 <c:if test="${not empty prevEventId}">
-                    <button class="prev-btn" onclick="location.href='/event/detail?eventId=${prevEventId}'">ì´ì „</button>
+                    <button class="prev-btn" onclick="location.href='/event/detail?eventId=${prevEventId}'">?´? „</button>
                 </c:if>
                 <c:if test="${not empty nextEventId}">
-                    <button class="next-btn" onclick="location.href='/event/detail?eventId=${nextEventId}'">ë‹¤ìŒ</button>
+                    <button class="next-btn" onclick="location.href='/event/detail?eventId=${nextEventId}'">?‹¤?Œ</button>
                 </c:if>
                 <button class="list-btn" onclick="location.href='/event/list'">ëª©ë¡</button>
             </div>
@@ -134,7 +134,7 @@
 
 <script>
     function checkDelete() {
-        if (confirm('ì •ë§ë¡œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?')) {
+        if (confirm('? •ë§ë¡œ ?‚­? œ?•˜?‹œê² ìŠµ?‹ˆê¹??')) {
             location.href = '/event/delete?eventId=${event.eventId}';
         }
     }
