@@ -41,7 +41,7 @@ public class FileConfig implements WebMvcConfigurer{
 	}
 	
 	@Bean
-	public S3Client s3Client() {
+	public S3Client defaultS3Client() {
 		AwsBasicCredentials credentials = AwsBasicCredentials.create(r2AccessKey, r2SecretKey);
 		
 		return S3Client.builder()
