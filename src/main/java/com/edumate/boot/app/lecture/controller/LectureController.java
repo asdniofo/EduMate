@@ -292,6 +292,14 @@ public class LectureController {
             }
 
             String memberId = (String) session.getAttribute("loginId");
+            
+            // 중복 강의명 체크
+            int duplicateCount = lService.checkDuplicateLecture(lectureName, memberId);
+            if (duplicateCount > 0) {
+                model.addAttribute("errorMsg", "이미 동일한 이름의 강의가 존재합니다. 다른 강의명을 사용해주세요.");
+                return "common/error";
+            }
+            
             lecture.setMemberId(memberId);
             lecture.setLectureName(lectureName);
             lecture.setLectureContent(lectureDescription);

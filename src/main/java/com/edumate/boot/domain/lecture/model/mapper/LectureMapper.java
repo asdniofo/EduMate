@@ -59,6 +59,8 @@ public interface LectureMapper {
 
     int insertQuestion(LectureQuestionRequest qList);
     
+    int checkDuplicateLecture(String lectureName, String memberId);
+    
     void deleteVideo(int videoNo);
     
     int getVideoOrder(int videoNo);

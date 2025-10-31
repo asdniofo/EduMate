@@ -254,6 +254,12 @@ public class LectureServiceImpl implements LectureService {
     }
     
     @Override
+    public int checkDuplicateLecture(String lectureName, String memberId) {
+        int result = lMapper.checkDuplicateLecture(lectureName, memberId);
+        return result;
+    }
+    
+    @Override
     public void deleteVideo(int videoNo) {
         lMapper.deleteVideo(videoNo);
     }

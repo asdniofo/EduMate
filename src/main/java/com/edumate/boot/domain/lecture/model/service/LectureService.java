@@ -67,6 +67,8 @@ public interface LectureService {
 
     int insertQuestion(LectureQuestionRequest qList);
     
+    int checkDuplicateLecture(String lectureName, String memberId);
+    
     void deleteVideo(int videoNo);
     
     void deleteVideoAndReorder(int videoNo, int lectureNo);

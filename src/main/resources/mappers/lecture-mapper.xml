@@ -209,6 +209,13 @@
         ,#{questionTitle}, #{questionContent}, SYSTIMESTAMP, DEFAULT, DEFAULT)
     </insert>
     
+    <select id="checkDuplicateLecture" resultType="int">
+        SELECT COUNT(*) FROM LECTURE 
+        WHERE LECTURE_NAME = #{lectureName} 
+        AND MEMBER_ID = #{memberId} 
+        AND LECTURE_YN = 'Y'
+    </select>
+    
     <update id="deleteVideo">
         UPDATE LECTURE_VIDEO SET VIDEO_YN = 'N' WHERE VIDEO_NO = #{videoNo}
     </update>
