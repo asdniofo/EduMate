@@ -86,7 +86,7 @@
 
                 <!-- reCAPTCHA -->
                 <div style="margin: 20px 0;">
-                    <div class="g-recaptcha" data-sitekey="6LdI9OorAAAAABmbABAsztSQECtECqsw1NhUgXuk"></div>
+                    <div class="g-recaptcha" data-sitekey="6Lf8UAAsAAAAAK4TUsleSFanG_y2BtHknDwopgW4"></div>
                 </div>
 
                 <!-- 제출 버튼 -->

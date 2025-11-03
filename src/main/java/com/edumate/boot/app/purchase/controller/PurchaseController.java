@@ -25,6 +25,9 @@ public class PurchaseController {
     @Value("${toss.payments.client.key}")
     private String tossPaymentsClientKey;
 
+    @Value("${base.url}")
+    private String baseUrl;
+
     @PostMapping("/toss/charge")
     @ResponseBody
     public Map<String, Object> requestTossPayment(@RequestBody Map<String, Object> requestData, HttpSession session) {
@@ -47,8 +50,8 @@ public class PurchaseController {
             response.put("amount", amount);
             response.put("orderId", orderId);
             response.put("orderName", "EduMate 잔액 충전");
-            response.put("successUrl", "http://localhost:8080/purchase/payment/success");
-            response.put("failUrl", "http://localhost:8080/common/error");
+            response.put("successUrl", baseUrl + "/purchase/payment/success");
+            response.put("failUrl", baseUrl + "/common/error");
 
         } catch (Exception e) {
             response.put("success", false);
@@ -129,8 +132,8 @@ public class PurchaseController {
                 response.put("amount", amount);
                 response.put("orderId", orderId);
                 response.put("orderName", lectureName);
-                response.put("successUrl", "http://localhost:8080/purchase/lecture/success");
-                response.put("failUrl", "http://localhost:8080/purchase/lecture/fail");
+                response.put("successUrl", baseUrl + "/purchase/lecture/success");
+                response.put("failUrl", baseUrl + "/purchase/lecture/fail");
                 return response;
             }
             if (purchaseSuccess) {

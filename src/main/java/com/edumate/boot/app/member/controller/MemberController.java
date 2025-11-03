@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.BufferedReader;
@@ -50,6 +51,9 @@ public class MemberController {
     private final LectureService lService;
     private final PurchaseService pService;
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${recaptcha.secret.key}")
+    private String recaptchaSecretKey;
 
     @GetMapping("/login")
     public String showLogin() {
@@ -125,7 +129,6 @@ public class MemberController {
 
     // 🔹 캡챠 검증 메서드
     private boolean verifyRecaptcha(String recaptchaResponse) {
-        String secretKey = "6LdI9OorAAAAAGTZcJRgdBLA5VdUFxQN4-1s-aXL";
         String apiUrl = "https://www.google.com/recaptcha/api/siteverify";
 
         try {
@@ -134,7 +137,7 @@ public class MemberController {
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
 
-            String postParams = "secret=" + secretKey + "&response=" + recaptchaResponse;
+            String postParams = "secret=" + recaptchaSecretKey + "&response=" + recaptchaResponse;
             OutputStream out = conn.getOutputStream();
             out.write(postParams.getBytes());
             out.flush();

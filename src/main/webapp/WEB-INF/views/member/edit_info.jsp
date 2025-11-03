@@ -109,7 +109,7 @@
 
                 <!-- reCAPTCHA -->
                 <div style="margin: 20px 0; display: flex; justify-content: center;">
-                    <div class="g-recaptcha" data-sitekey="6LdI9OorAAAAABmbABAsztSQECtECqsw1NhUgXuk"></div>
+                    <div class="g-recaptcha" data-sitekey="6Lf8UAAsAAAAAK4TUsleSFanG_y2BtHknDwopgW4"></div>
                 </div>
 
                 <div class="button-group">
